@@ -1,0 +1,15 @@
+{
+  "Active Directory": "ad",
+  "Android": "and",
+  "AWS": "aws",
+  "Azure": "azr",
+  "Docker": "dkr",
+  "Exchange Online": "exo",
+  "GCP": "gcp",
+  "iOS": "ios",
+  "Kubernetes": "k8s",
+  "Linux": "lin",
+  "macOS": "mac",
+  "Physical": "phy",
+  "Windows": "win"
+}

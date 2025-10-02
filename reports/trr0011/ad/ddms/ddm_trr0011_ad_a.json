@@ -1,0 +1,262 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 50,
+    "caption-font-weight": "normal",
+    "label-position": "inside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 4,
+    "label-font-size": 40,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": -256,
+        "y": -31
+      },
+      "caption": "Send Network Request",
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      },
+      "labels": [],
+      "properties": {
+        "Host": "Any non-DC",
+        "Permissions": "DS-Replication-Get-Changes*",
+        "User": "Any"
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 190.5,
+        "y": -31
+      },
+      "caption": "Receive Network Request",
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      },
+      "labels": [],
+      "properties": {
+        "Host": "DC"
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": -256,
+        "y": 199.95495097040046
+      },
+      "caption": "Call RPC",
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      },
+      "labels": [
+        "CS DCSyncAttempted?"
+      ],
+      "properties": {
+        "Protocol": "MS-DRSR",
+        "Remote Proc": "IDL_DRSGetNCChanges",
+        "OpNum": "3",
+        "Interface": "drsuapi"
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": -256,
+        "y": 399.8
+      },
+      "caption": "Send TCP Packet",
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      },
+      "labels": [
+        "IDS Rule"
+      ],
+      "properties": {}
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 190.5,
+        "y": 399.8
+      },
+      "caption": "Recieve TCP Packet",
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 16,
+        "property-font-size": 12
+      },
+      "labels": [],
+      "properties": {
+        " Initial Port": "135",
+        "Final Port": "dynamic",
+        "Host": "DC"
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 190.5,
+        "y": 184.4
+      },
+      "caption": "Receive RPC",
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 16,
+        "property-font-size": 12,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      },
+      "labels": [
+        "CS ActiveDirectoryIncomingDceRpcRequest"
+      ],
+      "properties": {
+        "Protocol": "MS-DRSR",
+        "Remote Proc": "IDL_DRSGetNCChanges",
+        "OpNum": "3",
+        "Host": "DC",
+        "Interface": "drsuapi"
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 464.68689781757894,
+        "y": -31
+      },
+      "caption": "Access AD Object",
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      },
+      "labels": [
+        "Event 4662"
+      ],
+      "properties": {
+        "Object": "Domain-DNS Class",
+        "Host": "DC"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n1",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n0",
+      "toId": "n2"
+    },
+    {
+      "id": "n3",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n3"
+    },
+    {
+      "id": "n4",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n3",
+      "toId": "n4"
+    },
+    {
+      "id": "n5",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n4",
+      "toId": "n5"
+    },
+    {
+      "id": "n6",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n5",
+      "toId": "n1"
+    },
+    {
+      "id": "n7",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n1",
+      "toId": "n6"
+    }
+  ]
+}

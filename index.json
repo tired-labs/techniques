@@ -1,0 +1,22 @@
+[
+  {
+    "name": "DC Synchronization Attack (DCSync)",
+    "id": "TRR0011",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1003.006"
+    ],
+    "platforms": [
+      "Active Directory"
+    ],
+    "procedures": {
+      "A": "Request replication from a DC"
+    },
+    "pub_date": "2025-10-01"
+  }
+]
