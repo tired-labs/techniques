@@ -18,5 +18,265 @@
       "A": "Request replication from a DC"
     },
     "pub_date": "2025-10-01"
+  },
+  {
+    "name": "Kerberos AS-REP Roasting",
+    "id": "TRR0012",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1558.004"
+    ],
+    "platforms": [
+      "Active Directory"
+    ],
+    "procedures": {
+      "A": "Enumerate Accounts Lacking Pre-Authentication via LDAP",
+      "B": "Enumerate Accounts Lacking Pre-Authentication via ADWS",
+      "C": "Test All Accounts for Pre-Authentication Status",
+      "D": "Intercept AS Messages on the Network"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Forge a Kerberos TGT (Golden Ticket)",
+    "id": "TRR0013",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet",
+      "Chris Hodson"
+    ],
+    "external_ids": [
+      "T1558.001"
+    ],
+    "platforms": [
+      "Active Directory"
+    ],
+    "procedures": {
+      "A": "Forge a TGT using the KRBTGT password hash"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Rogue Domain Controller (DCShadow)",
+    "id": "TRR0014",
+    "tactics": [
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1207"
+    ],
+    "platforms": [
+      "Active Directory"
+    ],
+    "procedures": {
+      "A": "Insert a rogue DC"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Stealing Credentials from the NTDS.dit",
+    "id": "TRR0015",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1003.003"
+    ],
+    "platforms": [
+      "Windows",
+      "Active Directory"
+    ],
+    "procedures": {
+      "A": "Volume shadow copy access",
+      "B": "Raw disk access"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Signed Binary Proxy Execution with MSHTA",
+    "id": "TRR0016",
+    "tactics": [
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1218.005"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Mshta executing HTA files or inline scripts",
+      "B": "RunDll32 calling RunHTMLApplication from mshtml.dll"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Malicious USB Device",
+    "id": "TRR0017",
+    "tactics": [
+      "Initial Access",
+      "Credential Access",
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1200"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Hardware-based keystroke logging",
+      "B": "Keystroke injection",
+      "C": "Clandestine data transfer"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Kerberos Service Ticket Roasting (Kerberoasting)",
+    "id": "TRR0018",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet",
+      "Chris Hodson"
+    ],
+    "external_ids": [
+      "T1558.003"
+    ],
+    "platforms": [
+      "Active Directory"
+    ],
+    "procedures": {
+      "A": "Enumerate SPNs with LDAP",
+      "B": "Enumerate SPNs with ADWS",
+      "C": "Intercept Tickets On the Network",
+      "D": "Harvest Tickets off Endpoints"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Remote Email Collection",
+    "id": "TRR0019",
+    "tactics": [
+      "Collection"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1114.002"
+    ],
+    "platforms": [
+      "Exchange Online"
+    ],
+    "procedures": {
+      "A": "Valid Credentials",
+      "B": "API Access as an Application",
+      "C": "eDiscovery",
+      "D": "Mailbox Delegation",
+      "E": "Export Mailbox"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Service Principal Manipulation",
+    "id": "TRR0020",
+    "tactics": [
+      "Persistence"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "AZT501.2",
+      "T1098.001",
+      "T1098.003"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Add credentials",
+      "B": "Add owner",
+      "C": "Add role",
+      "D": "Add API permissions"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Azure Guest Account Creation",
+    "id": "TRR0021",
+    "tactics": [
+      "Persistence"
+    ],
+    "contributors": [
+      "Tequila Schramm",
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "AZT502.3",
+      "T1136.003"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Create guest account"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
+  },
+  {
+    "name": "TRR0022: Hijack Azure Subscription",
+    "id": "TRR0022",
+    "tactics": [
+      "Persistence",
+      "Impact"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "AZT507.3",
+      "T1496.004"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Hijack via an external guest user",
+      "B": "Hijack via an internal user"
+    },
+    "last_update": "2025-10-07",
+    "pub_date": "2025-10-07"
   }
 ]
