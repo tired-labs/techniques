@@ -1,0 +1,188 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 3,
+    "border-color": "#68bc00",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 14,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 12,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 12,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 154.31148682862977,
+        "y": 231.54910676813347
+      },
+      "caption": "Sign in to Entra",
+      "labels": [
+        "Entra Signin Logs"
+      ],
+      "properties": {
+        "Client": "Any mail client or script",
+        "Required": "User Credentials"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 12,
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 75,
+        "y": 366.6062944120154
+      },
+      "caption": "Pass MFA challenge (if any)",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 231.62297365725965,
+        "y": 366.6062944120154
+      },
+      "caption": "Pass Conditional Access (if any)",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 481.9175942303427,
+        "y": 172.66921583527733
+      },
+      "caption": "Sync or Bind Messages",
+      "labels": [
+        "UnifiedAuditLog \"MailItemsAccessed\""
+      ],
+      "properties": {
+        "Client": "Any mail client or script",
+        "Protocol": "Any EXO supported protocol"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "label-border-width": 1,
+        "property-font-size": 14,
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 154.31148682862977,
+        "y": 54.357737511240146
+      },
+      "caption": "Present Valid Token",
+      "labels": [],
+      "properties": {
+        "Required": "Valid Token"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "border-width": 3,
+        "property-font-size": 12
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n2",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n4",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}

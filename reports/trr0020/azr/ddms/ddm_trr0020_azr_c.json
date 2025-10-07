@@ -1,0 +1,141 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 3,
+    "border-color": "#68bc00",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 14,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 12,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 12,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "position": {
+        "x": 395.14958741862745,
+        "y": 476.1719977658451
+      },
+      "caption": "Add Member to Role",
+      "labels": [
+        "Entra AuditLog"
+      ],
+      "properties": {
+        "Operation1": "Add member to role*",
+        "Operation2": "Add eligible member to role*",
+        "RBAC": "Entra ID"
+      },
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 395.14958741862745,
+        "y": 662.1719977658449
+      },
+      "caption": "Add Member to Role",
+      "labels": [
+        "Azure ActivityLog"
+      ],
+      "properties": {
+        "Operation": "Microsoft.Authorization/roleAssignments/write",
+        "RBAC": "Azure"
+      },
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 75,
+        "y": 476.1719977658451
+      },
+      "caption": "Create or Modify Custom Entra Role",
+      "labels": [
+        "Entra AuditLog"
+      ],
+      "properties": {
+        "Operation1": "Add role definition",
+        "Operation2": "Update role definition",
+        "RBAC": "Entra ID"
+      },
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 75,
+        "y": 662.1719977658449
+      },
+      "caption": "Create or Modify Custom Azure Role",
+      "labels": [
+        "Azure ActivityLog"
+      ],
+      "properties": {
+        "Operation": "Microsoft.Authorization/roleDefinitions/write",
+        "RBAC": "Azure"
+      },
+      "style": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n3",
+      "toId": "n1",
+      "type": "first step is optional",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n4",
+      "toId": "n2",
+      "type": "first step is optional",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 303.33984375,
+        "y": 78.80693026457553
+      },
+      "caption": "Invite External User as a Guest",
+      "labels": [
+        "Entra Audit"
+      ],
+      "properties": {
+        "OperationName": "Invite external user"
+      },
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 303.33984375,
+        "y": 280.8069302645755
+      },
+      "caption": "Invite User as Guest to External Tenant",
+      "labels": [],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 75,
+        "y": 179.80693026457553
+      },
+      "caption": "Modify Directory Guest Settings (if needed)",
+      "labels": [
+        "Entra Audit "
+      ],
+      "properties": {
+        "OperationName": "Update Policy"
+      },
+      "style": {
+        "border-color": "#cccccc"
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 596.4327808431007,
+        "y": 275.9842884523089
+      },
+      "caption": "Modify Subscription Transfer Settings (if needed)",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#cccccc"
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 801.390133121815,
+        "y": 168.3321825105087
+      },
+      "caption": "Transfer Subscription",
+      "labels": [],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 596.4327808431007,
+        "y": 50
+      },
+      "caption": "Add Role",
+      "labels": [
+        "Azure Activity"
+      ],
+      "properties": {
+        "Role": "Owner",
+        " operationName": "Microsoft.Authorization/roleAssignments/write"
+      },
+      "style": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n2",
+      "toId": "n0",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n2",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n1",
+      "toId": "n3",
+      "type": "if needed",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n0",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n4",
+      "fromId": "n5",
+      "toId": "n3",
+      "type": "if needed",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n5",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n6",
+      "fromId": "n5",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n7",
+      "fromId": "n1",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "fromId": "n1",
+      "toId": "n5",
+      "type": "if needed",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}

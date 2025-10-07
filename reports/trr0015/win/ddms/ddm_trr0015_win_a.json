@@ -1,0 +1,504 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 178.74768353953402,
+        "y": 50
+      },
+      "caption": "List Shadow Copies",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 807.7989735462862,
+        "y": 594.2926598217863
+      },
+      "caption": "Create Shadow Copy",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 1751.8915668664067,
+        "y": 488.0826929689804
+      },
+      "caption": "Open File",
+      "labels": [],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 1025.3853972089144,
+        "y": 1003.3629244511081
+      },
+      "caption": "Call COM Methods",
+      "labels": [],
+      "properties": {
+        "Method": "Many Functions",
+        "Object1": "IVssBackupComponents",
+        "Object2": "IVssAsync "
+      },
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 1751.8915668664067,
+        "y": 666.0964063291341
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "CreateFile",
+        "File": "NTDS.dit"
+      },
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 1751.8915668664067,
+        "y": 844.1101196892879
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "NtCreateFile",
+        "File": "NTDS.dit"
+      },
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 2004.7666957812023,
+        "y": 488.0826929689804
+      },
+      "caption": "Copy File",
+      "labels": [],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 2004.7666957812023,
+        "y": 666.0964063291341
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "CopyFileEx or ReadFile",
+        "File": "NTDS.dit"
+      },
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 2004.7666957812023,
+        "y": 844.1101196892879
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "NtReadFile",
+        "File": "NTDS.dit"
+      },
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 178.74768353953402,
+        "y": 488.0826929689804
+      },
+      "caption": "Create COM instance",
+      "labels": [],
+      "properties": {
+        "Object": "IVssBackupComponents"
+      },
+      "style": {}
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 361.29845902502996,
+        "y": 488.08269296898015
+      },
+      "caption": "Call COM Method",
+      "labels": [],
+      "properties": {
+        "Method": "IVssBackupComponents::Query"
+      },
+      "style": {}
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 1025.3853972089144,
+        "y": 1214.588862626473
+      },
+      "caption": "Create Volume",
+      "labels": [
+        "CS SnapshotVolumeMounted"
+      ],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": 282.4953670790684,
+        "y": 269.0413464844902
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "CreateVssBackupComponents",
+        "DLL": "VssApi.dll"
+      },
+      "style": {}
+    },
+    {
+      "id": "n13",
+      "position": {
+        "x": 75,
+        "y": 269.0413464844902
+      },
+      "caption": "Call RPC",
+      "labels": [],
+      "properties": {
+        "Interface": "MS-FSRVP",
+        "Transport": "ncacn_np",
+        "Named Pipe": " \\\\pipe\\FssagentRpc"
+      },
+      "style": {}
+    },
+    {
+      "id": "n14",
+      "position": {
+        "x": 936.1369297828932,
+        "y": 803.5156779473269
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "CreateVssBackupComponents"
+      },
+      "style": {}
+    },
+    {
+      "id": "n15",
+      "position": {
+        "x": 705.373206651366,
+        "y": 803.5156779473269
+      },
+      "caption": "Call RPC",
+      "labels": [],
+      "properties": {
+        "Interface": "MS-FSRVP",
+        "Transport": "ncacn_np",
+        "Named Pipe": " \\\\pipe\\FssagentRpc"
+      },
+      "style": {}
+    },
+    {
+      "id": "n16",
+      "position": {
+        "x": 820.7550682171295,
+        "y": 1003.3629244511081
+      },
+      "caption": "Create COM instance",
+      "labels": [],
+      "properties": {
+        "Object": "IVssBackupComponents"
+      },
+      "style": {}
+    },
+    {
+      "id": "n17",
+      "position": {
+        "x": 1433.5758733281136,
+        "y": 978.9199813584117
+      },
+      "caption": "Expose Volume",
+      "labels": [],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n18",
+      "position": {
+        "x": 1433.5758733281136,
+        "y": 1214.588862626473
+      },
+      "caption": "Call COM Method or Windows API",
+      "labels": [],
+      "properties": {
+        "API": "SetVolumeMountPoint",
+        "Method": "IVssBackupComponents::ExposeSnapshot"
+      },
+      "style": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n2",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n7",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "fromId": "n9",
+      "toId": "n10",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "fromId": "n10",
+      "toId": "n1",
+      "type": "if new SC needed",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "fromId": "n10",
+      "toId": "n2",
+      "type": "if SC already exists and is exposed",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "fromId": "n3",
+      "toId": "n11",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "fromId": "n11",
+      "toId": "n2",
+      "type": "if already exposed",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n10",
+      "fromId": "n0",
+      "toId": "n12",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n11",
+      "fromId": "n12",
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n12",
+      "fromId": "n0",
+      "toId": "n13",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n13",
+      "fromId": "n0",
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n14",
+      "fromId": "n13",
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n15",
+      "fromId": "n1",
+      "toId": "n14",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n16",
+      "fromId": "n1",
+      "toId": "n15",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n17",
+      "fromId": "n1",
+      "toId": "n16",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n18",
+      "fromId": "n16",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n19",
+      "fromId": "n14",
+      "toId": "n16",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n20",
+      "fromId": "n15",
+      "toId": "n16",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n21",
+      "fromId": "n11",
+      "toId": "n17",
+      "type": "if not exposed",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n22",
+      "fromId": "n17",
+      "toId": "n18",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n23",
+      "fromId": "n18",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}
