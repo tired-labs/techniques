@@ -1,0 +1,226 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "caption": "Disconnect USB Keyboard",
+      "labels": [
+        "CS DcUsbDeviceDisconnected"
+      ],
+      "properties": {},
+      "style": {
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 366.5,
+        "y": 50
+      },
+      "caption": "Connect USB Device",
+      "labels": [
+        "CS DcUsbDeviceConnected",
+        "CS DcUsb*Descriptor"
+      ],
+      "properties": {
+        "Device Class": "HID",
+        "Protocol": "1 (keyboard)"
+      },
+      "style": {
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 75,
+        "y": 315.38673933094566
+      },
+      "caption": "Connect USB Device",
+      "labels": [
+        "CS DcUsbDeviceConnected",
+        "CS DcUsb*Descriptor"
+      ],
+      "properties": {
+        "Device Class": "HID",
+        "Protocol": "1 (keyboard)"
+      },
+      "style": {
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 366.5,
+        "y": 315.38673933094566
+      },
+      "caption": "Send Keystrokes",
+      "labels": [],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 658,
+        "y": 315.3867393309456
+      },
+      "caption": "Create Process",
+      "labels": [
+        "CS ProcessRollup2"
+      ],
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 75,
+        "y": 580.7734786618913
+      },
+      "caption": "Connect USB Device",
+      "labels": [
+        "CS DcUsbDeviceConnected",
+        "CS DcUsb*Descriptor"
+      ],
+      "properties": {
+        "Device Class": "various"
+      },
+      "style": {
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 366.5,
+        "y": 580.7734786618913
+      },
+      "caption": "Attach Network Interface",
+      "labels": [
+        "CS LocalIpAddressIP4"
+      ],
+      "properties": {
+        "Subnet": "private IPs"
+      },
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 658,
+        "y": 580.7734786618913
+      },
+      "caption": "Establish Network Connection",
+      "labels": [
+        "CS NetworkConnectIP*",
+        "CS FirewallRuleIP*Matched"
+      ],
+      "properties": {
+        "Protocol": "any",
+        "Subnet": "private IPs"
+      },
+      "style": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}

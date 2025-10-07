@@ -1,0 +1,349 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 241.48659714189748,
+        "y": 556.2599343705785
+      },
+      "caption": "Consent to Entra permissions",
+      "labels": [
+        "Entra Audit \"Add delegated permission grant\"",
+        "Entra Audit \"Add app role assignment to service principal\""
+      ],
+      "properties": {
+        "API": "EXO or Graph",
+        "RBAC": "Entra ID"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 14,
+        "label-border-width": 1,
+        "caption-font-size": 14
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 740.9202166904332,
+        "y": 137.4552578572774
+      },
+      "caption": "Send Graph Request",
+      "labels": [
+        "UnifiedAuditLog \"MailItemsAccessed\""
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 241.48659714189748,
+        "y": 686.0103695714199
+      },
+      "caption": "Grant EXO permissions",
+      "labels": [
+        "UnifiedAuditLog \"New-ManagementRoleAssignment\""
+      ],
+      "properties": {
+        "API": "EXO or Graph",
+        "RBAC": "EXO RBAC for Apps"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 76.29342857979367,
+        "y": 189.36930227068183
+      },
+      "caption": "Register Entra Application",
+      "labels": [
+        "Entra Audit \"Add application\""
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 75.00000000000011,
+        "y": 686.0103695714199
+      },
+      "caption": "Add SPN to EXO",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 740.9202166904332,
+        "y": 262.77374697188975
+      },
+      "caption": "Send EWS Request",
+      "labels": [
+        "UnifiedAuditLog \"MailItemsAccessed\""
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 76.29342857979367,
+        "y": 328.73860454136366
+      },
+      "caption": "Add Client Secret",
+      "labels": [
+        "Entra Audit: \"Update application - Certificates and secrets management\""
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-border-width": 1,
+        "caption-font-size": 14,
+        "label-font-size": 12,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 76.29342857979367,
+        "y": 50
+      },
+      "caption": "Steal App's Client Secret",
+      "labels": [],
+      "properties": {
+        "Target": "App with needed permissions and existing secret"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "property-font-size": 14,
+        "label-border-width": 1,
+        "label-font-size": 12
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 440.21554817804525,
+        "y": 189.36930227068183
+      },
+      "caption": "Acquire app with client secret, permissions",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "property-font-size": 14,
+        "label-border-width": 1,
+        "label-font-size": 12
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 75,
+        "y": 556.2599343705785
+      },
+      "caption": "Add Entra Permissions",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "property-font-size": 14,
+        "label-border-width": 1,
+        "label-font-size": 12
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n4",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {
+        "property-font-size": 14,
+        "arrow-width": 2
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n9",
+      "toId": "n0",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n2",
+      "fromId": "n8",
+      "toId": "n4",
+      "type": "if adding EXO permissions",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n3",
+      "fromId": "n8",
+      "toId": "n9",
+      "type": "if adding Entra permissions",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n4",
+      "fromId": "n8",
+      "toId": "n6",
+      "type": "if adding secret",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n5",
+      "fromId": "n8",
+      "toId": "n3",
+      "type": "if adding app",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n6",
+      "fromId": "n8",
+      "toId": "n7",
+      "type": "if already exists",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n7",
+      "fromId": "n8",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n8",
+      "fromId": "n8",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 2,
+        "property-font-size": 14
+      }
+    }
+  ]
+}

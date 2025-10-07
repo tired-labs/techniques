@@ -1,0 +1,289 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "caption": "Start Process",
+      "labels": [
+        "CS PR2",
+        "Windows 4688"
+      ],
+      "properties": {
+        "Process": "mshta.exe"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-border-width": 2,
+        "label-font-size": 16
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 507.99870179421924,
+        "y": 50
+      },
+      "caption": "Load DLL",
+      "labels": [],
+      "properties": {
+        "Name": "mshtml.dll"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 679.9987017942192,
+        "y": 50
+      },
+      "caption": "Call Function",
+      "labels": [],
+      "properties": {
+        "Name": "RunHTMLApplication"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 567.7027418345734,
+        "y": 384.98343844251747
+      },
+      "caption": "Find Protocol Handler",
+      "labels": [],
+      "properties": {
+        "Protocol": "varies"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "border-color": "#000000"
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 291.4993508971096,
+        "y": 50
+      },
+      "caption": "Query Registry",
+      "labels": [
+        "Windows 4663 (SACL)",
+        "Sysmon 12"
+      ],
+      "properties": {
+        "Key": "COM Object GUID"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "border-color": "#000000",
+        "label-position": "outside",
+        "label-border-width": 2,
+        "label-font-size": 16
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 921.0075488412574,
+        "y": 384.98343844251747
+      },
+      "caption": "Run Application",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 75,
+        "y": 212.94228960296093
+      },
+      "caption": "Start Process",
+      "labels": [
+        "CS PR2",
+        "Windows 4688"
+      ],
+      "properties": {
+        "Process": "rundll32.exe"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 752.4497121689539,
+        "y": 258.3350756900909
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "CreateFile"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "label-position": "outside",
+        "label-font-size": 16
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "if Inline",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal",
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n2",
+      "fromId": "n0",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n3",
+      "fromId": "n4",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n4",
+      "fromId": "n3",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n5",
+      "fromId": "n6",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "n6",
+      "fromId": "n2",
+      "toId": "n7",
+      "type": "if File",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal",
+        "detail-position": "inline",
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n7",
+      "fromId": "n7",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    }
+  ]
+}
