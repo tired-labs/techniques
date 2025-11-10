@@ -31,7 +31,7 @@ Principal Manipulation).
 ### Security Principals
 
 To access resources that are secured by a Microsoft Entra tenant, the entity
-that requires access must be represented by a security principal. This
+that requires access must be represented by a [security principal]. This
 requirement is true for both users (user principals) and applications (service
 principals). The security principal defines the access policy and permissions
 for the user or application in the Microsoft Entra tenant.
@@ -43,12 +43,15 @@ for the user or application in the Microsoft Entra tenant.
   use resources without an interactive user. Service principals are called
   "Enterprise Apps" in the Azure portal.
 
+This TRR addresses only service principals (non-human identities) in Entra ID. User principals (human
+identities) will be addressed in a separate TRR.
+
 ### Applications in Azure
 
 Applications in Azure have two components:
 
-1. An App Registration
-2. A Service Principal (aka Enterprise Application)
+1. An [App Registration]
+2. A [Service Principal] (aka Enterprise Application)
 
 An **App Registration** is how you register a new application with Azure; it is
 the global representation of your application in Azure across all tenants and is
@@ -78,7 +81,7 @@ registration or consent), a service principal object is created.
 
 ### Service Principal Types
 
-There are three types of service principals in Azure. An application can be
+There are three types of service principals in Azure[^3]. An application can be
 represented by any one of the three.
 
 - **Application** - Application service principals are very flexible, but
@@ -146,12 +149,19 @@ Examples include:
 
 ## References
 
-- [Application and service principal objects in Microsoft Entra ID]
+- [Application and service principal objects in Microsoft Entra ID - Microsoft Learn]
+
+[^1]: [Entra Managed Identities - Microsoft Learn]
+[^2]: [Application and service principal objects in Microsoft Entra ID -
+    Microsoft Learn]
+[^3]: [Service Principal Objects - Microsoft Learn]
 
 [T1136.003]: https://attack.mitre.org/techniques/T1136/003/
 [AZT502.2]: https://microsoft.github.io/Azure-Threat-Research-Matrix/Persistence/AZT502/AZT502-2/
 [TRR0020]: ../../trr0020/azr/README.md
-[Application and service principal objects in Microsoft Entra ID]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
-
-[^1]: [Entra Managed Identities - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview)
-[^2]: [Application and service principal objects in Microsoft Entra ID - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals)
+[App Registration]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#application-registration
+[Service Principal]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object
+[Application and service principal objects in Microsoft Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
+[security principal]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals
+[Entra Managed Identities - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview
+[Service Principal Objects - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object
