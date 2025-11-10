@@ -12,8 +12,10 @@
 
 ### Scope Statement
 
-This TRR covers [AZT502.2] from Microsoft's Azure Threat Research Matrix, which
-corresponds to [T1136.003] (Create Account: Cloud Account) on the Mitre ATT&CK
+This TRR covers [AZT502.2] from Microsoft's Azure Threat Research Matrix (ATRM), which
+
+corresponds to [T1136.003] (Create Account: Cloud Account) on the MITRE ATT&CK
+
 matrix (as it pertains to Azure).
 
 ## Technique Overview
