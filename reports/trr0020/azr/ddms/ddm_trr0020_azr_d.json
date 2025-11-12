@@ -5,8 +5,8 @@
     "background-image": "",
     "background-size": "100%",
     "node-color": "#ffffff",
-    "border-width": 3,
-    "border-color": "#68bc00",
+    "border-width": 4,
+    "border-color": "#000000",
     "radius": 50,
     "node-padding": 5,
     "node-margin": 2,
@@ -18,21 +18,21 @@
     "caption-position": "inside",
     "caption-max-width": 200,
     "caption-color": "#000000",
-    "caption-font-size": 14,
+    "caption-font-size": 16,
     "caption-font-weight": "normal",
     "label-position": "outside",
     "label-display": "pill",
     "label-color": "#000000",
     "label-background-color": "#ffffff",
     "label-border-color": "#000000",
-    "label-border-width": 1,
-    "label-font-size": 12,
+    "label-border-width": 2,
+    "label-font-size": 14,
     "label-padding": 5,
     "label-margin": 4,
     "directionality": "directed",
     "detail-position": "inline",
     "detail-orientation": "parallel",
-    "arrow-width": 3,
+    "arrow-width": 5,
     "arrow-color": "#000000",
     "margin-start": 5,
     "margin-end": 5,
@@ -49,15 +49,39 @@
     "property-position": "outside",
     "property-alignment": "colon",
     "property-color": "#000000",
-    "property-font-size": 12,
+    "property-font-size": 16,
     "property-font-weight": "normal"
   },
   "nodes": [
     {
-      "id": "n6",
+      "id": "n2",
       "position": {
-        "x": 75,
-        "y": 883.0879095529763
+        "x": -265.3972202474231,
+        "y": -709.6514642704369
+      },
+      "caption": "Create Service Principal",
+      "labels": [
+        "Entra AuditLog"
+      ],
+      "properties": {
+        "RBAC": "Entra ID",
+        "Permission": "microsoft.directory/servicePrincipals/create",
+        "Operation": "Add service principal"
+      },
+      "style": {
+        "border-color": "#808080",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 8.370419638490631,
+        "y": -709.6514642704369
       },
       "caption": "Add Permission",
       "labels": [
@@ -69,13 +93,16 @@
         "PermissionOption2": "AppRoleAssignment.ReadWrite.All",
         "RBAC": "Entra ID"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
     },
     {
-      "id": "n7",
+      "id": "n4",
       "position": {
-        "x": 384.34856917628525,
-        "y": 999.4169817278382
+        "x": 286.6217808411726,
+        "y": -549.0029659776887
       },
       "caption": "Grant Consent",
       "labels": [
@@ -86,13 +113,16 @@
         "Permission": "ConsentRequest.ReadWrite.All",
         "RBAC": "Entra ID"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
     },
     {
-      "id": "n8",
+      "id": "n5",
       "position": {
-        "x": 693.6971383525704,
-        "y": 883.0879095529763
+        "x": 518.3513993014327,
+        "y": -709.6514642704369
       },
       "caption": "Permission Active",
       "labels": [
@@ -102,33 +132,44 @@
         "Operation": "Add app role assignment to service principal",
         "RBAC": "Entra ID"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
     }
   ],
   "relationships": [
     {
-      "id": "n2",
-      "fromId": "n6",
-      "toId": "n7",
+      "id": "n0",
+      "fromId": "n3",
+      "toId": "n4",
       "type": "if permission option 1",
       "properties": {},
       "style": {}
     },
     {
-      "id": "n3",
-      "fromId": "n7",
-      "toId": "n8",
+      "id": "n1",
+      "fromId": "n4",
+      "toId": "n5",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
-      "id": "n4",
-      "fromId": "n6",
-      "toId": "n8",
+      "id": "n2",
+      "fromId": "n3",
+      "toId": "n5",
       "type": "if permission option 2",
       "properties": {},
       "style": {}
+    },
+    {
+      "id": "n3",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n3"
     }
   ]
 }
