@@ -40,11 +40,11 @@ functionality to acquire and insert tickets belonging to other users.
 The key concepts required to understand this attack are Kerberos tickets and the
 Windows implementation of the protocol.
 
-### Kerberos tickets
+### Kerberos Tickets
 
 Kerberos is a network authentication protocol designed to provide strong
 authentication for client/server applications by using symmetric key
-cryptography to sign 'tickets' that a client can use to prove their identity and
+cryptography to sign "tickets" that a client can use to prove their identity and
 provide authorization to access a network resource.
 
 Kerberos relies on a Key Distribution Center (KDC), comprised of 3 elements.
@@ -196,7 +196,7 @@ potentially acquire valid Kerberos tickets that could be used in a
 pass-the-ticket attack. The DDM includes the ones most commonly used with this
 procedure, like those used by the popular tools [Rubeus] and [Mimikatz]. The DDM
 also acknowledges that there are other ways, but this TRR will not attempt an
-exhaustive exploration of them. All methods for acquiring tickets are in gray on
+exhaustive exploration of them. All methods in gray are for acquiring tickets on
 the DDM, in addition to the operation for the original valid request for the
 ticket, to note that these actions are precursors that must occur before the
 ticket can be imported into a new logon session.
