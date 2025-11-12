@@ -1,0 +1,417 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "caption": "Extract Ticket",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#808080",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 111.07141439016318,
+        "y": 265.4
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "OpenProcess",
+        "Permission": "PROCESS_VM_READ",
+        "Target": "lsass.exe"
+      },
+      "style": {
+        "border-color": "#808080",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 302.56591525494736,
+        "y": 265.4
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "ReadProcessMemory",
+        "Permission": "PROCESS_VM_READ",
+        "Target": "lsass.exe"
+      },
+      "style": {
+        "border-color": "#808080",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 10.0546875,
+        "y": 464
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "LsaCallAuthenticationPackage",
+        "Message": "KerbQueryTicketCacheMessage",
+        "Permission": "SeTcbPrivilege (to query other users)"
+      },
+      "style": {
+        "border-color": "#808080",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 302.56591525494736,
+        "y": 464
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "LsaCallAuthenticationPackage",
+        "Message": "KerbRetrieveEncodedTicketMessage or KerbRetrieveTicketMessage"
+      },
+      "style": {
+        "border-color": "#808080",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 568.7099980020929,
+        "y": 50
+      },
+      "caption": "Import Ticket",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 810.2107108333576,
+        "y": 50
+      },
+      "caption": "Submit Ticket",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 568.7099980020929,
+        "y": 332.3614613618084
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "LsaCallAuthenticationPackage",
+        "Message": "KerbSubmitTicketMessage",
+        "Permission": "SeTcbPrivilege"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 810.2107108333576,
+        "y": 332.3614613618084
+      },
+      "caption": "Send Network Request",
+      "labels": [
+        "Event 4769",
+        "CS ActiveDirectoryServiceAccessRequest"
+      ],
+      "properties": {
+        "Protocol": "Kerberos",
+        "Message": "TGS-REQ"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1
+      }
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 219.66073791569454,
+        "y": 138.66515903291773
+      },
+      "caption": "Other options?",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#808080",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": -321.9609365771741,
+        "y": 50
+      },
+      "caption": "Request Ticket",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#808080",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n13",
+      "position": {
+        "x": -321.9609365771741,
+        "y": 416.4264789348867
+      },
+      "caption": "Send Network Request",
+      "labels": [
+        "Event 4768",
+        "CS ActiveDirectoryAuthentication"
+      ],
+      "properties": {
+        "Protocol": "Kerberos",
+        "Message": "TGS-REQ"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#808080",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n0",
+      "toId": "n5"
+    },
+    {
+      "id": "n3",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n5",
+      "toId": "n6"
+    },
+    {
+      "id": "n4",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n3",
+      "toId": "n7"
+    },
+    {
+      "id": "n5",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n7",
+      "toId": "n9"
+    },
+    {
+      "id": "n6",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n6",
+      "toId": "n7"
+    },
+    {
+      "id": "n7",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n0",
+      "toId": "n11"
+    },
+    {
+      "id": "n8",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n11",
+      "toId": "n7"
+    },
+    {
+      "id": "n9",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n9",
+      "toId": "n8"
+    },
+    {
+      "id": "n10",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n8",
+      "toId": "n10"
+    },
+    {
+      "id": "n11",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n12",
+      "toId": "n13"
+    },
+    {
+      "id": "n12",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n13",
+      "toId": "n0"
+    }
+  ]
+}
