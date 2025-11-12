@@ -178,7 +178,12 @@ any logon session.
 Once a ticket has been stolen, it can be injected into any logon session using
 the Kerberos SSP/AP `KerbSubmitTicketMessage` message. This submits the ticket
 to be included in the current logon session's ticket cache, where it will be
-used whenever access is requested.
+used whenever access is requested. One important detail to note here: it is
+pointless for an attacker to inject a ticket for a user into a logon session for
+that same user, because it's a simple matter to request a new valid ticket for
+the logged on user. **Thus, maliciously injected tickets will always have a
+mismatch between the client the ticket was issued for and the logon session user
+account.**
 
 #### Detection Data Model
 

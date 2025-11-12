@@ -5,7 +5,7 @@
     "background-image": "",
     "background-size": "100%",
     "node-color": "#ffffff",
-    "border-width": 2,
+    "border-width": 4,
     "border-color": "#000000",
     "radius": 50,
     "node-padding": 5,
@@ -25,8 +25,8 @@
     "label-color": "#000000",
     "label-background-color": "#ffffff",
     "label-border-color": "#000000",
-    "label-border-width": 1,
-    "label-font-size": 16,
+    "label-border-width": 2,
+    "label-font-size": 14,
     "label-padding": 5,
     "label-margin": 4,
     "directionality": "directed",
@@ -56,7 +56,7 @@
     {
       "id": "n0",
       "position": {
-        "x": 75,
+        "x": 471.9609365771741,
         "y": 50
       },
       "caption": "Extract Ticket",
@@ -73,9 +73,9 @@
       }
     },
     {
-      "id": "n2",
+      "id": "n1",
       "position": {
-        "x": 111.07141439016318,
+        "x": 508.03235096733727,
         "y": 265.4
       },
       "caption": "Call API",
@@ -95,9 +95,9 @@
       }
     },
     {
-      "id": "n3",
+      "id": "n2",
       "position": {
-        "x": 302.56591525494736,
+        "x": 699.5268518321215,
         "y": 265.4
       },
       "caption": "Call API",
@@ -117,9 +117,9 @@
       }
     },
     {
-      "id": "n5",
+      "id": "n3",
       "position": {
-        "x": 10.0546875,
+        "x": 407.0156240771741,
         "y": 464
       },
       "caption": "Call API",
@@ -139,9 +139,9 @@
       }
     },
     {
-      "id": "n6",
+      "id": "n4",
       "position": {
-        "x": 302.56591525494736,
+        "x": 699.5268518321215,
         "y": 464
       },
       "caption": "Call API",
@@ -160,9 +160,9 @@
       }
     },
     {
-      "id": "n7",
+      "id": "n5",
       "position": {
-        "x": 568.7099980020929,
+        "x": 965.6709345792669,
         "y": 50
       },
       "caption": "Import Ticket",
@@ -179,9 +179,9 @@
       }
     },
     {
-      "id": "n8",
+      "id": "n6",
       "position": {
-        "x": 810.2107108333576,
+        "x": 1207.1716474105317,
         "y": 50
       },
       "caption": "Submit Ticket",
@@ -198,9 +198,9 @@
       }
     },
     {
-      "id": "n9",
+      "id": "n7",
       "position": {
-        "x": 568.7099980020929,
+        "x": 965.6709345792669,
         "y": 332.3614613618084
       },
       "caption": "Call API",
@@ -208,7 +208,8 @@
       "properties": {
         "API": "LsaCallAuthenticationPackage",
         "Message": "KerbSubmitTicketMessage",
-        "Permission": "SeTcbPrivilege"
+        "Permission": "SeTcbPrivilege",
+        "Ticket Client": "NOT the Logon Session User"
       },
       "style": {
         "border-color": "#68bc00",
@@ -220,9 +221,9 @@
       }
     },
     {
-      "id": "n10",
+      "id": "n8",
       "position": {
-        "x": 810.2107108333576,
+        "x": 1207.1716474105317,
         "y": 332.3614613618084
       },
       "caption": "Send Network Request",
@@ -245,9 +246,9 @@
       }
     },
     {
-      "id": "n11",
+      "id": "n9",
       "position": {
-        "x": 219.66073791569454,
+        "x": 616.6216744928686,
         "y": 138.66515903291773
       },
       "caption": "Other options?",
@@ -264,9 +265,9 @@
       }
     },
     {
-      "id": "n12",
+      "id": "n10",
       "position": {
-        "x": -321.9609365771741,
+        "x": 75,
         "y": 50
       },
       "caption": "Request Ticket",
@@ -283,9 +284,9 @@
       }
     },
     {
-      "id": "n13",
+      "id": "n11",
       "position": {
-        "x": -321.9609365771741,
+        "x": 75,
         "y": 416.4264789348867
       },
       "caption": "Send Network Request",
@@ -312,106 +313,106 @@
     {
       "id": "n0",
       "fromId": "n0",
-      "toId": "n2",
+      "toId": "n1",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
       "id": "n1",
-      "fromId": "n2",
-      "toId": "n3",
+      "fromId": "n1",
+      "toId": "n2",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
       "id": "n2",
-      "type": "",
-      "style": {},
-      "properties": {},
       "fromId": "n0",
-      "toId": "n5"
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
     },
     {
       "id": "n3",
+      "fromId": "n3",
+      "toId": "n4",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n5",
-      "toId": "n6"
+      "style": {}
     },
     {
       "id": "n4",
+      "fromId": "n2",
+      "toId": "n5",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n3",
-      "toId": "n7"
+      "style": {}
     },
     {
       "id": "n5",
+      "fromId": "n5",
+      "toId": "n7",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n7",
-      "toId": "n9"
+      "style": {}
     },
     {
       "id": "n6",
+      "fromId": "n4",
+      "toId": "n5",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n6",
-      "toId": "n7"
+      "style": {}
     },
     {
       "id": "n7",
-      "type": "",
-      "style": {},
-      "properties": {},
       "fromId": "n0",
-      "toId": "n11"
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {}
     },
     {
       "id": "n8",
+      "fromId": "n9",
+      "toId": "n5",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n11",
-      "toId": "n7"
+      "style": {}
     },
     {
       "id": "n9",
+      "fromId": "n7",
+      "toId": "n6",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n9",
-      "toId": "n8"
+      "style": {}
     },
     {
       "id": "n10",
+      "fromId": "n6",
+      "toId": "n8",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n8",
-      "toId": "n10"
+      "style": {}
     },
     {
       "id": "n11",
+      "fromId": "n10",
+      "toId": "n11",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n12",
-      "toId": "n13"
+      "style": {}
     },
     {
       "id": "n12",
+      "fromId": "n11",
+      "toId": "n0",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n13",
-      "toId": "n0"
+      "style": {}
     }
   ]
 }
