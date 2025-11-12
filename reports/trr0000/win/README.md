@@ -54,7 +54,7 @@ implementations have them on the same server. These elements are:
 - An authentication server (AS) that performs the initial authentication.
 - A ticket-granting server (TGS) that issues tickets to clients for specific
   services hosted on APs.
-- A Kerberos database that stores the password and identity of all verified
+- A Kerberos database that stores the password hash and identity of all verified
 users. 
 
 The Kerberos protocol defines a series of messages exchanged between the
