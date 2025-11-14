@@ -60,24 +60,15 @@ corrected before acceptance into the repository.
 
 ### TRR Name
 
-The TRR Name is not a section, but a header declaring the name of the technique
-detailed in the TRR. The value should follow the format of `Technique ID:
-Technique Name`.
-
-A Technique ID follows the format of `TRR####` assigned uniquely at the time of
-pull request acceptance. This ID will also be used to assign each procedure
-with a unique sub-identifier. This ensures that each procedure is independently
-trackable and allows more accurate referencing to occur.
-
-A technique name should be specific and depict what is researched in the report.
-The wording does not have to mirror existing names used by other frameworks, but
-can do so. For example, a TRR could use the industry's well-known name "DCSync."
-But a TRR on "Kerberoasting" might be more accurately named "Roasting Kerberos
-Service Tickets (Kerberoasting)" to help distinguish it from "AS-REP Roasting"
-(a closely related technique that also roasts Kerberos messages). In these
-cases, the author is encouraged to use the most accurate name possible. The
-well-known name can be included in parenthesis in the name or in the Technique
-Overview section (below).
+This is the title of the TRR. The name should be specific and depict what is
+researched in the report. The wording does not have to mirror existing names
+used by other frameworks, but can do so. For example, a TRR could use the
+industry's well-known name "DCSync," but a TRR on "Kerberoasting" might be more
+accurately named "Roasting Kerberos Service Tickets (Kerberoasting)" to help
+distinguish it from "AS-REP Roasting" (a closely related technique that also
+roasts Kerberos messages). In these cases, the author is encouraged to use the
+most accurate name possible. The well-known name can be included in parenthesis
+in the name or in the Technique Overview section (below).
 
 ### Metadata
 
@@ -87,9 +78,15 @@ separate front-end. This metadata contains fields such as the TRR ID, procedure
 IDs, external IDs for mapping to existing frameworks, associated tactics,
 relevant platforms, and individual contributors to the content.
 
+A TRR ID follows the format of `TRR####` and is assigned uniquely at the time of
+pull request acceptance. This ID will also be used to assign each procedure with
+a unique sub-identifier. This ensures that each procedure is independently
+trackable and allows more accurate referencing to occur.
+
 While human-readable and detailing valuable information for categorization, this
 section is meant to be used primarily for sorting/filtering purposes and should
-not contain any details that help understand the technique methodology.
+not contain any supplementary details to help understand the technique
+methodology. Those should go in the Technique Overview section.
 
 #### Scope Statement
 
