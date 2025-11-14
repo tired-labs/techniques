@@ -58,7 +58,7 @@ implementations have them on the same server. These elements are:
 users. 
 
 The Kerberos protocol defines a series of messages exchanged between the
-client, the KDC and AP. After a client has authenticated, they receive a Ticket
+client, the KDC, and AP. After a client has authenticated, they receive a Ticket
 Granting Ticket (TGT) that is stored on the client device and can be used to
 request access to specific network resources without having to reauthenticate.
 The client presents a TGT to the TGS when it requests access to a network
@@ -82,7 +82,7 @@ hash, which should be known only by the KDC and themselves.
 
 A pass-the-ticket attack abuses the statelessness of the Kerberos protocol. The
 possessor of a valid ticket is implicitly accepted as a valid owner of that
-identity, because the protocol uses cryptography (specifically, session keys and
+identity because the protocol uses cryptography (specifically, session keys and
 password hashes that should be known only to the owner) to ensure that tickets
 are issued only to their legitimate owners. A pass-the-ticket attack abuses the
 mechanisms for storing and retrieving tickets after they have been issued to the
@@ -140,15 +140,15 @@ The `ProtocolSubmitBuffer` parameter is used to submit a protocol-specific
 message to the security package hosted in LSASS. The Kerberos SSP/AP supports
 [just short of 40 messages]. The ones relevant to this attack technique are:
 
-- KerbQueryTicketCacheMessage - queries the local ticket cache
-- KerbRetrieveEncodedTicketMessage - retrieves a ticket from the local
+- `KerbQueryTicketCacheMessage` - queries the local ticket cache
+- `KerbRetrieveEncodedTicketMessage` - retrieves a ticket from the local
   cache
-- KerbSubmitTicketMessage - submits a ticket to be included in the local cache
+- `KerbSubmitTicketMessage` - submits a ticket to be included in the local cache
 
 > [!NOTE]
 > This list of messages is not necessarily inclusive. It's probably possible to
 > accomplish the same task with some of the other supported messages, like
-> KerbQueryTicketCacheExMessage or KerbAddExtraCredentialsMessage.
+> `KerbQueryTicketCacheExMessage` or `KerbAddExtraCredentialsMessage`.
 
 Most of the Kerberos SSP/AP routines require a calling process to hold the
 `SeTcbPrivilege` ('Trusted Computer Base'), which indicates the process is a
