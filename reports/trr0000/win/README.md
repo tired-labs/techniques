@@ -26,7 +26,7 @@ operating systems. It is also used extensively for authentication and
 authorization in Active Directory domains. As such, it plays a role in probably
 every modern enterprise network. An attacker who can steal valid Kerberos
 tickets from other users can use this procedure to inject those tickets into
-their own current logon session and thereby assume the identity of the ticket's
+their own current logon session and assume the identity of the ticket's
 owner.
 
 The Windows operating system has a built-in security package that implements the
