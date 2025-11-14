@@ -5,8 +5,8 @@
     "background-image": "",
     "background-size": "100%",
     "node-color": "#ffffff",
-    "border-width": 3,
-    "border-color": "#68bc00",
+    "border-width": 4,
+    "border-color": "#000000",
     "radius": 50,
     "node-padding": 5,
     "node-margin": 2,
@@ -18,21 +18,21 @@
     "caption-position": "inside",
     "caption-max-width": 200,
     "caption-color": "#000000",
-    "caption-font-size": 14,
+    "caption-font-size": 16,
     "caption-font-weight": "normal",
     "label-position": "outside",
     "label-display": "pill",
     "label-color": "#000000",
     "label-background-color": "#ffffff",
     "label-border-color": "#000000",
-    "label-border-width": 1,
-    "label-font-size": 12,
+    "label-border-width": 2,
+    "label-font-size": 14,
     "label-padding": 5,
     "label-margin": 4,
     "directionality": "directed",
     "detail-position": "inline",
     "detail-orientation": "parallel",
-    "arrow-width": 3,
+    "arrow-width": 5,
     "arrow-color": "#000000",
     "margin-start": 5,
     "margin-end": 5,
@@ -49,15 +49,39 @@
     "property-position": "outside",
     "property-alignment": "colon",
     "property-color": "#000000",
-    "property-font-size": 12,
+    "property-font-size": 16,
     "property-font-weight": "normal"
   },
   "nodes": [
     {
-      "id": "n1",
+      "id": "n2",
       "position": {
-        "x": 395.14958741862745,
-        "y": 476.1719977658451
+        "x": -119.62958036150937,
+        "y": -630.1605913051768
+      },
+      "caption": "Create Service Principal",
+      "labels": [
+        "Entra AuditLog"
+      ],
+      "properties": {
+        "RBAC": "Entra ID",
+        "Permission": "microsoft.directory/servicePrincipals/create",
+        "Operation": "Add service principal"
+      },
+      "style": {
+        "border-color": "#808080",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 414.49535606084623,
+        "y": -758.4949953267537
       },
       "caption": "Add Member to Role",
       "labels": [
@@ -68,13 +92,19 @@
         "Operation2": "Add eligible member to role*",
         "RBAC": "Entra ID"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-border-width": 2,
+        "label-font-size": 14
+      }
     },
     {
-      "id": "n2",
+      "id": "n5",
       "position": {
-        "x": 395.14958741862745,
-        "y": 662.1719977658449
+        "x": 414.49535606084623,
+        "y": -410.6610033258301
       },
       "caption": "Add Member to Role",
       "labels": [
@@ -84,30 +114,41 @@
         "Operation": "Microsoft.Authorization/roleAssignments/write",
         "RBAC": "Azure"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-border-width": 2,
+        "label-font-size": 14
+      }
     },
     {
-      "id": "n3",
+      "id": "n6",
       "position": {
-        "x": 75,
-        "y": 476.1719977658451
+        "x": 151.65175239375984,
+        "y": -807.361608867318
       },
-      "caption": "Create or Modify Custom Entra Role",
+      "caption": "Modify Custom Entra Role",
       "labels": [
         "Entra AuditLog"
       ],
       "properties": {
-        "Operation1": "Add role definition",
-        "Operation2": "Update role definition",
+        "Operation": "Update role definition",
         "RBAC": "Entra ID"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-border-width": 2,
+        "label-font-size": 14
+      }
     },
     {
-      "id": "n4",
+      "id": "n7",
       "position": {
-        "x": 75,
-        "y": 662.1719977658449
+        "x": 151.65175239375984,
+        "y": -410.6610033258301
       },
       "caption": "Create or Modify Custom Azure Role",
       "labels": [
@@ -117,25 +158,81 @@
         "Operation": "Microsoft.Authorization/roleDefinitions/write",
         "RBAC": "Azure"
       },
-      "style": {}
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-border-width": 2,
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 151.65175239375984,
+        "y": -676.7689728767596
+      },
+      "caption": "Create Custom Entra Role",
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3
+      },
+      "labels": [
+        "Entra AuditLog"
+      ],
+      "properties": {
+        "Operation": "Add role definition"
+      }
     }
   ],
   "relationships": [
     {
-      "id": "n0",
-      "fromId": "n3",
-      "toId": "n1",
-      "type": "first step is optional",
+      "id": "n2",
+      "type": "",
+      "style": {},
       "properties": {},
-      "style": {}
+      "fromId": "n7",
+      "toId": "n5"
     },
     {
-      "id": "n1",
-      "fromId": "n4",
-      "toId": "n2",
-      "type": "first step is optional",
+      "id": "n3",
+      "type": "",
+      "style": {},
       "properties": {},
-      "style": {}
+      "fromId": "n6",
+      "toId": "n4"
+    },
+    {
+      "id": "n4",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n6"
+    },
+    {
+      "id": "n5",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n7"
+    },
+    {
+      "id": "n6",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n8"
+    },
+    {
+      "id": "n7",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n8",
+      "toId": "n4"
     }
   ]
 }
