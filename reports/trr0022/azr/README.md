@@ -1,4 +1,4 @@
-# TRR0022: Hijack Azure Subscription
+# Hijack Azure Subscription
 
 ## Metadata
 
