@@ -60,7 +60,7 @@ corrected before acceptance into the repository.
 
 ### TRR Name
 
-This is the title of the TRR. THe name should be specific and depict what is
+This is the title of the TRR. The name should be specific and depict what is
 researched in the report. The wording does not have to mirror existing names
 used by other frameworks, but can do so. For example, a TRR could use the
 industry's well-known name "DCSync," but a TRR on "Kerberoasting" might be more
