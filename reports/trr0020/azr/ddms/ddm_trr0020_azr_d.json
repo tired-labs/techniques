@@ -54,10 +54,10 @@
   },
   "nodes": [
     {
-      "id": "n2",
+      "id": "n0",
       "position": {
-        "x": -265.3972202474231,
-        "y": -709.6514642704369
+        "x": 75,
+        "y": 50
       },
       "caption": "Create Service Principal",
       "labels": [
@@ -74,14 +74,15 @@
         "label-font-size": 14,
         "label-border-width": 2,
         "border-width": 3,
-        "caption-font-size": 16
+        "caption-font-size": 16,
+        "node-color": "#cccccc"
       }
     },
     {
-      "id": "n3",
+      "id": "n1",
       "position": {
-        "x": 8.370419638490631,
-        "y": -709.6514642704369
+        "x": 348.7676398859137,
+        "y": 50
       },
       "caption": "Add Permission",
       "labels": [
@@ -99,10 +100,10 @@
       }
     },
     {
-      "id": "n4",
+      "id": "n2",
       "position": {
-        "x": 286.6217808411726,
-        "y": -549.0029659776887
+        "x": 627.0190010885957,
+        "y": 210.64849829274817
       },
       "caption": "Grant Consent",
       "labels": [
@@ -119,10 +120,10 @@
       }
     },
     {
-      "id": "n5",
+      "id": "n3",
       "position": {
-        "x": 518.3513993014327,
-        "y": -709.6514642704369
+        "x": 858.7486195488558,
+        "y": 50
       },
       "caption": "Permission Active",
       "labels": [
@@ -141,35 +142,35 @@
   "relationships": [
     {
       "id": "n0",
-      "fromId": "n3",
-      "toId": "n4",
+      "fromId": "n1",
+      "toId": "n2",
       "type": "if permission option 1",
       "properties": {},
       "style": {}
     },
     {
       "id": "n1",
-      "fromId": "n4",
-      "toId": "n5",
+      "fromId": "n2",
+      "toId": "n3",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
       "id": "n2",
-      "fromId": "n3",
-      "toId": "n5",
+      "fromId": "n1",
+      "toId": "n3",
       "type": "if permission option 2",
       "properties": {},
       "style": {}
     },
     {
       "id": "n3",
+      "fromId": "n0",
+      "toId": "n1",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n2",
-      "toId": "n3"
+      "style": {}
     }
   ]
 }

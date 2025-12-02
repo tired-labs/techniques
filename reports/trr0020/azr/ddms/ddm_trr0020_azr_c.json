@@ -54,10 +54,10 @@
   },
   "nodes": [
     {
-      "id": "n2",
+      "id": "n0",
       "position": {
-        "x": -119.62958036150937,
-        "y": -630.1605913051768
+        "x": 75,
+        "y": 227.20101756214115
       },
       "caption": "Create Service Principal",
       "labels": [
@@ -74,14 +74,15 @@
         "label-font-size": 14,
         "label-border-width": 2,
         "border-width": 3,
-        "caption-font-size": 16
+        "caption-font-size": 16,
+        "node-color": "#cccccc"
       }
     },
     {
-      "id": "n4",
+      "id": "n1",
       "position": {
-        "x": 414.49535606084623,
-        "y": -758.4949953267537
+        "x": 609.1249364223556,
+        "y": 98.86661354056423
       },
       "caption": "Add Member to Role",
       "labels": [
@@ -101,10 +102,10 @@
       }
     },
     {
-      "id": "n5",
+      "id": "n2",
       "position": {
-        "x": 414.49535606084623,
-        "y": -410.6610033258301
+        "x": 609.1249364223556,
+        "y": 446.70060554148785
       },
       "caption": "Add Member to Role",
       "labels": [
@@ -123,10 +124,10 @@
       }
     },
     {
-      "id": "n6",
+      "id": "n3",
       "position": {
-        "x": 151.65175239375984,
-        "y": -807.361608867318
+        "x": 346.2813327552692,
+        "y": 50
       },
       "caption": "Modify Custom Entra Role",
       "labels": [
@@ -145,10 +146,10 @@
       }
     },
     {
-      "id": "n7",
+      "id": "n4",
       "position": {
-        "x": 151.65175239375984,
-        "y": -410.6610033258301
+        "x": 346.2813327552692,
+        "y": 446.70060554148785
       },
       "caption": "Create or Modify Custom Azure Role",
       "labels": [
@@ -167,72 +168,72 @@
       }
     },
     {
-      "id": "n8",
+      "id": "n5",
       "position": {
-        "x": 151.65175239375984,
-        "y": -676.7689728767596
+        "x": 346.2813327552692,
+        "y": 180.5926359905584
       },
       "caption": "Create Custom Entra Role",
-      "style": {
-        "border-color": "#68bc00",
-        "border-width": 3
-      },
       "labels": [
         "Entra AuditLog"
       ],
       "properties": {
         "Operation": "Add role definition"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3
       }
     }
   ],
   "relationships": [
     {
-      "id": "n2",
+      "id": "n0",
+      "fromId": "n4",
+      "toId": "n2",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n7",
-      "toId": "n5"
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n3",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n0",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
     },
     {
       "id": "n3",
+      "fromId": "n0",
+      "toId": "n4",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n6",
-      "toId": "n4"
+      "style": {}
     },
     {
       "id": "n4",
+      "fromId": "n0",
+      "toId": "n5",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n2",
-      "toId": "n6"
+      "style": {}
     },
     {
       "id": "n5",
+      "fromId": "n5",
+      "toId": "n1",
       "type": "",
-      "style": {},
       "properties": {},
-      "fromId": "n2",
-      "toId": "n7"
-    },
-    {
-      "id": "n6",
-      "type": "",
-      "style": {},
-      "properties": {},
-      "fromId": "n2",
-      "toId": "n8"
-    },
-    {
-      "id": "n7",
-      "type": "",
-      "style": {},
-      "properties": {},
-      "fromId": "n8",
-      "toId": "n4"
+      "style": {}
     }
   ]
 }

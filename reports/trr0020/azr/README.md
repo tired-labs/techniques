@@ -1,4 +1,4 @@
-# Service Principal Manipulation
+# Azure Service Principal Manipulation
 
 ## Metadata
 
