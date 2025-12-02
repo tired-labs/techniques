@@ -23,8 +23,8 @@ ticket cache, enabling them to assume the identity of the ticket owner.
 
 Kerberos is a common authentication protocol supported natively by all modern
 operating systems. It is also used extensively for authentication and
-authorization in Active Directory domains. As such, it plays a role in probably
-every modern enterprise network. An attacker who can steal valid Kerberos
+authorization in Active Directory domains. As such, it plays a role in many
+modern enterprise networks. An attacker who can steal valid Kerberos
 tickets from other users can use this procedure to inject those tickets into
 their own current logon session and assume the identity of the ticket's
 owner.
@@ -76,7 +76,7 @@ special service account that represents the KDC in the directory.
 with a given service (a CIFS share, an FTP server, etc). In the directory,
 services are represented by a service principal name (SPN) connected to the
 associated service account. The password of the service account should be known
-only by the KDC and the service.
+only by the KDC and the service itself.
 - Clients prove their identity by signing a timestamp with their own password
 hash, which should be known only by the KDC and themselves.
 
