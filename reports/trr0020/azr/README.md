@@ -607,22 +607,16 @@ to abuse. In Azure logging, delegated permissions are called an
 [Default User Permissions in Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions#owned-application-registrations
 [User and Admin Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview
 [Grant Tenant-Wide Admin Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/grant-admin-consent
-[Overview of Permissions and Consent - Microsoft Learn]:
-    https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview
+[Overview of Permissions and Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview
 [Risky Graph Permissions]: #risky-graph-permissions
-[security principal]:
-    https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals
+[security principal]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals
 [App Registration]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#application-registration
 [Service Principal]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object
-[Atomic Test 1]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-1---azure-ad-application-hijacking---service-principal
+[Atomic Test 1]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-1---azure-ad-application-hijacking---service-principal
 [Atomic Test 2]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-2---azure-ad-application-hijacking---app-registration
-[Atomic Test 1-2]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.md
-[Atomic Test 5]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-5---azure-ad---adding-service-principal-to-azure-ad-role
-[Atomic Test 7]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-7---azure---adding-service-principal-to-azure-role-in-subscription
+[Atomic Test 1-2]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.md
+[Atomic Test 5]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-5---azure-ad---adding-service-principal-to-azure-ad-role
+[Atomic Test 7]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-7---azure---adding-service-principal-to-azure-role-in-subscription
 [Atomic Test 8]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-8---azure-ad---adding-permission-to-application
 
 [^1]: [Entra Managed Identities - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview)
@@ -631,12 +625,10 @@ to abuse. In Azure logging, delegated permissions are called an
 [^4]: [Adding Credentials - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app?tabs=federated-credential#add-credentials)
 [^5]: [App consent permissions for custom roles - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/custom-consent-permissions)
 [^6]: [Azure Privilege Escalation via API Permissions Abuse - SpecterOps](https://posts.specterops.io/azure-privilege-escalation-via-azure-api-permissions-abuse-74aee1006f48)
-[^7]: [Microsoft Graph Permissions Reference - Microsoft
-    Learn](https://learn.microsoft.com/en-us/graph/permissions-reference)
+[^7]: [Microsoft Graph Permissions Reference - Microsoft     Learn](https://learn.microsoft.com/en-us/graph/permissions-reference)
 [^8]: [Graph API ServicePrincipal Add Password - Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-addpassword?view=graph-rest-1.0&tabs=http)
 [^9]: [Azure Resource Manager - Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview)
 [^10]: [Graph API ServicePrincipal  Add Owner - Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-post-owners?view=graph-rest-1.0&tabs=http)
 [^11]: [AZ CLI App Owner - Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/ad/app/owner?view=azure-cli-latest)
-[^12]: [AZ CLI SPN Owner - Microsoft
-    Learn](https://learn.microsoft.com/en-us/cli/azure/ad/sp/owner?view=azure-cli-latest)
+[^12]: [AZ CLI SPN Owner - Microsoft     Learn](https://learn.microsoft.com/en-us/cli/azure/ad/sp/owner?view=azure-cli-latest)
 [^13]: [Microsoft Entra built-in roles - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference)
