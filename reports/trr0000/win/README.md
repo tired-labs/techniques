@@ -55,7 +55,7 @@ implementations have them on the same server. These elements are:
 - A ticket-granting server (TGS) that issues tickets to clients for specific
   services hosted on APs.
 - A Kerberos database that stores the password hash and identity of all verified
-users. 
+users.
 
 The Kerberos protocol defines a series of messages exchanged between the
 client, the KDC, and AP. After a client has authenticated, they receive a Ticket
@@ -70,7 +70,7 @@ authentication and authorization. This requires that the cryptographic keys are
 known only by the key's owner and the KDC. There are a few different keys used
 for these cryptographic signatures:
 
-- TGTs are signed with the password hash of the `KRBTGT` account, which is a
+- TGTs are signed with the password hash of the `krbtgt` account, which is a
 special service account that represents the KDC in the directory.
 - Service tickets are signed with the hash of the service account associated
 with a given service (a CIFS share, an FTP server, etc). In the directory,
@@ -99,6 +99,27 @@ the process that implements the LSA's functionality; this runs as the trusted
 `SYSTEM` account in a process named `lsass.exe.` The LSASS process is a rich
 target for attackers, so it has many built-in protections like [Credential
 Guard] and [Protected Processes].
+
+#### A Note on Ticket Acquisition
+
+As noted in the scope statement, there are many different ways an attacker could
+potentially acquire valid Kerberos tickets that could be used in a
+pass-the-ticket attack. The process of reading (or dumping) LSASS process memory
+to extract cached Kerberos tickets is functionally equivalent to attack
+technique [T1003.001] *OS Credential Dumping: LSASS Memory*. Controls to detect
+or prevent T1003.001, like Credential Guard, will also detect or prevent an
+attacker from acquiring tickets from LSASS.
+
+Credential Guard makes two important changes to LSASS that are relevant to this
+TRR:
+
+1. Credential Guard moves credentials, including cached Kerberos tickets, from
+   the `lsass.exe` process into a new isolated process named `lsaiso.exe`. This
+   renders procedures that dump credentials directly from LSASS memory
+   inoperable.[^1]
+2. When Credential Guard is enabled, it is not longer possible to request the
+   session key for a cached Kerberos ticket. Without the session key, the
+   tickets retrieved from the Kerberos cache can't be used by other accounts.[^2]
 
 #### LSA Security Support Providers (SSPs)
 
@@ -145,10 +166,8 @@ message to the security package hosted in LSASS. The Kerberos SSP/AP supports
   cache
 - `KerbSubmitTicketMessage` - submits a ticket to be included in the local cache
 
-> [!NOTE]
-> This list of messages is not necessarily inclusive. It's probably possible to
-> accomplish the same task with some of the other supported messages, like
-> `KerbQueryTicketCacheExMessage` or `KerbAddExtraCredentialsMessage`.
+> [!NOTE] This list of messages is not necessarily inclusive. It may be possible
+> to accomplish the same task with some of the other supported messages.
 
 Most of the Kerberos SSP/AP routines require a calling process to hold the
 `SeTcbPrivilege` ('Trusted Computer Base'), which indicates the process is a
@@ -187,26 +206,15 @@ account.**
 
 #### Detection Data Model
 
+The DDM includes the ticket acquisition methods used by the popular tools
+[Rubeus] and [Mimikatz]. It also acknowledges that there are other ways to
+acquire tickets, but this TRR will not attempt an exhaustive exploration of
+them. The operations involved in acquiring tickets, in addition to the
+operations for the original valid request for the ticket, have been colored gray
+in the DDM to indicate that these actions are precursors that must occur before
+the ticket can be imported into a new logon session.
+
 ![DDM - Procedure Name 1](ddms/ddm_trr0000_win_a.png)
-
-#### A Note on Ticket Acquisition
-
-As noted in the scope statement, there are many different ways an attacker could
-potentially acquire valid Kerberos tickets that could be used in a
-pass-the-ticket attack. The DDM includes the ones most commonly used with this
-procedure, like those used by the popular tools [Rubeus] and [Mimikatz]. The DDM
-also acknowledges that there are other ways, but this TRR will not attempt an
-exhaustive exploration of them. All methods in gray are for acquiring tickets on
-the DDM, in addition to the operation for the original valid request for the
-ticket, to note that these actions are precursors that must occur before the
-ticket can be imported into a new logon session.
-
-> [!NOTE]
->
-> The process of reading (or dumping) LSASS process memory to extract cached
-> Kerberos tickets is functionally equivalent to attack technique [T1003.001] OS
-> Credential Dumping: LSASS Memory. Controls to detect or prevent T1003.001 will
-> also detect or prevent an attacker from acquiring tickets from LSASS.
 
 ## Available Emulation Tests
 
@@ -226,7 +234,10 @@ ticket can be imported into a new logon session.
 - [Get-KerberosTicketGrantingTicket - Jared Atkinson]
 - [Rubeus with More Kekeo - SpecterOps]
 
-[T1550.003]: https://attack.mitre.org/techniques/MITRE_ATT&CK_ID/T1550/003
+[^1]: [Credential Guard - Microsoft Learn]
+[^2]: [How Credential Guard Works - Steve Syfuhs]
+
+[T1550.003]: https://attack.mitre.org/techniques/T1550/003/
 [Credential Guard]: https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/
 [Protected Processes]: https://www.crowdstrike.com/en-us/blog/evolution-protected-processes-part-1-pass-hash-mitigations-windows-81/
 [Security Subsystem Architecture - Microsoft Learn]: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-2000-server/cc961760(v=technet.10)
@@ -247,3 +258,5 @@ ticket can be imported into a new logon session.
 [klist]: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/klist
 [Get-KerberosTicketGrantingTicket - Jared Atkinson]: https://gist.github.com/jaredcatkinson/c95fd1e4e76a4b9b966861f64782f5a9
 [Rubeus with More Kekeo - SpecterOps]: https://posts.specterops.io/rubeus-now-with-more-kekeo-6f57d91079b9
+[Credential Guard - Microsoft Learn]: https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/how-it-works
+[How Credential Guard Works - Steve Syfuhs]: https://syfuhs.net/how-does-remote-credential-guard-work
