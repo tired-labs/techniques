@@ -1,0 +1,235 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n22",
+      "position": {
+        "x": -7478.801180593765,
+        "y": -2762.0915311231765
+      },
+      "caption": "Set Registry Value",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n23",
+      "position": {
+        "x": -7226.640046224957,
+        "y": -2762.0915311231765
+      },
+      "caption": "Activity to be Concealed",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n24",
+      "position": {
+        "x": -6995.640046224957,
+        "y": -2762.0915311231765
+      },
+      "caption": "Set Registry Value",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n25",
+      "position": {
+        "x": -6764.640046224957,
+        "y": -2762.0915311231765
+      },
+      "caption": "Delete File",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#808080",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n26",
+      "position": {
+        "x": -7478.801180593765,
+        "y": -2572.0915311231765
+      },
+      "caption": "Call API",
+      "labels": [
+        "CS RegSystemConfigValueUpdate",
+        "WinEvent 4657 (requires SACL)"
+      ],
+      "properties": {
+        "API": "NtSetValueKey ",
+        "Key": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\LOGNAME",
+        "Subkey1": "File",
+        "Value1": "non-standard log location",
+        "Subkey2": "Flag",
+        "Value2": "1"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n27",
+      "position": {
+        "x": -6995.640046224957,
+        "y": -2572.0915311231765
+      },
+      "caption": "Call API",
+      "labels": [
+        "CS RegSystemConfigValueUpdate",
+        "WinEvent 4657 (requires SACL)"
+      ],
+      "properties": {
+        "API": "NtSetValueKey ",
+        "Key": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\EventLog\\LOGNAME",
+        "Subkey1": "File",
+        "Value1": "standard log location",
+        "Subkey2": "Flag",
+        "Value2": "<deleted>"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n28",
+      "position": {
+        "x": -6764.640046224957,
+        "y": -2572.0915311231765
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "NtDeleteFile",
+        "File": "non-standard log location"
+      },
+      "style": {
+        "border-color": "#808080",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n1",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n23",
+      "toId": "n24"
+    },
+    {
+      "id": "n3",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n22",
+      "toId": "n26"
+    },
+    {
+      "id": "n4",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n26",
+      "toId": "n23"
+    },
+    {
+      "id": "n5",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n24",
+      "toId": "n27"
+    },
+    {
+      "id": "n6",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n27",
+      "toId": "n25"
+    },
+    {
+      "id": "n7",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n25",
+      "toId": "n28"
+    }
+  ]
+}
