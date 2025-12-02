@@ -119,7 +119,8 @@ TRR:
    inoperable.[^1]
 2. When Credential Guard is enabled, it is not longer possible to request the
    session key for a cached Kerberos ticket. Without the session key, the
-   tickets retrieved from the Kerberos cache can't be used by other accounts.[^2]
+   tickets retrieved from the Kerberos cache can't be used by other
+   accounts.[^2]
 
 #### LSA Security Support Providers (SSPs)
 
