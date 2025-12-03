@@ -44,7 +44,7 @@ jobs:
         git config --local user.email "TRR-Bot@users.noreply.github.com"
         git config --local user.name "TRR-Bot"
         git add .
-        git diff --cached --quiet || git commit -m "Assigning TRR number from PR #${{ github.event.pull_request.number }}"
+        git diff --cached --quiet || git commit -m "Reindexing TRRs after merging PR #${{ github.event.pull_request.number }}"
         git push origin main
       env:
         GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
