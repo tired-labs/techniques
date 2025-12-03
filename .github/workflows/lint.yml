@@ -27,6 +27,10 @@ jobs:
       - name: Install dependencies
         run: go get github.com/yuin/goldmark 
 
+      - name: Run linter
+        if: steps.changed-markdown-files.outputs.any_changed == 'true' 
+        run: go run tools/trrlint/main.go ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+
       - name: Validate indexer would pass
         if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
         run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_all_changed_files }}
