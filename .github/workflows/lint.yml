@@ -28,8 +28,12 @@ jobs:
       - name: Install dependencies
         run: go get github.com/yuin/goldmark 
 
-      - name: Run linter
-        if: steps.changed-markdown-files.outputs.any_changed == 'true' 
+      - name: Run linter on changed files
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: go run tools/trrlint/main.go ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+
+      - name: Run linter on all files
+        if: github.event_name == 'workflow_dispatch'
         run: go run tools/trrlint/main.go ${{ steps.changed-markdown-files.outputs.all_changed_files }}
 
       - name: Validate indexer would pass
