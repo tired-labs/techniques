@@ -31,9 +31,7 @@ jobs:
       id: changed-markdown-files
       uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
       with:
-        files_yaml: |
-          all:
-            - reports/**/README.md
+        files: "reports/**/README.md"
 
     - name: Update modified TRRs using indexer
       if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
