@@ -278,26 +278,5 @@
     },
     "last_update": "2025-10-07",
     "pub_date": "2025-10-07"
-  },
-  {
-    "name": "DC Synchronization Attack (DCSync)",
-    "id": "TRR0023",
-    "tactics": [
-      "Credential Access"
-    ],
-    "contributors": [
-      "Andrew VanVleet"
-    ],
-    "external_ids": [
-      "T1003.006"
-    ],
-    "platforms": [
-      "Active Directory"
-    ],
-    "procedures": {
-      "A": "Request replication from a DC"
-    },
-    "last_update": "2025-12-03",
-    "pub_date": "2025-12-03"
   }
 ]
