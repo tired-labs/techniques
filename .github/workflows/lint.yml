@@ -1,8 +1,12 @@
 name: Lint and test indexer parsing
 run-name: Linting and testing indexer for ${{ github.head_ref }} on PR creation/modification
 on:
-   pull_request:
-      types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
 jobs:
    lint_and_test_index:
     runs-on: ubuntu-latest
@@ -22,7 +26,7 @@ jobs:
       - name: Setup Go environment
         uses: actions/setup-go@v5.5.0
         with:
-         go-version: '1.21'
+          go-version: '1.21'
 
       - name: Install dependencies
         run: go get github.com/yuin/goldmark 
