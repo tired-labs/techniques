@@ -4,7 +4,7 @@
 
 | Key     | Value     |
 |--------------|------------|
-| ID           | TRR0000 |
+| ID           | TRR0023 |
 | External IDs | [T1003.006] |
 | Tactics      | Credential Access |
 | Platforms    | Active Directory |
@@ -145,7 +145,7 @@ Here is an example log showing domain replication:
 
 | ID | Title | Tactic |
 |----|----|----|
-| TRR0000.AD.A | Request replication from a DC | Credential Access |
+| TRR0023.AD.A | Request replication from a DC | Credential Access |
 
 ### Procedure A: Request replication from a DC
 
@@ -156,7 +156,7 @@ desired. The DC replies by sending the requested data.
 
 #### Detection Data Model
 
-![DDM - TRR0000.AD.A](ddms/trr0000_ad_a.png)
+![DDM - TRR0023.AD.A](ddms/trr0023_ad_a.png)
 
 There are multiple great options for detecting this technique. Only a DC
 should ever request replication from a DC, so a request from other machines
@@ -169,7 +169,7 @@ coverage of this technique.
 
 | ID            | Link             |
 |---------------|------------------|
-| TRR0000.AD.A | [Atomic Tests 1-2] |
+| TRR0023.AD.A | [Atomic Tests 1-2] |
 
 ## References
 
