@@ -34,7 +34,7 @@ jobs:
 
       - name: Run linter on all files
         if: github.event_name == 'workflow_dispatch'
-        run: go run tools/trrlint/main.go ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+        run: go run tools/trrlint/main.go
 
       - name: Validate indexer would pass
         if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
