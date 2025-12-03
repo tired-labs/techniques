@@ -1,4 +1,4 @@
-# Forge a Kerberos TGT (Golden Ticket)
+# Forge a Kerberos TGT
 
 ## Metadata
 
@@ -12,11 +12,12 @@
 
 ## Technique Overview
 
-Adversaries who have the KRBTGT account password hash may forge Kerberos ticket
-granting tickets (TGTs) for any user in the domain. This is referred to as a
-"Golden Ticket" attack because the attacker can gain access to any resource in
-the domain, regardless of password changes, so long as the KRBTGT password
-remains unchanged.
+Adversaries who have the `krbtgt` account password hash may forge Kerberos
+ticket granting tickets (TGTs) for any user in the domain. This is referred to
+as a "Golden Ticket" attack because the attacker can gain access to any resource
+in the domain, regardless of password changes, so long as the `krbtgt` password
+remains unchanged. Later variations on the technique have been dubbed Sapphire
+and Diamond Tickets. This TRR currently covers Golden and Sapphire tickets.
 
 ## Technical Background
 
@@ -51,7 +52,7 @@ receive a TGT that is stored on the client device and can be used to request
 access to specific network resources without having to reauthenticate. These
 tickets are signed with the KDC's private key.
 - **A Service Ticket**: Clients are issued a service ticket to grant access to a
-specific resource. service tickets are issued by the KDC and are provided by the
+specific resource. Service tickets are issued by the KDC and are provided by the
 client to the AS to prove that the client is authorized to access the resource.
 These tickets are signed with the private key of the service account associated
 with requested resource.
@@ -59,8 +60,8 @@ with requested resource.
 In the Active Directory implementation of Kerberos, the KDC's private key is the
 password hash of a special service account that represents the KDC in the
 directory. This account is created automatically when the domain is created and
-is named "KRBTGT." A foundational assumption of Kerberos is that no one knows
-the KRBTGT password except the KDC, and thus any tickets that have been signed
+is named `krbtgt`. A foundational assumption of Kerberos is that no one knows
+the `krbtgt` password except the KDC, and thus any tickets that have been signed
 by the KDC's key must have been generated previously by the KDC itself.
 
 ### Kerberos Messages in Detail
@@ -77,17 +78,17 @@ summary; more detailed descriptions are available online.[^1][^2][^3]
 1. AS-REQ: The client authenticates to the KDC's Authentication Server with a
     username and password. By default in a Windows domain, pre-authentication
     data is also included in the form of a current timestamp encrypted with the
-    user’s secret key (derived from the windows password).
+    user's secret key (derived from the windows password).
 2. AS-REP: The KDC validates the client's credentials, then sends back a TGT.
     The TGT contains the PAC, which includes the symmetric user session key that
     is used in subsequent steps to encrypt communications with the KDC. The TGT
     also contains the username that it was issued for and an expiration
     timestamp. Note that the client cannot read the encrypted portions of the
-    TGT because it does not know have the KDC's encryption key. The AS-REP also
+    TGT because it does not know the KDC's encryption key. The AS-REP also
     contains the session key and expiration time encrypted with the user's hash,
     which the client can read. At this point, the client has a session key that
-    it decrypted using the user’s secret key and the TGT (which contains the
-    same session key, encrypted with the KDC's secret key).  In the image below,
+    it decrypted using the user's secret key and the TGT (which contains the
+    same session key, encrypted with the KDC's secret key). In the image below,
     you can see an AS-REP message, with the TGT (the ticket section), PAC (the
     ticket->enc-part section), and data encrypted with the user's key (the
     enc-part section).
@@ -102,7 +103,7 @@ summary; more detailed descriptions are available online.[^1][^2][^3]
     successful, it proceeds to create a service ticket that contains the PAC. A
     symmetric key is generated for use between the client and the requested
     service (the service session key). The service ticket is encrypted with the
-    service’s password hash. The service ticket and the service session key are
+    service's password hash. The service ticket and the service session key are
     encrypted a second time using the user's session key and sent to the client.
 5. AP-REQ: Client decrypts the service ticket and service session key from the
     TGS-REP message and sends the service ticket to the server hosting the
@@ -124,16 +125,17 @@ mechanisms. However, the Kerberos protocol does not define any explicit group
 membership or logon policy information to be carried in the Kerberos tickets;
 applications are expected to manage their own authorization. Kerberos extensions
 provide a mechanism to convey authorization information by encapsulating this
-information within an `AuthorizationData` structure. The [Privileged Attribute
-Certificate] (PAC) was created to provide this authorization data for Active
+information within an `AuthorizationData` structure. The [Privileged Attribute
+Certificate] (PAC) was created to provide this authorization data for Active
 Directory domains.
 
 Active Directory's implementation of Kerberos always includes a PAC. This is
 included in the TGT and is signed with the KDC's encryption key (again, derived
-from the KRBTGT password hash). The PAC contains the session key and information
-about the user's privileges in the domain. PAC validation is generally performed
-by checking the signature instead of inspecting if the attributes are correct
-(because Kerberos assumes that only the KDC knows the key).
+from the `krbtgt` password hash). The PAC contains the session key and
+information about the user's privileges in the domain. PAC validation is
+generally performed by checking the signature instead of inspecting if the
+attributes are correct (because Kerberos assumes that only the KDC knows the
+key).
 
 Here is an example of a decoded TGT.
 
@@ -207,8 +209,8 @@ Decoding unencrypted data in credential[0]['ticket']:
 
 ### Forging the TGT and Detecting Forgeries
 
-If an attacker can gain access to the password hash of the KRBTGT account, they
-can use it to forge and sign TGTs for any user in the domain. Instead of
+If an attacker can gain access to the password hash of the `krbtgt` account,
+they can use it to forge and sign TGTs for any user in the domain. Instead of
 requesting a TGT from the KDC, the attacker presents a forged TGT in the request
 for a service ticket.
 
@@ -236,29 +238,35 @@ field level encryption. This makes it possible to identify specific messages on
 the network, though the most important details are found in the encrypted
 portions.
 
-Finally, CrowdStrike IDP generates an ActiveDirectoryServiceAccessRequest event
-when a TGT is submitted to request a service ticket.
+Finally, CrowdStrike IDP generates an `ActiveDirectoryAuthentication` event when
+a user authenticates and is granted a TGT, and an
+`ActiveDirectoryServiceAccessRequest` event when a TGT is submitted to request a
+service ticket.
 
 ## Procedures
 
 | ID | Title | Tactic |
 |----|----|----|
-| TRR0013.AD.A | Forge a TGT using the KRBTGT password hash | Credential Access |
+| TRR0013.AD.A | Forge a TGT from scratch (Golden Ticket) | Credential Access |
+| TRR0013.AD.B | Forge TGT using PAC acquired via U2U+S4U2Self (Sapphire Ticket) | Credential Access |
 
-### Procedure A: Forge a TGT using the KRBTGT password hash
+### Procedure A: Forge a TGT from scratch (Golden Ticket)
 
-There is only one known procedure for this technique. If an attacker is careful
-to forge a ticket with  all the details in a legitimate TGT issued by the
-domain's KDC, a Golden Ticket attack is likely impossible to detect. An attacker
-can use a tool like [Impacket's getPAC.py] to inspect a legitimate TGT in the
-domain and ensure their forgery matches it.
+In this procedure, a TGT is created from scratch. The attacker is responsible
+for determining the correct fields and values to populate in the forged TGT. If
+an attacker is careful to forge a ticket with all the details in a legitimate
+TGT issued by the domain's KDC, a Golden Ticket attack is likely impossible to
+detect. An attacker can use a tool like [Impacket's getPAC.py] to inspect a
+legitimate TGT in the domain as a reference and ensure their forgery matches it.
 
 #### Detection Data Model
 
-![DDM - TRR0013.AD.A](ddms/trr0013_ad_a.png)
+![DDM - TRR0013.AD.A](ddms/trr0013_a.png)
 
-In the DDM above, the TGT request is included in gray circles, showing the
-process that normally would occur but is skipped in a Golden Ticket attack.
+In the DDM above, the green operations represent the client, the blue the KDC,
+and the purple the application server. The TGT request is included in gray
+circles, showing the process that normally would occur but is skipped in a
+Golden Ticket attack.
 
 The best opportunities for detecting Golden Tickets depend on adversaries making
 mistakes when forging their TGTs that distinguish the forgery from real
@@ -292,28 +300,170 @@ Snippet of a default Rubeus-generated TGT:
 
 Other indicators that a TGT might be forged include:
 
-- Issued for usernames that don’t exist in Active Directory
+- Issued for usernames that don't exist in Active Directory
 - Modified group memberships (added or removed)
 - Username and RID mismatches
 - Weaker than normal encryption types (e.g., RC4 instead of AES-256)
 - Ticket lifetimes that exceed the domain maximum (the default domain lifetime
 is 10 hours but the default assigned by mimikatz is 10 years)
+- A request for a service ticket using a TGT that was never issued.
+
+### Procedure B: Forge TGT using PAC acquired via U2U+S4U2Self (Sapphire Ticket)
+
+A Sapphire Ticket attempts to address the challenge of ensuring that a forged
+TGT blends into the environment by using legitimate elements issued by the KDC
+in the forgery. This is done by abusing two Kerberos features: [User-to-User
+Authentication Exchanges] (U2U) and the [Service for User] (S4U) protocol
+extension.
+
+#### User-to-User (U2U)
+
+User-to-User authentication provides a method to perform authentication when the
+verifier (i.e. the service) does not have a access to a long-term service key.
+(This might be the case when running a server as a user on a workstation or when
+running peer-to-peer application, for example).
+
+To address this problem, the Kerberos protocol allows a client to request that
+the ticket issued by the KDC be encrypted using a session key from a TGT issued
+to the party that will verify the authentication (again, usually the application
+server). This TGT must be obtained from the verifier by some means external to
+the Kerberos protocol prior to requesting U2U authentication.
+
+> [!NOTE]
+>
+> The client cannot use the verifier's TGT to impersonate the verifier because
+> they do not have the session key, which would be used to encrypt the TGS-REQ
+> message. Knowledge of the session key is how a client proves a TGT belongs to
+> them.
+
+When the client sends its TGS-REQ message to the KDC, it includes the verifying
+server's TGT as an additional ticket (using the `additional-tickets` section)
+and sets the `ENC-TKT-IN-SKEY` flag to `True`. After validating the request, the
+KDC will encrypt the service ticket with the session key contained in the
+verifier's TGT. The client will then submit the service ticket to the
+application server in an AP-REQ message, setting the `USE-SESSION-KEY` flag in
+the `ap-options` field. The verifying server will be able to decrypt the service
+ticket because it can decrypt its own TGT and obtain the session key.
+
+![Packet capture showing U2U authentication exchange](images/kerberos_wireshark_u2u.png)
+
+#### Service for User (S4U)
+
+Sometimes there is a need for a service to be able to impersonate a user while
+requesting data from another service. For example, a web server may need to
+query a database server but should only be allowed to access the information the
+requesting user has access to. In Kerberos, the functionality permitting the web
+server to impersonate a user is called "delegation."
+
+Microsoft created the [\[MS-SFU\] Service for User and Constrained Delegation]
+Kerberos protocol extension to enable delegation. Using Service For User (S4U),
+an application can request a Kerberos service ticket on behalf of a user (this
+is the opposite of the normal flow). There are two extensions included in
+\[MS-SFU\]:
+
+- **S4U2Self** - This extension allows a service to use its own TGT to retrieve
+  a service ticket to itself on behalf of a client, as though the client
+  originally requested and provided the ticket to the service.
+- **S4U2Proxy** - This extension allows a service to obtain a service ticket on
+  behalf of a client to a different service, using a service ticket from the
+  client as evidence that the client has authenticated.
+
+The \[MS-SFU\] extension defines two new pre-authentication data (`padata`)
+types, `PA-FOR-USER` and `PA_S4U-X509_USER`. Both are used to define the user
+for which a delegated service ticket is being requested. The former identifies
+the user by username and realm and the latter identifies them with an X509
+certificate. The KDC can identify an S4U request by the presence of one of these
+two data types in the TGS-REQ message (in the `padata` section of the message).
+
+An S4U2Self request only needs the `PA-FOR-USER` data, but an S4U2Proxy
+request also requires that a service ticket from the client is included in the
+`additional-tickets` field as proof that the client made the request to the
+service that will be acting as a proxy.[^4]
+
+![Packet capture showing S4U extensions](images/kerberos_wireshark_s4u.png)
+
+#### U2U+S4U2Self
+
+A Sapphire Ticket attack employs an unusual combination of U2U and S4U2Self to
+obtain a legitimate PAC for a target high privilege user, which can then be used
+to forge a credible TGT for that user. The attack uses the S4U extension's
+`PA-FOR-USER` data structure to request a service ticket on behalf of the target
+high profile user as though it were acting as a delegate for that user. However,
+instead of using a legitimate service as the delegator, it uses a low privilege
+user account, which doesn't have a long-term service key that the KDC can use to
+encrypt the service ticket. The attacker can't impersonate a legitimate service
+as the supposed delegator because they don't have the service's long-term key,
+and wouldn't be able to decrypt the resulting service ticket. This problem is
+solved by using U2U. By including the low privilege user's TGT and setting the
+`ENC-TKT-IN-SKEY` flag, the resulting service ticket will be encrypted with a
+key the attacker possesses, allowing them to obtain the high privilege user's
+PAC.
+
+#### Detection Data Model
+
+![DDM - Procedure Name 2](ddms/trr0013_b.png)
+
+This DDM has been simplified due to the large number of operations required for
+this procedure. The lower level networking details have been omitted, keeping
+the DDM focused at the Kerberos protocol application layer.
+
+An attacker performing a Sapphire Ticket attack starts by requesting a TGT for a
+compromised low privileged user. This TGT is one of two elements needed to forge
+a credible TGT. They then send a TGS-REQ message using U2U+S4U2Self to obtain a
+service ticket, encrypted with the low privilege user's session key, that
+contains a legitimate PAC for the target high privilege user. Using the low
+privilege user's session key they decrypt the service ticket and extract the
+PAC. Then, using the `krbtgt` password hash, they decrypt the low privilege
+user's TGT and replace their PAC with the high privilege user's PAC. They also
+alter the TGT's client name (`cname`) to match the high privilege user. The
+ticket is then re-encrypted, resulting in a forged TGT for the high privilege
+user composed of all legitimate elements issued by the KDC. They can then use
+this forged TGT to request service tickets as the high privilege user.
+
+#### A Note on Logging U2U+S4U2Self
+
+Because this procedure employs an unusual permutation of Kerberos messages, it
+throws off Windows event logging. Event 4769 records the U2U+S4U2Self TGS-REQ.
+The U2U requirement of setting the `ENC-TKT-IN-SKEY` flag is observable via the
+`TicketOptions` field (it is bit `0x8`), but the logging logic fails to
+recognize the S4U delegation. The resulting log simply has the low privilege
+user as both the TargetUserName and the ServiceName, and the targeted higher
+privilege user fails to appear in the log at all.
+
+CrowdStrike's `ActiveDirectoryServiceAccessRequest` event is more accurate,
+properly identifying that delegation is occurring and recording the low
+privilege user as the service and the high privilege user as the client
+requesting the service ticket. Additionally, it attempts to identify the
+delegator service, which under proper use of S4U2Proxy would be the service name
+(`sname`) in the service ticket included in the `additional-tickets` field.
+(Under valid S4U2Proxy, the service in the event would be the second service for
+which the delegator service is requesting a ticket on behalf of the client.)
+However, the Sapphire Ticket's unusual combination of U2U+S4U2Self means that
+instead of finding a service ticket in the `additional-tickets` field as
+expected, it finds the TGT holding the session key needed for U2U. CrowdStrike
+reads the `sname` from the additional ticket and includes it in the
+`DelegatorAccountUserPrincipal` event field, but the `sname` for a TGT is always
+`krbtgt`. So, the presence of the `krbtgt` account name in the
+`DelegatorAccountUserPrincipal` is a strong indicator that the TGS-REQ message
+was employing U2U+S4U2Self, and therefore a Sapphire Ticket attack.
 
 ## Available Emulation Tests
 
 | ID | Link |
 |----|----|
 | TRR0013.AD.A | [Atomic Tests 1-2] |
+| TRR0013.AD.B | |
 
 ## References
 
+- [RFC 4120 - Kerberos v5]
 - [Kerberos and Windows Security - Robert Broeckelmann]
 - [Kerberos Wireshark Captures - Robert Broeckelmann]
 - [Golden Ticket Attack for Blue Teams - Orhan Öztaş]
 - [Formal PAC MIDL Definition - Microsoft Learn]
 - [GetPac.py - GitHub]
-- [Kerberos & KRBTGT: AD's Domain Kerberos Service Account- AD Security]
-- [Kerberos, Active Directory’s Secret Decoder Ring - AD Security]
+- [Kerberos & krbtgt: AD's Domain Kerberos Service Account- AD Security]
+- [Kerberos, Active Directory's Secret Decoder Ring - AD Security]
 - [Detecting Forged Kerberos Ticket - AD Security]
 - [Abusing Microsoft Kerberos - Sorry you guys don't get it - Benjamin Delpy]
 - [Fighting Golden Ticket Attacks - Varonis]
@@ -323,14 +473,25 @@ is 10 hours but the default assigned by mimikatz is 10 years)
 - [Designing an Authentication System - MIT.edu]
 - [The New Generation of Kerberos Attacks - Palo Alto]
 - [Privilege Attribute Certificate Data Structure - Microsoft Learn]
+- [User-to-User Authentication Exchanges]
+- [\[MS-SFU\] Service for User and Constrained Delegation]
+- [Kerberos II - Credential Access - Raul Redondo]
+- [Kerberos III - User Impersonation - Raul Redondo]
+- [Kerberos IV - Delegations - Raul Redondo]
+- [Next Gen Kerberos Attacks - Palo Alto]
+
+[^1]: [Kerberos and Windows Security - Robert Broeckelmann]
+[^2]: [Kerberos Wireshark Captures - Robert Broeckelmann]
+[^3]: [Designing an Authentication System - MIT.edu]
+[^4]: [S4U2Proxy Specs]
 
 [Kerberos and Windows Security - Robert Broeckelmann]: https://medium.com/@robert.broeckelmann/kerberos-and-windows-security-kerberos-v5-protocol-b9c804e06479
 [Kerberos Wireshark Captures - Robert Broeckelmann]: https://medium.com/@robert.broeckelmann/kerberos-wireshark-captures-a-windows-login-example-151fabf3375a
 [Golden Ticket Attack for Blue Teams - Orhan Öztaş]: https://orhanoztasbir.medium.com/golden-ticket-attack-explaining-from-the-blue-team-perspective-411361ca7a22
 [Formal PAC MIDL Definition - Microsoft Learn]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/1d4912dd-5115-4124-94b6-fa414add575f
 [GetPac.py - GitHub]: https://github.com/fortra/impacket/blob/master/examples/getPac.py
-[Kerberos & KRBTGT: AD's Domain Kerberos Service Account- AD Security]: https://adsecurity.org/?p=483
-[Kerberos, Active Directory’s Secret Decoder Ring - AD Security]: https://adsecurity.org/?p=227
+[Kerberos & krbtgt: AD's Domain Kerberos Service Account- AD Security]: https://adsecurity.org/?p=483
+[Kerberos, Active Directory's Secret Decoder Ring - AD Security]: https://adsecurity.org/?p=227
 [Detecting Forged Kerberos Ticket - AD Security]: https://adsecurity.org/?p=1515
 [Abusing Microsoft Kerberos - Sorry you guys don't get it - Benjamin Delpy]: https://www.slideshare.net/slideshow/abusing-microsoft-kerberos-sorry-you-guys-dont-get-it/37957800
 [Fighting Golden Ticket Attacks - Varonis]: https://www.varonis.com/blog/pac_requestor-and-golden-ticket-attacks
@@ -344,7 +505,12 @@ is 10 hours but the default assigned by mimikatz is 10 years)
 [Impacket's getPAC.py]: https://github.com/fortra/impacket/blob/master/examples/getPac.py
 [Atomic Tests 1-2]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1558.001/T1558.001.md
 [T1558.001]: https://attack.mitre.org/techniques/T1558/001/
-
-[^1]: [Kerberos and Windows Security - Robert Broeckelmann](https://medium.com/@robert.broeckelmann/kerberos-and-windows-security-kerberos-v5-protocol-b9c804e06479)
-[^2]: [Kerberos Wireshark Captures - Robert Broeckelmann](https://medium.com/@robert.broeckelmann/kerberos-wireshark-captures-a-windows-login-example-151fabf3375a)
-[^3]: [Designing an Authentication System - MIT.edu](https://web.mit.edu/kerberos/dialogue.html)
+[User-to-User Authentication Exchanges]: https://www.rfc-editor.org/rfc/rfc4120#section-3.7
+[Service for User]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/3bff5864-8135-400e-bdd9-33b552051d94
+[\[MS-SFU\] Service for User and Constrained Delegation]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/3bff5864-8135-400e-bdd9-33b552051d94
+[S4U2Proxy Specs]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/c920c148-8a9c-42e9-b8e9-db5755cd281b
+[Kerberos II - Credential Access - Raul Redondo]: https://labs.lares.com/fear-kerberos-pt2/
+[Kerberos III - User Impersonation - Raul Redondo]: https://labs.lares.com/fear-kerberos-pt3/
+[Kerberos IV - Delegations - Raul Redondo]: https://labs.lares.com/fear-kerberos-pt4/
+[RFC 4120 - Kerberos v5]: https://www.rfc-editor.org/rfc/rfc4120#section-3.7
+[Next Gen Kerberos Attacks - Palo Alto]: https://unit42.paloaltonetworks.com/next-gen-kerberos-attacks/
