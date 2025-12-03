@@ -9,7 +9,6 @@ on:
       - main
 
 jobs:
-  # Job only runs if PR closed in a merge
   assign-trr-numbers:
     if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
@@ -28,10 +27,8 @@ jobs:
         ref: main
         token: ${{ steps.app-token.outputs.token }}
 
-
     - name: Get list of TRRs changed in PR
       id: changed-markdown-files
-      # v47
       uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
       with:
         files_yaml: |
@@ -41,7 +38,6 @@ jobs:
     - name: Update modified TRRs using indexer
       if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
       run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_all_changed_files }}
-
 
     - name: Commit and push updated files to main
       run: |
