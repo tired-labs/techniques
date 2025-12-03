@@ -1,9 +1,7 @@
 name: Lint and test indexer parsing
 run-name: Linting and testing indexer for ${{ github.head_ref }} on PR creation/modification
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
 
