@@ -9,6 +9,8 @@ jobs:
    lint_and_test_index:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
 
       - name: Get list of report markdown files changed in PR
         id: changed-markdown-files
@@ -17,9 +19,6 @@ jobs:
           files_yaml: |
             all:
               - reports/**/README.md
-
-      - name: Check out repo
-        uses: actions/checkout@v4
 
       - name: Setup Go environment
         uses: actions/setup-go@v5.5.0
