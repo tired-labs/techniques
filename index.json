@@ -278,5 +278,30 @@
     },
     "last_update": "2025-10-07",
     "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Clearing Windows Event Logs",
+    "id": "TRR0023",
+    "tactics": [
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet",
+      "Miles Whittaker",
+      "Chris Hodson"
+    ],
+    "external_ids": [
+      "T1070.001"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Event Clearing via RPC Call",
+      "B": "Event Logging Process Termination",
+      "C": "Event Log File Redirection"
+    },
+    "last_update": "2025-12-04",
+    "pub_date": "2025-12-04"
   }
 ]
