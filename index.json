@@ -208,7 +208,7 @@
     "pub_date": "2025-10-07"
   },
   {
-    "name": "Service Principal Manipulation",
+    "name": "Azure Service Principal Manipulation",
     "id": "TRR0020",
     "tactics": [
       "Persistence"
@@ -218,8 +218,10 @@
     ],
     "external_ids": [
       "AZT501.2",
+      "AZT502.2",
       "T1098.001",
-      "T1098.003"
+      "T1098.003",
+      "T1136.003"
     ],
     "platforms": [
       "Azure"
