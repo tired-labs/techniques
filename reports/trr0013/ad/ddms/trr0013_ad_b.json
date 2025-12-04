@@ -1,0 +1,495 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 636.56652034393,
+        "y": 69.89956860340891
+      },
+      "caption": "Send Network Request",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "TGS-REQ",
+        "padata": "PA-FOR-USER (S4U2Self)",
+        "Service (sname)": "LowPrivUser (S4U2Self)",
+        "PA-FOR-USER name": "HighPrivUser (S4U2Self)",
+        "KDCOptions": "ENC-TKT-IN-SKEY (U2U)",
+        "addtional-tickets": "LowPrivUser's TGT (U2U)"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 899.5585228602918,
+        "y": 69.89956860340891
+      },
+      "caption": "Receive Network Request",
+      "labels": [
+        "Event 4769",
+        "CS ActiveDirectoryServiceAccessRequest"
+      ],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "TGS-REQ"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 1080.8469951412678,
+        "y": 69.89956860340891
+      },
+      "caption": "Send Network Response",
+      "labels": [],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "TGS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#0062b1",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 1262.135467422244,
+        "y": 69.89956860340902
+      },
+      "caption": "Receive Network Request",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "TGS-REP",
+        "Contains": "HighPrivUser's PAC"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": -128.68167789697327,
+        "y": 69.89956860340897
+      },
+      "caption": "Send Network Request",
+      "labels": [],
+      "properties": {
+        "Host": "Any",
+        "User": "LowPrivUser",
+        "Kerberos Type": "AS-REQ"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 56.89339406351519,
+        "y": 69.89956860340897
+      },
+      "caption": "Receive Network Request",
+      "labels": [
+        "Event 4768",
+        "CS ActiveDirectoryAuthentication"
+      ],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "AS-REQ",
+        "User": "LowPrivUser"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": 858.1466380909501,
+        "y": 331.2023093542321
+      },
+      "caption": "Send Network Request",
+      "labels": [],
+      "properties": {
+        "Host": "Any",
+        "User": "Any",
+        "Kerberos Type": "AP-REQ"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n13",
+      "position": {
+        "x": 1047.1766200421318,
+        "y": 331.20230935423217
+      },
+      "caption": "Receive Network Request",
+      "labels": [
+        "Event 4624"
+      ],
+      "properties": {
+        "Host": "TargetService",
+        "Kerberos Type": "AP-REQ"
+      },
+      "style": {
+        "border-color": "#7b64ff",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n16",
+      "position": {
+        "x": -128.68167789697327,
+        "y": 331.2023093542321
+      },
+      "caption": "Forge TGT",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n17",
+      "position": {
+        "x": 242.46846602400365,
+        "y": 69.89956860340895
+      },
+      "caption": "Send Network Response",
+      "labels": [],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "AS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#0062b1",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n20",
+      "position": {
+        "x": 428.0435379844921,
+        "y": 69.89956860340897
+      },
+      "caption": "Receive Network Response",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "AS-REP",
+        "Contains": "LowPrivUser's TGT"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n21",
+      "position": {
+        "x": 88.80255680243312,
+        "y": 331.2023093542321
+      },
+      "caption": "Send Network Request",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "TGS-REQ",
+        "User": "HighPrivUser",
+        "Service": "TargetService"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n22",
+      "position": {
+        "x": 306.2867915018395,
+        "y": 331.20230935423217
+      },
+      "caption": "Receive Network Request",
+      "labels": [
+        "Event 4769",
+        "CS ActiveDirectoryServiceAccessRequest"
+      ],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "TGS-REQ"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n23",
+      "position": {
+        "x": 491.3329918312654,
+        "y": 331.2023093542321
+      },
+      "caption": "Send Network Response",
+      "labels": [],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "TGS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#0062b1",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n24",
+      "position": {
+        "x": 669.1166561397683,
+        "y": 331.2023093542321
+      },
+      "caption": "Receive Network Request",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "TGS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n3",
+      "fromId": "n1",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n17",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n9",
+      "toId": "n17"
+    },
+    {
+      "id": "n20",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n20",
+      "toId": "n0"
+    },
+    {
+      "id": "n21",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n8",
+      "toId": "n9"
+    },
+    {
+      "id": "n22",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n17",
+      "toId": "n20"
+    },
+    {
+      "id": "n23",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n0",
+      "toId": "n1"
+    },
+    {
+      "id": "n24",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n4",
+      "toId": "n7"
+    },
+    {
+      "id": "n25",
+      "type": "moving to second line for readability",
+      "style": {},
+      "properties": {},
+      "fromId": "n7",
+      "toId": "n16"
+    },
+    {
+      "id": "n26",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n16",
+      "toId": "n21"
+    },
+    {
+      "id": "n27",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n21",
+      "toId": "n22"
+    },
+    {
+      "id": "n28",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n22",
+      "toId": "n23"
+    },
+    {
+      "id": "n29",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n23",
+      "toId": "n24"
+    },
+    {
+      "id": "n30",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n24",
+      "toId": "n12"
+    },
+    {
+      "id": "n31",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n12",
+      "toId": "n13"
+    }
+  ]
+}
