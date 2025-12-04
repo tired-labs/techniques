@@ -4,7 +4,7 @@
 
 | Key          | Value                                      |
 |--------------|--------------------------------------------|
-| ID           | TRR0000                                    |
+| ID           | TRR0023                                    |
 | External IDs | [T1070.001]                                |
 | Tactics      | Defense Evasion                            |
 | Platforms    | Windows                                    |
@@ -112,9 +112,9 @@ event logs. There are two versions of the protocol:
 
 | ID                    | Title                             | Tactic            |
 |-----------------------|-----------------------------------|-------------------|
-| TRR0000.WIN.A         | Event Clearing via RPC Call       | Defense Evasion   |
-| TRR0000.WIN.B         | Event Logging Process Termination | Defense Evasion   |
-| TRR0000.WIN.C         | Event Log File Redirection        | Defense Evasion   |
+| TRR0023.WIN.A         | Event Clearing via RPC Call       | Defense Evasion   |
+| TRR0023.WIN.B         | Event Logging Process Termination | Defense Evasion   |
+| TRR0023.WIN.C         | Event Log File Redirection        | Defense Evasion   |
 
 ### Procedure A: Event Clearing via RPC Call
 
@@ -127,7 +127,7 @@ methods directly via their own tools or scripts.
 
 #### Detection Data Model
 
-![DDM - Procedure Name 1](ddms/trr0000_a.png)
+![DDM - Procedure Name 1](ddms/trr0023_a.png)
 
 The RPC methods for clearing event logs don't actually delete the log files,
 they just overwrite the existing file with a new file that holds only the
@@ -143,7 +143,7 @@ time after it has been terminated.
 
 #### Detection Data Model
 
-![DDM - Procedure Name 2](ddms/trr0000_b.png)
+![DDM - Procedure Name 2](ddms/trr0023_b.png)
 
 ### Procedure C: Event Log File Redirection
 
@@ -164,7 +164,7 @@ are eliminated.
 
 #### Detection Data Model
 
-![DDM - Procedure Name 3](ddms/trr0000_c.png)
+![DDM - Procedure Name 3](ddms/trr0023_c.png)
 
 The operations in gray are optional: an attacker doesn't have to delete the
 diverted log file, but can do so if they choose.
@@ -173,9 +173,9 @@ diverted log file, but can do so if they choose.
 
 | ID            | Link               |
 |---------------|--------------------|
-| TRR0000.WIN.A | [Atomic Tests 1-3] |
-| TRR0000.WIN.B |                    |
-| TRR0000.WIN.C |                    |
+| TRR0023.WIN.A | [Atomic Tests 1-3] |
+| TRR0023.WIN.B |                    |
+| TRR0023.WIN.C |                    |
 
 ## References
 
