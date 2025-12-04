@@ -34,8 +34,8 @@ jobs:
         files: "reports/**/README.md"
 
     - name: Update modified TRRs using indexer
-      if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
-      run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_all_changed_files }}
+      if: steps.changed-markdown-files.outputs.any_changed == 'true'
+      run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_changed_files }}
 
     - name: Commit and push updated files to main
       run: |
