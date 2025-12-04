@@ -1,85 +1,72 @@
-# Service Principal Manipulation
+# Azure Service Principal Manipulation
 
 ## Metadata
 
 | Key          | Value                                |
 |--------------|--------------------------------------|
 | ID           | TRR0020                              |
-| External IDs | [AZT501.2], [T1098.001], [T1098.003] |
+| External IDs | [AZT501.2], [AZT502.2], [T1098.001], [T1098.003], [T1136.003] |
 | Tactics      | Persistence                          |
 | Platforms    | Azure                                |
 | Contributors | Andrew VanVleet                      |
 
 ### Scope Statement
 
-This TRR covers manipulation of a service principle for persistence in Azure,
-which corresponds to multiple subtechniques on the Mitre ATT&CK matrix and
-Microsoft's Azure Threat Research Matrix (ATRM). The following techniques are
-addressed, as they pertain to Azure:
+This TRR covers manipulation of a service principal for persistence in Azure,
+including optionally creating a new service principal. This technique
+corresponds to multiple subtechniques on the MITRE ATT&CK matrix and Microsoft's
+Azure Threat Research Matrix (ATRM). The following techniques are addressed (as
+they pertain to Azure):
 
+- AZT502.2 Account Creation: Service Principal Creation
 - AZT501.2 Account Manipulation: Service Principal Manipulation
 - T1098.001 Account Manipulation: Additional Cloud Credentials
 - T1098.003 Account Manipulation: Additional Cloud Roles
+- T1136.003 Create Account: Cloud Account
 
 ## Technique Overview
 
 Attackers can use Azure service principals to achieve persistent access to a
-compromised tenant. Those options include:
+compromised tenant. An attacker can create a new service principal (AZT502.2 &
+T1136.003) or take over an existing one. Those options include:
 
-1. Adding new credentials to an existing service principal (T1098.001 &
-   AZT501.2)
+1. Adding new credentials to a service principal (T1098.001 & AZT501.2)
 2. Adding an account they control as a new owner of a service principal.
    (AZT501.2)
 3. Granting a service principal they control additional roles. (T1098.003)
 4. Granting a service principal additional permissions.
+
+These options all represent unique procedures and are addressed individually in
+the [Procedures] section.
 
 ## Technical Background
 
 ### Security Principals
 
 To access resources that are secured by a Microsoft Entra tenant, the entity
-that requires access must be represented by a security principal. This
+that requires access must be represented by a [security principal]. This
 requirement is true for both users (user principal) and applications (service
 principal). The security principal defines the access policy and permissions for
 the user/application in the Microsoft Entra tenant.
 
-- **User principals** are the interactive users of the applications/resources in
+- **User principals** are the human users of the applications/resources in
   the tenant.
-- **Service Principals** are the security objects that are assigned privileges,
-  access policies, roles, etc, for an application in a single tenant. These
-  account types provide a way for applications and services to authenticate and
-  use resources without an interactive user account. Service principals are
-  called "Enterprise Apps" in the Azure portal.
+- **Service Principals** represent non-human identities in a tenant. They are
+  the security objects that are assigned privileges, access policies, roles,
+  etc, for an application in a single tenant. These account types provide a way
+  for applications and services to authenticate and use resources without an
+  interactive user. Service principals are called "Enterprise Apps" in the Azure
+  portal.
 
-There are three types of service principal:
+This TRR addresses only service principals (non-human identities) in Entra ID.
+User principals (human identities) will be addressed in a separate TRR.
 
-- **Application** - This type of service principal is the local representation,
-  or application instance, of a global application object in a single tenant or
-  directory. An application service principal is a concrete instance created
-  from the application object and inherits certain properties from that
-  application object.
-
-- **Managed identity** - Managed identities provide an identity for applications
-  to use when connecting to resources that support Microsoft Entra
-  authentication, but eliminate the need for developers to manage credentials.
-  When a managed identity is enabled, a service principal representing that
-  managed identity is created in your tenant. Service principals representing
-  managed identities can be granted access and permissions, but can't be updated
-  or modified directly.[^1][^2]
-
-- **Legacy** - This type of service principal represents a legacy app, which is
-  an app created before app registrations were introduced or an app created
-  through legacy experiences. A legacy service principal can have credentials,
-  service principal names, reply URLs, and other properties that an authorized
-  user can edit, but doesn't have an associated app registration. The service
-  principal can only be used in the tenant where it was created.
-
-### Applications
+### Applications in Azure
 
 Applications in Azure have two components:
 
-1. An App Registration
-2. A Service Principal (aka Enterprise Application)
+1. An [App Registration]
+2. A [Service Principal] (aka Enterprise Application)
 
 An **App Registration** is how you register a new application with Azure; it is
 the global representation of your application in Azure across all tenants and is
@@ -96,14 +83,38 @@ who can access the app, and what resources the app can access. When an
 application is given permission to access resources in a tenant (upon
 registration or consent), a service principal object is created.  
 
-An example helps illustrate this concept: ZScaler offers a "Private Access"
-(ZPA) product in Azure. The App Registration for ZPA exists in ZScaler's own
-tenant. If you want to use the application in your tenant, you go to Enterprise
-Applications, create a new application, and select ZPA from the "Azure AD
-Gallery." This will create a service principle for ZPA in your tenant and you
-will need to grant your consent for it to hold the application permissions that
-it requires (which were defined by ZScaler in the App Registration). You can
-then use ZPA in your tenant.
+> [!TIP]
+>
+> An example helps illustrate this concept: ZScaler offers a "Private Access"
+> (ZPA) product in Azure. The App Registration for ZPA exists in ZScaler's own
+> tenant. If you want to use the application in your tenant, you go to
+> Enterprise Applications, create a new application, and select ZPA from the
+> "Azure AD Gallery." This will create a service principal for ZPA in your
+> tenant and you will need to grant your consent for it to hold the application
+> permissions that it requires (which were defined by ZScaler in the App
+> Registration). You can then use ZPA in your tenant.
+
+### Service Principal Types
+
+There are three types of service principals in Azure[^3]. An application can be
+represented by any one of the three.
+
+- **Application** - Application service principals are very flexible, but
+  require developers to manually handle secrets, credentials, certificates, or
+  keys used to authenticate the application.
+
+- **Managed identity** - Managed identities allow Azure to handle the
+  application authentication behind the scenes, eliminating the need for
+  developers to manage credentials. Managed identities can be granted access and
+  permissions, but can't be updated or modified directly.[^1][^2]
+
+- **Legacy** - This type of service principal represents a legacy app, which is
+  an app created before app registrations were introduced or through legacy
+  mechanisms. These cannot be created anymore, but preexisting objects can still
+  function. A legacy service principal can have credentials, service principal
+  names, reply URLs, and other properties that an authorized user can edit, but
+  doesn't have an associated app registration. The service principal can only be
+  used in the tenant where it was created.
 
 ### Azure Roles and Permissions
 
@@ -265,6 +276,8 @@ Connect provider.[^3][^4]
 
 ![DDM - Add credentials](ddms/ddm_trr0020_azr_a.png)
 
+The operation in gray indicates that it is optional.
+
 Adding credentials to a service principal name (SPN) as a user requires a role
 with the `Microsoft.Directory/servicePrincipals/credentials/update` permission
 in Entra. To add credentials as an application, one of the
@@ -312,6 +325,8 @@ enterprise applications useful:
 #### Detection Data Model
 
 ![DDM - Add owner](ddms/ddm_trr0020_azr_b.png)
+
+The operation in gray indicates that it is optional.
 
 Adding an owner to an SPN or application requires a role with the
 `Microsoft.Directory/servicePrincipals/owners/update` or
@@ -362,6 +377,8 @@ role holding them:
 #### Detection Data Model
 
 ![DDM - Add role](ddms/ddm_trr0020_azr_c.png)
+
+The operation in gray indicates that it is optional.
 
 Changes to Entra ID objects, including adding or removing roles, are logged in
 the Azure Audit Log. The Entra logs that are most relevant to this technique
@@ -540,6 +557,8 @@ Permissions Reference.[^7]
 
 ![DDM - Add API permissions](ddms/ddm_trr0020_azr_d.png)
 
+The operation in gray indicates that it is optional.
+
 To add a new API permission, there are two options: via consent or bypassing
 consent. The permissions required differ per approach. When a new permission is
 added, Entra logs an `Update Application` log with a change to the
@@ -577,26 +596,27 @@ to abuse. In Azure logging, delegated permissions are called an
 - [Grant Tenant-Wide Admin Consent - Microsoft Learn]
 
 [T1098.001]: https://attack.mitre.org/techniques/T1098/001/
+[T1136.003]: https://attack.mitre.org/techniques/T1136/003/
+[AZT502.2]: https://microsoft.github.io/Azure-Threat-Research-Matrix/Persistence/AZT502/AZT502-2/
 [AZT501.2]: https://microsoft.github.io/Azure-Threat-Research-Matrix/Persistence/AZT501/AZT501-2/
 [T1098.003]: https://attack.mitre.org/techniques/T1098/003/
+[Procedures]: #procedures
 [Application and service principal objects in Microsoft Entra ID]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
 [Graph Permissions Reference - Microsoft Learn]: https://learn.microsoft.com/en-us/azure/active-directory/roles/permissions-reference
 [Azure Privilege Escalation via Azure API Permissions Abuse - SpecterOps]: https://posts.specterops.io/azure-privilege-escalation-via-azure-api-permissions-abuse-74aee1006f48
 [Default User Permissions in Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions#owned-application-registrations
 [User and Admin Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview
 [Grant Tenant-Wide Admin Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/grant-admin-consent
-[Overview of Permissions and Consent - Microsoft Learn]:
-    https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview
+[Overview of Permissions and Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity-platform/permissions-consent-overview
 [Risky Graph Permissions]: #risky-graph-permissions
-[Atomic Test 1]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-1---azure-ad-application-hijacking---service-principal
+[security principal]: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-principals
+[App Registration]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#application-registration
+[Service Principal]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object
+[Atomic Test 1]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-1---azure-ad-application-hijacking---service-principal
 [Atomic Test 2]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-2---azure-ad-application-hijacking---app-registration
-[Atomic Test 1-2]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.md
-[Atomic Test 5]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-5---azure-ad---adding-service-principal-to-azure-ad-role
-[Atomic Test 7]:
-    https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-7---azure---adding-service-principal-to-azure-role-in-subscription
+[Atomic Test 1-2]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.md
+[Atomic Test 5]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-5---azure-ad---adding-service-principal-to-azure-ad-role
+[Atomic Test 7]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-7---azure---adding-service-principal-to-azure-role-in-subscription
 [Atomic Test 8]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-8---azure-ad---adding-permission-to-application
 
 [^1]: [Entra Managed Identities - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview)
@@ -605,12 +625,10 @@ to abuse. In Azure logging, delegated permissions are called an
 [^4]: [Adding Credentials - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app?tabs=federated-credential#add-credentials)
 [^5]: [App consent permissions for custom roles - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/custom-consent-permissions)
 [^6]: [Azure Privilege Escalation via API Permissions Abuse - SpecterOps](https://posts.specterops.io/azure-privilege-escalation-via-azure-api-permissions-abuse-74aee1006f48)
-[^7]: [Microsoft Graph Permissions Reference - Microsoft
-    Learn](https://learn.microsoft.com/en-us/graph/permissions-reference)
+[^7]: [Microsoft Graph Permissions Reference - Microsoft     Learn](https://learn.microsoft.com/en-us/graph/permissions-reference)
 [^8]: [Graph API ServicePrincipal Add Password - Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-addpassword?view=graph-rest-1.0&tabs=http)
 [^9]: [Azure Resource Manager - Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview)
 [^10]: [Graph API ServicePrincipal  Add Owner - Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-post-owners?view=graph-rest-1.0&tabs=http)
 [^11]: [AZ CLI App Owner - Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/ad/app/owner?view=azure-cli-latest)
-[^12]: [AZ CLI SPN Owner - Microsoft
-    Learn](https://learn.microsoft.com/en-us/cli/azure/ad/sp/owner?view=azure-cli-latest)
+[^12]: [AZ CLI SPN Owner - Microsoft     Learn](https://learn.microsoft.com/en-us/cli/azure/ad/sp/owner?view=azure-cli-latest)
 [^13]: [Microsoft Entra built-in roles - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference)

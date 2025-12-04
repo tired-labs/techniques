@@ -5,8 +5,8 @@
     "background-image": "",
     "background-size": "100%",
     "node-color": "#ffffff",
-    "border-width": 3,
-    "border-color": "#68bc00",
+    "border-width": 4,
+    "border-color": "#000000",
     "radius": 50,
     "node-padding": 5,
     "node-margin": 2,
@@ -18,21 +18,21 @@
     "caption-position": "inside",
     "caption-max-width": 200,
     "caption-color": "#000000",
-    "caption-font-size": 14,
+    "caption-font-size": 16,
     "caption-font-weight": "normal",
     "label-position": "outside",
     "label-display": "pill",
     "label-color": "#000000",
     "label-background-color": "#ffffff",
     "label-border-color": "#000000",
-    "label-border-width": 1,
-    "label-font-size": 12,
+    "label-border-width": 2,
+    "label-font-size": 14,
     "label-padding": 5,
     "label-margin": 4,
     "directionality": "directed",
     "detail-position": "inline",
     "detail-orientation": "parallel",
-    "arrow-width": 3,
+    "arrow-width": 5,
     "arrow-color": "#000000",
     "margin-start": 5,
     "margin-end": 5,
@@ -49,14 +49,14 @@
     "property-position": "outside",
     "property-alignment": "colon",
     "property-color": "#000000",
-    "property-font-size": 12,
+    "property-font-size": 16,
     "property-font-weight": "normal"
   },
   "nodes": [
     {
       "id": "n0",
       "position": {
-        "x": 75,
+        "x": 335,
         "y": 50
       },
       "caption": "Add Credential",
@@ -67,8 +67,47 @@
         "RBAC": "Entra ID",
         "Operation": "Update Application - Certificates and secrets management"
       },
-      "style": {}
+      "style": {
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 3,
+        "border-color": "#68bc00"
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "caption": "Create Service Principal",
+      "labels": [
+        "Entra AuditLog"
+      ],
+      "properties": {
+        "RBAC": "Entra ID",
+        "Permission": "microsoft.directory/servicePrincipals/create",
+        "Operation": "Add service principal"
+      },
+      "style": {
+        "border-color": "#808080",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 3,
+        "node-color": "#cccccc"
+      }
     }
   ],
-  "relationships": []
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n1",
+      "toId": "n0",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ]
 }
