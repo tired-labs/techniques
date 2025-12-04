@@ -256,7 +256,7 @@
     "pub_date": "2025-10-07"
   },
   {
-    "name": "TRR0022: Hijack Azure Subscription",
+    "name": "Hijack Azure Subscription",
     "id": "TRR0022",
     "tactics": [
       "Persistence",
