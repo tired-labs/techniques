@@ -44,7 +44,7 @@
     "pub_date": "2025-10-07"
   },
   {
-    "name": "Forge a Kerberos TGT (Golden Ticket)",
+    "name": "Forge a Kerberos TGT",
     "id": "TRR0013",
     "tactics": [
       "Credential Access"
@@ -60,7 +60,8 @@
       "Active Directory"
     ],
     "procedures": {
-      "A": "Forge a TGT using the KRBTGT password hash"
+      "A": "Forge a TGT from scratch (Golden Ticket)",
+      "B": "Forge TGT using PAC acquired via U2U+S4U2Self (Sapphire Ticket)"
     },
     "last_update": "2025-10-07",
     "pub_date": "2025-10-07"
