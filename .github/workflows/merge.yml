@@ -1,39 +1,48 @@
-name: Merging PR into main
+name: Index new TRR on merge
 run-name: Merging ${{ github.event.pull_request.head.repo.full_name }} into main
+
 on:
   pull_request_target:
     types:
       - closed
-    branches: 
+    branches:
       - main
+
 jobs:
-  # Job only runs if PR closed in a merge
-  if_merged_report:
+  assign-trr-numbers:
     if: ${{ github.event.pull_request.merged == true }}
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
+    - name: Generate GitHub App Token
+      id: app-token
+      uses: actions/create-github-app-token@v1
       with:
-          token: ${{ secrets.PUSH_TOKEN }}  #this token allows the action to push changes back to the repo
-    
-    - name: Get list of report markdown files changed in PR
+        app-id: ${{ secrets.GH_APP_ID }}
+        private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+
+    - name: Checkout main
+      uses: actions/checkout@v4
+      with:
+        ref: main
+        token: ${{ steps.app-token.outputs.token }}
+
+    - name: Get list of TRRs changed in PR
       id: changed-markdown-files
-      uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # pinned to v47
+      uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
       with:
-        files_yaml: |
-            all:    #get all TRR reports changed for indexing
-              - reports/**/README.md
-    
-    # update the index for all modified reports in the PR
-    - name: Run indexer
-      if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
-      run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_all_changed_files }}
-      
-    # Commit new index (and possibly renamed files) to main
-    - name: Commit updated files to branch
+        files: "reports/**/README.md"
+
+    - name: Update modified TRRs using indexer
+      if: steps.changed-markdown-files.outputs.any_changed == 'true'
+      run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+
+    - name: Commit and push updated files to main
       run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "TRR-Bot@users.noreply.github.com"
+        git config --local user.name "TRR-Bot"
         git add .
-        git commit -m "Assigning TRR number and updating index"
-        git push
+        git diff --cached --quiet || git commit -m "Reindexing TRRs after merging PR #${{ github.event.pull_request.number }}"
+        git push origin main
+      env:
+        GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}

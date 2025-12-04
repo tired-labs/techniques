@@ -1,35 +1,39 @@
 name: Lint and test indexer parsing
 run-name: Linting and testing indexer for ${{ github.head_ref }} on PR creation/modification
-on: 
-   pull_request:
-      types: [opened, synchronize, reopened]
-jobs: 
-   lint_and_test_index: 
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+   lint_and_test_index:
     runs-on: ubuntu-latest
     steps:
-    
-      - name: Get list of report markdown files changed in PR
-        id: changed-markdown-files
-        uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62 # pinned to v47
-        with:
-          files: reports/**/README.md
-          
-      - name: Check out repo
-        uses: actions/checkout@v4
-      
-      - name: Setup Go environment
-        uses: actions/setup-go@v5.5.0
-        with:
-         go-version: '1.21'
-       
-      - name: Install dependencies
-        run: go get github.com/yuin/goldmark 
-      
-      - name: Run linter
-        if: steps.changed-markdown-files.outputs.any_changed == 'true' 
-        run: go run tools/trrlint/main.go ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+    - name: Check out repo
+      uses: actions/checkout@v4
 
-      # Run the index script in merge_test mode to ensure proper parsing for indexing.
-      - name: Run indexing test
-        if: steps.changed-markdown-files.outputs.any_changed == 'true'
-        run: python3 tools/index/index.py merge_test -f ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+    - name: Get list of report markdown files changed in PR
+      id: changed-markdown-files
+      uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
+      with:
+        files: "reports/**/README.md"
+
+    - name: Setup Go environment
+      uses: actions/setup-go@v5.5.0
+      with:
+        go-version: '1.21'
+
+    - name: Install dependencies
+      run: go get github.com/yuin/goldmark
+
+    - name: Run linter on changed files
+      if: steps.changed-markdown-files.outputs.any_changed == 'true'
+      run: go run tools/trrlint/main.go ${{ steps.changed-markdown-files.outputs.all_changed_files }}
+
+    - name: Run linter on all files
+      if: github.event_name == 'workflow_dispatch'
+      run: go run tools/trrlint/main.go
+
+    - name: Validate indexer would pass
+      if: steps.changed-markdown-files.outputs.all_any_changed == 'true'
+      run: python3 tools/index/index.py merge -f ${{ steps.changed-markdown-files.outputs.all_all_changed_files }}
