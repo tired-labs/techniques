@@ -44,7 +44,7 @@
     "pub_date": "2025-10-07"
   },
   {
-    "name": "Forge a Kerberos TGT (Golden Ticket)",
+    "name": "Forge a Kerberos TGT",
     "id": "TRR0013",
     "tactics": [
       "Credential Access"
@@ -60,7 +60,8 @@
       "Active Directory"
     ],
     "procedures": {
-      "A": "Forge a TGT using the KRBTGT password hash"
+      "A": "Forge a TGT from scratch (Golden Ticket)",
+      "B": "Forge TGT using PAC acquired via U2U+S4U2Self (Sapphire Ticket)"
     },
     "last_update": "2025-10-07",
     "pub_date": "2025-10-07"
@@ -207,7 +208,7 @@
     "pub_date": "2025-10-07"
   },
   {
-    "name": "Service Principal Manipulation",
+    "name": "Azure Service Principal Manipulation",
     "id": "TRR0020",
     "tactics": [
       "Persistence"
@@ -217,8 +218,10 @@
     ],
     "external_ids": [
       "AZT501.2",
+      "AZT502.2",
       "T1098.001",
-      "T1098.003"
+      "T1098.003",
+      "T1136.003"
     ],
     "platforms": [
       "Azure"
@@ -256,7 +259,7 @@
     "pub_date": "2025-10-07"
   },
   {
-    "name": "TRR0022: Hijack Azure Subscription",
+    "name": "Hijack Azure Subscription",
     "id": "TRR0022",
     "tactics": [
       "Persistence",
@@ -278,5 +281,30 @@
     },
     "last_update": "2025-10-07",
     "pub_date": "2025-10-07"
+  },
+  {
+    "name": "Clearing Windows Event Logs",
+    "id": "TRR0023",
+    "tactics": [
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet",
+      "Miles Whittaker",
+      "Chris Hodson"
+    ],
+    "external_ids": [
+      "T1070.001"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Event Clearing via RPC Call",
+      "B": "Event Logging Process Termination",
+      "C": "Event Log File Redirection"
+    },
+    "last_update": "2025-12-04",
+    "pub_date": "2025-12-04"
   }
 ]
