@@ -117,7 +117,7 @@ TRR:
    the `lsass.exe` process into a new isolated process named `lsaiso.exe`. This
    renders procedures that dump credentials directly from LSASS memory
    inoperable.[^1]
-2. When Credential Guard is enabled, it is not longer possible to request the
+2. When Credential Guard is enabled, it is no longer possible to request the
    session key for a cached Kerberos ticket. Without the session key, the
    tickets retrieved from the Kerberos cache can't be used by other
    accounts.[^2]
@@ -139,7 +139,7 @@ years.
 Windows' native Kerberos SSP/AP is implemented in `System32/kerberos.dll.`
 Generally, programmers do not directly interact with this library because
 Windows has provided more user-friendly or generalized interfaces for developers
-to use. (For example, Windows has provided the [Negotiate SSP], which will
+to use. (For example, Windows has provided [Negotiate SSP], which will
 automatically select between Kerberos and NTLM auth depending on the request
 circumstances, and the [Security Support Provider Interface] (SSPI) that
 provides a common interface regardless of the SSP used.) However, it is possible
