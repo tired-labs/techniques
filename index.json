@@ -306,5 +306,27 @@
     },
     "last_update": "2025-12-04",
     "pub_date": "2025-12-04"
+  },
+  {
+    "name": "Pass-the-Ticket",
+    "id": "TRR0024",
+    "tactics": [
+      "Defense Evasion",
+      "Lateral Movement"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1550.003"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Submit ticket to local cache"
+    },
+    "last_update": "2025-12-16",
+    "pub_date": "2025-12-16"
   }
 ]

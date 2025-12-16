@@ -4,7 +4,7 @@
 
 | Key          | Value                                      |
 |--------------|--------------------------------------------|
-| ID           | TRR0000                                    |
+| ID           | TRR0024                                    |
 | External IDs | [T1550.003]                                |
 | Tactics      | Defense Evasion, Lateral Movement          |
 | Platforms    | Windows                                    |
@@ -191,7 +191,7 @@ any logon session.
 
 | ID              | Title                          | Tactic            |
 |-----------------|--------------------------------|-------------------|
-| TRR0000.WIN.A   | Submit ticket to local cache | Defense Evasion, Lateral Movement |
+| TRR0024.WIN.A   | Submit ticket to local cache | Defense Evasion, Lateral Movement |
 
 ### Procedure A: Submit ticket to local cache
 
@@ -215,13 +215,13 @@ operations for the original valid request for the ticket, have been colored gray
 in the DDM to indicate that these actions are precursors that must occur before
 the ticket can be imported into a new logon session.
 
-![DDM - Procedure Name 1](ddms/ddm_trr0000_win_a.png)
+![DDM - Procedure Name 1](ddms/ddm_trr0024_win_a.png)
 
 ## Available Emulation Tests
 
 | ID            | Link             |
 |---------------|------------------|
-| TRR0000.WIN.A | [Atomic Tests 1-2]          |
+| TRR0024.WIN.A | [Atomic Tests 1-2]          |
 
 ## References
 
