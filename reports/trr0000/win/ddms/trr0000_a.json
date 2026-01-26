@@ -1,0 +1,469 @@
+{
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 75,
+        "y": 82.75845212774135
+      },
+      "caption": "Create Process",
+      "labels": [],
+      "properties": {
+        "API": "CreateProcess",
+        "Flag": "CREATE_SUSPENDED"
+      },
+      "style": {
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 16,
+        "caption-font-size": 16,
+        "label-border-color": "#0062b1",
+        "caption-color": "#000000",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 637.9889034596309,
+        "y": 150.36882826736598
+      },
+      "caption": "Map Section",
+      "labels": [],
+      "properties": {
+        "API option 1": "CreateFileMapping",
+        "API option 2": "NtMapViewOfSection"
+      },
+      "style": {
+        "label-position": "outside",
+        "label-font-size": 16,
+        "caption-font-size": 16,
+        "label-color": "#4d4d4d",
+        "label-border-color": "#0062b1",
+        "caption-color": "#000000",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 557.7766788022718,
+        "y": 380.1712070409548
+      },
+      "caption": "Allocate Memory",
+      "labels": [],
+      "properties": {
+        "API": "VirtualAllocEx"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-color": "#0062b1",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 305.93320810004695,
+        "y": 405.7487153370867
+      },
+      "caption": "Suspend Process",
+      "labels": [],
+      "properties": {
+        "API option 1": "ExAcquireRundownProtection",
+        "API option 2": "DebugActiveProcess"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-color": "#000000",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 305.93320810004695,
+        "y": 573.5610763038784
+      },
+      "caption": "Suspend Thread",
+      "labels": [],
+      "properties": {
+        "API": "SuspendThread"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-color": "#000000",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 1488.6760622404806,
+        "y": 250.73765653473214
+      },
+      "caption": "Resume Thread",
+      "labels": [],
+      "properties": {
+        "API": "ResumeThread"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-color": "#000000",
+        "border-color": "#808080",
+        "node-color": "#cccccc",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 1488.6760622404806,
+        "y": 392.25145408885453
+      },
+      "caption": "Create Thread",
+      "labels": [],
+      "properties": {
+        "API": "CreateThread"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-color": "#000000",
+        "border-color": "#808080",
+        "node-color": "#cccccc",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 75,
+        "y": 250.73765653473214
+      },
+      "caption": "Open Process",
+      "labels": [],
+      "properties": {
+        "API": "OpenProcess"
+      },
+      "style": {
+        "caption-color": "#000000",
+        "caption-font-size": 16,
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 730.0121059698474,
+        "y": 380.1712070409548
+      },
+      "caption": "Write Memory",
+      "labels": [],
+      "properties": {
+        "API option 1": "NtWriteVirtualMemory",
+        "API option 2": "WriteProcessMemory"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-color": "#0062b1",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 1306.049704782083,
+        "y": 75.93332416967448
+      },
+      "caption": "Write Memory",
+      "labels": [],
+      "properties": {
+        "API option 1": "NtWriteVirtualMemory",
+        "API option 2": "WriteProcessMemory",
+        "Location": "PE Header"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-color": "#0062b1",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": 957.823476459677,
+        "y": 250.73765653473214
+      },
+      "caption": "Write Memory",
+      "labels": [],
+      "properties": {
+        "API option 1": "NtWriteVirtualMemory",
+        "API option 2": "WriteProcessMemory",
+        "Location": "AddressOfCallBacks"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-color": "#0062b1",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    },
+    {
+      "id": "n13",
+      "position": {
+        "x": 1102.9034797873405,
+        "y": 75.93332416967448
+      },
+      "caption": "Write Memory",
+      "labels": [],
+      "properties": {
+        "API option 1": "NtWriteVirtualMemory",
+        "API option 2": "WriteProcessMemory",
+        "Location": "IMAGE_TLS_DIRECTORY"
+      },
+      "style": {
+        "caption-font-size": 16,
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-color": "#0062b1",
+        "border-color": "#68bc00",
+        "border-width": 3
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n0",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "fromId": "n4",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "fromId": "n4",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "fromId": "n5",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "fromId": "n5",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n10",
+      "fromId": "n8",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n11",
+      "fromId": "n8",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n12",
+      "fromId": "n8",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n13",
+      "fromId": "n8",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n14",
+      "fromId": "n2",
+      "toId": "n10",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n15",
+      "fromId": "n13",
+      "toId": "n11",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n16",
+      "fromId": "n12",
+      "toId": "n13",
+      "type": "if needed",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal"
+      }
+    },
+    {
+      "id": "n17",
+      "fromId": "n1",
+      "toId": "n12",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n18",
+      "fromId": "n10",
+      "toId": "n12",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n19",
+      "fromId": "n12",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n20",
+      "fromId": "n12",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n22",
+      "fromId": "n11",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n23",
+      "fromId": "n11",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ],
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  }
+}
