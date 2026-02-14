@@ -1,0 +1,153 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 3,
+    "border-color": "#68bc00",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 14,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 12,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 12,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 75,
+        "y": 257.4271394364555
+      },
+      "caption": "Create Event Filter",
+      "labels": [
+        "Sysmon 19"
+      ],
+      "properties": {},
+      "style": {
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 16,
+        "caption-font-size": 15,
+        "label-border-color": "#000000",
+        "border-width": 2
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 75,
+        "y": 50
+      },
+      "caption": "Create Event Consumer",
+      "labels": [
+        "Sysmon 20"
+      ],
+      "properties": {},
+      "style": {
+        "property-position": "outside",
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 16,
+        "caption-font-size": 15,
+        "label-border-color": "#000000",
+        "border-width": 2
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 316.8952197244058,
+        "y": 153.71356971822775
+      },
+      "caption": "Create Binding",
+      "labels": [
+        "Sysmon 21",
+        "CS WmiFilterConsumerBindingEtw"
+      ],
+      "properties": {},
+      "style": {
+        "label-position": "outside",
+        "label-font-size": 16,
+        "caption-font-size": 15,
+        "label-color": "#4d4d4d",
+        "label-border-color": "#000000",
+        "border-width": 2
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n1",
+      "toId": "n0",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n0",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}

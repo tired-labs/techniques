@@ -328,5 +328,74 @@
     },
     "last_update": "2025-12-16",
     "pub_date": "2025-12-16"
+  },
+  {
+    "name": "Process Injection via Asynchronous Procedure Call (APC)",
+    "id": "TRR0025",
+    "tactics": [
+      "Defense Evasion",
+      "Privilege Escalation"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1055.004",
+      "T1055.001",
+      "T1055.002"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Queue Remote APC"
+    },
+    "last_update": "2026-02-03",
+    "pub_date": "2026-02-03"
+  },
+  {
+    "name": "Process Injection via Thread Local Storage Callback",
+    "id": "TRR0026",
+    "tactics": [
+      "Defense Evasion",
+      "Privilege Escalation"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1055.005",
+      "T1055.001",
+      "T1055.002"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Malicious TLS Callback"
+    },
+    "last_update": "2026-02-09",
+    "pub_date": "2026-02-09"
+  },
+  {
+    "name": "WMI Event Subscription",
+    "id": "TRR0027",
+    "tactics": [
+      "Persistence"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1546.003"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Create a WMI Event Subscription"
+    },
+    "last_update": "2026-02-12",
+    "pub_date": "2026-02-12"
   }
 ]
