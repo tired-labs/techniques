@@ -421,5 +421,28 @@
     },
     "last_update": "2026-02-19",
     "pub_date": "2026-02-19"
+  },
+  {
+    "name": "UnPAC-the-Hash",
+    "id": "TRR0029",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet",
+      "Chris Hodson"
+    ],
+    "external_ids": [
+      "T1555"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Certificate + U2U",
+      "B": "Key Trust + U2U"
+    },
+    "last_update": "2026-02-19",
+    "pub_date": "2026-02-19"
   }
 ]
