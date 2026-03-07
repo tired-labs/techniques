@@ -1,0 +1,473 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 3,
+    "border-color": "#68bc00",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 14,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 12,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 12,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 965.4979856764037,
+        "y": 181.11811219932508
+      },
+      "caption": "Send Network Request",
+      "labels": [],
+      "properties": {
+        "Host": "Any",
+        "User": "Any",
+        "Kerberos Type": "TGS-REQ",
+        "KDCOptions": "ENC-TKT-IN-SKEY (U2U)",
+        "AdditionalTickets": "TGT (from AS-REP)"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 1184.0428455177707,
+        "y": 181.11811219932525
+      },
+      "caption": "Receive Network Request",
+      "labels": [
+        "Event 4769",
+        "CS ActiveDirectoryServiceAccessRequest"
+      ],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "TGS-REQ",
+        "KDCOptions": "ENC-TKT-IN-SKEY (U2U)",
+        "AdditionalTickets": "TGT (from AS-REP)"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 1402.587705359138,
+        "y": 181.11811219932508
+      },
+      "caption": "Send Network Response",
+      "labels": [],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "TGS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#0062b1",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 1621.1325652005053,
+        "y": 181.11811219932497
+      },
+      "caption": "Receive Network Request",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "TGS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": -57.741100869385065,
+        "y": 181.11811219932525
+      },
+      "caption": "Send Network Request",
+      "labels": [],
+      "properties": {
+        "Host": "Any",
+        "User": "Any",
+        "Kerberos Type": "AS-REQ",
+        "padata": "PA-PK-AS-REQ (Type 16)"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 160.80375897198186,
+        "y": 181.11811219932497
+      },
+      "caption": "Receive Network Request",
+      "labels": [
+        "Event 4768",
+        "CS ActiveDirectoryAuthentication"
+      ],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "AS-REQ",
+        "padata": "PA-PK-AS-REQ (Type 16)"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n17",
+      "position": {
+        "x": 528.4082659936696,
+        "y": 181.11811219932514
+      },
+      "caption": "Send Network Response",
+      "labels": [],
+      "properties": {
+        "Host": "DC",
+        "Kerberos Type": "AS-REP",
+        "Contains": "PAC_CREDENTIAL_INFO"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#0062b1",
+        "label-font-size": 12,
+        "property-font-size": 12,
+        "node-color": "#ffffff"
+      }
+    },
+    {
+      "id": "n20",
+      "position": {
+        "x": 746.9531258350366,
+        "y": 181.1181121993251
+      },
+      "caption": "Receive Network Response",
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "AS-REP"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n21",
+      "position": {
+        "x": 1839.6774250418723,
+        "y": 181.11811219932525
+      },
+      "caption": "Decrypt message",
+      "style": {},
+      "labels": [],
+      "properties": {
+        "Kerberos Type": "TGS-REP",
+        "Contains": "PAC_CREDENTIAL_INFO"
+      }
+    },
+    {
+      "id": "n22",
+      "position": {
+        "x": 344.60601248282575,
+        "y": 181.11811219932505
+      },
+      "caption": "Validate Certificate",
+      "style": {
+        "border-color": "#0062b1"
+      },
+      "labels": [],
+      "properties": {}
+    },
+    {
+      "id": "n23",
+      "position": {
+        "x": 398.7795782735502,
+        "y": 479.8883165747842
+      },
+      "caption": "Query Active Directory Data",
+      "style": {
+        "border-color": "#0062b1"
+      },
+      "labels": [],
+      "properties": {
+        "Attribute": "MSDS-KeyCredentialLink"
+      }
+    },
+    {
+      "id": "n24",
+      "position": {
+        "x": 253.235418511508,
+        "y": 400.74768279859495
+      },
+      "caption": "Verify Certificate Trust Chain",
+      "style": {
+        "border-color": "#0062b1"
+      },
+      "labels": [],
+      "properties": {}
+    },
+    {
+      "id": "n25",
+      "position": {
+        "x": -328.3432933761764,
+        "y": 130.5387913149396
+      },
+      "caption": "Acquire Certificate",
+      "labels": [],
+      "properties": {
+        "EKU": "Smart Card Logon"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    },
+    {
+      "id": "n26",
+      "position": {
+        "x": -328.3432933761764,
+        "y": 256.3945999826505
+      },
+      "caption": "Write AD Attribute",
+      "labels": [
+        "Event 5136 (SACL)"
+      ],
+      "properties": {
+        "Attribute": "MSDS-KeyCredentialLink"
+      },
+      "style": {
+        "caption-font-size": 14,
+        "border-color": "#68bc00",
+        "label-font-size": 12,
+        "property-font-size": 12
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n3",
+      "fromId": "n1",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "property-font-size": 12,
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n19",
+      "fromId": "n20",
+      "toId": "n0",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n20",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n8",
+      "toId": "n9"
+    },
+    {
+      "id": "n21",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n17",
+      "toId": "n20"
+    },
+    {
+      "id": "n22",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n0",
+      "toId": "n1"
+    },
+    {
+      "id": "n23",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n4",
+      "toId": "n7"
+    },
+    {
+      "id": "n24",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n7",
+      "toId": "n21"
+    },
+    {
+      "id": "n25",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n9",
+      "toId": "n22"
+    },
+    {
+      "id": "n26",
+      "type": "key trust",
+      "style": {
+        "detail-orientation": "horizontal",
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n22",
+      "toId": "n23"
+    },
+    {
+      "id": "n27",
+      "type": "certificate trust",
+      "style": {
+        "detail-orientation": "horizontal",
+        "arrow-color": "#000000"
+      },
+      "properties": {},
+      "fromId": "n22",
+      "toId": "n24"
+    },
+    {
+      "id": "n28",
+      "type": "",
+      "style": {
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n23",
+      "toId": "n17"
+    },
+    {
+      "id": "n29",
+      "type": "",
+      "style": {
+        "arrow-color": "#000000"
+      },
+      "properties": {},
+      "fromId": "n24",
+      "toId": "n17"
+    },
+    {
+      "id": "n30",
+      "type": "certificate trust",
+      "style": {
+        "detail-orientation": "horizontal",
+        "arrow-color": "#000000"
+      },
+      "properties": {},
+      "fromId": "n25",
+      "toId": "n8"
+    },
+    {
+      "id": "n31",
+      "type": "key trust",
+      "style": {
+        "detail-orientation": "horizontal",
+        "arrow-color": "#f44e3b"
+      },
+      "properties": {},
+      "fromId": "n26",
+      "toId": "n8"
+    }
+  ]
+}

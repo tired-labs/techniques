@@ -1,0 +1,202 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 3,
+    "border-color": "#68bc00",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 14,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 12,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 12,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n8",
+      "position": {
+        "x": -180.74110086938506,
+        "y": 145.11811219932525
+      },
+      "caption": "Write AD Attribute",
+      "labels": [
+        "Event 5136 (SACL)"
+      ],
+      "properties": {
+        "Host": "Any",
+        "Attribute": "msds-KeyCredentialLink"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 1,
+        "border-width": 2
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": -348.74110086938504,
+        "y": 145.11811219932525
+      },
+      "caption": "Create Key Pair",
+      "labels": [],
+      "properties": {
+        "Host": "Any"
+      },
+      "style": {
+        "node-color": "#ffffff",
+        "border-color": "#68bc00",
+        "property-font-size": 12,
+        "caption-font-size": 14,
+        "label-position": "outside",
+        "label-font-size": 12,
+        "label-border-width": 2,
+        "border-width": 2
+      }
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": -12.741100869385093,
+        "y": 145.11811219932525
+      },
+      "caption": "Authenticate",
+      "style": {
+        "border-width": 2
+      },
+      "labels": [],
+      "properties": {}
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": -47.88418586573779,
+        "y": 399.6344268681304
+      },
+      "caption": "Kerberos PKINIT",
+      "style": {
+        "border-width": 2
+      },
+      "labels": [
+        "Event 4768"
+      ],
+      "properties": {
+        "Pre-Authentication Type": "16"
+      }
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": 42.26673144449575,
+        "y": 327.21392571099113
+      },
+      "caption": "Entra ID?",
+      "style": {
+        "border-width": 2
+      },
+      "labels": [],
+      "properties": {}
+    },
+    {
+      "id": "n13",
+      "position": {
+        "x": 120.98186701365157,
+        "y": 246.81456179591808
+      },
+      "caption": "Windows Hello for Business?",
+      "style": {
+        "border-width": 2
+      },
+      "labels": [],
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n9",
+      "toId": "n8"
+    },
+    {
+      "id": "n1",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n8",
+      "toId": "n10"
+    },
+    {
+      "id": "n2",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n10",
+      "toId": "n11"
+    },
+    {
+      "id": "n3",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n10",
+      "toId": "n12"
+    },
+    {
+      "id": "n4",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n10",
+      "toId": "n13"
+    }
+  ]
+}
