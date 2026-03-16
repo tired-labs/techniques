@@ -20,12 +20,9 @@ disks, establishing C2, local reconnaissance, etc.).
 
 Note that this ATT&CK technique contains multiple procedures without common
 operations/chokepoints. As a result, this TRR includes two known procedures
-(focused on native Windows features), but there are at least two more procedures
-possible:
-
-- using a third-party hypervisor like VirtualBox
-- using a third-party portable hypervisor like VMware Player (no installation
-  required!)
+(focused on native Windows features). Third-party and portable hypervisors
+(such as VirtualBox or VMware Player) represent additional out-of-scope
+procedures not covered here.
 
 ## Technical Background
 
@@ -180,9 +177,9 @@ The primary indicator is the execution of the manager process.
 - Windows Sandbox session start: `Event ID 39` in the `AppModel-Runtime` channel
 - Windows Sandbox session end: `Event ID 41` in the `AppModel-Runtime` channel
 
-[!NOTE]
-Other Hyper-V VMs on the system can trigger these events - look specifically for
-the keyword `CmProxyD` in the event details.
+> [!NOTE]
+> Other Hyper-V VMs on the system can trigger these events — look specifically
+> for the keyword `CmProxyD` in the event details.
 
 #### Feature Enablement (Setup)
 
@@ -221,7 +218,7 @@ Like Hyper-V, this feature must be enabled if not already present.
 Windows Sandbox can be customized using `.wsb` files (XML format). These files
 are critical forensic artifacts because they define mapped folders
 (host-to-guest), logon commands (what runs on start), and network settings
-([src][ref-20]). Technically, the sandbox can be configured with the `wsb` CLI
+([src][ref-19]). Technically, the sandbox can be configured with the `wsb` CLI
 as well, so these are not mandatory (but can be very informative)!
 
 - **Extension**: `*.wsb`
@@ -268,9 +265,13 @@ process executing.
 #### Detection Data Model - Procedure A
 
 ![Procedure A DDM](ddms/execute-malicious-vm-on-host_procedure-a_ddm.png)
-Note: there are a lot of ways to detect services in Windows, this DDM only
-includes the most common ones (as well as the key features to identify this
-particular service).
+The most durable detection signal is `vmwp.exe` process execution — VM name
+and configuration details can be changed by an attacker, but a Hyper-V VM
+cannot execute without spawning this process. Event ID 18500 provides
+higher-fidelity confirmation of VM start but requires explicitly collecting
+from the non-default `Microsoft-Windows-Hyper-V-Worker-Admin` channel. Service
+creation events (7045/4697) are also modeled but are less unique to this
+technique and more likely to produce false positives.
 
 #### Example Sigma Rules - Procedure A
 
@@ -323,7 +324,7 @@ boundary.
 
 The below rule could be implemented in several different ways:
 
-- With an exclusion list, using Sigma `expand` and [pipelines][ref-21] (ideally
+- With an exclusion list, using Sigma `expand` and [pipelines][ref-20] (ideally
   we'd use a non-hostname property, like "network zone", as the list of
   hostnames that should run Hyper-V could be quite long)
 - As a `level: informational` rule, combined with external-to-Sigma
@@ -356,7 +357,7 @@ level: informational
 
 | ID | Link |
 | - | - |
-| TRR0000.WIN.A | [Atomic Red Team: Create and Start Hyper-V Virtual Machine][ref-22] |
+| TRR0000.WIN.A | [Atomic Red Team: Create and Start Hyper-V Virtual Machine][ref-21] |
 | TRR0000.WIN.B | None |
 
 ## References
@@ -379,9 +380,9 @@ level: informational
 - [HackTheBox: Windows Sandbox Data Exfiltration Attack Forensics][ref-16]
 - [Microsoft Learn: Windows Sandbox overview][ref-17]
 - [Check Point Research: Playing in the Windows Sandbox][ref-18]
-- [Microsoft Learn: Windows Sandbox configuration file][ref-20]
-- [SigmaHQ: Pipelines][ref-21]
-- [Atomic Red Team: T1564.006][ref-22]
+- [Microsoft Learn: Windows Sandbox configuration file][ref-19]
+- [SigmaHQ: Pipelines][ref-20]
+- [Atomic Red Team: T1564.006][ref-21]
 
 [ref-1]: https://attack.mitre.org/techniques/T1564/006/
 [ref-2]: https://github.com/keepwatch
@@ -401,6 +402,6 @@ level: informational
 [ref-16]: https://www.hackthebox.com/blog/windows-sandbox-data-exfiltration-attack-forensics#the_attack_
 [ref-17]: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-overview
 [ref-18]: https://research.checkpoint.com/2021/playing-in-the-windows-sandbox/
-[ref-20]: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file
-[ref-21]: https://sigmahq.io/docs/digging-deeper/pipelines.html#query-expression-placeholders
-[ref-22]: https://www.atomicredteam.io/atomic-red-team/atomics/T1564.006#atomic-test-3---create-and-start-hyper-v-virtual-machine
+[ref-19]: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file
+[ref-20]: https://sigmahq.io/docs/digging-deeper/pipelines.html#query-expression-placeholders
+[ref-21]: https://www.atomicredteam.io/atomic-red-team/atomics/T1564.006#atomic-test-3---create-and-start-hyper-v-virtual-machine
