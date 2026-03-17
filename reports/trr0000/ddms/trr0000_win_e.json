@@ -1,0 +1,202 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n36",
+      "position": {
+        "x": 75,
+        "y": 3200
+      },
+      "caption": "Call API",
+      "labels": [
+        "Sysmon 13 (RegistryValueSet)",
+        "Win 4657 (SACL)"
+      ],
+      "properties": {
+        "Key": "...\\Configuration Manager",
+        "Value": "EnablePeriodicBackup = 1",
+        "API": "RegSetValueEx/NtSetValueKey "
+      },
+      "style": {
+        "border-color": "#808080",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 1,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n37",
+      "position": {
+        "x": 321.52318840579716,
+        "y": 3200
+      },
+      "caption": "Wait for Backup Task",
+      "labels": [],
+      "properties": {
+        "Task": "RegIdleBackup",
+        "Trigger": "Restart + idle maintenance"
+      },
+      "style": {
+        "border-color": "#808080",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 1,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n39",
+      "position": {
+        "x": 697.3782136482434,
+        "y": 3200
+      },
+      "caption": "Read File",
+      "labels": [
+        "Sysmon 11 (FileCreate)"
+      ],
+      "properties": {
+        "Files": "SYSTEM and SAM"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 1,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n40",
+      "position": {
+        "x": 905.6015289888836,
+        "y": 3200
+      },
+      "caption": "Decrypt SAM Entries",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 1,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n41",
+      "position": {
+        "x": 321.52318840579716,
+        "y": 3417
+      },
+      "caption": "Write File",
+      "style": {
+        "label-border-width": 1,
+        "border-color": "#808080"
+      },
+      "labels": [
+        "Sysmon 11 (FileCreate)",
+        "CS RegistryHiveFileWritten"
+      ],
+      "properties": {
+        "Folder": "System32\\config\\RegBack\\"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n39",
+      "fromId": "n36",
+      "toId": "n37",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#999999"
+      }
+    },
+    {
+      "id": "n44",
+      "type": "",
+      "style": {
+        "arrow-color": "#999999"
+      },
+      "properties": {},
+      "fromId": "n37",
+      "toId": "n41"
+    },
+    {
+      "id": "n45",
+      "type": "",
+      "style": {
+        "arrow-color": "#999999"
+      },
+      "properties": {},
+      "fromId": "n41",
+      "toId": "n39"
+    },
+    {
+      "id": "n46",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n39",
+      "toId": "n40"
+    }
+  ]
+}
