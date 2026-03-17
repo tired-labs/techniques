@@ -226,7 +226,7 @@ be enabled manually or via group policy, but this can also be done remotely.
 When running, it is hosted in a dedicated `svchost.exe` process, and this is the
 process that actually performs the activities on the target system's registry.
 
->[!Note]
+> [!Note]
 >
 > RPC methods can be called locally: essentially the 'remote machine' is itself.
 > An attacker might use this procedure locally to attempt to blend in with
@@ -403,12 +403,12 @@ entirely by opening a raw handle to the disk volume and parsing NTFS structures
 manually to locate and read the SAM and SYSTEM hive files.
 
 Normal input/output operations use operating system APIs (like `CreateFile` and
-`WriteFile`) to interact with files on the disk. This permits the operating system
-to do all the work required to locate the file on the physical disk, regardless
-of file system structure, and read or write the requested data. This also means
-that the operating system can enforce consistency protections and security
-checks on the requested access. A few examples of checks the operating system
-might enforce are:
+`WriteFile`) to interact with files on the disk. This permits the operating
+system to do all the work required to locate the file on the physical disk,
+regardless of file system structure, and read or write the requested data. This
+also means that the operating system can enforce consistency protections and
+security checks on the requested access. A few examples of checks the operating
+system might enforce are:
 
 - Locks on files which are opened by a process and cannot be opened by other
   processes, such as the `NTDS.dit` file or SYSTEM registry hives.
