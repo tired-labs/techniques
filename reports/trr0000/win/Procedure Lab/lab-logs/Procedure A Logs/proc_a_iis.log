@@ -1,0 +1,16 @@
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2026-02-20 16:47:19
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2026-02-20 16:47:19 ::1 GET / - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/145.0.0.0+Safari/537.36 - 200 0 0 822
+2026-02-20 16:47:19 ::1 GET /iisstart.png - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/145.0.0.0+Safari/537.36 http://localhost/ 200 0 0 7
+2026-02-20 16:47:19 ::1 GET /favicon.ico - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/145.0.0.0+Safari/537.36 http://localhost/ 404 0 2 0
+2026-02-20 16:48:58 ::1 GET / - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/145.0.0.0+Safari/537.36 - 304 0 0 1
+2026-02-20 16:48:58 ::1 GET /iisstart.png - 80 - ::1 Mozilla/5.0+(Windows+NT+10.0;+Win64;+x64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/145.0.0.0+Safari/537.36 http://localhost/ 304 0 0 0
+#Software: Microsoft Internet Information Services 10.0
+#Version: 1.0
+#Date: 2026-02-20 17:09:55
+#Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer) sc-status sc-substatus sc-win32-status time-taken
+2026-02-20 17:09:55 ::1 GET /test_shells/proc_a/shell.aspx - 80 - ::1 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.26100.7705 - 200 0 0 830
+2026-02-20 17:09:55 ::1 GET /test_shells/proc_a/shell.aspx cmd=whoami 80 - ::1 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.26100.7705 - 200 0 0 314
+2026-02-20 17:10:01 ::1 GET /test_shells/proc_a/shell.aspx cmd=ipconfig 80 - ::1 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.26100.7705 - 200 0 0 41
