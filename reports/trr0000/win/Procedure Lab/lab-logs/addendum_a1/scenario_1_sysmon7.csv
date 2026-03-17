@@ -1,0 +1,477 @@
+"Message","Id","Version","Qualifiers","Level","Task","Opcode","Keywords","RecordId","ProviderName","ProviderId","LogName","ProcessId","ThreadId","MachineName","UserId","TimeCreated","ActivityId","RelatedActivityId","ContainerLog","MatchedQueryIds","Bookmark","LevelDisplayName","OpcodeDisplayName","TaskDisplayName","KeywordsDisplayNames","Properties"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.609
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\wldp.dll
+FileVersion: 10.0.26100.7920 (WinBuild.160101.0800)
+Description: Windows Lockdown Policy
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: wldp.dll
+Hashes: SHA256=C594D36160157706676AD231566A94F564D48D913812ED1539574AC2DC77A22A
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570517","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.413
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Xml.Linq\6da9d9d9c4d2a57b2842dbbaf9f63b75\System.Xml.Linq.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Xml.Linq.dll
+Hashes: SHA256=4862F8F30B29BE3FD0D8490F9829C4F6D523E7BA539414D52AE5C0353160C66C
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570510","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.392
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.ServiceModel\77253019669d6af1e2297ac43bda3676\System.ServiceModel.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: System.ServiceModel.dll
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.ServiceModel.dll
+Hashes: SHA256=0E06CBCE46FB2D977F2DCE93741431577450671433A02CF9D3EC5D0E7BFB5FAE
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570509","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.355
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Runteb92aa12#\c4d05e9706fa0a7d465e11195812c7b4\System.Runtime.Serialization.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: System.Runtime.Serialization.dll
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Runtime.Serialization.dll
+Hashes: SHA256=8B67EBFC06B6013B62BD1F59866B2220600FAC40D34EC4FBD9436369844B4987
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570508","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.344
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\assembly\GAC_64\System.EnterpriseServices\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.EnterpriseServices.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: Microsoft .NET Services Support Infrastructure
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.EnterpriseServices.dll
+Hashes: SHA256=288013ACB35574DFB24FCD9779CECD2AF1A82AE7C21967E7C679B19D6813DE2B
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570507","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.344
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\assembly\GAC_64\System.EnterpriseServices\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.EnterpriseServices.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: Microsoft .NET Services Support Infrastructure
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.EnterpriseServices.dll
+Hashes: SHA256=288013ACB35574DFB24FCD9779CECD2AF1A82AE7C21967E7C679B19D6813DE2B
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570506","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.343
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Drawing\273e99947fa8c5b9d2838e3a00645750\System.Drawing.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Drawing.dll
+Hashes: SHA256=4EB44CB7049DCE8E1944BA040D0008B38ABF880BFBBB7D925A3405C18580707B
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570505","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.341
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Web.Services\24d05a5e57515147101edd702d483326\System.Web.Services.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Web.Services.dll
+Hashes: SHA256=CEBB4FA7C8B849B3A10E12656EB22B23F1461D81D1BC370F8676833ED8B8ADDF
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570504","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8084","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.325
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\assembly\GAC_64\System.Data\v4.0_4.0.0.0__b77a5c561934e089\System.Data.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: system.data.dll
+Hashes: SHA256=44EF042FA9FBCA676466CF9DDD7541EC00C8887C10672880702CC5A4A8182606
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570503","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.324
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Data\1064903e754dde661225885b95eceee4\System.Data.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: system.data.dll
+Hashes: SHA256=EEF29314975CD6D3B1E0608B55D6CAEC104794EB63019698E2F1B1FF5D7B5E33
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570502","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.317
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\inetsrv\gzip.dll
+FileVersion: 10.0.26100.1 (WinBuild.160101.0800)
+Description: GZIP Compression DLL
+Product: Internet Information Services
+Company: Microsoft Corporation
+OriginalFileName: gzip.dll
+Hashes: SHA256=D4700579E37861EF80759B152505D58427114FE16D7171C3486091BB72937046
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570501","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.306
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\dpapi.dll
+FileVersion: 10.0.26100.1 (WinBuild.160101.0800)
+Description: Data Protection API
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: dpapi.dll
+Hashes: SHA256=2DB49CE97E44F116C31B06136E79E887141C3E74ABE823CB243C2073509B7EEA
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570500","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.305
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\crypt32.dll
+FileVersion: 10.0.26100.7309 (WinBuild.160101.0800)
+Description: Crypto API32
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: CRYPT32.DLL
+Hashes: SHA256=0F549C9C035EC2DFD39A2DCF6FD8F13DAB8515AC748759B3583DCDB155FFE011
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570499","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.078
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\profapi.dll
+FileVersion: 10.0.26100.7309 (WinBuild.160101.0800)
+Description: User Profile Basic API
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: PROFAPI.DLL
+Hashes: SHA256=1204BFE36D00F7D634BC6A4823DE910BF6546E688512378FFC43F238801826B0
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570497","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.076
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\WinTypes.dll
+FileVersion: 10.0.26100.7920 (WinBuild.160101.0800)
+Description: Windows Base Types DLL
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: WinTypes.dll
+Hashes: SHA256=AEADD91ABB4E6039199161A775D0579ABF703EBF394C906EC4D2224157A64E15
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570496","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.076
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\shell32.dll
+FileVersion: 10.0.26100.7920 (WinBuild.160101.0800)
+Description: Windows Shell Common Dll
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: SHELL32.DLL
+Hashes: SHA256=4759511BCD8008E1E4ABB8BEAFB7F530DA54387592D46CA9D7E537C8549F60A0
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570495","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.075
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Xml\24459e28621b293eb94adc2d3d46a29d\System.Xml.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Xml.dll
+Hashes: SHA256=C5DB1FA570DCF324FB1A41389F3E3B963E7C18CB53D87407F38A5B4B4843D4F7
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570494","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.057
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Configuration\aee4a9b1feab1017f9c0be0b2ddab3ff\System.Configuration.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: System.Configuration.dll
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Configuration.dll
+Hashes: SHA256=2D53512EECBF9D4E708F19CD5F96FEA917B07E2CA7990C24BE7DA5A59A3F3AA9
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570493","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.056
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System.Core\318c241e7a02d80c9524df93922eabae\System.Core.ni.dll
+FileVersion: 4.8.9319.0 built by: NET481REL1LAST_25H2_B
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Core.dll
+Hashes: SHA256=6F322604E912A461A1D2CD8B4E46F609A6E5192F8777393082698DDE9CC10FE5
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570492","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.015
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\System\d4bdee93a2422be7ed56b39c2554e1ae\System.ni.dll
+FileVersion: 4.8.9321.0 built by: NET481REL1LAST_25H2_B
+Description: .NET Framework
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.dll
+Hashes: SHA256=5AAF63BD6170BFCDF7A5301FF24B2D25A06C2E34E943B7E303FC6AA63A6414F4
+Signed: false
+Signature: -
+SignatureStatus: Unavailable
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570491","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.006
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\clrjit.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: Microsoft .NET Runtime Just-In-Time Compiler
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: clrjit.dll
+Hashes: SHA256=0927813DA18845783F946E30E5BA326F73454B5207931E3C21FEDC7D7AFB4249
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570490","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:08.003
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\sxs.dll
+FileVersion: 10.0.26100.7920 (WinBuild.160101.0800)
+Description: Fusion 2.5
+Product: Microsoft? Windows? Operating System
+Company: Microsoft Corporation
+OriginalFileName: SXS.DLL
+Hashes: SHA256=C551407E263C26B4CE87889C346F85F51B5CEAD2787B2AA2B214D0FDAD8BB897
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570489","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:07.998
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\assembly\GAC_64\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll
+FileVersion: 4.8.9319.0 built by: NET481REL1LAST_25H2_B
+Description: System.Web.dll
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Web.dll
+Hashes: SHA256=E1A363D42B3E652531EB300105B008447E9BA2A1C96F67EAE5866AED25FFE743
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570488","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:08 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:07.997
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\assembly\GAC_64\System.Web\v4.0_4.0.0.0__b03f5f7f11d50a3a\System.Web.dll
+FileVersion: 4.8.9319.0 built by: NET481REL1LAST_25H2_B
+Description: System.Web.dll
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: System.Web.dll
+Hashes: SHA256=E1A363D42B3E652531EB300105B008447E9BA2A1C96F67EAE5866AED25FFE743
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570487","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:07 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:07.992
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\assembly\NativeImages_v4.0.30319_64\mscorlib\76cc8cd31b99e4657b7fa51813603db8\mscorlib.ni.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: Microsoft Common Language Runtime Class Library
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: mscorlib.dll
+Hashes: SHA256=9737DB3588A6DAD7B76B69E4375665A7A3EEBA4D8EE8376ACA8665E7AECC3CD2
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570486","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:07 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:07.963
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\webengine.dll
+FileVersion: 4.8.9319.0 built by: NET481REL1LAST_25H2_B
+Description: Microsoft ASP.NET ISAPI Shim DLL
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: webengine.dll
+Hashes: SHA256=9CC596C51718215FF5336ED5C35B120F0EEAF19926A36BA54F505B0B108E7918
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570483","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:07 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:07.962
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\System32\inetsrv\wbhst_pm.dll
+FileVersion: 10.0.26100.1 (WinBuild.160101.0800)
+Description: WebHost Protocol Manager (the worker process plug-in)
+Product: Internet Information Services
+Company: Microsoft Corporation
+OriginalFileName: wbhst_pm.dll
+Hashes: SHA256=8A624A0D16FDD10C2A1C699356EAE3FFEFD9CDC16C30FED0D30496713AC302F1
+Signed: true
+Signature: Microsoft Windows
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570482","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:07 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"
+"Image loaded:
+RuleName: ImageLoad
+UtcTime: 2026-03-17 14:22:07.959
+ProcessGuid: {0b948c92-6389-69b9-562a-090000005500}
+ProcessId: 113980
+Image: C:\Windows\System32\inetsrv\w3wp.exe
+ImageLoaded: C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_filter.dll
+FileVersion: 4.8.9221.0 built by: NET481REL1LAST_25H2
+Description: Microsoft ASP.NET ISAPI Filter DLL
+Product: Microsoft? .NET Framework
+Company: Microsoft Corporation
+OriginalFileName: aspnet_filter.dll
+Hashes: SHA256=C03ABDB527BD9FD464F6EB8D2E7AEDB39A5E0BAFA1F90998671F6693068F6530
+Signed: true
+Signature: Microsoft Corporation
+SignatureStatus: Valid
+User: IIS APPPOOL\DefaultAppPool","7","3",,"4","7","0","-9223372036854775808","570481","Microsoft-Windows-Sysmon","5770385f-c22a-43e0-bf4c-06f5698ffbd9","Microsoft-Windows-Sysmon/Operational","6608","8076","McDesktop","S-1-5-18","3/17/2026 10:22:07 AM",,,"Microsoft-Windows-Sysmon/Operational","System.UInt32[]","System.Diagnostics.Eventing.Reader.EventBookmark","Information","Info","Image loaded (rule: ImageLoad)","System.Collections.ObjectModel.ReadOnlyCollection`1[System.String]","System.Collections.Generic.List`1[System.Diagnostics.Eventing.Reader.EventProperty]"

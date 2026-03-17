@@ -1,0 +1,324 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 13,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 100,
+        "y": -80
+      },
+      "caption": "Create New File",
+      "labels": [
+        "Sysmon 11 (FileCreate)"
+      ],
+      "properties": {
+        "Target": "Web root directory | bin/ directory"
+      },
+      "style": {
+        "border-color": "#000000",
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 100,
+        "y": 280
+      },
+      "caption": "Modify Existing File",
+      "labels": [
+        "FIM",
+        "Win 4663 (SACL)"
+      ],
+      "properties": {
+        "Target": "Web root directory"
+      },
+      "style": {
+        "border-color": "#000000",
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 750,
+        "y": 423
+      },
+      "caption": "Write Config",
+      "labels": [
+        "Sysmon 11 (FileCreate)",
+        "FIM"
+      ],
+      "properties": {
+        "Target": "web.config",
+        "Content": "handlers | buildProviders | IHttpHandler | handler + DLL type"
+      },
+      "style": {
+        "border-color": "#000000",
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 350,
+        "y": 100
+      },
+      "caption": "Send HTTP Request",
+      "labels": [
+        "IIS W3C"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#000000",
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 550,
+        "y": 100
+      },
+      "caption": "Route Request",
+      "labels": [],
+      "properties": {
+        "Process": "HTTP.sys → w3wp.exe"
+      },
+      "style": {
+        "border-color": "#000000"
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 750,
+        "y": 100
+      },
+      "caption": "Match Handler",
+      "labels": [],
+      "properties": {
+        "Process": "w3wp.exe"
+      },
+      "style": {
+        "border-color": "#000000"
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 1000,
+        "y": 100
+      },
+      "caption": "Execute Code",
+      "labels": [],
+      "properties": {
+        "Process": "w3wp.exe"
+      },
+      "style": {
+        "border-color": "#000000"
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 1000,
+        "y": 380
+      },
+      "caption": "Compile ASPX",
+      "labels": [
+        "Sysmon 11 (FileCreate)",
+        "Sysmon 1 (ProcessCreate)"
+      ],
+      "properties": {
+        "Process": "w3wp.exe → csc.exe",
+        "Artifact": "Temporary ASP.NET Files"
+      },
+      "style": {
+        "border-color": "#000000",
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 1280,
+        "y": -40
+      },
+      "caption": "Process Spawn",
+      "labels": [
+        "Sysmon 1 (ProcessCreate)",
+        "Win 4688 (ProcessCreate)"
+      ],
+      "properties": {
+        "Parent": "w3wp.exe",
+        "Child": "cmd.exe / powershell.exe"
+      },
+      "style": {
+        "border-color": "#000000",
+        "label-font-size": 14
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 1280,
+        "y": 240
+      },
+      "caption": "Call .NET API",
+      "labels": [],
+      "properties": {
+        "Process": "w3wp.exe (in-process)"
+      },
+      "style": {
+        "border-color": "#000000"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r0",
+      "fromId": "n0",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r1",
+      "fromId": "n1",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r2",
+      "fromId": "n2",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r3",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r4",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r5",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r6",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "sub-operation",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r7",
+      "fromId": "n6",
+      "toId": "n8",
+      "type": "if OS command",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000",
+        "detail-orientation": "horizontal"
+      }
+    },
+    {
+      "id": "r8",
+      "fromId": "n6",
+      "toId": "n9",
+      "type": "if in-process",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b",
+        "detail-orientation": "horizontal"
+      }
+    }
+  ]
+}
