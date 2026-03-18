@@ -225,7 +225,8 @@ service uses to impersonate the caller for access checks. When running, it is
 hosted in a dedicated `svchost.exe` process, and this is the process that
 actually performs the activities on the target system's registry.
 
-The default status of the Remote Registry service depends on the version of Windows running on the target:
+The default status of the Remote Registry service depends on the version of
+Windows running on the target:
 
 - Windows 10/11: The service is disabled by default. It must be enabled manually
   or via group policy, but this can also be done remotely.
