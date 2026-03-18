@@ -81,7 +81,8 @@ built-in Administrator). Each key has the following values:
   set, account expiration, login count, failed login count, account control
   flags (disabled, locked out, etc.)
 - `SupplementalCredentials` - contains a structured binary value that holds
-  additional cryptographic forms of the user's password.
+  additional cryptographic forms of the user's password.[^10] None of these
+  additional forms are not used in this technique.
 
 Another value of interest to this technique is the domain-level
 `SAM\Domains\Account\F` value. This contains some of the encryption material
@@ -220,11 +221,20 @@ translation to RPC calls.
 
 When using MS-RRP, the attacker authenticates to the target via SMB, using the
 named pipe `\PIPE\winreg`, to establish a session that the Remote Registry
-service uses to impersonate the caller for access checks. The Remote Registry
-service is disabled by default on standard Windows 10 and 11 machines. It must
-be enabled manually or via group policy, but this can also be done remotely.
-When running, it is hosted in a dedicated `svchost.exe` process, and this is the
-process that actually performs the activities on the target system's registry.
+service uses to impersonate the caller for access checks. When running, it is
+hosted in a dedicated `svchost.exe` process, and this is the process that
+actually performs the activities on the target system's registry.
+
+The default status of the Remote Registry service depends on the version of Windows running on the target:
+
+- Windows 10/11: The service is disabled by default. It must be enabled manually
+  or via group policy, but this can also be done remotely.
+- Windows Server 2003 and Windows XP/2000: The service is configured to start
+  automatically by default.[^11]
+- Windows Server 2012+: The service is set to `Automatic (Trigger Start)`,
+  meaning it auto-starts when a connection is made to `\PIPE\winreg`. (On Server
+  2019+, the service will shut down after being idle for 10 minutes, but will
+  restart on a new request.)[^12]
 
 > [!Note]
 >
@@ -577,6 +587,9 @@ exist.
 [^7]: [VSS: Generating a Backup Set - Microsoft Learn]
 [^8]: [VShadow - GitHub]
 [^9]: [An NTFS Parser Library - CodeProject]
+[^10]: [MS-SAMR SupplementalCredentials - Microsoft Learn]
+[^11]: See the footnotes at [RegConnectRegistryA function - Microsoft Learn]
+[^12]: BloodHound Inner Workings - Compass Security]
 
 [T1003.002]: https://attack.mitre.org/techniques/T1003/002/
 [SysKey and the SAM - Brendan Dolan-Gavitt (moyix)]: https://moyix.blogspot.com/2008/02/syskey-and-sam.html
@@ -600,3 +613,7 @@ exist.
 [VSS: Generating a Backup Set - Microsoft Learn]: https://learn.microsoft.com/en-us/windows/win32/vss/generating-a-backup-set
 [VShadow - GitHub]: https://github.com/microsoft/Windows-classic-samples/tree/main/Samples/VShadowVolumeShadowCopy
 [An NTFS Parser Library - CodeProject]: https://www.codeproject.com/Articles/81456/An-NTFS-Parser-Lib
+[MS-SAMR SupplementalCredentials - Microsoft Learn]: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-samr/0705f888-62e1-4a4c-bac0-b4d427f396f8
+[RegConnectRegistryA function - Microsoft Learn]: https://learn.microsoft.com/en-us/windows/win32/api/winreg/nf-winreg-regconnectregistrya
+[Manual (Trigger Start) - Robert Wray]: https://robertwray.co.uk/blog/what-does-manual-triggered-mean-for-a-windows-service
+[BloodHound Inner Workings - Compass Security]: https://blog.compass-security.com/2022/05/bloodhound-inner-workings-part-3/
