@@ -173,7 +173,7 @@ The `<buildProviders>` element can only be defined at the IIS Application level
 - ASP.NET returns a configuration error if it appears below the application
 root. This means the custom handler variant requires either that the target
 directory is already an IIS Application, the attacker can modify the site root's
-`web.config`, or the attacker can modify `machine.config` (requires SYSTEM
+`web.config`, or the attacker can modify `machine.config` (requires `SYSTEM`
 access).
 
 When a `web.config` is placed in a subdirectory, IIS dynamically reloads that
