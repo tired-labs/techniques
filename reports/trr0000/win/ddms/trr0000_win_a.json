@@ -204,7 +204,7 @@
       ],
       "properties": {
         "Parent": "w3wp.exe",
-        "Child": "cmd.exe / powershell.exe"
+        "Child": "cmd.exe / powershell.exe / <executable>"
       },
       "style": {
         "border-color": "#000000",
