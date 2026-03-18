@@ -530,7 +530,7 @@ every 10 days after a system restart. The `RegIdleBackup` scheduled task has a
 COM handler with `ClassId` `{CA767AA8-9157-4604-B64B-40747123D5F2}`, which is
 handled by `Windows\System32\regidle.dll`. This library makes a call to the
 undocumented `NtInitializeRegistry` function with an argument of `0x13e8`, which
-is implemented in `ntoskrnl32.exe`. The kernel code does a number of checks,
+is implemented in `ntoskrnl.exe`. The kernel code does a number of checks,
 then makes copies of the registry hives. The backed up files are stored in the
 `%SystemRoot%\System32\config\RegBack\` directory, which is hard-coded in the
 kernel's implementation.
