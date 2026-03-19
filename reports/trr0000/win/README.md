@@ -81,6 +81,7 @@ built-in Administrator). Each key has the following values:
   set, account expiration, login count, failed login count, account control
   flags (disabled, locked out, etc.)
 - `SupplementalCredentials` - contains a structured binary value that holds
+  additional cryptographic forms of the user's password.[^10] None of these
   additional forms are used in this technique.
 
 Another value of interest to this technique is the domain-level
