@@ -590,7 +590,7 @@ exist.
 [^9]: [An NTFS Parser Library - CodeProject]
 [^10]: [MS-SAMR SupplementalCredentials - Microsoft Learn]
 [^11]: See the footnotes at [RegConnectRegistryA function - Microsoft Learn]
-[^12]: BloodHound Inner Workings - Compass Security]
+[^12]: [BloodHound Inner Workings - Compass Security]
 
 [T1003.002]: https://attack.mitre.org/techniques/T1003/002/
 [SysKey and the SAM - Brendan Dolan-Gavitt (moyix)]: https://moyix.blogspot.com/2008/02/syskey-and-sam.html
