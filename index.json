@@ -444,5 +444,30 @@
     },
     "last_update": "2026-02-19",
     "pub_date": "2026-02-19"
+  },
+  {
+    "name": "Extracting Credentials from the SAM Database",
+    "id": "TRR0030",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1003.002"
+    ],
+    "platforms": [
+      "Windows"
+    ],
+    "procedures": {
+      "A": "Local Registry Access",
+      "B": "Remote Registry Access",
+      "C": "Volume Shadow Copy Access",
+      "D": "Raw Disk Access",
+      "E": "Acquire Registry Backup"
+    },
+    "last_update": "2026-03-19",
+    "pub_date": "2026-03-19"
   }
 ]
