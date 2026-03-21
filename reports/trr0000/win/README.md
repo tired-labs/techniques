@@ -357,11 +357,23 @@ same as [Procedure A] and [Procedure B].
 - [IHttpHandler Interface - Microsoft Learn]
 - [IIS Integrated Pipeline - Microsoft Learn]
 - [IIS Validation Configuration - Microsoft Learn]
+- [Introduction to applicationHost.config - Microsoft Learn]
+- [How to Use Locking in IIS Configuration - Microsoft Learn]
+- [BuildProvider Class - Microsoft Learn]
+- [PageHandlerFactory Class - Microsoft Learn]
+- [Shadow Copying Assemblies - Microsoft Learn]
+- [Classic ASP Not Installed by Default on IIS 7.0 and Above - Microsoft Learn]
 - [Detect and Prevent Web Shell Malware - NSA/CISA]
 - [Web Shell Attacks Continue to Rise - Microsoft Security Blog]
 - [Ghost in the Shell - Microsoft Security Blog]
 - [Web Shell Detection - Elastic Security]
 - [Mo' Shells Mo' Problems: Deep Panda Web Shells - CrowdStrike]
+- [HAFNIUM Targeting Exchange Servers with 0-Day Exploits - Microsoft Security Blog]
+- [Uploading web.config for Fun and Profit 2 - Soroush Dalili]
+- [Breaking Down the China Chopper Web Shell - Part I - Mandiant]
+- [Mitigate Microsoft Exchange Server Vulnerabilities (AA21-062A) - CISA]
+- [HAFNIUM, China Chopper and ASP.NET Runtime - Trustwave SpiderLabs]
+- [Sigma: Suspicious Process by Web Server Process - SigmaHQ]
 - [T1505.003 - MITRE ATT&CK]
 
 [Technical Background]: #technical-background
@@ -408,3 +420,27 @@ same as [Procedure A] and [Procedure B].
     https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1505.003/T1505.003.md#atomic-test-1---deploy-asp-webshell
 [Atomic Test T1505.003-2]:
     https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1505.003/T1505.003.md#atomic-test-2---deploy-aspx-webshell
+[Introduction to applicationHost.config - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig
+[How to Use Locking in IIS Configuration - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/iis/get-started/planning-for-security/how-to-use-locking-in-iis-configuration
+[BuildProvider Class - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/dotnet/api/system.web.compilation.buildprovider?view=netframework-4.8.1
+[PageHandlerFactory Class - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/dotnet/api/system.web.ui.pagehandlerfactory?view=netframework-4.8.1
+[Shadow Copying Assemblies - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/dotnet/framework/app-domains/shadow-copy-assemblies
+[Classic ASP Not Installed by Default on IIS 7.0 and Above - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/iis/application-frameworks/running-classic-asp-applications-on-iis-7-and-iis-8/classic-asp-not-installed-by-default-on-iis
+[HAFNIUM Targeting Exchange Servers with 0-Day Exploits - Microsoft Security Blog]:
+    https://www.microsoft.com/en-us/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
+[Uploading web.config for Fun and Profit 2 - Soroush Dalili]:
+    https://soroush.me/blog/2019/08/uploading-web-config-for-fun-and-profit-2/
+[Breaking Down the China Chopper Web Shell - Part I - Mandiant]:
+    https://cloud.google.com/blog/topics/threat-intelligence/breaking-down-china-chopper-web-shell-part-i
+[Mitigate Microsoft Exchange Server Vulnerabilities (AA21-062A) - CISA]:
+    https://www.cisa.gov/news-events/cybersecurity-advisories/aa21-062a
+[HAFNIUM, China Chopper and ASP.NET Runtime - Trustwave SpiderLabs]:
+    https://www.trustwave.com/en-us/resources/blogs/spiderlabs-blog/hafnium-china-chopper-and-aspnet-runtime/
+[Sigma: Suspicious Process by Web Server Process - SigmaHQ]:
+    https://github.com/SigmaHQ/sigma/blob/master/rules/windows/process_creation/proc_creation_win_webshell_susp_process_spawned_from_webserver.yml
