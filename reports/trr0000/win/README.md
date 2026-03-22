@@ -368,7 +368,8 @@ same as [Procedure A] and [Procedure B].
 - [Ghost in the Shell - Microsoft Security Blog]
 - [Web Shell Detection - Elastic Security]
 - [Mo' Shells Mo' Problems: Deep Panda Web Shells - CrowdStrike]
-- [HAFNIUM Targeting Exchange Servers with 0-Day Exploits - Microsoft Security Blog]
+- [HAFNIUM Targeting Exchange Servers with 0-Day Exploits - Microsoft Security
+  Blog]
 - [Uploading web.config for Fun and Profit 2 - Soroush Dalili]
 - [Breaking Down the China Chopper Web Shell - Part I - Mandiant]
 - [Mitigate Microsoft Exchange Server Vulnerabilities (AA21-062A) - CISA]
@@ -432,7 +433,8 @@ same as [Procedure A] and [Procedure B].
     https://learn.microsoft.com/en-us/dotnet/framework/app-domains/shadow-copy-assemblies
 [Classic ASP Not Installed by Default on IIS 7.0 and Above - Microsoft Learn]:
     https://learn.microsoft.com/en-us/iis/application-frameworks/running-classic-asp-applications-on-iis-7-and-iis-8/classic-asp-not-installed-by-default-on-iis
-[HAFNIUM Targeting Exchange Servers with 0-Day Exploits - Microsoft Security Blog]:
+[HAFNIUM Targeting Exchange Servers with 0-Day Exploits - Microsoft Security
+    Blog]:
     https://www.microsoft.com/en-us/security/blog/2021/03/02/hafnium-targeting-exchange-servers/
 [Uploading web.config for Fun and Profit 2 - Soroush Dalili]:
     https://soroush.me/blog/2019/08/uploading-web-config-for-fun-and-profit-2/
