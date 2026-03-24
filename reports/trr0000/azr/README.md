@@ -225,8 +225,8 @@ In this procedure, the attacker abuses the OAuth authorization code flow by
 manipulating the authorization request and redirect behavior in order to obtain
 the authorization code generated during the authentication process.
 
-The attacker crafts an OAuth authorization request directed at the  Microsoft
-identity platform authorization endpoint.  This request contains parameters
+The attacker crafts an OAuth authorization request directed at the Microsoft
+identity platform authorization endpoint. This request contains parameters
 defining the client application, requested scopes, and the redirect URI where
 the authorization code will be returned.
 
