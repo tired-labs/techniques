@@ -219,7 +219,7 @@ indistinguishable from normal authentication flows.
 | ------------- | ---------- | ----------------- |
 | TRR0000.AZR.A | Authorization Code Collection via Social Engineering (ConsentFix) | Credential Access |
 
-### Procedure A:  Authorization Code Collection via Social Engineering (ConsentFix)
+### Procedure A: Authorization Code Collection (ConsentFix)
 
 In this procedure, the attacker abuses the OAuth authorization code flow by
 manipulating the authorization request and redirect behavior in order to obtain
