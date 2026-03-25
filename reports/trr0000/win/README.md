@@ -6,7 +6,7 @@
 | - | - |
 | ID | TRR0000 |
 | External IDs | [T1564.006][ref-1] |
-| Tactics | Defense Evasion, Persistence |
+| Tactics | Defense Evasion |
 | Platforms | Windows |
 | Contributors | Jordan Anderson ([keepwatch][ref-2]) |
 
@@ -14,9 +14,9 @@
 
 This technique involves adversaries running malicious code inside a virtual
 machine (VM) on a compromised host. The primary goal is to isolate their malware
-from the host operating system, thereby blinding host-based security tools to
+or malicious action from the host operating system, thereby blinding host-based security tools to
 the details of the malicious activity (which could include encrypting shared
-disks, establishing C2, local reconnaissance, etc.).
+disks, establishing C2, local reconnaissance, etc.). Because these VMs can bridge network connections to the host, they can also be used to exfiltrate data from the host to the internet, run port scans, or conduct other malicious activity that would otherwise be caught by host-based security tools. They can also be used to bypass application allowlisting, as the malicious code is running in a different operating system than the host. Finally, they can provide access to the host filesystem, which can be used to steal sensitive data or conduct encryption for impact.
 
 Note that this ATT&CK technique contains multiple procedures without common
 operations/chokepoints. As a result, this TRR includes two known procedures
@@ -26,12 +26,42 @@ procedures not covered here.
 
 ## Technical Background
 
-### Hyper-V details
+### Hypervisor Isolation
+
+A hypervisor abstracts host hardware and provides an isolated execution
+environment for a guest operating system. Security tools installed on the host
+cannot inspect guest memory, enumerate guest processes, or monitor guest file
+system activity. This isolation is the core property adversaries exploit: any
+code running inside the guest is invisible to host-based endpoint detection and
+response (EDR) products.
+
+On Windows, two categories of hypervisor are relevant:
+
+- **Native (Type 1)**: Hyper-V operates as a Type 1 hypervisor integrated into
+  the Windows kernel. Once enabled, the host OS itself runs as a privileged
+  partition managed by the Hyper-V hypervisor. Windows Sandbox also uses Hyper-V
+  technology under the hood.
+- **Third-party (Type 2)**: Products like Oracle VirtualBox and VMware
+  Workstation/Player install as applications on the host OS and load kernel-mode
+  drivers to manage virtual machines.
+
+This TRR focuses on Type 1 hypervisors on Windows, specifically Hyper-V and Windows Sandbox.
+
+### Type 1 Hypervisors
+
+This is a key point to establish before going further. Type 1 hypervisors run directly on the host hardware, below the host operating system. This means that the host operating system is running as a guest of the hypervisor, and the hypervisor has full control over the host hardware. This is in contrast to Type 2 hypervisors, which run as applications on top of the host operating system. 
+
+The use of these features produces many forensic and detection artifacts.
+
+### Hyper-V
+
+Hyper-V is available on Windows 10/11 Pro, Enterprise, Education editions and
+Windows Server.
 
 #### Enable Hyper-V
 
-There are two documented ways to enable Hyper-V, but the key is that they both
-require service changes, per [MSFT documentation][ref-3]:
+This feature is not enabled by default on Windows, so if you expect it to not be enabled, there's a potential detection opportunity here. There are two documented ways to enable Hyper-V, but the key is that they both
+require service changes, per [Microsoft's documentation][ref-3]:
 
 - Requires a reboot:
   ```powershell
@@ -43,17 +73,32 @@ require service changes, per [MSFT documentation][ref-3]:
   ```
 
 Event ID 7045 is a log entry that indicates a new service has been installed on
-the system ([src][ref-4]).
+the system [^ref-4].
 
 #### Import VM to Hyper-V
 
+One way to abuse Hyper-V is to import a pre-built malicious VM into Hyper-V[^ref-22]. This can be done via the Hyper-V Manager GUI or via PowerShell. The below PowerShell command will import a VM from a given path:
+
+```powershell
+Import-VM -Path "C:\Path\To\VM" -Copy -GenerateNewId
+```
+
 Unlike a service, a Hyper-V virtual machine's primary configuration is not
-stored in the registry. Therefore, there aren't many good indicators for a new
-VM being added to Hyper-V.
+stored in the registry, so there aren't many good indicators for a new
+VM being added to Hyper-V. Even if there were, the data available is sparse (VM name, VM filesystem path, etc.) and difficult to use for detection (similar to the challenges with scheduled tasks).
+
+More importantly, while threat actors have imported malicious VMs previously, the attack can also work if attackers create a new VM and then conduct malicious operations within. Going forward, we'll focus on the elements that are essential for a given procedure.
 
 #### Start VM
 
-Several built-in Windows events can be used to collect this data (as long as
+Unlike importing a VM, starting a VM is essential to the procedure. When a Hyper-V VM starts, the Virtual Machine Management Service (`vmms.exe`) coordinates with the Hyper-V Compute Service (`vmcompute.exe`) to
+launch a Virtual Machine Worker Process (`vmwp.exe`) for each running VM. The
+`vmwp.exe` process is the host-side representation of the running guest and is
+responsible for device emulation and I/O.
+
+VM starts can occur through the Hyper-V Manager GUI, PowerShell, or programmatically via the Hyper-V WMI provider. 
+
+Several built-in Windows events can be used to collect data about VM starts (as long as
 defenders are logging them):
 
 | Event ID | Description | Source | Sample message | Details |
@@ -74,17 +119,20 @@ C:\Windows\System32\winevt\Logs\Microsoft-Windows-Hyper-V-Worker%4Admin.evtx
 
 #### Connect VM to the network
 
-This is not strictly required for malicious activity, but can also be used as a
+This is not strictly required for malicious activity (a Hyper-V VM can be used for file system evasion only), but it is required for command and control (C2) traffic to be effective, or can be used as a
 proxy for VM start if other logs are unavailable.
+
+Network traffic from the guest is routed through a Hyper-V virtual switch; when using the Default Switch, traffic is NATed through the host's network stack, causing outbound connections to
+appear as originating from the host's IP address. 
 
 ##### Monitor VM connection via Registry artifacts
 
-"When a Hyper-V [VM]is started, the extensible switch interface creates a port
+"When a Hyper-V VM is started, the extensible switch interface creates a port
 before the virtual machine (VM) network adapter is exposed within the guest
-operating system" ([src][ref-8]). The technical artifact of that change is VMMS
+operating system" [^ref-8]. The technical artifact of that change is Virtual Machine Management Service (VMMS)
 creates new GUID-labeled Registry keys under the switch for each "port" in use
-(by default one) ([src][ref-9]), and deletes the ports when the VM stops
-([src][ref-10]). Therefore, a network-enabled VM starting will create a Registry
+(by default one) [^ref-9], and deletes the ports when the VM stops
+[^ref-10]. Therefore, a network-enabled VM starting will create a Registry
 key underneath one of the switch ports (either the default switch, or a custom
 switch) - the advantage for us is we can merely monitor at the appropriate
 depth:
@@ -96,6 +144,7 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VMSMP\Parameters\SwitchList
 The Hyper-V Virtual Switch Management Protocol (VMSMP) stores the configuration
 for its virtual switches and all the ports connected to them underneath a
 registry key:
+
 ```text
 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VMSMP\Parameters\SwitchList
 ```
@@ -118,13 +167,13 @@ HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\VMSMP\Parameters\SwitchList
 ```
 
 There is a "Default Switch" which is automatically enabled when you enable the
-service on Windows 10 and 11([src][ref-11]). On Windows Server, this must be
-enabled manually ([src][ref-12]). These registry keys can be used to determine
+service on Windows 10 and 11 [^ref-11]. On Windows Server, this must be
+enabled manually [^ref-12]. These registry keys can be used to determine
 if network connectivity is possible from Hyper-V VMs.
 
 ##### Monitor VM connection via Event logs
 
-Event ID 232 captures the "network connection" event ([src][ref-13]) (equivalent
+Event ID 232 captures the "network connection" event [^ref-13] (equivalent
 to plugging an Ethernet cable into a device, but virtually here). The below is a
 sample event, derived from [this troubleshooting article][ref-14] (search for
 232).
@@ -137,99 +186,120 @@ NIC C0470977-2D74-4F23-B695-B60A74E5100A (Friendly Name: MyTestVM_Network_Adapte
 
 - Option 1: `Get-VM -Id "<guid>"`
 - Option 2 (use VMCX config file)
-  - Navigate to:
-    ```text
-    C:\ProgramData\Microsoft\Windows\Hyper-V\Virtual Machines\
-    ```
+  - Navigate to `C:\ProgramData\Microsoft\Windows\Hyper-V\Virtual Machines\`
   - This contains XML-formatted files with names like `<guid>.vmcx`
   - Open this file to find the `name` attribute
 
-### Windows Sandbox details
+### Windows Sandbox
+
+Windows Sandbox is a lightweight, disposable desktop environment built on
+Hyper-V container technology. It is available on Windows 10/11 Pro and
+Enterprise. When launched, it creates a temporary Windows instance that is
+destroyed when closed.
+
+Using Windows Sandbox requires Hyper-V to be enabled on the host OS (see previous section), as well as the Windows Sandbox feature to be enabled.
+
+Sandbox can be launched via `WindowsSandbox.exe`, either with no arguments (for
+a default configuration) or with a `.wsb` configuration file that specifies
+options such as mapped host folders, networking settings, and logon commands. A
+`.wsb` file is not required — the sandbox can be opened with default settings and
+malicious activity conducted interactively or through other means.
 
 #### VM Execution Identification
 
-The execution of the sandbox is distinct from standard Hyper-V VMs.
+The execution of the sandbox is distinct from how standard Hyper-V VMs are started.
 
-**Process Execution:**
-The primary indicator is the execution of the manager process.
+**Process Execution**
 
-- `WindowsSandbox.exe`: The main entry point application.
+The primary indicator is the execution of the manager process:
+
+- `WindowsSandbox.exe`: The main entry point application
 - `CmProxy.exe` / `CmProxyD.exe`: Container Manager Proxy, often seen handling
-  RDP connections to the sandbox.
+  RDP connections to the sandbox
 
-**Command-line interface** (optional) ([src][ref-15])
+**Command-line interface** (optional) [^ref-15]
 
-- `wsb start` with configuration:
+`wsb start` with configuration: 
+
   ```text
   wsb start --config "<Configuration><Networking>Disabled</Networking></Configuration>"
   ```
-- `wsb share`:
+
+`wsb share`:
+
   ```text
   wsb share --id 12345678-1234-1234-1234-1234567890AB -f C:\host\folder -s C:\sandbox\folder --allow-write
   ```
-- `wsb exec`:
+
+`wsb exec`:
+
   ```text
   wsb exec –-id 12345678-1234-1234-1234-1234567890AB -c app.exe -r System
   ```
 
-**Event Logs**: ([src][ref-16])
+**Event Logs** [^ref-16]
 
 - Windows Sandbox session start: `Event ID 39` in the `AppModel-Runtime` channel
 - Windows Sandbox session end: `Event ID 41` in the `AppModel-Runtime` channel
 
 > [!NOTE]
-> Other Hyper-V VMs on the system can trigger these events — look specifically
+> Other Hyper-V VMs on the system can trigger these events - look specifically
 > for the keyword `CmProxyD` in the event details.
 
 #### Feature Enablement (Setup)
 
 Like Hyper-V, this feature must be enabled if not already present.
 
-**Commands:** ([src][ref-17])
+**Commands** [^ref-17]
 
 - PowerShell:
+
   ```powershell
   Enable-WindowsOptionalFeature -FeatureName "Containers-DisposableClientVM" -All -Online
   ```
+
 - DISM:
+
   ```cmd
   Dism /online /Enable-Feature /FeatureName:"Containers-DisposableClientVM" /All
   ```
 
 **Forensic Artifacts of Enablement:**
 
-- **Registry Keys**:
+- **Registry Keys**
   - Keys created when the package is installed:
+
     ```text
     HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\Containers-DisposableClientVM*
     ```
+
   - `HKLM\SYSTEM\CurrentControlSet\Services\CmService`: The *Container Manager
-    Service* which is required for Sandbox execution. ([src][ref-18])
-- **Services**:
+    Service* which is required for Sandbox execution. [^ref-18]
+- **Services**
   - `CmService` (Container Manager Service): This service manages the lifecycle
     of containers and is essential for Windows Sandbox. Its startup type may
-    change to specific/automatic when the feature is enabled. ([src][ref-18])
-- **Events**:
+    change to specific/automatic when the feature is enabled. [^ref-18]
+- **Events**
   - `Event ID 9` in the `Setup` log fires when the feature has been enabled (and
-    the PC has restarted) ([src][ref-16])
+    the PC has restarted) [^ref-16]
 
 #### Configuration Files (.wsb)
 
 Windows Sandbox can be customized using `.wsb` files (XML format). These files
 are critical forensic artifacts because they define mapped folders
 (host-to-guest), logon commands (what runs on start), and network settings
-([src][ref-19]). Technically, the sandbox can be configured with the `wsb` CLI
-as well, so these are not mandatory (but can be very informative)!
+[^ref-19]. Technically, the sandbox can be configured with the `wsb` CLI
+as well, so these files are not mandatory (but can be very informative if present)!
 
-- **Extension**: `*.wsb`
-- **Suspicious Content**:
+- **Extension:** `*.wsb`
+- **Suspicious Content:**
   - `<MappedFolder>`: Maps a host folder to the sandbox. This is the primary way
     to smuggle malware *into* the sandbox.
   - `<LogonCommand>`: Commands to execute automatically when the sandbox starts.
   - `<Networking>Enable</Networking>`: Explicitly enabling networking (though it
     is on by default).
 
-**Example Malicious WSB:**
+**Example Malicious WSB**
 
 ```xml
 <Configuration>
@@ -258,100 +328,27 @@ as well, so these are not mandatory (but can be very informative)!
 There are very useful Hyper-V logs that can give you a lot of data about the VMs
 being started in your environment. However, almost all of the detail available
 can be changed by the attacker (such as VM name), so the best defense is to
-monitor for Hyper-V being **used** on systems where you don't expect it to be
-running. The recommended way to do that monitoring is by looking for the Hyper-V
-process executing.
+monitor for Hyper-V being **used** on systems, ideally by looking for the Hyper-V
+process executing. Since the primary detection signal is execution, expected Hyper-V usage in a given environment will determine whether this technique should be detected or yielded[^ref-23] for that environment.
 
 #### Detection Data Model - Procedure A
 
 ![Procedure A DDM](ddms/execute-malicious-vm-on-host_procedure-a_ddm.png)
+
 The most durable detection signal is `vmwp.exe` process execution — VM name
 and configuration details can be changed by an attacker, but a Hyper-V VM
 cannot execute without spawning this process. Event ID 18500 provides
 higher-fidelity confirmation of VM start but requires explicitly collecting
 from the non-default `Microsoft-Windows-Hyper-V-Worker-Admin` channel. Service
-creation events (7045/4697) are also modeled but are less unique to this
-technique and more likely to produce false positives.
-
-#### Example Sigma Rules - Procedure A
-
-The below rule could be implemented in several different ways:
-
-- With an exclusion list, using Sigma `expand` and [pipelines][ref-21] (ideally
-  we'd use a non-hostname property, like "network zone", as the list of
-  hostnames that should run Hyper-V could be quite long)
-- As a `level: informational` rule, combined with external-to-Sigma
-  post-processing to make the rule viable
-
-```sigma
-title: Hyper-V VM started on unexpected host
-id: 9a1b7ad8-7829-42f7-a685-667366d0fc2b
-status: test
-description: Adversaries can use Hyper-V VMs to conceal malicious activity from on-host security monitoring
-references:
-     - <replace-with-trr-link>
-author: Jordan Anderson (iwillkeepwatch)
-date: 2026-01-23
-tags:
-    - attack.defense-evasion
-    - attack.t1564.006
-logsource:
-    product: windows
-    category: process_create
-detection:
-    selection:
-        Image|endswith: "*\\vmwp.exe"
-        Hostname|expand: %non_hyper-v_hosts%
-    condition: selection
-falsepositives:
-    - Systems that legitimately run Hyper-V, like developer devices
-level: medium
-```
+creation events (7045/4697) could be used for partial coverage, but technically an attacker can abuse an already-enabled Hyper-V feature, so process execution is more durable.
 
 ### Procedure B: Execute VM via Windows Sandbox
-
-Windows Sandbox provides a lightweight desktop environment to safely run
-applications in isolation. Unlike Hyper-V, it is designed to be disposable and
-non-persistent. Adversaries (such as the *MirrorFace* APT) have abused this
-feature to evade host-based detections by running malware inside this ephemeral
-boundary.
 
 #### Detection Data Model - Procedure B
 
 ![Procedure B DDM](ddms/execute-malicious-vm-on-host_procedure-b_ddm.png)
 
-#### Example Sigma Rules - Procedure B
-
-The below rule could be implemented in several different ways:
-
-- With an exclusion list, using Sigma `expand` and [pipelines][ref-20] (ideally
-  we'd use a non-hostname property, like "network zone", as the list of
-  hostnames that should run Hyper-V could be quite long)
-- As a `level: informational` rule, combined with external-to-Sigma
-  post-processing to make the rule viable
-
-```sigma
-title: Windows Sandbox Execution
-id: 5f1f9630-5807-44e2-a274-1361250284c7
-description: Detects the execution of Windows Sandbox processes, which may be used to hide malicious activity.
-references:
-     - <replace-with-trr-link>
-author: Jordan Anderson (iwillkeepwatch)
-date: 2026-01-23
-tags:
-    - attack.defense-evasion
-    - attack.t1564.006
-status: test
-logsource:
-    category: process_create
-    product: windows
-detection:
-    selection:
-        Image|endswith:
-            - '\WindowsSandbox.exe'
-    condition: selection
-level: informational
-```
+Similar to Hyper-V, the most durable detection signal is process execution. The `WindowsSandbox.exe` process must always run for Windows Sandbox to operate. Event ID 39 provides higher-fidelity confirmation of sandbox start but requires explicitly collecting from the non-default `AppModel-Runtime` channel. Service creation events (7045/4697) could be used for partial coverage, but technically an attacker can abuse an already-enabled Windows Sandbox feature, so process execution is more durable.
 
 ## Available Emulation Tests
 
@@ -362,27 +359,20 @@ level: informational
 
 ## References
 
-- [MITRE ATT&CK: T1564.006 - Hide Artifacts: Run Virtual Instance][ref-1]
-- [GitHub: keepwatch][ref-2]
-- [Microsoft Learn: Install Hyper-V on Windows 10][ref-3]
-- [Splunk: Event ID 7045][ref-4]
-- [MyEventlog: Event ID 18500][ref-5]
-- [Microsoft Q&A: Unable to start LOCAL Hyper-V VM][ref-6]
-- [Woshub: How to Stop/Kill a Hung Virtual Machine on Hyper-V?][ref-7]
-- [Microsoft Learn: Overview of Hyper-V Extensible Switch Ports][ref-8]
-- [Rlevchenko: Hyper-V 3.0 interaction with registry][ref-9]
-- [Kickthatcomputer: Hyper-V failed to update configuration for port][ref-10]
-- [YouTube: How to set up Default Switch in Hyper-V][ref-11]
-- [YouTube: How to Enable Default Switch in Hyper-V Server][ref-12]
-- [Hatena Blog: Event ID 232][ref-13]
-- [RSSing: Troubleshooting Hyper-V Networking][ref-14]
-- [Microsoft Learn: Windows Sandbox configuration][ref-15]
-- [HackTheBox: Windows Sandbox Data Exfiltration Attack Forensics][ref-16]
-- [Microsoft Learn: Windows Sandbox overview][ref-17]
-- [Check Point Research: Playing in the Windows Sandbox][ref-18]
-- [Microsoft Learn: Windows Sandbox configuration file][ref-19]
-- [SigmaHQ: Pipelines][ref-20]
-- [Atomic Red Team: T1564.006][ref-21]
+[^ref-4]: [Splunk: Event ID 7045][ref-4]
+[^ref-8]: [Microsoft Learn: Overview of Hyper-V Extensible Switch Ports][ref-8]
+[^ref-9]: [Rlevchenko: Hyper-V 3.0 interaction with registry][ref-9]
+[^ref-10]: [Kickthatcomputer: Hyper-V failed to update configuration for port][ref-10]
+[^ref-11]: [YouTube: How to set up Default Switch in Hyper-V][ref-11]
+[^ref-12]: [YouTube: How to Enable Default Switch in Hyper-V Server][ref-12]
+[^ref-13]: [Hatena Blog: Event ID 232][ref-13]
+[^ref-15]: [Microsoft Learn: Windows Sandbox configuration][ref-15]
+[^ref-16]: [HackTheBox: Windows Sandbox Data Exfiltration Attack Forensics][ref-16]
+[^ref-17]: [Microsoft Learn: Windows Sandbox overview][ref-17]
+[^ref-18]: [Check Point Research: Playing in the Windows Sandbox][ref-18]
+[^ref-19]: [Microsoft Learn: Windows Sandbox configuration file][ref-19]
+[^ref-22]: [Sophos: Ragnar Locker Ransomware Deploys Virtual Machine to Dodge Security][ref-22]
+[^ref-23]: [Thriving Defense: Some Techniques Should Only Be Detected Opportunistically][ref-23]
 
 [ref-1]: https://attack.mitre.org/techniques/T1564/006/
 [ref-2]: https://github.com/keepwatch
@@ -405,3 +395,5 @@ level: informational
 [ref-19]: https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-configure-using-wsb-file
 [ref-20]: https://sigmahq.io/docs/digging-deeper/pipelines.html#query-expression-placeholders
 [ref-21]: https://www.atomicredteam.io/atomic-red-team/atomics/T1564.006#atomic-test-3---create-and-start-hyper-v-virtual-machine
+[ref-22]: https://www.sophos.com/en-us/blog/ragnar-locker-ransomware-deploys-virtual-machine-to-dodge-security
+[ref-23]: https://thrivingdefense.com/principles/some-techniques-should-only-be-detected-opportunistically
