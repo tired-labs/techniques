@@ -1,0 +1,439 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 721.8366041989229,
+        "y": 554.5921650333435
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4656 (SACL)"
+      ],
+      "properties": {
+        "Key": "HKLM\\SAM",
+        "API": "RegOpenKeyEx/NtOpenKey"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 962.7668382298682,
+        "y": 474.695177862611
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4663 (SACL)"
+      ],
+      "properties": {
+        "API": "RegEnumValueEx/NtEnumerateValueKey"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 1242.952621198102,
+        "y": 474.695177862611
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4663 (SACL)"
+      ],
+      "properties": {
+        "API": "RegGetValue/RegQueryValueEx/NtQueryValueKey",
+        "Values": "SAM/Account/Domain/F, per-user V values"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 962.7668382298682,
+        "y": 634.4891522040764
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4656 (SACL)"
+      ],
+      "properties": {
+        "API": "RegSaveKey/NtSaveKey",
+        "Requires": "SeBackupPrivilege"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 962.7668382298682,
+        "y": 821.7803352766821
+      },
+      "caption": "Write File",
+      "labels": [
+        "Sysmon 11 (FileCreate)",
+        "CS RegistryHiveFileWritten"
+      ],
+      "properties": {
+        "File Name": "any"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 687.7668382298687,
+        "y": -137.29118307260592
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4656 (SACL)"
+      ],
+      "properties": {
+        "Key": "HKLM\\SYSTEM",
+        "API": "RegOpenKeyEx"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 962.7668382298682,
+        "y": -217.18817024333885
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4663 (SACL)"
+      ],
+      "properties": {
+        "API": "RegQueryInfoKey",
+        "Values": "JD, Skew1, GBG, Data"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 962.7668382298682,
+        "y": -57.394195901873076
+      },
+      "caption": "Call API",
+      "labels": [
+        "Win 4656 (SACL)"
+      ],
+      "properties": {
+        "API": "RegSaveKey/NtSaveKey",
+        "Requires": "SeBackupPrivilege"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 962.7668382298682,
+        "y": 129.8969871707328
+      },
+      "caption": "Write File",
+      "labels": [
+        "Sysmon 11 (FileCreate)",
+        "CS RegistryHiveFileWritten"
+      ],
+      "properties": {
+        "File Name": "any"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 216.1650733935718,
+        "y": 240.17201956770816
+      },
+      "caption": "Decrypt SAM Entries",
+      "labels": [],
+      "properties": {
+        "Note": "In-memory or offline"
+      },
+      "style": {
+        "border-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "property-font-size": 14
+      }
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 75,
+        "y": 129.8969871707328
+      },
+      "caption": "Get SysKey",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#000000"
+      }
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 75,
+        "y": 350.4470519646835
+      },
+      "caption": "Get Encrypted Hashes",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#000000"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal"
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n0",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal"
+      }
+    },
+    {
+      "id": "n2",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal"
+      }
+    },
+    {
+      "id": "n3",
+      "fromId": "n5",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {
+        "detail-orientation": "horizontal"
+      }
+    },
+    {
+      "id": "n4",
+      "fromId": "n7",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "fromId": "n6",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "fromId": "n11",
+      "toId": "n10",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "fromId": "n10",
+      "toId": "n11",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "fromId": "n11",
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "fromId": "n10",
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n10",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n11",
+      "fromId": "n2",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n12",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n13",
+      "type": "implementation",
+      "style": {},
+      "properties": {},
+      "fromId": "n10",
+      "toId": "n5"
+    },
+    {
+      "id": "n14",
+      "type": "implementation",
+      "style": {},
+      "properties": {},
+      "fromId": "n11",
+      "toId": "n0"
+    }
+  ]
+}
