@@ -55,7 +55,7 @@ protocols). Entra validates the token's signature against the public certificate
 stored in the domain's federation configuration. If the signature is valid and
 the token corresponds to a user in the tenant the user is signed in.
 
-You can view custom and federated domains in an Entra tenant by using the
+One can view custom and federated domains in an Entra tenant by using the
 `Get-MgDomain` and `Get-MgDomainFederationConfiguration` PowerShell cmdlets
 (part of the Microsoft.Graph module).
 
