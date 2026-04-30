@@ -40,8 +40,8 @@ certificate. The modified domain trust authorizes the attacker's IdP to issue
 signed tokens that Entra accepts. Because federation trust in Entra is
 tenant-wide, a single modified domain enables the attacker to authenticate as
 any user in the tenant without knowing those users' credentials. This technique
-was employed for persistence in the SolarWinds (APT29) and Octo Tempest
-intrusion campaigns.
+was employed for persistence in the SolarWinds (APT29)[^2] and Octo
+Tempest/Scattered Spider[^3] intrusion campaigns.
 
 ## Technical Background
 
@@ -219,7 +219,7 @@ attacker's tokens are also accepted.
 
 #### Detection Data Model
 
-![DDM - Modify existing federated domain](ddms/TRR0000_azr_a.png)
+![DDM - Modify existing federated domain](ddms/trr0000_azr_a.png)
 
 The procedure consists of a single essential operation: modifying the federation
 configuration of a verified, federated target domain.
@@ -247,7 +247,7 @@ domain is sufficient to enable token forgery for any user in the tenant.
 
 #### Detection Data Model
 
-![DDM - Add and federate new domain](ddms/TRR0000_azr_b.png)
+![DDM - Add and federate new domain](ddms/trr0000_azr_b.png)
 
 The `Publish DNS Record` prerequisite is shown in gray to indicate that it
 occurs at an external location and is not observable from within the tenant.
@@ -276,6 +276,8 @@ occurs at an external location and is not observable from within the tenant.
 - [AADInternals FederatedIdentityTools - GitHub]
 
 [^1]: [Golden SAML Attack - CyberArk]
+[^2]: [Guidance On Recent Nation State Attacks (SolarWinds) - Microsoft]
+[^3]: [Octo Tempest crosses boundaries to facilitate extortion, encryption, and destruction - Microsoft]
 
 [T1484.002]: https://attack.mitre.org/techniques/T1484/002/
 [T1556.007]: https://attack.mitre.org/techniques/T1556/007/
@@ -295,3 +297,4 @@ occurs at an external location and is not observable from within the tenant.
 [Detecting Microsoft 365 and Azure Active Directory backdoors - Mandiant]: https://www.mandiant.com/resources/blog/detecting-microsoft-365-azure-active-directory-backdoors
 [AADInternals FederatedIdentityTools - GitHub]: https://github.com/Gerenios/AADInternals/blob/master/FederatedIdentityTools.ps1
 [Golden SAML Attack - CyberArk]: https://www.cyberark.com/resources/threat-research-blog/golden-saml-newly-discovered-attack-technique-forges-authentication-to-cloud-apps
+[Guidance On Recent Nation State Attacks (SolarWinds) - Microsoft]: https://www.microsoft.com/en-us/msrc/blog/2020/12/customer-guidance-on-recent-nation-state-cyber-attacks
