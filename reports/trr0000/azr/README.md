@@ -279,7 +279,7 @@ occurs at an external location and is not observable from within the tenant.
 
 [T1484.002]: https://attack.mitre.org/techniques/T1484/002/
 [T1556.007]: https://attack.mitre.org/techniques/T1556/007/
-[T1606.002]: https://attack.mitre.org/techniques/T606/002/
+[T1606.002]: https://attack.mitre.org/techniques/T1606/002/
 
 [Add and verify custom domain names - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/users/domains-manage
 [Add your custom domain - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/fundamentals/add-custom-domain
