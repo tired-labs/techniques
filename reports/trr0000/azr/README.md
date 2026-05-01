@@ -97,7 +97,7 @@ This includes:
 - Cloud-only users (`@<tenant>.onmicrosoft.com`) who have an `ImmutableId`
 - External / guest users who have an `ImmutableId`
 
->[!NOTE]
+> [!NOTE]
 >
 > Not all Entra users have an `ImmutableId` by default. For users synced from
 > on-premises Active Directory, `ImmutableId` is populated automatically and
@@ -264,20 +264,20 @@ occurs at an external location and is not observable from within the tenant.
 - [Add and verify custom domain names - Microsoft Learn]
 - [Add your custom domain - Microsoft Learn]
 - [Microsoft Entra built-in roles - Microsoft Learn]
-- [Monitor changes to federation configuration in Microsoft Entra ID - Microsoft Learn]
+- [Monitor changes to federation configuration Entra ID - Microsoft Learn]
 - [Deep-dive to Azure Active Directory Identity Federation - AADInternals]
-- [Security vulnerability in Azure AD & Office 365 identity federation - AADInternals]
+- [Security vulnerability in Azure identity federation - AADInternals]
 - [How to create a backdoor to Azure AD - part 1: Identity federation - AADInternals]
-- [Roles Allowing To Abuse Entra ID Federation for Persistence and Privilege Escalation - Tenable]
+- [Roles Allowing To Abuse Entra ID Federation - Tenable]
 - [I Spy: Escalating to Entra ID Global Admin - Datadog Security Labs]
-- [Octo Tempest crosses boundaries to facilitate extortion, encryption, and destruction - Microsoft]
-- [Remediation and hardening strategies for Microsoft 365 to defend against APT29 - Mandiant]
+- [Octo Tempest - Microsoft]
+- [Remediation and hardening strategies for Microsoft 365 - Mandiant]
 - [Detecting Microsoft 365 and Azure Active Directory backdoors - Mandiant]
 - [AADInternals FederatedIdentityTools - GitHub]
 
 [^1]: [Golden SAML Attack - CyberArk]
 [^2]: [Guidance On Recent Nation State Attacks (SolarWinds) - Microsoft]
-[^3]: [Octo Tempest crosses boundaries to facilitate extortion, encryption, and destruction - Microsoft]
+[^3]: [Octo Tempest - Microsoft]
 
 [T1484.002]: https://attack.mitre.org/techniques/T1484/002/
 [T1556.007]: https://attack.mitre.org/techniques/T1556/007/
@@ -286,14 +286,14 @@ occurs at an external location and is not observable from within the tenant.
 [Add and verify custom domain names - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/users/domains-manage
 [Add your custom domain - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/fundamentals/add-custom-domain
 [Microsoft Entra built-in roles - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference
-[Monitor changes to federation configuration in Microsoft Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-monitor-federation-changes
+[Monitor changes to federation configuration Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-monitor-federation-changes
 [Deep-dive to Azure Active Directory Identity Federation - AADInternals]: https://aadinternals.com/post/aad-deepdive/
-[Security vulnerability in Azure AD & Office 365 identity federation - AADInternals]: https://aadinternals.com/post/federation-vulnerability/
+[Security vulnerability in Azure identity federation - AADInternals]: https://aadinternals.com/post/federation-vulnerability/
 [How to create a backdoor to Azure AD - part 1: Identity federation - AADInternals]: https://aadinternals.com/post/aadbackdoor/
-[Roles Allowing To Abuse Entra ID Federation for Persistence and Privilege Escalation - Tenable]: https://medium.com/tenable-techblog/roles-allowing-to-abuse-entra-id-federation-for-persistence-and-privilege-escalation-df9ca6e58360
+[Roles Allowing To Abuse Entra ID Federation - Tenable]: https://medium.com/tenable-techblog/roles-allowing-to-abuse-entra-id-federation-for-persistence-and-privilege-escalation-df9ca6e58360
 [I Spy: Escalating to Entra ID Global Admin - Datadog Security Labs]: https://securitylabs.datadoghq.com/articles/i-spy-escalating-to-entra-id-global-admin/
-[Octo Tempest crosses boundaries to facilitate extortion, encryption, and destruction - Microsoft]: https://www.microsoft.com/en-us/security/blog/2023/10/25/octo-tempest-crosses-boundaries-to-facilitate-extortion-encryption-and-destruction/
-[Remediation and hardening strategies for Microsoft 365 to defend against APT29 - Mandiant]: https://www.mandiant.com/resources/remediation-and-hardening-strategies-microsoft-365-defend-against-apt29-v13
+[Octo Tempest - Microsoft]: https://www.microsoft.com/en-us/security/blog/2023/10/25/octo-tempest-crosses-boundaries-to-facilitate-extortion-encryption-and-destruction/
+[Remediation and hardening strategies for Microsoft 365 - Mandiant]: https://www.mandiant.com/resources/remediation-and-hardening-strategies-microsoft-365-defend-against-apt29-v13
 [Detecting Microsoft 365 and Azure Active Directory backdoors - Mandiant]: https://www.mandiant.com/resources/blog/detecting-microsoft-365-azure-active-directory-backdoors
 [AADInternals FederatedIdentityTools - GitHub]: https://github.com/Gerenios/AADInternals/blob/master/FederatedIdentityTools.ps1
 [Golden SAML Attack - CyberArk]: https://www.cyberark.com/resources/threat-research-blog/golden-saml-newly-discovered-attack-technique-forges-authentication-to-cloud-apps
