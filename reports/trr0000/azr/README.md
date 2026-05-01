@@ -267,7 +267,7 @@ occurs at an external location and is not observable from within the tenant.
 - [Monitor changes to federation configuration Entra ID - Microsoft Learn]
 - [Deep-dive to Azure Active Directory Identity Federation - AADInternals]
 - [Security vulnerability in Azure identity federation - AADInternals]
-- [How to create a backdoor to Azure AD - part 1: Identity federation - AADInternals]
+- [How to create a backdoor to Azure AD - AADInternals]
 - [Roles Allowing To Abuse Entra ID Federation - Tenable]
 - [I Spy: Escalating to Entra ID Global Admin - Datadog Security Labs]
 - [Octo Tempest - Microsoft]
@@ -289,7 +289,7 @@ occurs at an external location and is not observable from within the tenant.
 [Monitor changes to federation configuration Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/how-to-connect-monitor-federation-changes
 [Deep-dive to Azure Active Directory Identity Federation - AADInternals]: https://aadinternals.com/post/aad-deepdive/
 [Security vulnerability in Azure identity federation - AADInternals]: https://aadinternals.com/post/federation-vulnerability/
-[How to create a backdoor to Azure AD - part 1: Identity federation - AADInternals]: https://aadinternals.com/post/aadbackdoor/
+[How to create a backdoor to Azure AD - AADInternals]: https://aadinternals.com/post/aadbackdoor/
 [Roles Allowing To Abuse Entra ID Federation - Tenable]: https://medium.com/tenable-techblog/roles-allowing-to-abuse-entra-id-federation-for-persistence-and-privilege-escalation-df9ca6e58360
 [I Spy: Escalating to Entra ID Global Admin - Datadog Security Labs]: https://securitylabs.datadoghq.com/articles/i-spy-escalating-to-entra-id-global-admin/
 [Octo Tempest - Microsoft]: https://www.microsoft.com/en-us/security/blog/2023/10/25/octo-tempest-crosses-boundaries-to-facilitate-extortion-encryption-and-destruction/
