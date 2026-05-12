@@ -215,14 +215,22 @@ already exist in the victim tenant, the victim may see only a Microsoft sign-in
 or account selection prompt rather than a suspicious consent screen.
 
 The example authorization request in this TRR uses
-`9bc3ab49-b65d-410a-85ad-de819febfddc`, which public ConsentFix research maps
-to Microsoft SharePoint Online Management Shell. Other commonly discussed
-first-party applications include Microsoft Azure CLI, Microsoft Azure
-PowerShell, Visual Studio, Visual Studio Code, Microsoft Teams, and Aadrm Admin
-Powershell. These applications are not equally useful to an attacker. The
-attacker needs an application whose pre-consented delegated scopes provide
-access to a useful resource, and whose registered reply URLs include a value
-that can expose the authorization code.
+`9bc3ab49-b65d-410a-85ad-de819febfddc`, the application ID for Microsoft
+SharePoint Online Management Shell. This application has delegated scopes such
+as `AllProfiles.Manage`, `Sites.FullControl.All`, and `User.Read.All`, with the
+reply URL `https://oauth.spops.microsoft.com/`. Those grants make the
+application useful when the attacker wants SharePoint or user profile access
+without registering a new application or triggering a new consent prompt.
+
+Other commonly discussed first-party applications include Microsoft Azure CLI,
+Microsoft Azure PowerShell, Visual Studio, Visual Studio Code, Microsoft Teams,
+and Aadrm Admin Powershell. These applications are attractive targets because
+they are Microsoft first-party applications with existing consent grants in many
+tenants, allowing authorization requests to avoid the suspicious consent prompt
+associated with newly registered third-party applications. The practical impact
+depends on which delegated scopes are already granted for the selected
+application and whether the application's registered reply URLs allow the
+authorization code to be exposed or captured.
 
 For many ConsentFix examples, that useful reply URL is `localhost`. Local
 redirect URIs are common for public clients and developer tools because a
@@ -368,6 +376,7 @@ records as steps in the attack itself.
 - [Microsoft - OAuth Redirection][microsoft-oauth]
 - [Microsoft - Redirect URI Best Practices][microsoft-redirect-uri]
 - [Microsoft Graph - oAuth2PermissionGrant][microsoft-oauth2-grant]
+- [Tech and me - SPO Management Shell ADAL Application][spo-adal-app]
 - [John Hammond - ConsentFix Video Walkthrough][hammond-video]
 
 [T1528]: https://attack.mitre.org/techniques/T1528/
@@ -381,4 +390,6 @@ records as steps in the attack itself.
   https://learn.microsoft.com/en-us/entra/identity-platform/reply-url
 [microsoft-oauth2-grant]:
   https://learn.microsoft.com/en-us/graph/api/resources/oauth2permissiongrant
+[spo-adal-app]:
+  https://www.techmikael.com/2017/08/a-workaround-to-support-switching.html
 [hammond-video]: https://www.youtube.com/watch?v=AAiiIY-Soak
