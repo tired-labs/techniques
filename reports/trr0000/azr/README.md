@@ -10,17 +10,14 @@
 | Platforms    | Azure             |
 | Contributors | Kyle Barboza      |
 
-
 ## Technique Overview
-
 
 OAuth authorization code phishing is a technique where an attacker abuses the
 OAuth authorization code flow to obtain authorization codes generated during a
 legitimate authentication process. In Microsoft Entra ID environments, an
 attacker can craft a malicious authorization request and distribute it through
 phishing or social engineering to convince a victim to initiate the OAuth
-authentication flow. 
-
+authentication flow.
 
 After the victim successfully authenticates and grants consent, the identity
 provider issues an authorization code and redirects the user's browser to the
@@ -251,7 +248,6 @@ inventory first-party service principals, review delegated permission grants,
 and examine which reply URLs and resources appear in sign-in activity for those
 applications.
 
-
 ## Procedures
 
 | ID            | Title      | Tactic            |
@@ -376,7 +372,6 @@ records as steps in the attack itself.
 - [Microsoft - OAuth Redirection][microsoft-oauth]
 - [Microsoft - Redirect URI Best Practices][microsoft-redirect-uri]
 - [Microsoft Graph - oAuth2PermissionGrant][microsoft-oauth2-grant]
-- [Tech and me - SPO Management Shell ADAL Application][spo-adal-app]
 - [John Hammond - ConsentFix Video Walkthrough][hammond-video]
 
 [T1528]: https://attack.mitre.org/techniques/T1528/
@@ -390,6 +385,4 @@ records as steps in the attack itself.
   https://learn.microsoft.com/en-us/entra/identity-platform/reply-url
 [microsoft-oauth2-grant]:
   https://learn.microsoft.com/en-us/graph/api/resources/oauth2permissiongrant
-[spo-adal-app]:
-  https://www.techmikael.com/2017/08/a-workaround-to-support-switching.html
 [hammond-video]: https://www.youtube.com/watch?v=AAiiIY-Soak
