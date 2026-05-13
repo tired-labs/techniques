@@ -232,7 +232,8 @@ with `rootDomains` set to one of 3 possible values:
 
 - all: UPN domain validation applied to all verified domains
 - enumerated: validation applied only to the listed domains
-- none: validation applied to no domains (the state prior to the Dec 2025 update)
+- none: validation applied to no domains (the state prior to the Dec 2025
+  update)
 
 Currently this can only be done via the Graph API:
 
@@ -485,12 +486,12 @@ versions are accepted.
 ## References
 
 - [Deep-dive to Azure Active Directory Identity Federation - AADInternals]
-- [Security vulnerability in Azure AD & Office 365 identity federation - AADInternals]
+- [Security vulnerability in Entra identity federation - AADInternals]
 - [Golden SAML - CyberArk]
 - [Golden SAML Revisited: The Solorigate Connection - CyberArk]
 - [Investigating identity threats in hybrid cloud environments - Microsoft]
 - [SAML 2.0 Bearer Assertion Profiles for OAuth 2.0 - RFC 7522]
-- [Microsoft identity platform and OAuth 2.0 SAML Bearer Assertion Flow - Microsoft Learn]
+- [Azure OAuth 2.0 SAML Bearer Assertion Flow - Microsoft Learn]
 - [SAML 2.0 Core Specification - OASIS]
 - [WS-Federation 1.2 Specification - OASIS]
 - [XML Signature Syntax and Processing - W3C]
@@ -513,12 +514,12 @@ versions are accepted.
 [T1606.002]: https://attack.mitre.org/techniques/T1606/002/
 
 [Deep-dive to Azure Active Directory Identity Federation - AADInternals]: https://aadinternals.com/post/aad-deepdive/
-[Security vulnerability in Azure AD & Office 365 identity federation - AADInternals]: https://aadinternals.com/post/federation-vulnerability/
+[Security vulnerability in Entra identity federation - AADInternals]: https://aadinternals.com/post/federation-vulnerability/
 [Golden SAML - CyberArk]: https://www.cyberark.com/resources/threat-research-blog/golden-saml-newly-discovered-attack-technique-forges-authentication-to-cloud-apps
 [Golden SAML Revisited: The Solorigate Connection - CyberArk]: https://www.cyberark.com/resources/threat-research-blog/golden-saml-revisited-the-solorigate-connection
 [Investigating identity threats in hybrid cloud environments - Microsoft]: https://www.microsoft.com/en-us/security/blog/2024/05/15/investigating-identity-threats-in-hybrid-cloud-environments/
 [SAML 2.0 Bearer Assertion Profiles for OAuth 2.0 - RFC 7522]: https://datatracker.ietf.org/doc/html/rfc7522
-[Microsoft identity platform and OAuth 2.0 SAML Bearer Assertion Flow - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity-platform/v2-saml-bearer-assertion
+[Azure OAuth 2.0 SAML Bearer Assertion Flow - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity-platform/v2-saml-bearer-assertion
 [SAML 2.0 Core Specification - OASIS]: https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf
 [WS-Federation 1.2 Specification - OASIS]: https://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation-1.2-spec-os.html
 [XML Signature Syntax and Processing - W3C]: https://www.w3.org/TR/xmldsig-core/
