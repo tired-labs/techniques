@@ -15,15 +15,16 @@
 This TRR covers the modification of Microsoft Entra ID federated domain trust
 configuration to register an attacker-controlled token-signing certificate. The
 modified trust enables the attacker's identity provider (IdP) to issue signed
-identity tokens that Entra accepts as valid for any user in the tenant.
+identity tokens that Entra accepts as valid for users in the tenant.
 
 The technique operates entirely against Entra ID's cloud-side configuration. It
 does not require compromise of any on-premises identity infrastructure (such as
 AD FS), and the attacker's IdP is hosted on attacker-controlled infrastructure.
 
 The use of a valid signing certificate to generate a SAML token is referred to
-as a 'Golden SAML' attack ([T1606.002]).[^1] This technique is one of the ways
-an attacker can position themselves for a Golden SAML attack in an Azure tenant.
+as a 'Golden SAML' attack ([T1606.002], [TRR0000]).[^1] This technique is one of
+the ways an attacker can position themselves for a Golden SAML attack in an
+Azure tenant.
 
 This technique maps to two MITRE ATT&CK IDs:
 
@@ -59,60 +60,11 @@ One can view custom and federated domains in an Entra tenant by using the
 `Get-MgDomain` and `Get-MgDomainFederationConfiguration` PowerShell cmdlets
 (part of the Microsoft.Graph module).
 
-### Per-domain Redirection, Tenant-wide Trust
+### Federated Domain Configuration Object
 
-Federation in Entra has two distinct scopes that operate independently:
-
-#### Per-domain Sign-in Redirection
-
-When a user attempts an interactive sign-in with a UPN in a federated domain
-(e.g., `alice@contoso.com`), Entra redirects that user to the IdP configured for
-`contoso.com`. Users in other domains within the same tenant are not redirected
-to that IdP, they are redirected to whichever IdP their own domain is federated
-with, or if their domain is `Managed` they authenticate against Entra directly.
-
-#### Tenant-wide Token Issuing Trust
-
-Once an IdP is registered as the federation provider for a domain in the tenant,
-Entra will trust signed tokens from that IdP for any user in the tenant. When a
-token is submitted to Entra, the signature is validated against the federation
-configurations registered in the tenant - any registered IdP's certificate is
-acceptable. The user is then identified by matching the token's `NameId` claim
-to an `ImmutableId` in Entra, with no constraint that the user belong to the
-federated domain the token came from.
-
-There is no check that links a token's issuing IdP to the domain of the user
-being authenticated. The domain on the federation configuration controls only
-*redirection during interactive sign-in*; it does not constrain *which users the
-IdP can vouch for* via direct token submission. An attacker who federates a
-domain they own (e.g., `attacker-evil-corp.com`) can forge tokens for any user
-in that tenant even though the attacker's domain has no relationship to those
-users.
-
-This includes:
-
-- Users in other federated domains (whose own domain federates to a different
-  IdP)
-- Users in `Managed` (non-federated) domains
-- Cloud-only users (`@<tenant>.onmicrosoft.com`) who have an `ImmutableId`
-- External / guest users who have an `ImmutableId`
-
-> [!NOTE]
->
-> Not all Entra users have an `ImmutableId` by default. For users synced from
-> on-premises Active Directory, `ImmutableId` is populated automatically and
-> corresponds to the on-prem object's `objectGUID` (or a configured anchor). For
-> cloud-only and guest users, the attribute is `null` by default. Attackers have
-> worked around this limitation by manually adding an `ImmutableId` to a
-> cloud-only user (often a high-privilege one). This requires
-> `User.ReadWrite.All` permissions, typically held by `User Administrator`,
-> `Global Administrator`, etc. It can be done via the MS Graph cmdlet
-> `Update-MgUser -UserId "user@yourdomain.com" -OnPremisesImmutableId
-> "Base64StringValue=="`
-
-### Federation configuration object
-
-A federated domain's configuration includes the following fields:
+When a federated domain is configured in Entra, an
+`internalDomainFederation`[^4] object is created that includes the following
+fields:
 
 - `IssuerUri` - identifier of the IdP. Must match the `Issuer` claim in
   tokens.
@@ -127,6 +79,66 @@ A federated domain's configuration includes the following fields:
 - `PreferredAuthenticationProtocol` - `wsfed` or `saml`.
 - `federatedIdpMfaBehavior` - controls whether Entra accepts MFA claims
   from the federated IdP.
+
+### Federated Authentication
+
+When a user attempts an interactive sign-in with a UPN in a federated domain
+(e.g., `alice@contoso.com`), Entra redirects the user to the `ActiveSignInUri`
+from the corresponding domain's configuration object to authenticate. The IdP
+authenticates the user, provides them with a token signed with the IdP's signing
+certificate, and redirects them back to Entra. For users in `Managed` domains,
+Entra handles the authentication directly.
+
+It is also possible for the IdP to initiate an authentication flow for the user
+(as opposed to the user being redirected to the IdP from Entra). When a token is
+submitted to Entra, the token is validated via the following steps:
+
+1. Parse the request
+2. Identify the federation realm by matching the token's `Issuer` against the
+   `IssuerUri` values in all domain configuration objects across the tenant
+3. Validate the token signature against the public certificate in the
+   matching federation configuration
+4. Validate the timestamp window (`NotBefore` to `NotOnOrAfter`)
+5. Validate the audience (must be `urn:federation:MicrosoftOnline`)
+6. Resolve the user by matching the token's `NameID` against the `ImmutableId`
+   attributes on users in the tenant directory
+7. Verify that the domain in the user's UPN matches the federated domain.
+
+Absent from the validation process is cross-checking the token's
+`UserPrincipalName` claim against the resolved user object.
+
+> [!NOTE]
+>
+> Not all Entra users have an `ImmutableId` by default. For users synced from
+> on-premises Active Directory, `ImmutableId` is populated automatically and
+> corresponds to the on-prem object's `objectGUID` (or a configured anchor). For
+> cloud-only and guest users, the attribute is `null` by default. Attackers have
+> worked around this limitation by manually adding an `ImmutableId` to a
+> cloud-only user (often a high-privilege one). This requires
+> `User.ReadWrite.All` permissions, typically held by `User Administrator`,
+> `Global Administrator`, etc. It can be done via the MS Graph cmdlet
+> `Update-MgUser -UserId "user@yourdomain.com" -OnPremisesImmutableId
+> "Base64StringValue=="`
+
+#### A Note on Federated Authentication Scope
+
+Microsoft recently added an additional step in the federated token validation
+process.[^5] Step 7 above - cross-checking the federated domain's domain name
+against the user's UPN domain - was added in December 2025 and will be in force
+for all tenants by August 2026. Prior to this change, a federated domain's
+identity provider could issue tokens for *any* user in the tenant that had an
+`ImmutableId`, including cloud-only accounts, guest accounts, and users
+federated to another domain. The new default behavior significantly decreases
+the blast radius of this attack technique.
+
+While Microsoft strongly discourages it, tenant owners can exclude domains from
+this additional validation step by adding a `federatedTokenValidationPolicy`[^4]
+with `rootDomains` set to one of 3 possible values:
+
+- all: UPN domain validation applied to all verified domains
+- enumerated: validation applied only to the listed domains
+- none: validation applied to no domains (the state prior to the Dec 2025
+  update)
 
 ### Domain lifecycle in Entra
 
@@ -232,8 +244,7 @@ compromised). They publish the verification TXT or MX record at the DNS
 authority for the domain and then invoke verification, which Entra confirms via
 DNS query. With the domain verified, the attacker changes its authentication
 type to 'Federated' and writes the federation configuration with their own
-signing certificate, allowing them to generate tokens for all users in the
-tenant.
+signing certificate, allowing them to generate tokens for users in the tenant.
 
 This procedure has the same terminal operation as Procedure A but adds three
 preceeding operations - adding the domain, verifying it, and setting the
@@ -241,9 +252,12 @@ authentication type. (Publishing the DNS record needed to verify the domain
 occurs at the attacker's DNS authority and is not observable from within the
 victim's Entra tenant.)
 
-The new domain does not need to resemble or relate to any existing domain in the
-tenant. Because federation trust is tenant-wide, an arbitrarily-named attacker
-domain is sufficient to enable token forgery for any user in the tenant.
+> [!NOTE]
+>
+> Following the August 2026 enforcement of user-to-domain validation, this procedure
+> has a much smaller blast radius than it had previously. An attacker performing
+> this procedure may also add a `federatedTokenValidationPolicy` to disable
+> validation for the domains they wish to target.
 
 #### Detection Data Model
 
@@ -278,6 +292,8 @@ occurs at an external location and is not observable from within the tenant.
 [^1]: [Golden SAML Attack - CyberArk]
 [^2]: [Guidance On Recent Nation State Attacks (SolarWinds) - Microsoft]
 [^3]: [Octo Tempest - Microsoft]
+[^4]: [internaldomainfederation - Microsoft Learn]
+[^5]: [Changes to federatedTokenValidationPolicy - M365Admin]
 
 [T1484.002]: https://attack.mitre.org/techniques/T1484/002/
 [T1556.007]: https://attack.mitre.org/techniques/T1556/007/
@@ -298,3 +314,4 @@ occurs at an external location and is not observable from within the tenant.
 [AADInternals FederatedIdentityTools - GitHub]: https://github.com/Gerenios/AADInternals/blob/master/FederatedIdentityTools.ps1
 [Golden SAML Attack - CyberArk]: https://www.cyberark.com/resources/threat-research-blog/golden-saml-newly-discovered-attack-technique-forges-authentication-to-cloud-apps
 [Guidance On Recent Nation State Attacks (SolarWinds) - Microsoft]: https://www.microsoft.com/en-us/msrc/blog/2020/12/customer-guidance-on-recent-nation-state-cyber-attacks
+[internaldomainfederation - Microsoft Learn]: https://learn.microsoft.com/en-us/graph/api/resources/internaldomainfederation?view=graph-rest-1.0
