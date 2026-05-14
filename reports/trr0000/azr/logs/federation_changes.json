@@ -1,0 +1,95 @@
+{
+        "category": "DirectoryManagement",
+        "correlationId": "f4c7d5e6-b172-466a-b53e-8278f1fb6127",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Set domain authentication",
+        "activityDateTime": "2026-05-07T19:42:38.9671039Z",
+        "loggedByService": "Core Directory",
+        "operationType": "Update",
+        "userAgent": "",
+        "performedBy": null,
+        "initiatedBy": {
+            "app": null,
+            "linkableIdentifiers": null,
+            "user": {
+                "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "displayName": null,
+                "userPrincipalName": "Admin@xxxxxx.onmicrosoft.com",
+                "ipAddress": "1.2.3.4",
+                "userType": null,
+                "agentType": "notAgentic",
+                "homeTenantId": null,
+                "homeTenantName": null
+            }
+        },
+        "targetResources": [
+            {
+                "id": null,
+                "displayName": "test.tired-labs.org",
+                "type": null,
+                "userPrincipalName": null,
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "LiveType",
+                        "oldValue": "[\"Federated\"]",
+                        "newValue": "[\"Managed\"]"
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"LiveType\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Linux; Ubuntu 24.04.4 LTS; en-US) PowerShell/7.6.1"
+            }
+        ]
+    },
+    {
+        "category": "DirectoryManagement",
+        "correlationId": "4a513716-d7a0-4aef-9c34-3221e393abab",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Set federation settings on domain",
+        "activityDateTime": "2026-05-07T19:57:51.9573345Z",
+        "loggedByService": "Core Directory",
+        "operationType": "Add",
+        "userAgent": "",
+        "performedBy": null,
+        "initiatedBy": {
+            "app": null,
+            "linkableIdentifiers": null,
+            "user": {
+                "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "displayName": null,
+                "userPrincipalName": "Admin@xxxxxx.onmicrosoft.com",
+                "ipAddress": "1.2.3.4",
+                "userType": null,
+                "agentType": "notAgentic",
+                "homeTenantId": null,
+                "homeTenantName": null
+            }
+        },
+        "targetResources": [
+            {
+                "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "displayName": "MSFT",
+                "type": "Directory",
+                "userPrincipalName": null,
+                "groupType": null,
+                "modifiedProperties": []
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "User-Agent",
+                "value": "Mozilla/5.0 (Linux; Ubuntu 24.04.4 LTS; en-US) PowerShell/7.6.1"
+            }
+        ]
+    },
