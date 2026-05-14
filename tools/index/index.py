@@ -27,11 +27,50 @@ def parse_proc_table(proc_table):
            procs[elements[1].split(".")[-1].strip()] = elements[2].strip()
     return procs
 
+def parse_test_table(test_table, ref_links):
+    tests = {}
+    for line in test_table[3:]:
+        if len(line) != 0:
+            elements = line.split("|")
+            letter = elements[1].split(".")[-1].strip()
+            link_field = elements[2].strip()
+
+            if not link_field or link_field.lower() == "none":
+                tests[letter] = None
+            else:
+                # Pattern: [text][ref-key]
+                match = re.match(r'\[([^\]]+)\]\[([^\]]+)\]', link_field)
+                if match:
+                    text = match.group(1)
+                    ref_key = match.group(2).lower()
+                else:
+                    # Pattern: [text]
+                    match = re.match(r'\[([^\]]+)\]', link_field)
+                    if match:
+                        text = match.group(1)
+                        ref_key = text.lower()
+                    else:
+                        text = link_field
+                        ref_key = None
+
+                url = ref_links.get(ref_key) if ref_key else None
+                tests[letter] = {"text": text, "url": url}
+    return tests
+
 def parse_trr_meta(TRR_path):
     TRR_dict = {}  #dict to hold all the values parsed from the TRR meta
-    
-    #file_path = os.path.join(DID_path, "README.md")
-    file = open(TRR_path, "r")
+
+    with open(TRR_path, "r") as f:
+        content = f.read()
+
+    # Build reference link dictionary from the whole file
+    # Markdown ref format: [key]: https://url
+    ref_links = {}
+    for m in re.finditer(r'^\[([^\]]+)\]:\s+(\S+)', content, re.MULTILINE):
+        ref_links[m.group(1).lower()] = m.group(2)
+
+    import io
+    file = io.StringIO(content)
 
     #Parse the TRR README.md line by line
     for line in file:
@@ -83,7 +122,20 @@ def parse_trr_meta(TRR_path):
 
             proc_dict = parse_proc_table(proc_table) #load all the data from the procedures table into the dict
             TRR_dict['procedures'] = proc_dict
-    
+
+            # The while loop above may have stopped at a ### subsection header.
+            # Advance until we find the next level-2 (## ) section header.
+            while not proc_line.startswith("## "):
+                proc_line = next(file)
+
+            if proc_line.strip() == "## Available Emulation Tests":
+                test_table = []
+                test_line = next(file)
+                while not test_line.startswith("##"):
+                    test_table.append(test_line.strip())
+                    test_line = next(file)
+                TRR_dict['tests'] = parse_test_table(test_table, ref_links)
+
     return(TRR_dict)
 
 def update_index(trr_dict, index):
@@ -101,6 +153,8 @@ def update_index(trr_dict, index):
             trr['platforms'] = trr_dict['platforms']
             trr['procedures'] = trr_dict['procedures']
             trr['tactics'] = trr_dict['tactics']
+            if 'tests' in trr_dict:
+                trr['tests'] = trr_dict['tests']
 
     if not found_id:  #ID isn't in index already, add it
         #add a publication date
