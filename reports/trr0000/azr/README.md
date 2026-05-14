@@ -254,10 +254,10 @@ victim's Entra tenant.)
 
 > [!NOTE]
 >
-> Following the August 2026 enforcement of user-to-domain validation, this procedure
-> has a much smaller blast radius than it had previously. An attacker performing
-> this procedure may also add a `federatedTokenValidationPolicy` to disable
-> validation for the domains they wish to target.
+> Following the August 2026 enforcement of user-to-domain validation, this
+> procedure has a much smaller blast radius than it had previously. An attacker
+> performing this procedure may also add a `federatedTokenValidationPolicy` to
+> disable validation for the domains they wish to target.
 
 #### Detection Data Model
 
