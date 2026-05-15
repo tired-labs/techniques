@@ -78,7 +78,7 @@ fields:
   Entra.
 - `PreferredAuthenticationProtocol` - `wsfed` or `saml`.
 - `federatedIdpMfaBehavior` - controls whether Entra accepts MFA claims
-  from the federated IdP.
+  from the federated IdP. (Default is `acceptIfMfaDoneByFederatedIdp`.)
 
 ### Federated Authentication
 
@@ -181,8 +181,10 @@ These are held by the following built-in roles:
 | Global Administrator | X | X |
 | Hybrid Identity Administrator | X | X |
 | Partner Tier 2 Support | X | X |
-| Domain Name Administrator | X | |
+| Domain Name Administrator | X | X |
 | External Identity Provider Administrator | | X |
+| Domain.ReadWrite.All (Application) | X | |
+| Security Administrator | | X |
 
 ### API surfaces
 
@@ -191,8 +193,8 @@ one remains available.
 
 - **MS Graph** - Used by `Update-MgDomainFederationConfiguration` and
   `New-MgDomainFederationConfiguration`.
-- **Azure AD Graph** - Retired June 2025. Used by AADInternals.
-- **MSOnline V1 Provisioning API** - Retired March 2024. Used by MSOnline's
+- **Azure AD Graph** - Retired August 2025. Used by AADInternals.
+- **MSOnline V1 Provisioning API** - Retired May 2024. Used by MSOnline's
   `Set-MsolDomainAuthentication`.
 
 ### Telemetry
@@ -268,10 +270,10 @@ occurs at an external location and is not observable from within the tenant.
 
 ## Available Emulation Tests
 
-| ID            | Link |
-|---------------|------|
-| TRR0000.AZR.A |      |
-| TRR0000.AZR.B |      |
+| ID | Link |
+| ------------- | ------ |
+| TRR0000.AZR.A | [Atomic Test] |
+| TRR0000.AZR.B | |
 
 ## References
 
@@ -315,3 +317,4 @@ occurs at an external location and is not observable from within the tenant.
 [Golden SAML Attack - CyberArk]: https://www.cyberark.com/resources/threat-research-blog/golden-saml-newly-discovered-attack-technique-forges-authentication-to-cloud-apps
 [Guidance On Recent Nation State Attacks (SolarWinds) - Microsoft]: https://www.microsoft.com/en-us/msrc/blog/2020/12/customer-guidance-on-recent-nation-state-cyber-attacks
 [internaldomainfederation - Microsoft Learn]: https://learn.microsoft.com/en-us/graph/api/resources/internaldomainfederation?view=graph-rest-1.0
+[Atomic Test]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1484.002/T1484.002.md
