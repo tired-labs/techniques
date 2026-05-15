@@ -1,0 +1,162 @@
+ {
+        "id": "4ee4b8ee-cea9-4d0a-b6ae-b41ff1cf0100",
+        "createdDateTime": "2026-05-12T17:45:46Z",
+        "userDisplayName": "Bob Watkins",
+        "userPrincipalName": "bobw@test.tired-labs.org",
+        "userId": "f61432e5-863c-4071-b70a-75f9b48f4de6",
+        "appId": "1950a258-227b-4e31-a9cf-717495945fc2",
+        "appDisplayName": "Microsoft Azure PowerShell",
+        "ipAddress": "1.2.3.4",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Mobile Apps and Desktop clients",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "correlationId": "31065e32-ae3c-466b-ba21-fa389f6caeba",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "4ee4b8ee-cea9-4d0a-b6ae-b41ff1cf0100",
+        "isInteractive": true,
+        "tokenIssuerName": "",
+        "tokenIssuerType": "AzureAD",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 180,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Microsoft Graph",
+        "resourceId": "00000003-0000-0000-c000-000000000000",
+        "resourceTenantId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "homeTenantId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "homeTenantName": "",
+        "authenticationMethodsUsed": [],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "",
+        "signInIdentifierType": null,
+        "servicePrincipalName": null,
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": null,
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 7922,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": null,
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "7rjkTqnOCk22rrQf8c8BAA",
+        "incomingTokenType": "saml11",
+        "authenticationProtocol": "none",
+        "resourceServicePrincipalId": "da144347-e41e-4882-93fd-666205d7808b",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": "",
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000",
+            "1b912ec3-a9dd-4c4d-a53e-76aa7adb28d7",
+            "00000002-0000-0ff1-ce00-000000000000",
+            "00000003-0000-0ff1-ce00-000000000000"
+        ],
+        "sessionId": "004e27ea-686a-ddf9-bd17-c3a526024e8c",
+        "appOwnerTenantId": "f8cdef31-a31e-4b4a-93e4-5f571e91255a",
+        "resourceOwnerTenantId": "f8cdef31-a31e-4b4a-93e4-5f571e91255a",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": "",
+            "agentSubjectType": "notAgentic",
+            "agentSubjectParentId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "",
+            "displayName": "",
+            "operatingSystem": "Windows10",
+            "browser": "Chrome 120.0.0",
+            "isCompliant": false,
+            "isManaged": false,
+            "trustType": null
+        },
+        "location": {
+            "city": "Cherry Hill",
+            "state": "New Jersey",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 39.90709,
+                "longitude": -74.99649
+            }
+        },
+        "appliedConditionalAccessPolicies": [
+            {
+                "id": "SecurityDefaults",
+                "displayName": "Security Defaults",
+                "enforcedGrantControls": [],
+                "enforcedSessionControls": [],
+                "sessionControlsNotSatisfied": [],
+                "result": "success",
+                "conditionsSatisfied": "application,users",
+                "conditionsNotSatisfied": "none",
+                "authenticationStrength": null,
+                "includeRulesSatisfied": [
+                    {
+                        "conditionalAccessCondition": "application",
+                        "ruleSatisfied": "allApps"
+                    },
+                    {
+                        "conditionalAccessCondition": "users",
+                        "ruleSatisfied": "allUsers"
+                    }
+                ],
+                "excludeRulesSatisfied": []
+            }
+        ],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Federation certificate thumbprint",
+                "value": "A547055EF5CBBE06C7F18F60B021E18724D997C0"
+            },
+            {
+                "key": "Is Legacy Store Used",
+                "value": "0"
+            },
+            {
+                "key": "Legacy Store Use Information",
+                "value": ""
+            },
+            {
+                "key": "Oauth Scope Info",
+                "value": "[\"Application.ReadWrite.All\",\"AppRoleAssignment.ReadWrite.All\",\"AuditLog.Read.All\",\"DelegatedPermissionGrant.ReadWrite.All\",\"Directory.AccessAsUser.All\",\"Group.ReadWrite.All\",\"User.Read.All\"]"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": null
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": null,
+            "federatedTokenId": null,
+            "federatedTokenIssuer": null
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": 1002
+        }
+    },
