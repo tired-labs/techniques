@@ -101,8 +101,8 @@ Browser          Service              Entra              AD FS
  |  (user authenticates, AD FS signs SAML 1.1)             |
  |<-HTML auto-POST form (wresult=signed RSTR)--------------|
  |---POST /login.srf------------------>|                   |
- |  (Entra validates signature, resolves user)             |
- |<-302 + Set-Cookie ESTSAUTH----------|                   |
+ |  (Entra validation and additional posssible exchanges   |
+ |<-200 + Set-Cookie ESTSAUTH----------|                   |
  |---GET--------->|                    |                   |
  |<-200 service---|                    |                   |
 ```
