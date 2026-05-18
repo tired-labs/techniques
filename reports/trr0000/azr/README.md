@@ -142,7 +142,7 @@ user's behalf. The steps of the flow are:
 
 1. The service has previously obtained a signed SAML assertion for the user,
    typically via an upstream SSO event with the user's federated IdP. The
-   service needs an access token for a Microsoft API (e.g., Graph.
+   service needs an access token for a Microsoft API (e.g., Graph).
 2. The service POSTs to `https://login.microsoftonline.com/common/oauth2/token`
    with:
 
