@@ -64,7 +64,7 @@ authentication flow is:
 2. The service determines the user is unauthenticated and redirects the browser
    to `https://login.microsoftonline.com/...` with the service identified as the
    relying party.
-3. Entra inspects the user's User Prinicpal Name (UPN) domain. If the domain is
+3. Entra inspects the user's User Principal Name (UPN) domain. If the domain is
    federated, Entra issues a 302 redirect to the federated Identity Provider
    (IdP)'s WS-Federation sign-in URL (e.g., `https://sts.contoso.com/adfs/ls/`)
    with the WS-Fed parameters:
@@ -101,7 +101,7 @@ Browser          Service              Entra              AD FS
  |  (user authenticates, AD FS signs SAML 1.1)             |
  |<-HTML auto-POST form (wresult=signed RSTR)--------------|
  |---POST /login.srf------------------>|                   |
- |  (Entra validation and additional posssible exchanges   |
+ |  (Entra validation and additional possible exchanges   |
  |<-200 + Set-Cookie ESTSAUTH----------|                   |
  |---GET--------->|                    |                   |
  |<-200 service---|                    |                   |
@@ -118,7 +118,7 @@ Once the session has been established, the attacker can subsequently:
 
 #### Browser-Initiated SAML 2.0 Sign-in
 
-The SAML authenication flow follows the same pattern as WS-Fed, except it uses
+The SAML authentication flow follows the same pattern as WS-Fed, except it uses
 SAML tokens and Entra's SAML endpoints. This flow is used when the federated IdP
 is configured for SAML 2.0 SP-Lite rather than WS-Fed (common with non-Microsoft
 IdPs like Okta, PingFederate, or third- party SAML providers).
@@ -217,7 +217,7 @@ Absent from the validation process is cross-checking the token's
 
 #### A Note on Federated Authentication Scope
 
-Microsoft recently added an additional step in the federated token validaiton
+Microsoft recently added an additional step in the federated token validation
 process.[^3] Step 7 above - cross-checking the federated domain's domain name
 against the user's UPN domain - was added in December 2025 and will be in force
 for all tenants by August 2026. Prior to this change, a federated domain's
@@ -311,8 +311,7 @@ The token is a SAML 1.1 assertion wrapped in a
     <wsu:Expires>...</wsu:Expires>
   </t:Lifetime>
   <wsp:AppliesTo>
-    <wsa:EndValidate
-TokenpointReference>
+    <wsa:EndpointReference>
       <wsa:Address>urn:federation:MicrosoftOnline</wsa:Address>
     </wsa:EndpointReference>
   </wsp:AppliesTo>
@@ -349,8 +348,8 @@ TokenpointReference>
 </t:RequestSecurityTokenResponse>
 ```
 
-The signature in WS-Fed wraps the inner SAML 1.1 assertion. Same XMLDSig
-mechanism, same enveloped pattern.
+The signature in WS-Fed wraps the inner SAML 1.1 assertion, using the 
+same XMLDSig mechanism and same enveloped pattern.
 
 #### MFA Bypass via Claim Inclusion
 
