@@ -16,7 +16,9 @@ This TRR covers file-based web shells executed through IIS handler mappings on
 Windows. ASP.NET Core is excluded because IIS acts as a reverse proxy to Kestrel
 rather than executing code through its own handler pipeline. PHP via FastCGI is
 similarly excluded as requests are handed off to `php-cgi.exe` outside the IIS
-execution model.
+execution model. IIS module deployments (`App_Code\` source files or `Bin\`
+DLLs registered as `IHttpModule` or `IHttpHandler`) are covered by [T1505.004]
+regardless of delivery and are out of scope for this TRR.
 
 ## Technique Overview
 
@@ -39,13 +41,16 @@ implementation.
 #### `HTTP.sys`
 
 All HTTP/HTTPS traffic destined for IIS passes through `HTTP.sys`, a kernel-mode
-driver that listens on configured ports (typically 80 and 443). `HTTP.sys`
+driver that listens on configured ports (80 and 443 by default). `HTTP.sys`
 handles connection management, caching, and request routing. When a request
 requires application code, `HTTP.sys` routes it to the appropriate application
 pool based on site bindings. The Windows Process Activation Service (`WAS`)
 mediates between `HTTP.sys` and the worker process, managing application pool
 lifecycle and process activation. `HTTP.sys` and `WAS` operate at the kernel and
-system service level respectively, below the reach of most telemetry sources.
+system-service level respectively. `HTTP.sys` request routing is observable
+via the `Microsoft-Windows-HttpService` ETW provider (Event 1 `RecvReq`,
+Event 3 `Deliver`), but this provider is not captured by a default-enabled
+host log.
 
 #### Application Pools
 
@@ -62,8 +67,8 @@ has.
 
 #### The IIS Worker Process (`w3wp.exe`)
 
-The worker process `w3wp.exe` is the most important component for understanding
-web shell execution. It loads and executes requested files using the appropriate
+The worker process `w3wp.exe` hosts web shell execution. It loads and executes
+requested files using the appropriate
 scripting engine, runs under the application pool's identity, and can spawn
 child processes.
 
@@ -90,23 +95,31 @@ service is present on a default IIS installation; each must be explicitly
 enabled under Application Development Features in the IIS role configuration.
 
 IIS also supports Server-Side Includes (SSI) via `ssinc.dll`. If enabled, files
-with extensions `.shtml`, `.stm`, and `.shtm` can execute directives such as
-`<!--#exec cmd="command">`. The `#exec cmd=` directive spawns a child process
-and follows the same essential operations as [Procedure A]. Other SSI directives
-(`#include`, `#echo`) are handled internally by `ssinc.dll` without passing
-through a scripting engine. Although these operate in-process, they do not map
-to [Procedure B] because `ssinc.dll` performs predefined operations with
+with extensions `.shtml`, `.stm`, and `.shtm` are processed by `ssinc.dll`. The
+`#exec cmd=` directive is disabled on IIS 7.0 and later - attempting it
+produces the error "The CMD option is not enabled for #EXEC calls." Only
+`#exec cgi=` remains available on IIS 7+, and it routes through the CGI model
+that is out of scope for this TRR. The remaining SSI directives (`#include`,
+`#echo`) are handled internally by `ssinc.dll` without passing through a
+scripting engine. Although these operate in-process, they do not map to
+[Procedure B] because `ssinc.dll` performs predefined operations with
 attacker-controlled parameters - it does not interpret or execute
 attacker-authored code. [Procedure B] requires arbitrary code execution through
 a scripting engine within `w3wp.exe`.
 
-For a web shell to execute, its file extension must match a handler mapping that
-routes the request to an executable handler rather than serving it as static
-content. The requirement that a request match a handler mapping is an essential
-operation in the pipeline - it cannot be skipped. However, the mappings
-themselves are configurable. When an attacker modifies handler mappings through
-`web.config` to route additional extensions through executable handlers, the
-essential operations change - this is covered in [Procedure C].
+For a file-based web shell to execute through its file extension, that extension
+must match a handler mapping that routes the request to an executable handler
+rather than serving it as static content. The requirement that a request match
+an executable handler mapping is an essential operation in the file-based script
+pipeline these procedures model. However, the mappings themselves are
+configurable. When an attacker modifies handler mappings through `web.config` to
+route additional extensions through executable handlers, the essential
+operations change - this is covered in [Procedure C].
+
+HTTP modules deployed via `App_Code\` source or `Bin\` DLLs execute earlier in
+the Integrated pipeline (at `BeginRequest`, before handler resolution); module
+deployments do not fit the file-based script model and are outside the scope of
+the procedures here.
 
 ### ASP vs. ASP.NET Execution
 
@@ -116,7 +129,7 @@ Classic ASP files (`.asp`) are interpreted directly by `asp.dll` inside
 ASP.NET files (`.aspx`) undergo a compilation step. On first request, the
 ASP.NET engine compiles the source into a .NET assembly (DLL) stored in
 `C:\Windows\Microsoft.NET\Framework64\<version>\Temporary ASP.NET Files\`. On
-.NET Framework 4.8, this compilation spawns `csc.exe` as a child process of
+.NET Framework, this compilation spawns `csc.exe` as a child process of
 `w3wp.exe`.
 
 The compilation produces several artifacts in `Temporary ASP.NET Files`: a
@@ -140,7 +153,7 @@ files. A `web.config` placed in any web-accessible directory overrides IIS
 settings for that directory and its subdirectories.
 
 An attacker who can write a `web.config` can manipulate handler mappings in two
-ways. First, they can add a custom handler mapping that routes a normally static
+ways. First, they can add a custom handler mapping that routes a static
 extension (`.jpg`, `.txt`, `.png`) through the ASP.NET engine, then place a web
 shell with that extension. Second, they can define an inline `IHttpHandler`
 within the `web.config` itself - no separate script file needed.
@@ -189,14 +202,32 @@ ASP.NET Files\<app>\<hash>\assembly\dl3\` at load time, which is a file creation
 event. This variant requires both a `web.config` handler entry and write access
 to the `bin/` directory.
 
-### IIS Application Initialization
+### Auto-Execution Triggers
 
-IIS Application Initialization can be configured through `web.config` to send
+Two IIS features cause a deployed web shell to execute without an
+attacker-initiated client request.
+
+**Application Initialization** can be configured through `web.config` to send
 internal warmup requests to specified pages on app pool start, recycle, or
 reboot. If an attacker designates a web shell as a preload page, IIS will
 automatically trigger it on every lifecycle event - transforming the shell from
-a passive backdoor into one that auto-executes without an attacker-initiated
-request.
+a passive backdoor into one that auto-executes without an attacker request.
+IIS sets the `APP_WARMING_UP` server variable on these warmup requests to
+distinguish them from requests arriving from a client.
+
+**`global.asax`** in an ASP.NET application defines lifecycle handlers such as
+`Application_Start` and `Application_BeginRequest` on the `HttpApplication`
+class. `Application_Start` runs once when the application first initializes;
+`Application_BeginRequest` runs on every request the application processes. An
+attacker who can write to the application root can place arbitrary code in
+`global.asax` that executes on these triggers without any request to a separate
+shell file.
+
+Both auto-execution vectors reach code execution through the same pipeline as
+the procedures below. Whether the executing code spawns a child process
+([Procedure A]) or stays in-process ([Procedure B]) determines which procedure
+applies. Lifecycle-triggered executions originate inside IIS rather than from a
+client connection.
 
 ## Procedures
 
@@ -206,6 +237,17 @@ request.
 | TRR0000.WIN.B | Web Shell with In-Process Execution | Persistence |
 | TRR0000.WIN.C | Web Shell via `web.config` Manipulation | Persistence |
 
+All three procedures begin with a file-write prerequisite: the attacker either
+creates a new file in a web-accessible path or modifies an existing one. The
+two entry points produce asymmetric telemetry. `Sysmon 11 (FileCreate)` fires
+on file creation and overwrite but not on in-place modification such as
+appending to an existing file. In-place modification is observable only when
+File Integrity Monitoring is deployed or when a SACL on the web root emits
+`Win 4663 (SACL)`; neither is enabled by default. As a Persistence technique,
+subsequent invocations of a deployed shell do not touch the file-write
+prerequisites - they produce no file-prerequisite telemetry until the shell
+is replaced or modified.
+
 ### Procedure A: Web Shell with OS Command Execution
 
 This procedure covers all execution paths where a request processed by
@@ -214,33 +256,37 @@ is the defining characteristic that distinguishes this procedure from [Procedure
 B]. The delivery method for placing the malicious file on disk is tangential;
 the essential prerequisite is that the file exists in a web-accessible path.
 
-Three variants share this defining operation but differ in their handler path,
+Two variants share this defining operation but differ in their handler path,
 prerequisites, and upstream artifacts.
 
 In the ASP.NET variant, a malicious `.aspx`, `.ashx`, or `.asmx` file is
 processed by the ASP.NET engine, which requires the ASP.NET role service. On
-first request under .NET Framework 4.8, the engine compiles the source into an
+first request under .NET Framework, the engine compiles the source into an
 assembly, spawning `csc.exe` as a child process of `w3wp.exe`. This compilation
 produces artifacts in `Temporary ASP.NET Files` - a `.compiled` metadata file,
 the compiled assembly (`.dll`), intermediate C# source files (`.cs`), and
 compiler I/O files. After compilation, the web shell's code executes and spawns
 a command interpreter such as `cmd.exe` or `powershell.exe` with
-attacker-supplied arguments.
+attacker-supplied arguments. A minimal illustration:
+
+```aspx
+<%@ Page Language="C#" %>
+<% System.Diagnostics.Process.Start("cmd.exe", "/c " + Request["q"]); %>
+```
 
 In the Classic ASP variant, a malicious `.asp` file is interpreted by `asp.dll`
 inside `w3wp.exe`. The Classic ASP role service is not installed by default and
 is separate from the ASP.NET role service. No compilation step occurs and no
 artifacts are produced on disk from interpretation. The web shell spawns a child
-process through the same mechanism as the ASP.NET variant.
+process through the same mechanism as the ASP.NET variant, for example by
+instantiating `WScript.Shell` via COM:
 
-In the SSI variant, a file with a `.shtml`, `.stm`, or `.shtm` extension
-containing an `#exec cmd=` directive is parsed by `ssinc.dll`. The Server Side
-Includes role service must be installed. No scripting engine is involved -
-`ssinc.dll` processes the directive directly and spawns a child process to
-execute the command string. Attacker control is limited to the command string
-within the directive.
+```asp
+<% Set s = Server.CreateObject("WScript.Shell")
+   s.Run "cmd.exe /c " & Request("q"), 0, True %>
+```
 
-All three variants converge at the same essential operation: the child process
+Both variants converge at the same essential operation: the child process
 spawned by `w3wp.exe` executes the command and output is returned in the HTTP
 response.
 
@@ -250,11 +296,10 @@ response.
 
 File prerequisites feed into the shared pipeline (Route Request, Match Handler,
 Execute Code). Execute Code represents the handler processing the request within
-`w3wp.exe` - through a scripting engine for the ASP.NET and Classic ASP
-variants, and through `ssinc.dll` directive processing for the SSI variant. The
-distinguishing operation is Process Spawn from `w3wp.exe`, shared across all
-three variants. Compile ASPX is a sub-operation of Execute Code, relevant only
-to the ASP.NET variant.
+`w3wp.exe` through a scripting engine for both the ASP.NET and Classic ASP
+variants. The distinguishing operation is Process Spawn from `w3wp.exe`, shared
+across both variants. Compile ASPX is a sub-operation of Execute Code, relevant
+only to the ASP.NET variant.
 
 ### Procedure B: Web Shell with In-Process Execution
 
@@ -263,7 +308,20 @@ through Execute Code. The difference is that the web shell never spawns a child
 process - all operations occur within the `w3wp.exe` process. Examples include
 .NET framework APIs such as `System.IO.File.ReadAllText()` or
 `System.Net.WebClient`, and COM objects used for in-process operations such as
-`ADODB.Connection` or `Scripting.FileSystemObject`.
+`ADODB.Connection` or `Scripting.FileSystemObject`. A minimal illustration of
+an in-process file read:
+
+```aspx
+<%@ Page Language="C#" %>
+<% Response.Write(System.IO.File.ReadAllText(Request["f"])); %>
+```
+
+When the in-process variant is implemented as a source-form ASP.NET page
+(`.aspx`, `.ashx`, or `.asmx`), the first request triggers the same ASP.NET
+compilation step described in [Procedure A]'s ASP.NET variant - `csc.exe` is
+spawned as a child of `w3wp.exe` and produces artifacts in `Temporary ASP.NET
+Files`. The Classic ASP COM in-process variant does not compile and produces
+no compiler-related artifacts.
 
 The invocation method does not determine the procedure. COM objects that spawn
 child processes - such as `WScript.Shell.Run()` or `WScript.Shell.Exec()` - fall
@@ -272,19 +330,30 @@ the defining essential operation. The specific APIs or COM objects used are
 attacker-controlled and tangential. The side effects of those calls may produce
 telemetry depending on the action taken.
 
+On .NET Framework 4.8 with Windows 10 or Windows Server 2016 and later,
+in-memory assembly loads via the `Assembly.Load(byte[])` overload are submitted
+to AMSI through `AmsiScanBuffer`. A web shell that reflectively loads a
+byte-array assembly produces observable AMSI scan content. This is specific to
+that overload - it does not extend to the JIT, to general managed execution,
+or to the disk-loaded compiled `.aspx` assembly described above. The remaining
+in-process surface (in-process .NET COM interop, `System.IO`, disk-loaded code,
+and `asp.dll`-hosted Classic ASP scripts) is not observed by AMSI.
+
 SSI directives such as `#include` and `#echo` also operate without spawning a
 child process, but they do not map to this procedure. These directives perform
 predefined I/O operations within `ssinc.dll` - they do not execute
-attacker-authored code and do not reach the Process Spawn or Call .NET API
-operations in the pipeline.
+attacker-authored code and do not reach the Process Spawn or Perform In-Process
+Operation operations in the pipeline.
 
 #### Detection Data Model
 
 ![DDM - Web Shell with In-Process Execution](ddms/trr0000_win_b.png)
 
 Identical to [Procedure A] through Execute Code. Diverges at the final step:
-Call .NET API instead of Process Spawn. The Call .NET API operation has no
-direct telemetry - only its side effects may be observable.
+Perform In-Process Operation instead of Process Spawn. The reflective
+`Assembly.Load(byte[])` sub-case produces AMSI scan content; the remaining
+in-process surface is silent at this node and is observable only through
+downstream side effects.
 
 ### Procedure C: Web Shell via `web.config` Manipulation
 
@@ -294,9 +363,9 @@ chain in two ways: it enables non-standard file extensions to be routed through
 an executable handler, and in the inline `IHttpHandler` variant, it eliminates
 the separate script file prerequisite entirely.
 
-Three variants exist. In the custom handler mapping variant, the attacker writes
+Four variants exist. In the custom handler mapping variant, the attacker writes
 a `web.config` with both a handler mapping and build provider registration, then
-places a shell with a normally static extension. The build provider must be
+places a shell with a static extension. The build provider must be
 defined at the IIS Application level. In the inline handler variant, the
 attacker defines an `IHttpHandler` directly in the `web.config` - no separate
 file needed. In the pre-compiled DLL variant, the attacker places a compiled
@@ -304,6 +373,16 @@ file needed. In the pre-compiled DLL variant, the attacker places a compiled
 `web.config` handler registration; this bypasses `csc.exe` and standard
 compilation artifacts, though the CLR shadow copy into `Temporary ASP.NET
 Files\assembly\dl3\` still produces a file creation event.
+
+In the compiler-options variant, the attacker writes a subdirectory `web.config`
+that injects compiler arguments via `<system.web><compilation><compilers>`.
+These arguments are passed to `csc.exe` during ASP.NET dynamic compilation of
+source-form pages requested from the directory. Because the
+`system.web/compilation` section is not locked by default (unlike
+`system.webServer/handlers`), this variant operates from a subdirectory
+`web.config` without requiring an unlock of the handlers section. The injected
+compiler arguments execute as part of the `csc.exe` invocation, producing the
+same `Temporary ASP.NET Files` artifacts as a normal compilation.
 
 The write location prerequisite differs across variants. The custom handler
 mapping variant requires `web.config` at the IIS Application root because the
@@ -314,8 +393,11 @@ constraints and pipeline mode behavior documented in [Technical Background]. The
 pre-compiled DLL variant requires both a `web.config` with handler registration
 - which can be at subdirectory level, subject to the same locking and pipeline
 mode constraints - and write access to the application's `bin/` directory. The
-downstream pipeline operates the same as [Procedure A] and [Procedure B];
-post-execution behavior depends on the shell's code.
+compiler-options variant requires only a subdirectory `web.config` and a
+subsequent request to a source-form page in that directory; the locked
+`system.webServer/handlers` section is not touched. The downstream pipeline
+operates the same as [Procedure A] and [Procedure B]; post-execution behavior
+depends on the shell's code.
 
 Application Initialization can further enhance persistence by configuring IIS to
 auto-trigger the shell on app pool lifecycle events (see [Technical
@@ -333,7 +415,10 @@ Write Config feeds into Match Handler, reflecting its modification of handler
 matching. In the inline variant, Write Config is the sole prerequisite. In the
 custom handler mapping and pre-compiled DLL variants, it is accompanied by a
 file operation. The downstream pipeline and post-execution branches remain the
-same as [Procedure A] and [Procedure B].
+same as [Procedure A] and [Procedure B]. Compile ASPX is relevant for the
+source-form variants (custom handler mapping, inline, compiler-options); the
+pre-compiled DLL variant bypasses `csc.exe` and Compile ASPX is not on its
+active path.
 
 ## Available Emulation Tests
 
@@ -353,6 +438,11 @@ same as [Procedure A] and [Procedure B].
 - [Virtual Directories in IIS - Microsoft Learn]
 - [web.config Reference - Microsoft Learn]
 - [IIS Application Initialization - Microsoft Learn]
+- [HttpApplication Class - Microsoft Learn]
+- [HTTP Server API ETW Tracing - Microsoft Learn]
+- [AMSI Integration with Microsoft Defender Antivirus - Microsoft Learn]
+- [Assembly.Load Method - Microsoft Learn]
+- [What's New in .NET Framework 4.8 - Microsoft Learn]
 - [Server-Side Includes in IIS - Microsoft Learn]
 - [IHttpHandler Interface - Microsoft Learn]
 - [IIS Integrated Pipeline - Microsoft Learn]
@@ -382,6 +472,7 @@ same as [Procedure A] and [Procedure B].
 [Procedure B]: #procedure-b-web-shell-with-in-process-execution
 [Procedure C]: #procedure-c-web-shell-via-webconfig-manipulation
 [T1505.003]: https://attack.mitre.org/techniques/T1505/003/
+[T1505.004]: https://attack.mitre.org/techniques/T1505/004/
 [IIS Architecture Overview - Microsoft Learn]:
     https://learn.microsoft.com/en-us/iis/get-started/introduction-to-iis/introduction-to-iis-architecture
 [Handler Mappings in IIS - Microsoft Learn]:
@@ -398,6 +489,16 @@ same as [Procedure A] and [Procedure B].
     https://learn.microsoft.com/en-us/iis/configuration/
 [IIS Application Initialization - Microsoft Learn]:
     https://learn.microsoft.com/en-us/iis/configuration/system.webserver/applicationinitialization/
+[HttpApplication Class - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication
+[HTTP Server API ETW Tracing - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/windows/win32/http/scenario-1--http-timeout-example-using-etw-tracing-and-netsh-commands
+[AMSI Integration with Microsoft Defender Antivirus - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/defender-endpoint/amsi-on-mdav
+[Assembly.Load Method - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.load
+[What's New in .NET Framework 4.8 - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/dotnet/framework/whats-new/#introducing-net-framework-48
 [Server-Side Includes in IIS - Microsoft Learn]:
     https://learn.microsoft.com/en-us/iis/configuration/system.webserver/serversideinclude
 [IHttpHandler Interface - Microsoft Learn]:

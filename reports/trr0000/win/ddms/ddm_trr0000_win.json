@@ -133,9 +133,12 @@
         "y": 100
       },
       "caption": "Route Request",
-      "labels": [],
+      "labels": [
+        "Microsoft-Windows-HttpService 1 (RecvReq)",
+        "Microsoft-Windows-HttpService 3 (Deliver)"
+      ],
       "properties": {
-        "Process": "HTTP.sys → w3wp.exe"
+        "Process": "HTTP.sys -> w3wp.exe"
       },
       "style": {
         "border-color": "#000000"
@@ -183,7 +186,7 @@
         "Sysmon 1 (ProcessCreate)"
       ],
       "properties": {
-        "Process": "w3wp.exe → csc.exe",
+        "Process": "w3wp.exe -> csc.exe",
         "Artifact": "Temporary ASP.NET Files"
       },
       "style": {
@@ -217,8 +220,10 @@
         "x": 1280,
         "y": 240
       },
-      "caption": "Call .NET API",
-      "labels": [],
+      "caption": "Perform In-Process Operation",
+      "labels": [
+        "AMSI (AmsiScanBuffer)"
+      ],
       "properties": {
         "Process": "w3wp.exe (in-process)"
       },
