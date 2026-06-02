@@ -30,7 +30,7 @@ This technique maps to two MITRE ATT&CK IDs:
 
 - T1484.002 Domain or Tenant Policy Modification: Trust Modification, which
   includes modifications to federated domains.
-- T1556.007 Modify Authenication Process: Hybrid Identity, which includes trust
+- T1556.007 Modify Authentication Process: Hybrid Identity, which includes trust
   relationships between AD FS and Entra ID.
 
 ## Technique Overview
@@ -249,7 +249,7 @@ type to 'Federated' and writes the federation configuration with their own
 signing certificate, allowing them to generate tokens for users in the tenant.
 
 This procedure has the same terminal operation as Procedure A but adds three
-preceeding operations - adding the domain, verifying it, and setting the
+preceding operations - adding the domain, verifying it, and setting the
 authentication type. (Publishing the DNS record needed to verify the domain
 occurs at the attacker's DNS authority and is not observable from within the
 victim's Entra tenant.)
