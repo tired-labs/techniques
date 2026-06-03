@@ -4,7 +4,7 @@
 
 | Key          | Value                              |
 |--------------|------------------------------------|
-| ID           | TRR0000                            |
+| ID           | TRR0031                            |
 | External IDs | [T1484.002], [T1556.007]           |
 | Tactics      | Persistence, Defense Evasion       |
 | Platforms    | Azure                              |
@@ -22,7 +22,7 @@ does not require compromise of any on-premises identity infrastructure (such as
 AD FS), and the attacker's IdP is hosted on attacker-controlled infrastructure.
 
 The use of a valid signing certificate to generate a SAML token is referred to
-as a 'Golden SAML' attack ([T1606.002], [TRR0000]).[^1] This technique is one of
+as a 'Golden SAML' attack ([T1606.002], [TRR0031]).[^1] This technique is one of
 the ways an attacker can position themselves for a Golden SAML attack in an
 Azure tenant.
 
@@ -218,8 +218,8 @@ configuration must be queried from MS Graph after the event fires.
 
 | ID | Title | Tactic |
 | --- | --- | --- |
-| TRR0000.AZR.A | Modify existing federated domain | Persistence, Defense Evasion |
-| TRR0000.AZR.B | Add new federated domain | Persistence, Defense Evasion |
+| TRR0031.AZR.A | Modify existing federated domain | Persistence, Defense Evasion |
+| TRR0031.AZR.B | Add new federated domain | Persistence, Defense Evasion |
 
 ### Procedure A: Modify Existing Federated Domain
 
@@ -233,7 +233,7 @@ attacker's tokens are also accepted.
 
 #### Detection Data Model
 
-![DDM - Modify existing federated domain](ddms/trr0000_azr_a.png)
+![DDM - Modify existing federated domain](ddms/trr0031_azr_a.png)
 
 The procedure consists of a single essential operation: modifying the federation
 configuration of a verified, federated target domain.
@@ -263,7 +263,7 @@ victim's Entra tenant.)
 
 #### Detection Data Model
 
-![DDM - Add and federate new domain](ddms/trr0000_azr_b.png)
+![DDM - Add and federate new domain](ddms/trr0031_azr_b.png)
 
 The `Publish DNS Record` prerequisite is shown in gray to indicate that it
 occurs at an external location and is not observable from within the tenant.
@@ -272,8 +272,8 @@ occurs at an external location and is not observable from within the tenant.
 
 | ID | Link |
 | ------------- | ------ |
-| TRR0000.AZR.A | [Atomic Test] |
-| TRR0000.AZR.B | |
+| TRR0031.AZR.A | [Atomic Test] |
+| TRR0031.AZR.B | |
 
 ## References
 
