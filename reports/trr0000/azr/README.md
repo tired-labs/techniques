@@ -235,6 +235,8 @@ with `rootDomains` set to one of 3 possible values:
 - none: validation applied to no domains (the state prior to the Dec 2025
   update)
 
+Setting or changing a `federatedTokenValidationPolicy` requires the permission 
+`Policy.ReadWrite.AuthenticationMethod`, held only by Global Admin by default.
 Currently this can only be done via the Graph API:
 
 ```powershell
