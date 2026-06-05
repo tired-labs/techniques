@@ -469,5 +469,36 @@
     },
     "last_update": "2026-03-19",
     "pub_date": "2026-03-19"
+  },
+  {
+    "name": "Entra ID Federated Domain Trust Modification",
+    "id": "TRR0031",
+    "tactics": [
+      "Persistence",
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1484.002",
+      "T1556.007"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Modify existing federated domain",
+      "B": "Add new federated domain"
+    },
+    "tests": {
+      "A": {
+        "text": "Atomic Test",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1484.002/T1484.002.md"
+      },
+      "B": null
+    },
+    "last_update": "2026-06-03",
+    "pub_date": "2026-06-03"
   }
 ]
