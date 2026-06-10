@@ -27,6 +27,14 @@ token endpoint to obtain an access token representing the victim's identity,
 allowing access to APIs and services such as Microsoft Graph or Azure Resource
 Manager depending on the granted permissions.
 
+This technique is related to but distinct from the illicit consent grant
+technique (Microsoft's "Malicious Application Consent," AZT203). Illicit consent
+grant relies on the victim approving a malicious application and granting it
+permissions. This technique does not depend on that approval step. Instead, it
+abuses the OAuth authorization code flow directly, often leveraging trusted
+first-party applications, to capture an authorization code after the victim
+authenticates.
+
 ## Technical Background
 
 ### OAuth
@@ -36,9 +44,10 @@ OAuth is a foundational protocol used by modern identity platforms to enable
 grant an application limited access to resources without sharing credentials
 directly with the application.
 
-Instead of providing a password, the identity provider authenticates the user
-and issues **tokens that represent the user’s authorized permissions**. These
-tokens can then be used by the application to access APIs on behalf of the user.
+Instead of providing a password directly to the application, a separate
+identity provider authenticates the user and issues **tokens that represent the
+user’s authorized permissions**. These tokens can then be used by the
+application to access APIs on behalf of the user.
 
 In Microsoft Entra ID environments, OAuth is commonly used to authorize
 applications to access services such as:
@@ -62,28 +71,19 @@ provider for authentication. After the user successfully authenticates and
 grants consent, the identity provider issues a temporary **authorization code**.
 The client application then exchanges this code for an **access token**.
 
-```
-User
-  │
-  │ Authorization Request
-  ▼
-Authorization Endpoint
-  │
-  │ generates
-  ▼
-Authorization Code
-  │
-  │ redeemed
-  ▼
-Token Endpoint
-  │
-  │ issues
-  ▼
-Access Token
-  │
-  │ used to call
-  ▼
-API (Graph / Gmail / Slack)
+```mermaid
+sequenceDiagram
+    participant User
+    participant Client as Client Application
+    participant IdP as Identity Provider
+    participant API as Resource API (e.g. Microsoft Graph)
+
+    User->>IdP: Authorization request (authorization endpoint)
+    IdP->>IdP: Authenticate user and obtain consent
+    IdP-->>Client: Redirect with authorization code
+    Client->>IdP: Redeem code at token endpoint
+    IdP-->>Client: Issue access token
+    Client->>API: Call API with access token
 ```
 
 The authorization code is designed to be **short-lived** and is intended to be
@@ -116,7 +116,7 @@ https://login.microsoftonline.com/common/oauth2/v2.0/authorize
 &response_type=code
 &redirect_uri=http://localhost:3000/
 &response_mode=query
-&scope=https://management.azure.com/.default
+&scope=https://microsoft.sharepoint.com/.default
 &state=12345
 ```
 
@@ -203,6 +203,18 @@ as `OAuth2PermissionGrant` objects. When those grants already exist for the
 requested resource and scope, Entra ID does not show the user a new consent
 prompt because consent has already been granted in the tenant.
 
+These grants are enumerable through Microsoft Graph by an authenticated
+principal with directory read access. Listing `servicePrincipals` (filtered by
+`publisherName eq 'Microsoft'`) reveals first-party applications and their
+defined scopes, while `oauth2PermissionGrants` reveals which delegated consent
+grants already exist in the tenant. Reading these requires `Directory.Read.All`
+(or `Application.Read.All` for service principals) and, for delegated calls, a
+directory role such as Directory Readers or Global Reader. An attacker who
+already has such read access can use this to identify the first-party
+`client_id` values most likely to avoid a consent prompt. Many Microsoft
+first-party `client_id` values are also publicly documented, so this step is not
+strictly required to select a target application.
+
 In the context of this technique, first-party applications play a critical role
 by removing the need for a traditional consent prompt. The attacker is not
 registering a new application. Instead, they craft an authorization request that
@@ -273,7 +285,7 @@ https://login.microsoftonline.com/common/oauth2/v2.0/authorize
 &response_type=code  
 &redirect_uri=http://localhost:3000/  
 &response_mode=query  
-&scope=https://management.azure.com/.default  
+&scope=https://microsoft.sharepoint.com/.default  
 &state=12345
 ```
 
@@ -328,6 +340,16 @@ identifies a first-party app with an exploitable open redirect, wildcard reply
 URL, or other misconfigured reply URL that allows direct attacker collection,
 that path should be added as a distinct procedure.
 
+A second variant involves a malicious application impersonating first-party
+software. A trojanized client (for example, a tampered build of Visual Studio
+Code) could use the genuine first-party `client_id` and a registered `localhost`
+reply URL, receive the authorization code on the loopback listener, and then
+forward it to attacker-controlled infrastructure. This variant is not treated as
+a separate procedure here because the social engineering occurs earlier, when
+the victim is convinced to install the malicious software; once that trust is
+established the code collection no longer depends on the `localhost` redirect
+indicator central to this procedure.
+
 #### Detection Data Model
 
 ![DDM - Consent Fix](ddms/ddm_trr0000_consentfix.png)
@@ -362,7 +384,6 @@ records as steps in the attack itself.
 | ID            | Link |
 | ------------- | ---- |
 | TRR0000.AZR.A |      |
-
 
 ## References
 
