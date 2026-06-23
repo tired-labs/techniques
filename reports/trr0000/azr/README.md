@@ -216,7 +216,8 @@ parent resource plus the Monitoring Contributor role.
 An attacker holding the Security Administrator role (or another role with
 permission to write Entra diagnostic settings) modifies the tenant's
 `microsoft.aadiam` diagnostic setting to stop the export of Entra audit and
-sign-in logs to their long-term store. The attacker can either delete or modify the setting.
+sign-in logs to their long-term store. The attacker can either delete or modify
+the setting.
 
 #### Detection Data Model
 
@@ -272,7 +273,7 @@ the action.
 - [microsoft.aadiam/diagnosticSettings - ARM template reference]
 - [Azure Activity Log event schema - Microsoft Learn]
 - [Auditing Azure AD Diagnostics Setting Changes - Sam's Corner]
-- [Detect Azure AD Diagnostics Setting Changes In Microsoft Sentinel - Sam's Corner]
+- [Detect Azure AD Diagnostics Setting Changes - Sam's Corner]
 
 [^1]: [Learn about the audit logs in Microsoft Entra ID - Microsoft Learn]
 
@@ -285,4 +286,4 @@ the action.
 [microsoft.aadiam/diagnosticSettings - ARM template reference]: https://learn.microsoft.com/en-us/azure/templates/microsoft.aadiam/2017-04-01/diagnosticsettings
 [Azure Activity Log event schema - Microsoft Learn]: https://learn.microsoft.com/en-us/azure/azure-monitor/platform/activity-log-schema
 [Auditing Azure AD Diagnostics Setting Changes - Sam's Corner]: https://samilamppu.com/2021/04/19/auditing-azure-ad-diagnostics-setting-changes/
-[Detect Azure AD Diagnostics Setting Changes In Microsoft Sentinel - Sam's Corner]: https://samilamppu.com/2022/05/30/detect-azure-ad-diagnostics-setting-changes-in-microsoft-sentinel/
+[Detect Azure AD Diagnostics Setting Changes - Sam's Corner]: https://samilamppu.com/2022/05/30/detect-azure-ad-diagnostics-setting-changes-in-microsoft-sentinel/
