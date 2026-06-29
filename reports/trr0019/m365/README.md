@@ -481,11 +481,11 @@ email from a victim tenant.[^10])
 
 | ID                           | Title            | Tactic            |
 |----------------|------------------|-------------------|
-| TRR0019.EXO.A  | Valid Credentials | Collection    |
-| TRR0019.EXO.B  | API Access as an Application | Collection |
-| TRR0019.EXO.C  | eDiscovery | Collection |
-| TRR0019.EXO.D  | Mailbox Delegation | Collection |
-| TRR0019.EXO.E  | Export Mailbox | Collection |
+| TRR0019.M365.A  | Valid Credentials | Collection    |
+| TRR0019.M365.B  | API Access as an Application | Collection |
+| TRR0019.M365.C  | eDiscovery | Collection |
+| TRR0019.M365.D  | Mailbox Delegation | Collection |
+| TRR0019.M365.E  | Export Mailbox | Collection |
 
 ### Procedure A: Valid Credentials
 
@@ -546,7 +546,7 @@ tokens could possibly arise.
 
 #### Detection Data Model
 
-![TRR0019.EXO.A - Valid Credentials](ddms/ddm_trr0019_exo_a.png)
+![TRR0019.M365.A - Valid Credentials](ddms/ddm_trr0019_exo_a.png)
 
 Using stole usernames and passwords became more difficult with the end of basic
 authentication because an attacker now needs to have the user's credentials,
@@ -566,7 +566,7 @@ and permissions can be assigned either in Entra or in EXO.
 
 #### Detection Data Model
 
-![TRR0019.EXO.B - API Access as Application](ddms/ddm_trr0019_exo_b.png)
+![TRR0019.M365.B - API Access as Application](ddms/ddm_trr0019_exo_b.png)
 
 To execute this procedure, at attacker needs three things:
 
@@ -629,7 +629,7 @@ searches).
 
 #### Detection Data Model
 
-![TRR0019.EXO.C - eDiscovery](ddms/ddm_trr0019_exo_c.png)
+![TRR0019.M365.C - eDiscovery](ddms/ddm_trr0019_exo_c.png)
 
 Exchange's eDiscovery solution is fairly simple: you create a compliance search
 and define the parameters to be used to match messages. The search is then run
@@ -703,7 +703,7 @@ Add-MailboxPermission -Identity <targetmailbox> -User <delegateduser> -AccessRig
 
 #### Detection Data Model
 
-![TRR0019.EXO.D - Delegation](ddms/ddm_trr0019_exo_d.png)
+![TRR0019.M365.D - Delegation](ddms/ddm_trr0019_exo_d.png)
 
 An attacker with sufficient permissions could grant delegated access for
 specific target mailboxes to an account in their control. They could then log in
@@ -740,7 +740,7 @@ for their `ItemIds` and export those items:
 
 #### Detection Data Model
 
-![TRR0019.EXO.E - Export Mailbox](ddms/ddm_trr0019_exo_e.png)
+![TRR0019.M365.E - Export Mailbox](ddms/ddm_trr0019_exo_e.png)
 
 Due to the requirement to provide unique `ItemIds` for each item to be exported,
 an attacker first must enumerate the mail items in a victim's mailbox. This can
@@ -767,13 +767,13 @@ provides equivalent functionality in EXO.
 
 ## Available Emulation Tests
 
-| ID            | Link            |
-|---------------|-----------------|
-| TRR0019.EXO.A | [Atomic Test 1] |
-| TRR0019.EXO.B |       |
-| TRR0019.EXO.C |       |
-| TRR0019.EXO.D | [Atomic Test]      |
-| TRR0019.EXO.E |       |
+| ID             | Link            |
+|------------- --|-----------------|
+| TRR0019.M365.A | [Atomic Test 1] |
+| TRR0019.M365.B |       |
+| TRR0019.M365.C |       |
+| TRR0019.M365.D | [Atomic Test]      |
+| TRR0019.M365.E |       |
 
 ## References
 
