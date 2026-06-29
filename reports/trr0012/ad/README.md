@@ -172,7 +172,7 @@ Windows has two logs that are relevant to the process of requesting a Kerberos
 TGT:
 
 - Event 4771 - Kerberos pre-authentication failed (logged on failure).
-- Event 4678 - A Kerberos authentication ticket (TGT) was requested (logged on
+- Event 4768 - A Kerberos authentication ticket (TGT) was requested (logged on
   success and failure).
 
 The field `Pre-Authentication Type` indicates what kind of pre-auth data was

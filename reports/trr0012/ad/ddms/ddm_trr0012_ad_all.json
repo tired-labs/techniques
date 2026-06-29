@@ -172,7 +172,7 @@
       "caption": "Send AS-REP",
       "labels": [
         "Event 4771",
-        "Event 4678",
+        "Event 4768",
         "CS ActiveDirectoryAuthenticationFailure"
       ],
       "properties": {
