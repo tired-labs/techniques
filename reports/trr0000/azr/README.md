@@ -63,11 +63,12 @@ Logging in Azure and Entra ID follows a three-layer model. Understanding which
 layer a technique targets is essential to understanding both its effect and its
 observability.
 
-1. **Source generation.** Events are emitted by the platform's control plane
-   (the Entra directory, the Azure Resource Manager [ARM], and so on). On these
-   platforms, source generation is system-controlled and cannot be disabled by
-   an administrator. Microsoft's documentation states explicitly that Entra
-   audit log entries "are system generated and can't be changed or deleted."[^1]
+1. **Source generation.** Events are emitted by the platform's control plane:
+   the Entra directory, the Azure Resource Manager (ARM), the specfic resource,
+   etc. On these platforms, source generation is system-controlled and cannot be
+   disabled by an administrator. Microsoft's documentation states explicitly
+   that Entra audit log entries "are system generated and can't be changed or
+   deleted."[^1]
 
 2. **In-portal retention.** A short-term store viewable in the Azure and Entra
    admin portals. This store has a fixed, relatively short retention window and
@@ -247,13 +248,13 @@ The procedure consists of a single essential operation: modifying a
 `microsoft.insights` diagnostic settings resource through ARM at subscription or
 resource scope, via either a `PUT` or a `DELETE`.
 
-The telemetry annotation records that the modification appears in the Azure
-Activity Log under the `Administrative` category, with the operation name
-`MICROSOFT.INSIGHTS/DIAGNOSTICSETTINGS/WRITE` for a category-reducing edit or
-`MICROSOFT.INSIGHTS/DIAGNOSTICSETTINGS/DELETE` for a full removal. Because this
-record is generated at the moment of the change, a defender exporting the
-Activity Log to an external destination prior to the attack retains evidence of
-the action.
+The operation is recorded in the Azure Activity Log under the `Administrative`
+category, with the operation name `MICROSOFT.INSIGHTS/DIAGNOSTICSETTINGS/WRITE`
+for a category-reducing edit or `MICROSOFT.INSIGHTS/DIAGNOSTICSETTINGS/DELETE`
+for a full removal. Because this record is generated at the moment of the
+change, the log recording the modification will be generated before the change
+takes effect, ensuring that a defender exporting the Activity Log to an external
+destination prior to the attack still receives a record of the action.
 
 ## Available Emulation Tests
 
