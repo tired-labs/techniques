@@ -5,17 +5,15 @@
 | Key          | Value                                |
 |--------------|--------------------------------------|
 | ID           | TRR0000                              |
-| External IDs | [T1562.008]                          |
-| Tactics      | Defense Evasion                      |
+| External IDs | [T1685.002]                          |
+| Tactics      | Defense Impairment                   |
 | Platforms    | Azure, Entra ID                      |
 | Contributors | Andrew VanVleet                      |
 
 ### Scope Statement
 
 This TRR covers techniques to disable or modify cloud logs in the Azure and
-Entra ID platforms by tampering with the log export pipeline. It corresponds to
-the MITRE ATT&CK technique T1562.008 (Impair Defenses: Disable or Modify Cloud
-Logs).
+Entra ID platforms by tampering with the log export pipeline.
 
 The TRR does not include logging for Microsoft 365; that is covered in a
 separate TRR. The TRR also does not address efforts to remove logs from the
@@ -64,7 +62,7 @@ layer a technique targets is essential to understanding both its effect and its
 observability.
 
 1. **Source generation.** Events are emitted by the platform's control plane:
-   the Entra directory, the Azure Resource Manager (ARM), the specfic resource,
+   the Entra directory, the Azure Resource Manager (ARM), the specfic resource,https://attack.mitre.org/techniques/T1685/002/
    etc. On these platforms, source generation is system-controlled and cannot be
    disabled by an administrator. Microsoft's documentation states explicitly
    that Entra audit log entries "are system generated and can't be changed or
@@ -277,8 +275,7 @@ destination prior to the attack still receives a record of the action.
 
 [^1]: [Learn about the audit logs in Microsoft Entra ID - Microsoft Learn]
 
-[T1562.008]: https://attack.mitre.org/techniques/T1562/008/
-[Disable or Modify Cloud Logs - MITRE ATT&CK]: https://attack.mitre.org/techniques/T1562/008/
+[T1685.002]: https://attack.mitre.org/techniques/T1685/002/
 [Configure Microsoft Entra diagnostic settings - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings
 [Logs available for streaming from Microsoft Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-diagnostic-settings-logs-options
 [Learn about the audit logs in Microsoft Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-audit-logs
