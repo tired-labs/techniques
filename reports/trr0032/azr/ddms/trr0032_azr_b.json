@@ -1,0 +1,247 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 50,
+    "caption-font-weight": "normal",
+    "label-position": "inside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 4,
+    "label-font-size": 40,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 306.6172095068252,
+        "y": 175.00000000000006
+      },
+      "caption": "Forge Token",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 523.1235604529347,
+        "y": 50
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "Method": "POST",
+        "Endpoint": "/login.srf (WS-Fed or SAML) or /{tenant}/saml2 (SAML 2.0)",
+        "Host": "login.microsoftonline.com"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 739.6299113990442,
+        "y": 175.0000000000001
+      },
+      "caption": "Validate Token",
+      "labels": [
+        "Entra Sign-in Logs"
+      ],
+      "properties": {
+        "Host": "Entra ID"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 956.1362623451538,
+        "y": 50.000000000000455
+      },
+      "caption": "Issue Session",
+      "labels": [
+        "Entra Sign-in Logs"
+      ],
+      "properties": {
+        "Host": "Entra ID"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 523.1235604529347,
+        "y": 300
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "Method": "POST",
+        "Endpoint": "/common/oauth2/token",
+        "Host": "login.microsoftonline.com"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 956.1362623451536,
+        "y": 300.00000000000045
+      },
+      "caption": "Issue Access Token",
+      "labels": [
+        "Entra Sign-in Logs"
+      ],
+      "properties": {
+        "Host": "Entra ID"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "border-width": 3,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "caption-font-size": 16
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "Procedure A",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "n2",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "n3",
+      "fromId": "n0",
+      "toId": "n4",
+      "type": "Procedure B",
+      "properties": {},
+      "style": {
+        "arrow-color": "#d33115"
+      }
+    },
+    {
+      "id": "n4",
+      "type": "",
+      "style": {
+        "arrow-color": "#d33115"
+      },
+      "properties": {},
+      "fromId": "n4",
+      "toId": "n2"
+    },
+    {
+      "id": "n5",
+      "type": "",
+      "style": {
+        "arrow-color": "#d33115"
+      },
+      "properties": {},
+      "fromId": "n2",
+      "toId": "n6"
+    }
+  ]
+}
