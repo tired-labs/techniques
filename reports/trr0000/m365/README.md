@@ -13,7 +13,8 @@
 ### Scope Statement
 
 This TRR covers procedures to disable or modify cloud logging from Microsoft 365
-(M365) workloads. It corresponds to MITRE ATT&CK technique T1562.008 (Impair Defenses: Disable or Modify Cloud Logs) as it pertains to Microsoft 365.
+(M365) workloads. It corresponds to MITRE ATT&CK technique T1562.008 (Impair
+Defenses: Disable or Modify Cloud Logs) as it pertains to Microsoft 365.
 
 The following elements are out of scope for this TRR:
 
@@ -87,8 +88,8 @@ The UAL can be accessed five ways:
   Purview audit portal, just reached through a different portal.
 
 - **Search-UnifiedAuditLog cmdlet.** The Exchange Online PowerShell cmdlet that
-  underlies the portal search tool, and the long-standing scripting interface for
-  querying the UAL.
+  underlies the portal search tool, and the long-standing scripting interface
+  for querying the UAL.
 
 - **Purview Audit Search Graph API.** A Microsoft Graph API (the `auditLogQuery`
   endpoint) that programmatically runs asynchronous audit searches and retrieves
@@ -125,9 +126,9 @@ points in Exchange Online:
 
 - **Organization-wide** (`Set-OrganizationConfig -AuditDisabled $true`): the
   master override for the mailbox audit feed across the tenant.
-- **Per-principal bypass** (`Set-MailboxAuditBypassAssociation`): exempts actions
-  performed *by* the named principal from being audited in any mailbox they
-  touch.
+- **Per-principal bypass** (`Set-MailboxAuditBypassAssociation`): exempts
+  actions performed *by* the named principal from being audited in any mailbox
+  they touch.
 - **Per-mailbox audited action set** (`Set-Mailbox -AuditOwner/-AuditDelegate/`
   `-AuditAdmin`): defines which actions are audited for each logon type.
   Microsoft maintains a `DefaultAuditSet`, which is collection of events that
@@ -261,7 +262,8 @@ configuration is defined separately for each type of mailbox logon:
 - **Delegate**: the mailbox is accessed by a user with *SendAs*, *SendOnBehalf*,
   or *FullAccess* delegation permissions.
 
-The audit set is defined via `Set-Mailbox` using a per-mailbox property for each logon type:
+The audit set is defined via `Set-Mailbox` using a per-mailbox property for each
+logon type:
 
 - `AuditOwner`
 - `AuditAdmin`
@@ -343,8 +345,10 @@ a set is overwritten, the old set is not included in the log.
 
 An attacker holding the Organization Configuration role in Purview can reduce
 how long records persist, either by shortening an existing retention policy's
-duration (the `RetentionDuration` parameter) or by introducing a
-short-duration policy with a higher priority than existing policies. These can be done using the `Set-` or `New-UnifiedAuditLogRetentionPolicy` cmdlets in Security & Compliance Powershell.
+duration (the `RetentionDuration` parameter) or by introducing a short-duration
+policy with a higher priority than existing policies. These can be done using
+the `Set-` or `New-UnifiedAuditLogRetentionPolicy` cmdlets in Security &
+Compliance Powershell.
 
 There are two notable boundaries on this procedure:
 
