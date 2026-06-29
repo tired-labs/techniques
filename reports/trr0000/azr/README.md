@@ -62,7 +62,7 @@ layer a technique targets is essential to understanding both its effect and its
 observability.
 
 1. **Source generation.** Events are emitted by the platform's control plane:
-   the Entra directory, the Azure Resource Manager (ARM), the specfic resource,https://attack.mitre.org/techniques/T1685/002/
+   the Entra directory, the Azure Resource Manager (ARM), the specfic resource,
    etc. On these platforms, source generation is system-controlled and cannot be
    disabled by an administrator. Microsoft's documentation states explicitly
    that Entra audit log entries "are system generated and can't be changed or
