@@ -102,10 +102,9 @@ component and one plane.
 
 A diagnostic setting is itself an ARM resource, modified through the standard
 ARM REST API at `management.azure.com`. The same operation can be performed
-through Azure PowerShell (`Set-AzDiagnosticSetting`,
-`Remove-AzDiagnosticSetting`), the Azure CLI (`az monitor diagnostic-settings`),
-Terraform, Bicep, or the Azure portal; all of these funnel through the same ARM
-endpoint.
+through Azure PowerShell (`Set/Remove-AzDiagnosticSetting`), the Azure CLI
+(`az monitor diagnostic-settings`), Terraform, Bicep, the Azure portal, etc; all of 
+these funnel through the same ARM endpoint.
 
 The resource path differs by scope:
 
