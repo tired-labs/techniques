@@ -5,7 +5,7 @@
     "background-image": "",
     "background-size": "100%",
     "node-color": "#ffffff",
-    "border-width": 2,
+    "border-width": 4,
     "border-color": "#000000",
     "radius": 50,
     "node-padding": 5,
@@ -18,15 +18,15 @@
     "caption-position": "inside",
     "caption-max-width": 200,
     "caption-color": "#000000",
-    "caption-font-size": 16,
+    "caption-font-size": 50,
     "caption-font-weight": "normal",
-    "label-position": "outside",
+    "label-position": "inside",
     "label-display": "pill",
     "label-color": "#000000",
     "label-background-color": "#ffffff",
     "label-border-color": "#000000",
-    "label-border-width": 1,
-    "label-font-size": 16,
+    "label-border-width": 4,
+    "label-font-size": 40,
     "label-padding": 5,
     "label-margin": 4,
     "directionality": "directed",
@@ -54,10 +54,10 @@
   },
   "nodes": [
     {
-      "id": "n0",
+      "id": "n1",
       "position": {
-        "x": 209.41164585460146,
-        "y": 312.59694033726106
+        "x": 263.4116458546015,
+        "y": 258.59694033726106
       },
       "caption": "Enumerate SPNs",
       "labels": [],
@@ -71,10 +71,10 @@
       }
     },
     {
-      "id": "n1",
+      "id": "n2",
       "position": {
-        "x": 287.9330703833923,
-        "y": 551.5656419911977
+        "x": 341.9330703833923,
+        "y": 497.5656419911977
       },
       "caption": "Send ADWS request",
       "labels": [],
@@ -87,26 +87,28 @@
       }
     },
     {
-      "id": "n2",
+      "id": "n3",
       "position": {
-        "x": 75,
-        "y": 757.822255186173
+        "x": 129,
+        "y": 703.822255186173
       },
       "caption": "Send LDAP Search Request",
       "labels": [],
       "properties": {
         "Protocol": "LDAP or LDAPs",
-        "Port": "389 or 636"
+        "Port": "389 or 636",
+        "Global Catalog": "3268 or 3269"
       },
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "property-alignment": "center"
       }
     },
     {
-      "id": "n3",
+      "id": "n4",
       "position": {
-        "x": 668.80608190224,
-        "y": 757.822255186173
+        "x": 722.80608190224,
+        "y": 703.822255186173
       },
       "caption": "Receive LDAP Search Request",
       "labels": [
@@ -115,14 +117,17 @@
       ],
       "properties": {},
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "caption-position": "inside",
+        "label-position": "outside",
+        "label-font-size": 14
       }
     },
     {
-      "id": "n4",
+      "id": "n5",
       "position": {
-        "x": 539.471644920577,
-        "y": 551.5656419911977
+        "x": 593.471644920577,
+        "y": 497.5656419911977
       },
       "caption": "Receive ADWS request",
       "labels": [],
@@ -132,10 +137,10 @@
       }
     },
     {
-      "id": "n5",
+      "id": "n6",
       "position": {
-        "x": 591.9116458546015,
-        "y": 312.59694033726106
+        "x": 645.9116458546015,
+        "y": 258.59694033726106
       },
       "caption": "Send AD Data",
       "labels": [],
@@ -147,10 +152,10 @@
       }
     },
     {
-      "id": "n6",
+      "id": "n7",
       "position": {
-        "x": 836.5664926656315,
-        "y": 312.5969337300116
+        "x": 890.5664926656315,
+        "y": 258.5969337300116
       },
       "caption": "Request Service Ticket",
       "labels": [],
@@ -166,10 +171,10 @@
       }
     },
     {
-      "id": "n7",
+      "id": "n8",
       "position": {
-        "x": 1081.2213394766618,
-        "y": 312.59694033726106
+        "x": 1135.2213394766618,
+        "y": 258.59694033726106
       },
       "caption": "Send Service Ticket",
       "labels": [
@@ -180,14 +185,16 @@
         "Host": "DC"
       },
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 14
       }
     },
     {
-      "id": "n8",
+      "id": "n9",
       "position": {
-        "x": 1303.281033098722,
-        "y": 312.596940337261
+        "x": 1357.281033098722,
+        "y": 258.596940337261
       },
       "caption": "Crack Hash",
       "labels": [],
@@ -199,10 +206,10 @@
       }
     },
     {
-      "id": "n9",
+      "id": "n10",
       "position": {
-        "x": 954.0490025457719,
-        "y": 168.00550614980182
+        "x": 1008.0490025457719,
+        "y": 114.00550614980182
       },
       "caption": "Intercept Service Ticket",
       "labels": [],
@@ -212,10 +219,10 @@
       }
     },
     {
-      "id": "n10",
+      "id": "n11",
       "position": {
-        "x": 954.0490025457719,
-        "y": 50
+        "x": 1008.0490025457719,
+        "y": -4
       },
       "caption": "Harvest Service Ticket",
       "labels": [],
@@ -228,46 +235,82 @@
   "relationships": [
     {
       "id": "n0",
-      "fromId": "n0",
-      "toId": "n1",
-      "type": "",
-      "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n1",
-      "fromId": "n0",
+      "fromId": "n1",
       "toId": "n2",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
-      "id": "n2",
-      "fromId": "n2",
+      "id": "n1",
+      "fromId": "n1",
       "toId": "n3",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-color": "#d33115"
+      }
     },
     {
-      "id": "n3",
-      "fromId": "n1",
+      "id": "n2",
+      "fromId": "n3",
       "toId": "n4",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-color": "#d33115"
+      }
     },
     {
-      "id": "n4",
-      "fromId": "n3",
+      "id": "n3",
+      "fromId": "n2",
       "toId": "n5",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
+      "id": "n4",
+      "fromId": "n4",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#d33115"
+      }
+    },
+    {
       "id": "n5",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#d33115"
+      }
+    },
+    {
+      "id": "n6",
+      "fromId": "n7",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#d33115"
+      }
+    },
+    {
+      "id": "n7",
+      "fromId": "n8",
+      "toId": "n9",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#d33115"
+      }
+    },
+    {
+      "id": "n8",
       "fromId": "n5",
       "toId": "n6",
       "type": "",
@@ -275,49 +318,27 @@
       "style": {}
     },
     {
-      "id": "n6",
-      "fromId": "n6",
+      "id": "n9",
+      "fromId": "n8",
       "toId": "n7",
       "type": "",
       "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n7",
-      "fromId": "n7",
-      "toId": "n8",
-      "type": "",
-      "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n8",
-      "fromId": "n4",
-      "toId": "n5",
-      "type": "",
-      "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n9",
-      "fromId": "n7",
-      "toId": "n6",
-      "type": "",
-      "properties": {},
-      "style": {}
+      "style": {
+        "arrow-color": "#d33115"
+      }
     },
     {
       "id": "n10",
-      "fromId": "n9",
-      "toId": "n8",
+      "fromId": "n10",
+      "toId": "n9",
       "type": "",
       "properties": {},
       "style": {}
     },
     {
       "id": "n11",
-      "fromId": "n10",
-      "toId": "n8",
+      "fromId": "n11",
+      "toId": "n9",
       "type": "",
       "properties": {},
       "style": {}

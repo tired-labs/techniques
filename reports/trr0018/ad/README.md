@@ -228,6 +228,15 @@ query used by some of the well-known tools.
 | Impacket's GetUserSPN.py "Stealth Mode" | (&(objectCategory=person)(!(UserAccountControl:1.2.840.113556.1.4.803:=2))) |
 | Empire Powershell's "Invoke-Kerberoast" | **(servicePrincipalName=*)** |
 
+### Global Catalog
+
+In addition to the common LDAP ports 389 and 636, the Global catalog
+is also a target for SPN enumeration on ports 3268 or 3269. The Global
+Catalog is a directory index used in Microsoft Active Directory.
+Unlike the common LDAP ports, the Global Catalog allows for querying
+of the entire forest rather than just the domain. Also, it only has a
+subset of the attributes compared to the common LDAP ports.
+
 ### Roasting Service Tickets
 
 Once the attacker has identified accounts with SPNs, they can request a service
