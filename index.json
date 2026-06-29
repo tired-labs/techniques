@@ -500,5 +500,32 @@
     },
     "last_update": "2026-06-03",
     "pub_date": "2026-06-03"
+  },
+  {
+    "name": "Forging SAML Tokens for Entra ID",
+    "id": "TRR0032",
+    "tactics": [
+      "Credential Access",
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1606.002"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Submit forged token to federation endpoint",
+      "B": "Exchange forged token via SAML Bearer flow"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-06-29",
+    "pub_date": "2026-06-29"
   }
 ]
