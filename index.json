@@ -41,7 +41,16 @@
       "D": "Intercept AS Messages on the Network"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Tests 1-3",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1558.004/T1558.004.md"
+      },
+      "B": null,
+      "C": null,
+      "D": null
+    }
   },
   {
     "name": "Forge a Kerberos TGT",
