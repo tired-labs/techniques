@@ -199,7 +199,7 @@ CrowdStrike has two logs relevant to TGT requests:
 In both cases, the `ActiveDirectoryAuthenticationMethod` field will be `0` for
 Kerberos. The ActiveDirectoryAuthentication event does not have a field
 indicating if pre-auth data was provided, and as such is less useful than
-Windows event 4678 for this technique. The ActiveDirectoryAuthenticationFailure
+Windows event 4768 for this technique. The ActiveDirectoryAuthenticationFailure
 has a `KerberosErrorCode` field that contains the same `Result Code` information
 as Windows event 4771, but it shows the value in decimal instead of hex, so
 `KDC_ERR_PREAUTH_REQUIRED` is decimal `25`
