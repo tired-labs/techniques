@@ -4,7 +4,7 @@
 
 | Key          | Value                                          |
 |--------------|------------------------------------------------|
-| ID           | TRR0000                                        |
+| ID           | TRR0032                                        |
 | External IDs | [T1606.002]                                    |
 | Tactics      | Credential Access, Defense Evasion             |
 | Platforms    | Azure                                          |
@@ -430,8 +430,8 @@ object configured, which has the equivalence of a validation policy set to
 
 | ID | Title | Tactic |
 | --- | --- | --- |
-| TRR0000.AZR.A | Submit forged token to federation endpoint | Credential Access, Defense Evasion |
-| TRR0000.AZR.B | Exchange forged token via SAML Bearer flow | Credential Access, Defense Evasion |
+| TRR0032.AZR.A | Submit forged token to federation endpoint | Credential Access, Defense Evasion |
+| TRR0032.AZR.B | Exchange forged token via SAML Bearer flow | Credential Access, Defense Evasion |
 
 ### Procedure A: Submit Forged Token to Federation Endpoint
 
@@ -454,7 +454,7 @@ steps 1-6 had been completed normally.
 
 #### Detection Data Model
 
-![DDM - Submit forged token to federation endpoint](ddms/trr0000_azr_a.png)
+![DDM - Submit forged token to federation endpoint](ddms/trr0032_azr_a.png)
 
 ### Procedure B: Exchange Forged Token via SAML Bearer Flow
 
@@ -475,14 +475,14 @@ versions are accepted.
 
 #### Detection Data Model
 
-![DDM - Exchange forged token via SAML Bearer flow](ddms/trr0000_azr_b.png)
+![DDM - Exchange forged token via SAML Bearer flow](ddms/trr0032_azr_b.png)
 
 ## Available Emulation Tests
 
 | ID            | Link |
 |---------------|------|
-| TRR0000.AZR.A |      |
-| TRR0000.AZR.B |      |
+| TRR0032.AZR.A |      |
+| TRR0032.AZR.B |      |
 
 ## References
 
