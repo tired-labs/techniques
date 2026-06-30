@@ -1,0 +1,466 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 50,
+    "caption-font-weight": "normal",
+    "label-position": "inside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 4,
+    "label-font-size": 40,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 68.758372224592,
+        "y": 249.04436240662773
+      },
+      "caption": "Enumerate Users w/o Pre-Auth",
+      "labels": [],
+      "properties": {
+        "Host": "Any",
+        "Option1": "Filter userAccountControl in query",
+        "Option2": "Get all users w/ userAccountControl attribute then filter"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 233.7919245219658,
+        "y": 425.04178578555616
+      },
+      "caption": "Send ADWS Request",
+      "labels": [],
+      "properties": {
+        "Protocol": "TCP",
+        "Port": "9389"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 68.758372224592,
+        "y": 668.4615030693966
+      },
+      "caption": "Send LDAP Search Request",
+      "labels": [],
+      "properties": {
+        "Protocol": "LDAP or LDAPS",
+        "Port": "389 or 636"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 463.5773316594368,
+        "y": 425.04178578555616
+      },
+      "caption": "Receive ADWS Request",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 578.4700352281723,
+        "y": 668.4615030693966
+      },
+      "caption": "Receive LDAP Search Request",
+      "labels": [
+        "CS ActiveDirectoryIncomingLdapSearchRequest"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 578.4700352281723,
+        "y": 226.04178578555616
+      },
+      "caption": "Send AD Data",
+      "labels": [],
+      "properties": {
+        "Host": "DC"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 960.712870400456,
+        "y": 425.04178578555616
+      },
+      "caption": "Send AS-REQ",
+      "labels": [],
+      "properties": {
+        "Protocol": "Kerberos",
+        "Host": "Any",
+        "PreAuthType": "0",
+        "Optional": "Downgrade Encryption"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 1187.6194126310884,
+        "y": 425.04178578555616
+      },
+      "caption": "Send AS-REP",
+      "labels": [
+        "Event 4771",
+        "Event 4768",
+        "CS ActiveDirectoryAuthenticationFailure"
+      ],
+      "properties": {
+        "PreAuthType": "0",
+        "ResultCode_Failure": "0x19",
+        "ResultCode_Success": "0x0",
+        "EncryptionType": "0x17 (RC4)"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 1363.6611984166445,
+        "y": 226.04178578555616
+      },
+      "caption": "Crack Hash",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 800.2657156935841,
+        "y": 65.59463107868419
+      },
+      "caption": "Alternate Procedure: Test Every Account",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 1187.6194126310884,
+        "y": 50
+      },
+      "caption": "Intercept Auth Server Messages",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 960.712870400456,
+        "y": 226.04178578555616
+      },
+      "caption": "Request TGT",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": 1187.6194126310884,
+        "y": 226.04178578555616
+      },
+      "caption": "Send TGT",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n1",
+      "fromId": "n0",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n2",
+      "fromId": "n1",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n3",
+      "fromId": "n2",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n4",
+      "fromId": "n3",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n5",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n6",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n7",
+      "fromId": "n10",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n8",
+      "fromId": "n5",
+      "toId": "n11",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n9",
+      "fromId": "n11",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n10",
+      "fromId": "n7",
+      "toId": "n12",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n11",
+      "fromId": "n12",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n12",
+      "fromId": "n9",
+      "toId": "n11",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "n13",
+      "fromId": "n12",
+      "toId": "n11",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
+    }
+  ]
+}

@@ -228,7 +228,7 @@ future.
 There are a handful of Windows events logged during the Kerberos authentication
 and authorization process. These are:
 
-- Event 4678 - A Kerberos authentication ticket (TGT) was requested.
+- Event 4768 - A Kerberos authentication ticket (TGT) was requested.
 - Event 4769 - A Kerberos service ticket was requested.
 - Event 4624 - An account was successfully logged on.
 
@@ -261,7 +261,7 @@ legitimate TGT in the domain as a reference and ensure their forgery matches it.
 
 #### Detection Data Model
 
-![DDM - TRR0013.AD.A](ddms/trr0013_a.png)
+![DDM - TRR0013.AD.A](ddms/trr0013_ad_a.png)
 
 In the DDM above, the green operations represent the client, the blue the KDC,
 and the purple the application server. The TGT request is included in gray
@@ -401,7 +401,7 @@ PAC.
 
 #### Detection Data Model
 
-![DDM - Procedure Name 2](ddms/trr0013_b.png)
+![DDM - Procedure Name 2](ddms/trr0013_ad_b.png)
 
 This DDM has been simplified due to the large number of operations required for
 this procedure. The lower level networking details have been omitted, keeping
