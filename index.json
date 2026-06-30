@@ -73,7 +73,14 @@
       "B": "Forge TGT using PAC acquired via U2U+S4U2Self (Sapphire Ticket)"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Tests 1-2",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1558.001/T1558.001.md"
+      },
+      "B": null
+    }
   },
   {
     "name": "Rogue Domain Controller (DCShadow)",
