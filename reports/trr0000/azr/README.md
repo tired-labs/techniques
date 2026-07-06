@@ -206,8 +206,8 @@ parent resource plus the Monitoring Contributor role.
 
 | ID            | Title                            | Tactic          |
 |---------------|----------------------------------|-----------------|
-| TRR0000.AZR.A | Modify Entra Diagnostic Setting  | Defense Evasion |
-| TRR0000.AZR.B | Modify Azure Diagnostic Setting  | Defense Evasion |
+| TRR0000.AZR.A | Modify Entra Diagnostic Setting  | Defense Impairment |
+| TRR0000.AZR.B | Modify Azure Diagnostic Setting  | Defense Impairment |
 
 ### Procedure A: Modify Entra Diagnostic Setting
 
