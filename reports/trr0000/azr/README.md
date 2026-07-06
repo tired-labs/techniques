@@ -263,7 +263,7 @@ destination prior to the attack still receives a record of the action.
 
 ## References
 
-- [Disable or Modify Cloud Logs - MITRE ATT&CK]
+- [Disable or Modify Cloud Logs - MITRE ATT&CK][T1685.002]
 - [Configure Microsoft Entra diagnostic settings - Microsoft Learn]
 - [Logs available for streaming from Microsoft Entra ID - Microsoft Learn]
 - [Learn about the audit logs in Microsoft Entra ID - Microsoft Learn]
