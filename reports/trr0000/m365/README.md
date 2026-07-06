@@ -129,14 +129,14 @@ points in Exchange Online:
 - **Per-principal bypass** (`Set-MailboxAuditBypassAssociation`): exempts
   actions performed *by* the named principal from being audited in any mailbox
   they touch.
-- **Per-mailbox audited action set** (`Set-Mailbox
-  -AuditOwner/-AuditDelegate/-AuditAdmin`): defines which actions are audited
-  for each logon type. Microsoft maintains a `DefaultAuditSet`, which is
-  collection of events that will be audited for each logon type by default.
-  Customizing the logged action set for a logon type removes  it from the
-  `DefaultAuditSet` and ends Microsoft's automatic management of it. Any newly
-  released events must be added to the custom set manually. An attacker can
-  therefore create a custom set to remove high-value actions while auditing
+- **Per-mailbox audited action set**
+  (`Set-Mailbox-AuditOwner/-AuditDelegate/-AuditAdmin`): defines which actions
+  are audited for each logon type. Microsoft maintains a `DefaultAuditSet`,
+  which is collection of events that will be audited for each logon type by
+  default. Customizing the logged action set for a logon type removes  it from
+  the `DefaultAuditSet` and ends Microsoft's automatic management of it. Any
+  newly released events must be added to the custom set manually. An attacker
+  can therefore create a custom set to remove high-value actions while auditing
   still reports as enabled.
 
 #### Mailbox Auditing Architecture Changes
