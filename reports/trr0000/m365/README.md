@@ -5,16 +5,16 @@
 | Key          | Value                                |
 |--------------|--------------------------------------|
 | ID           | TRR0000                              |
-| External IDs | [T1562.008]                          |
-| Tactics      | Defense Evasion                      |
+| External IDs | [T1685.002]                          |
+| Tactics      | Defense Impairment                      |
 | Platforms    | Microsoft 365                        |
 | Contributors | Andrew VanVleet                      |
 
 ### Scope Statement
 
 This TRR covers procedures to disable or modify cloud logging from Microsoft 365
-(M365) workloads. It corresponds to MITRE ATT&CK technique T1562.008 (Impair
-Defenses: Disable or Modify Cloud Logs) as it pertains to Microsoft 365.
+(M365) workloads. It corresponds to MITRE ATT&CK technique [T1685.002] (Disable
+or Modify Tools: Disable or Modify Cloud Log) as it pertains to Microsoft 365.
 
 The following elements are out of scope for this TRR:
 
@@ -24,7 +24,7 @@ The following elements are out of scope for this TRR:
   and Dynamics 365/Dataverse expose their own source-level audit settings, but
   they are noted only for completeness and are not developed as procedures.
 - The log destinations and their consumers (a SIEM ingesting via the Office 365
-  Management Activity API, exported archives).
+  Management Activity API, exported archives, etc...).
 
 ## Technique Overview
 
@@ -129,14 +129,15 @@ points in Exchange Online:
 - **Per-principal bypass** (`Set-MailboxAuditBypassAssociation`): exempts
   actions performed *by* the named principal from being audited in any mailbox
   they touch.
-- **Per-mailbox audited action set** (`Set-Mailbox -AuditOwner/-AuditDelegate/`
-  `-AuditAdmin`): defines which actions are audited for each logon type.
-  Microsoft maintains a `DefaultAuditSet`, which is collection of events that
-  will be audited for each logon type by default. Customizing the logged action
-  set for a logon type removes  it from the `DefaultAuditSet` and ends
-  Microsoft's automatic management of it. Any newly released events must be
-  added to the custom set manually. An attacker can therefore create a custom
-  set to remove high-value actions while auditing still reports as enabled.
+- **Per-mailbox audited action set** (`Set-Mailbox
+  -AuditOwner/-AuditDelegate/-AuditAdmin`): defines which actions are audited
+  for each logon type. Microsoft maintains a `DefaultAuditSet`, which is
+  collection of events that will be audited for each logon type by default.
+  Customizing the logged action set for a logon type removes  it from the
+  `DefaultAuditSet` and ends Microsoft's automatic management of it. Any newly
+  released events must be added to the custom set manually. An attacker can
+  therefore create a custom set to remove high-value actions while auditing
+  still reports as enabled.
 
 #### Mailbox Auditing Architecture Changes
 
@@ -379,7 +380,7 @@ independent of the retention policy.
 
 ## References
 
-- [Disable or Modify Cloud Logs - MITRE ATT&CK]
+- [Disable or Modify Cloud Logs - MITRE ATT&CK][T1685.002]
 - [Manage mailbox auditing - Microsoft Learn]
 - [Set-AdminAuditLogConfig - Microsoft Learn]
 - [Search the audit log - Microsoft Learn]
@@ -393,8 +394,7 @@ independent of the retention policy.
 [^2]: [Microsoft Purview Audit Search Graph API - Microsoft]
 [^3]: [Search-MailboxAuditLog Deprecation - Microsoft]
 
-[T1562.008]: https://attack.mitre.org/techniques/T1562/008/
-[Disable or Modify Cloud Logs - MITRE ATT&CK]: https://attack.mitre.org/techniques/T1562/008/
+[T1685.002]: https://attack.mitre.org/techniques/T1685/002/
 [Manage mailbox auditing - Microsoft Learn]: https://learn.microsoft.com/en-us/purview/audit-mailboxes
 [Set-AdminAuditLogConfig - Microsoft Learn]: https://learn.microsoft.com/en-us/powershell/module/exchange/set-adminauditlogconfig
 [Search the audit log - Microsoft Learn]: https://learn.microsoft.com/en-us/purview/audit-search
