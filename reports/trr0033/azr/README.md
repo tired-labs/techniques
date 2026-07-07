@@ -15,8 +15,8 @@
 This TRR covers techniques to disable or modify cloud logs in the Azure and
 Entra ID platforms by tampering with the log export pipeline.
 
-The TRR does not include logging for Microsoft 365; that is covered in a
-separate TRR. The TRR also does not address efforts to remove logs from the
+The TRR does not include logging for Microsoft 365; that is covered in
+[TRR0033.M365]. The TRR also does not address efforts to remove logs from the
 logging destinations themselves (deleting a Log Analytics workspace, altering
 workspace retention, deleting stored data, etc). These are destination-side
 actions rather than modifications to the cloud logging configuration.
@@ -276,6 +276,7 @@ destination prior to the attack still receives a record of the action.
 [^1]: [Learn about the audit logs in Microsoft Entra ID - Microsoft Learn]
 
 [T1685.002]: https://attack.mitre.org/techniques/T1685/002/
+[TRR0033.M365]: ../m365/README.md
 [Configure Microsoft Entra diagnostic settings - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-configure-diagnostic-settings
 [Logs available for streaming from Microsoft Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-diagnostic-settings-logs-options
 [Learn about the audit logs in Microsoft Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-audit-logs

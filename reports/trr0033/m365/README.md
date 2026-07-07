@@ -19,7 +19,7 @@ or Modify Tools: Disable or Modify Cloud Log) as it pertains to Microsoft 365.
 The following elements are out of scope for this TRR:
 
 - Azure and Entra ID logging (diagnostic settings for Entra activity logs and
-  the Azure Activity Log) are covered in a separate TRR.
+  the Azure Activity Log) are covered in [TRR0033.AZR].
 - Per-workload audit controls for workloads other than Exchange. Power BI/Fabric
   and Dynamics 365/Dataverse expose their own source-level audit settings, but
   they are noted only for completeness and are not developed as procedures.
@@ -395,6 +395,7 @@ independent of the retention policy.
 [^3]: [Search-MailboxAuditLog Deprecation - Microsoft]
 
 [T1685.002]: https://attack.mitre.org/techniques/T1685/002/
+[TRR0033.AZR]: ../azr/README.md
 [Manage mailbox auditing - Microsoft Learn]: https://learn.microsoft.com/en-us/purview/audit-mailboxes
 [Set-AdminAuditLogConfig - Microsoft Learn]: https://learn.microsoft.com/en-us/powershell/module/exchange/set-adminauditlogconfig
 [Search the audit log - Microsoft Learn]: https://learn.microsoft.com/en-us/purview/audit-search
