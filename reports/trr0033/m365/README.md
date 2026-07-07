@@ -130,7 +130,7 @@ points in Exchange Online:
   actions performed *by* the named principal from being audited in any mailbox
   they touch.
 - **Per-mailbox audited action set**
-  (`Set-Mailbox-AuditOwner/-AuditDelegate/-AuditAdmin`): defines which actions
+  (`Set-Mailbox -AuditOwner/-AuditDelegate/-AuditAdmin`): defines which actions
   are audited for each logon type. Microsoft maintains a `DefaultAuditSet`,
   which is collection of events that will be audited for each logon type by
   default. Customizing the logged action set for a logon type removes  it from
