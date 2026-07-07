@@ -4,7 +4,7 @@
 
 | Key          | Value                                |
 |--------------|--------------------------------------|
-| ID           | TRR0000                              |
+| ID           | TRR0033                              |
 | External IDs | [T1685.002]                          |
 | Tactics      | Defense Impairment                   |
 | Platforms    | Azure, Entra ID                      |
@@ -206,8 +206,8 @@ parent resource plus the Monitoring Contributor role.
 
 | ID            | Title                            | Tactic          |
 |---------------|----------------------------------|-----------------|
-| TRR0000.AZR.A | Modify Entra Diagnostic Setting  | Defense Impairment |
-| TRR0000.AZR.B | Modify Azure Diagnostic Setting  | Defense Impairment |
+| TRR0033.AZR.A | Modify Entra Diagnostic Setting  | Defense Impairment |
+| TRR0033.AZR.B | Modify Azure Diagnostic Setting  | Defense Impairment |
 
 ### Procedure A: Modify Entra Diagnostic Setting
 
@@ -219,7 +219,7 @@ the setting.
 
 #### Detection Data Model
 
-![DDM - Modify Entra Diagnostic Setting](ddms/trr0000_azr_a.png)
+![DDM - Modify Entra Diagnostic Setting](ddms/trr0033_azr_a.png)
 
 The procedure consists of a single essential operation: modifying the
 tenant-scoped `microsoft.aadiam` diagnostic settings resource through ARM, via
@@ -240,7 +240,7 @@ can delete the setting or overwrite it to remove specific categories.
 
 #### Detection Data Model
 
-![DDM - Modify Azure Diagnostic Setting](ddms/trr0000_azr_b.png)
+![DDM - Modify Azure Diagnostic Setting](ddms/trr0033_azr_b.png)
 
 The procedure consists of a single essential operation: modifying a
 `microsoft.insights` diagnostic settings resource through ARM at subscription or
@@ -258,8 +258,8 @@ destination prior to the attack still receives a record of the action.
 
 | ID            | Link |
 |---------------|------|
-| TRR0000.AZR.A |      |
-| TRR0000.AZR.B |      |
+| TRR0033.AZR.A |      |
+| TRR0033.AZR.B |      |
 
 ## References
 

@@ -552,5 +552,32 @@
     },
     "last_update": "2026-06-29",
     "pub_date": "2026-06-29"
+  },
+  {
+    "name": "Disable or Modify Cloud Logs (Azure)",
+    "id": "TRR0033",
+    "tactics": [
+      "Defense Impairment"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1685.002"
+    ],
+    "platforms": [
+      "Azure",
+      "Entra ID"
+    ],
+    "procedures": {
+      "A": "Modify Entra Diagnostic Setting",
+      "B": "Modify Azure Diagnostic Setting"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-07-07",
+    "pub_date": "2026-07-07"
   }
 ]
