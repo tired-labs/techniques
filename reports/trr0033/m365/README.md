@@ -4,9 +4,9 @@
 
 | Key          | Value                                |
 |--------------|--------------------------------------|
-| ID           | TRR0000                              |
+| ID           | TRR0033                              |
 | External IDs | [T1685.002]                          |
-| Tactics      | Defense Impairment                      |
+| Tactics      | Defense Impairment                   |
 | Platforms    | Microsoft 365                        |
 | Contributors | Andrew VanVleet                      |
 
@@ -189,11 +189,11 @@ runs.
 
 | ID             | Title                                   | Tactic          |
 |----------------|-----------------------------------------|-----------------|
-| TRR0000.M365.A | Disable Unified Audit Log Ingestion     | Defense Evasion |
-| TRR0000.M365.B | Disable Mailbox Auditing (Org Wide)     | Defense Evasion |
-| TRR0000.M365.C | Bypass Mailbox Auditing (Per Principal) | Defense Evasion |
-| TRR0000.M365.D | Reduce Mailbox Audited Actions (Per Mailbox) | Defense Evasion |
-| TRR0000.M365.E | Reduce Audit Log Retention              | Defense Evasion |
+| TRR0033.M365.A | Disable Unified Audit Log Ingestion     | Defense Evasion |
+| TRR0033.M365.B | Disable Mailbox Auditing (Org Wide)     | Defense Evasion |
+| TRR0033.M365.C | Bypass Mailbox Auditing (Per Principal) | Defense Evasion |
+| TRR0033.M365.D | Reduce Mailbox Audited Actions (Per Mailbox) | Defense Evasion |
+| TRR0033.M365.E | Reduce Audit Log Retention              | Defense Evasion |
 
 ### Procedure A: Disable Unified Audit Log Ingestion
 
@@ -206,7 +206,7 @@ out according to retention.
 
 #### Detection Data Model
 
-![DDM - Disable Unified Audit Log Ingestion](ddms/trr0000_m365_a.png)
+![DDM - Disable Unified Audit Log Ingestion](ddms/trr0033_m365_a.png)
 
 ### Procedure B: Disable Mailbox Auditing (Org Wide)
 
@@ -218,7 +218,7 @@ UAL.
 
 #### Detection Data Model
 
-![DDM - Disable Mailbox Auditing Org-Wide](ddms/trr0000_m365_b.png)
+![DDM - Disable Mailbox Auditing Org-Wide](ddms/trr0033_m365_b.png)
 
 ### Procedure C: Bypass Mailbox Auditing (Per Principal)
 
@@ -240,7 +240,7 @@ attacker-controlled principal operates in a blind spot.
 
 #### Detection Data Model
 
-![DDM - Bypass Mailbox Auditing Per-Principal](ddms/trr0000_m365_c.png)
+![DDM - Bypass Mailbox Auditing Per-Principal](ddms/trr0033_m365_c.png)
 
 ### Procedure D: Reduce Mailbox Audited Actions (Per Mailbox)
 
@@ -340,7 +340,7 @@ a set is overwritten, the old set is not included in the log.
 
 #### Detection Data Model
 
-![DDM - Reduce Mailbox Audited Actions](ddms/trr0000_m365_d.png)
+![DDM - Reduce Mailbox Audited Actions](ddms/trr0033_m365_d.png)
 
 ### Procedure E: Reduce Audit Log Retention
 
@@ -366,17 +366,17 @@ independent of the retention policy.
 
 #### Detection Data Model
 
-![DDM - Reduce Audit Log Retention](ddms/trr0000_m365_e.png)
+![DDM - Reduce Audit Log Retention](ddms/trr0033_m365_e.png)
 
 ## Available Emulation Tests
 
 | ID             | Link |
 |----------------|------|
-| TRR0000.M365.A |      |
-| TRR0000.M365.B |      |
-| TRR0000.M365.C |      |
-| TRR0000.M365.D |      |
-| TRR0000.M365.E |      |
+| TRR0033.M365.A |      |
+| TRR0033.M365.B |      |
+| TRR0033.M365.C |      |
+| TRR0033.M365.D |      |
+| TRR0033.M365.E |      |
 
 ## References
 
