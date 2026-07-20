@@ -546,9 +546,9 @@ tokens could possibly arise.
 
 #### Detection Data Model
 
-![TRR0019.M365.A - Valid Credentials](ddms/ddm_trr0019_exo_a.png)
+![TRR0019.M365.A - Valid Credentials](ddms/ddm_trr0019_m365_a.png)
 
-Using stole usernames and passwords became more difficult with the end of basic
+Using stolen usernames and passwords became more difficult with the end of basic
 authentication because an attacker now needs to have the user's credentials,
 pass any additional MFA challenges, and fulfill the organization's conditional
 access policies (if any are defined). Stolen tokens are now probably the easiest
@@ -566,9 +566,9 @@ and permissions can be assigned either in Entra or in EXO.
 
 #### Detection Data Model
 
-![TRR0019.M365.B - API Access as Application](ddms/ddm_trr0019_exo_b.png)
+![TRR0019.M365.B - API Access as Application](ddms/ddm_trr0019_m365_b.png)
 
-To execute this procedure, at attacker needs three things:
+To execute this procedure, an attacker needs three things:
 
 1. An Entra ID application
 2. A client secret
@@ -589,9 +589,9 @@ delegated permissions in this approach, but that would require the threat actor
 to have a target user's credentials (and potentially pass an MFA challenge). It
 would be much easier for attackers going this route to use procedure A and
 authenticate with an existing mail client like OWA (which effectively already
-has delegated permissions)
+has delegated permissions).
 
-When granting permissions to an application in Entra, the follow logs are
+When granting permissions to an application in Entra, the following logs are
 relevant:
 
 | Log | Action |
@@ -629,7 +629,7 @@ searches).
 
 #### Detection Data Model
 
-![TRR0019.M365.C - eDiscovery](ddms/ddm_trr0019_exo_c.png)
+![TRR0019.M365.C - eDiscovery](ddms/ddm_trr0019_m365_c.png)
 
 Exchange's eDiscovery solution is fairly simple: you create a compliance search
 and define the parameters to be used to match messages. The search is then run
@@ -703,7 +703,7 @@ Add-MailboxPermission -Identity <targetmailbox> -User <delegateduser> -AccessRig
 
 #### Detection Data Model
 
-![TRR0019.M365.D - Delegation](ddms/ddm_trr0019_exo_d.png)
+![TRR0019.M365.D - Delegation](ddms/ddm_trr0019_m365_d.png)
 
 An attacker with sufficient permissions could grant delegated access for
 specific target mailboxes to an account in their control. They could then log in
@@ -740,7 +740,7 @@ for their `ItemIds` and export those items:
 
 #### Detection Data Model
 
-![TRR0019.M365.E - Export Mailbox](ddms/ddm_trr0019_exo_e.png)
+![TRR0019.M365.E - Export Mailbox](ddms/ddm_trr0019_m365_e.png)
 
 Due to the requirement to provide unique `ItemIds` for each item to be exported,
 an attacker first must enumerate the mail items in a victim's mailbox. This can
