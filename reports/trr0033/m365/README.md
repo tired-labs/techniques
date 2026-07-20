@@ -145,7 +145,7 @@ Historically, Exchange stored audit log entries in a hidden folder within each
 individual mailbox. As of March 1, 2025 mailbox audit data is no longer written
 to the mailbox itself but is ingested by the unified audit service.[^3] As a
 result, the previous per-mailbox `AuditEnabled` property is overridden by the
-organization default. Addtionally, the per-mailbox `AuditLogAgeLimit` parameter
+organization default. Additionally, the per-mailbox `AuditLogAgeLimit` parameter
 is also ignored. (Both properties could be set via the `Set-Mailbox` cmdlet.)
 These previous procedures are now nonfunctional.
 
