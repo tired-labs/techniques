@@ -27,6 +27,15 @@ token endpoint to obtain an access token representing the victim's identity,
 allowing access to APIs and services such as Microsoft Graph or Azure Resource
 Manager depending on the granted permissions.
 
+This TRR does not cover a situation where an attacker is able to gain control
+over a subdomain for a legitimate registered reply URL for a Microsoft
+first-party application. In that situation, the attacker could provide the
+malicious subdomain as the reply URL in the authorization request and the
+authorization code would be sent directly to them. This TRR will not address
+this possibility because responsibility for securing first-party applications,
+including their reply URLs, is held by Microsoft and out of the control of
+individual tenant owners.
+
 This technique is related to but distinct from the illicit consent grant
 technique (Microsoft's "Malicious Application Consent," AZT203). Illicit consent
 grant relies on the victim approving a malicious application and granting it
@@ -162,6 +171,18 @@ redirect URI mismatch error. For the ConsentFix procedure, the attacker is not
 adding a new reply URL or registering a new application. They are selecting a
 valid reply URL already present on a Microsoft first-party application, such as
 a `localhost` reply URL used by command-line or development-oriented clients.
+
+> [!NOTE]
+>
+> You can list applications in your tenant that have a `localhost` reply URL
+> registered with the following PowerShell script:
+>
+> ```powershell
+> Connect-MgGraph -scope "Directory.Read.All"
+> Get-MgServicePrincipal -All | Where-Object {
+>     $_.ReplyUrls -like "*localhost*"
+> }
+> ```
 
 This validation is important for procedure scoping. A non-localhost reply URL
 would only support direct attacker collection if the first-party application has
@@ -325,30 +346,21 @@ APIs, depending on the scopes granted during the authorization process.
 
 #### Procedure Boundary
 
-This procedure specifically covers authorization code collection where the code
-is exposed to the victim through a valid local redirect URI and the victim is
+This procedure primarily covers authorization code collection where the code is
+exposed to the victim through a valid local redirect URI and the victim is
 socially engineered into returning the code or full URL to the attacker.
 
-A related redirect-hijack variant would be materially different if an attacker
-could use the same first-party `client_id` with a registered reply URL that
-delivers the code directly to attacker-controlled infrastructure. That variant
-would not rely on a `localhost` indicator and would require different detection
-logic. This TRR does not define that as a separate procedure because the
-reviewed public research does not confirm an attacker-controlled reply URL for
-the Microsoft first-party applications discussed here. If future research
-identifies a first-party app with an exploitable open redirect, wildcard reply
-URL, or other misconfigured reply URL that allows direct attacker collection,
-that path should be added as a distinct procedure.
-
-A second variant involves a malicious application impersonating first-party
-software. A trojanized client (for example, a tampered build of Visual Studio
-Code) could use the genuine first-party `client_id` and a registered `localhost`
-reply URL, receive the authorization code on the loopback listener, and then
-forward it to attacker-controlled infrastructure. This variant is not treated as
-a separate procedure here because the social engineering occurs earlier, when
-the victim is convinced to install the malicious software; once that trust is
-established the code collection no longer depends on the `localhost` redirect
-indicator central to this procedure.
+> [!NOTE]
+>
+> There is a possible variation on this procedure that involves the attacker
+> pre-positioning an application (for example, a trojanized version of popular
+> software like Visual Studio Code) on the victim's machine, which could then
+> listen on `localhost` and collect the authorization code and send it to
+> attacker-controlled infrastructure without needing to trick the user into
+> collecting and submitting the code. This approach retains the same essential
+> operations: the user is tricked into authenticating and the code is sent to
+> localhost. It differs only in how the code is collected and transmitted. We
+> will treat it as a variant of Procedure A in this TRR.
 
 #### Detection Data Model
 
