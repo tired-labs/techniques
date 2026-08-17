@@ -1,0 +1,383 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n9",
+      "position": {
+        "x": 328.3035105555078,
+        "y": -480.41304323476743
+      },
+      "caption": "Deliver Lure to Victim",
+      "labels": [
+        "Email Gateway"
+      ],
+      "properties": {
+        "client_id": "First-party application",
+        "redirect_uri": "localhost"
+      },
+      "style": {
+        "border-color": "#fa28ff",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n10",
+      "position": {
+        "x": 749.5851726120579,
+        "y": -480.41304323476743
+      },
+      "caption": "Send Authorization Request",
+      "labels": [
+        "Network / Proxy Logs"
+      ],
+      "properties": {
+        "Endpoint": "login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize",
+        "client_id": "First-party application",
+        "redirect_uri": "localhost"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 774.0188795071717,
+        "y": -247.73788618331352
+      },
+      "caption": "Authenticate User",
+      "labels": [
+        "Entra Interactive SignIn Logs"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n13",
+      "position": {
+        "x": 948.0091501927761,
+        "y": -247.73788618331352
+      },
+      "caption": "Issue Authorization Code",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n14",
+      "position": {
+        "x": 1539.6288125515707,
+        "y": -480.41304323476754
+      },
+      "caption": "Collect and Send Authorization Code",
+      "labels": [],
+      "properties": {
+        "Note": "via social engineering (victim shares code)"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n15",
+      "position": {
+        "x": 1915.3112614173187,
+        "y": -480.41304323476743
+      },
+      "caption": "Redeem Authorization Code",
+      "labels": [
+        "Entra NonInteractive SignIn Logs"
+      ],
+      "properties": {
+        "Endpoint": "login.microsoftonline.com/{tenant}/oauth2/v2.0/token"
+      },
+      "style": {
+        "border-color": "#fa28ff",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n16",
+      "position": {
+        "x": 2096.8902752704907,
+        "y": -480.4130432347675
+      },
+      "caption": "Issue Access Token",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    },
+    {
+      "id": "n17",
+      "position": {
+        "x": 551.1611950313397,
+        "y": -480.41304323476743
+      },
+      "caption": "Receive Lure",
+      "style": {
+        "border-width": 2,
+        "caption-font-size": 16,
+        "border-color": "#68bc00"
+      },
+      "labels": [],
+      "properties": {}
+    },
+    {
+      "id": "n18",
+      "position": {
+        "x": 948.0091501927761,
+        "y": -480.41304323476743
+      },
+      "caption": "Receive Authorization Request",
+      "style": {
+        "border-width": 2,
+        "border-color": "#0062b1"
+      },
+      "labels": [],
+      "properties": {}
+    },
+    {
+      "id": "n19",
+      "position": {
+        "x": 1112.8502204875408,
+        "y": -247.73788618331355
+      },
+      "caption": "Send Redirect to Reply URL",
+      "style": {
+        "border-color": "#0062b1"
+      },
+      "labels": [],
+      "properties": {
+        "client_id": "First-party application",
+        "redirect_uri": "localhost"
+      }
+    },
+    {
+      "id": "n20",
+      "position": {
+        "x": 1345.5253775389947,
+        "y": -480.41304323476743
+      },
+      "caption": "Receive Redirect",
+      "labels": [],
+      "properties": {
+        "client_id": "First-party application",
+        "redirect_uri": "localhost"
+      },
+      "style": {
+        "border-width": 2,
+        "caption-font-size": 16,
+        "border-color": "#68bc00"
+      }
+    },
+    {
+      "id": "n21",
+      "position": {
+        "x": 1733.7322475641465,
+        "y": -480.4130432347675
+      },
+      "caption": "Receive Authorization Code",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#fa28ff",
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2,
+        "border-width": 2,
+        "caption-font-size": 16
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n11",
+      "fromId": "n11",
+      "toId": "n13",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n14",
+      "fromId": "n15",
+      "toId": "n16",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 3
+      }
+    },
+    {
+      "id": "n15",
+      "type": "",
+      "style": {
+        "arrow-width": 3
+      },
+      "properties": {},
+      "fromId": "n9",
+      "toId": "n17"
+    },
+    {
+      "id": "n16",
+      "type": "",
+      "style": {
+        "arrow-width": 3
+      },
+      "properties": {},
+      "fromId": "n17",
+      "toId": "n10"
+    },
+    {
+      "id": "n17",
+      "type": "",
+      "style": {
+        "arrow-width": 3
+      },
+      "properties": {},
+      "fromId": "n10",
+      "toId": "n18"
+    },
+    {
+      "id": "n18",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n18",
+      "toId": "n11"
+    },
+    {
+      "id": "n19",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n13",
+      "toId": "n19"
+    },
+    {
+      "id": "n20",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n19",
+      "toId": "n20"
+    },
+    {
+      "id": "n21",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n20",
+      "toId": "n14"
+    },
+    {
+      "id": "n22",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n14",
+      "toId": "n21"
+    },
+    {
+      "id": "n23",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n21",
+      "toId": "n15"
+    }
+  ]
+}
