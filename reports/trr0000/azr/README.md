@@ -364,7 +364,15 @@ socially engineered into returning the code or full URL to the attacker.
 
 #### Detection Data Model
 
-![DDM - Consent Fix](ddms/ddm_trr0000_consentfix.png)
+![DDM - Consent Fix](ddms/trr0000_azr_a.png)
+
+> [!NOTE]
+>
+> Node border colors in the DDM:
+>
+> - Green - User (victim)
+> - Blue - Entra
+> - Pink - Attacker
 
 Detection opportunities for this technique are limited because much of the OAuth
 authorization flow occurs within trusted Microsoft identity infrastructure. One
