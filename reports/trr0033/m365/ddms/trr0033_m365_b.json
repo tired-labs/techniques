@@ -1,0 +1,203 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 50,
+    "caption-font-weight": "normal",
+    "label-position": "inside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 4,
+    "label-font-size": 40,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 133.4411650641193,
+        "y": 9.299902901774024
+      },
+      "caption": "Modify Organization Configuration",
+      "labels": [
+        "UAL 'Set-OrganizationConfig'"
+      ],
+      "properties": {
+        "Command": "Set-OrganizationConfig (EXO Powershell)",
+        "Property": "AuditDisabled",
+        "Value": "True",
+        "Permission": "Organization Management or Audit Logs"
+      },
+      "style": {
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 14,
+        "label-border-color": "#000000",
+        "border-color": "#000000",
+        "border-width": 2,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 485.52095680785965,
+        "y": -315.6257578209351
+      },
+      "caption": "Modify Audit Bypass Association",
+      "labels": [
+        "UAL 'Set-MailboxAuditBypassAssociation'"
+      ],
+      "properties": {
+        "Command": "Set-MailboxAuditBypassAssociation (EXO Powershell)",
+        "Property": "AuditBypassEnabled",
+        "Value": "True",
+        "Permission": "Organization Management or Audit Logs"
+      },
+      "style": {
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 14,
+        "label-border-color": "#000000",
+        "border-color": "#000000",
+        "border-width": 2,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 323.47458359916084,
+        "y": -153.96607195673624
+      },
+      "caption": "Modify Audit Configuration",
+      "labels": [
+        "UAL 'Set-AdminAuditLogConfig'"
+      ],
+      "properties": {
+        "Command": "Set-AdminAuditLogConfig (EXO Powershell)",
+        "Property": "UnifiedAuditLogIngestionEnabled",
+        "Value": "False",
+        "Permission": "Audit Manager (Purview) / Organization Management or Audit Logs (EXO)"
+      },
+      "style": {
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 14,
+        "label-border-color": "#000000",
+        "border-color": "#000000",
+        "border-width": 2,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 617.107999185995,
+        "y": -445.8794640807753
+      },
+      "caption": "Modify Mailbox Audit Set",
+      "labels": [
+        "UAL 'Set-Mailbox'"
+      ],
+      "properties": {
+        "Command": "Set-Mailbox (EXO Powershell)",
+        "Property": "Audit*",
+        "Value": "Various",
+        "Permission": "Organization Management or Audit Logs"
+      },
+      "style": {
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 14,
+        "label-border-color": "#000000",
+        "border-color": "#000000",
+        "border-width": 2,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 788.2478751823307,
+        "y": -593.2387583125056
+      },
+      "caption": "Create or Modify Retention Policy",
+      "labels": [
+        "UAL 'New-/Set-UnifiedAuditLogRetentionPolicy'"
+      ],
+      "properties": {
+        "Command": "New-/Set-UnifiedAuditLogRetentionPolicy (Security & Compliance Powershell)",
+        "Property": "RetentionDuration",
+        "Value": "various",
+        "Permission": "Organization Configuration (Purview)"
+      },
+      "style": {
+        "caption-position": "inside",
+        "caption-color": "#000000",
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-display": "pill",
+        "label-font-size": 14,
+        "label-border-color": "#000000",
+        "border-color": "#000000",
+        "border-width": 2,
+        "label-border-width": 2
+      }
+    }
+  ],
+  "relationships": []
+}

@@ -41,7 +41,16 @@
       "D": "Intercept AS Messages on the Network"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Tests 1-3",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1558.004/T1558.004.md"
+      },
+      "B": null,
+      "C": null,
+      "D": null
+    }
   },
   {
     "name": "Forge a Kerberos TGT",
@@ -64,7 +73,14 @@
       "B": "Forge TGT using PAC acquired via U2U+S4U2Self (Sapphire Ticket)"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Tests 1-2",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1558.001/T1558.001.md"
+      },
+      "B": null
+    }
   },
   {
     "name": "Rogue Domain Controller (DCShadow)",
@@ -180,7 +196,16 @@
       "D": "Harvest Tickets off Endpoints"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Tests 1-3, 5-7",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1558.003/T1558.003."
+      },
+      "B": null,
+      "C": null,
+      "D": null
+    }
   },
   {
     "name": "Remote Email Collection",
@@ -205,7 +230,20 @@
       "E": "Export Mailbox"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Test 1",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1114.002/T1114.002.md#atomic-test-1---office365---remote-mail-collected"
+      },
+      "B": null,
+      "C": null,
+      "D": {
+        "text": "Atomic Test",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.002/T1098.002.md#atomic-test-1---exo---full-access-mailbox-permission-granted-to-a-user"
+      },
+      "E": null
+    }
   },
   {
     "name": "Azure Service Principal Manipulation",
@@ -469,5 +507,122 @@
     },
     "last_update": "2026-03-19",
     "pub_date": "2026-03-19"
+  },
+  {
+    "name": "Entra ID Federated Domain Trust Modification",
+    "id": "TRR0031",
+    "tactics": [
+      "Persistence",
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1484.002",
+      "T1556.007"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Modify existing federated domain",
+      "B": "Add new federated domain"
+    },
+    "tests": {
+      "A": {
+        "text": "Atomic Test",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1484.002/T1484.002.md"
+      },
+      "B": null
+    },
+    "last_update": "2026-06-03",
+    "pub_date": "2026-06-03"
+  },
+  {
+    "name": "Forging SAML Tokens for Entra ID",
+    "id": "TRR0032",
+    "tactics": [
+      "Credential Access",
+      "Defense Evasion"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1606.002"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Submit forged token to federation endpoint",
+      "B": "Exchange forged token via SAML Bearer flow"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-06-29",
+    "pub_date": "2026-06-29"
+  },
+  {
+    "name": "Disable or Modify Cloud Logs (Azure)",
+    "id": "TRR0033",
+    "tactics": [
+      "Defense Impairment"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1685.002"
+    ],
+    "platforms": [
+      "Azure",
+      "Entra ID"
+    ],
+    "procedures": {
+      "A": "Modify Entra Diagnostic Setting",
+      "B": "Modify Azure Diagnostic Setting"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-07-07",
+    "pub_date": "2026-07-07"
+  },
+  {
+    "name": "Disable or Modify Cloud Logs (Microsoft 365)",
+    "id": "TRR0033",
+    "tactics": [
+      "Defense Impairment"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1685.002"
+    ],
+    "platforms": [
+      "Microsoft 365"
+    ],
+    "procedures": {
+      "A": "Disable Unified Audit Log Ingestion",
+      "B": "Disable Mailbox Auditing (Org Wide)",
+      "C": "Bypass Mailbox Auditing (Per Principal)",
+      "D": "Reduce Mailbox Audited Actions (Per Mailbox)",
+      "E": "Reduce Audit Log Retention"
+    },
+    "tests": {
+      "A": null,
+      "B": null,
+      "C": null,
+      "D": null,
+      "E": null
+    },
+    "last_update": "2026-07-22",
+    "pub_date": "2026-07-22"
   }
 ]

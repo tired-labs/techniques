@@ -172,7 +172,7 @@ Windows has two logs that are relevant to the process of requesting a Kerberos
 TGT:
 
 - Event 4771 - Kerberos pre-authentication failed (logged on failure).
-- Event 4678 - A Kerberos authentication ticket (TGT) was requested (logged on
+- Event 4768 - A Kerberos authentication ticket (TGT) was requested (logged on
   success and failure).
 
 The field `Pre-Authentication Type` indicates what kind of pre-auth data was
@@ -199,7 +199,7 @@ CrowdStrike has two logs relevant to TGT requests:
 In both cases, the `ActiveDirectoryAuthenticationMethod` field will be `0` for
 Kerberos. The ActiveDirectoryAuthentication event does not have a field
 indicating if pre-auth data was provided, and as such is less useful than
-Windows event 4678 for this technique. The ActiveDirectoryAuthenticationFailure
+Windows event 4768 for this technique. The ActiveDirectoryAuthenticationFailure
 has a `KerberosErrorCode` field that contains the same `Result Code` information
 as Windows event 4771, but it shows the value in decimal instead of hex, so
 `KDC_ERR_PREAUTH_REQUIRED` is decimal `25`
