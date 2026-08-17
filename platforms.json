@@ -4,7 +4,7 @@
   "AWS": "aws",
   "Azure": "azr",
   "Docker": "dkr",
-  "Exchange Online": "exo",
+  "Microsoft 365": "m365",
   "GCP": "gcp",
   "iOS": "ios",
   "Kubernetes": "k8s",

@@ -18,15 +18,15 @@
     "caption-position": "inside",
     "caption-max-width": 200,
     "caption-color": "#000000",
-    "caption-font-size": 16,
+    "caption-font-size": 50,
     "caption-font-weight": "normal",
-    "label-position": "outside",
+    "label-position": "inside",
     "label-display": "pill",
     "label-color": "#000000",
     "label-background-color": "#ffffff",
     "label-border-color": "#000000",
-    "label-border-width": 2,
-    "label-font-size": 14,
+    "label-border-width": 4,
+    "label-font-size": 40,
     "label-padding": 5,
     "label-margin": 4,
     "directionality": "directed",
@@ -56,8 +56,8 @@
     {
       "id": "n0",
       "position": {
-        "x": 106.12020761822049,
-        "y": 226.04178578555616
+        "x": 68.758372224592,
+        "y": 249.04436240662773
       },
       "caption": "Enumerate Users w/o Pre-Auth",
       "labels": [],
@@ -67,13 +67,18 @@
         "Option2": "Get all users w/ userAccountControl attribute then filter"
       },
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n1",
       "position": {
-        "x": 221.0129111869561,
+        "x": 233.7919245219658,
         "y": 425.04178578555616
       },
       "caption": "Send ADWS Request",
@@ -83,14 +88,19 @@
         "Port": "9389"
       },
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n2",
       "position": {
-        "x": 35.50029292036216,
-        "y": 610.0417857855562
+        "x": 68.758372224592,
+        "y": 668.4615030693966
       },
       "caption": "Send LDAP Search Request",
       "labels": [],
@@ -99,27 +109,37 @@
         "Port": "389 or 636"
       },
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n3",
       "position": {
-        "x": 450.7983183244272,
+        "x": 463.5773316594368,
         "y": 425.04178578555616
       },
       "caption": "Receive ADWS Request",
       "labels": [],
       "properties": {},
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n4",
       "position": {
-        "x": 564.6202076182205,
-        "y": 610.0417857855562
+        "x": 578.4700352281723,
+        "y": 668.4615030693966
       },
       "caption": "Receive LDAP Search Request",
       "labels": [
@@ -127,13 +147,18 @@
       ],
       "properties": {},
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n5",
       "position": {
-        "x": 538.9703281485345,
+        "x": 578.4700352281723,
         "y": 226.04178578555616
       },
       "caption": "Send AD Data",
@@ -142,13 +167,18 @@
         "Host": "DC"
       },
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n6",
       "position": {
-        "x": 921.2131633208182,
+        "x": 960.712870400456,
         "y": 425.04178578555616
       },
       "caption": "Send AS-REQ",
@@ -160,13 +190,18 @@
         "Optional": "Downgrade Encryption"
       },
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n7",
       "position": {
-        "x": 1148.1197055514506,
+        "x": 1187.6194126310884,
         "y": 425.04178578555616
       },
       "caption": "Send AS-REP",
@@ -182,70 +217,101 @@
         "EncryptionType": "0x17 (RC4)"
       },
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n8",
       "position": {
-        "x": 1324.1614913370067,
+        "x": 1363.6611984166445,
         "y": 226.04178578555616
       },
       "caption": "Crack Hash",
       "labels": [],
       "properties": {},
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n9",
       "position": {
-        "x": 707.9578076136131,
-        "y": 120.1110411730655
+        "x": 800.2657156935841,
+        "y": 65.59463107868419
       },
       "caption": "Alternate Procedure: Test Every Account",
       "labels": [],
       "properties": {},
-      "style": {}
+      "style": {
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
+      }
     },
     {
       "id": "n10",
       "position": {
-        "x": 1148.1197055514506,
+        "x": 1187.6194126310884,
         "y": 50
       },
       "caption": "Intercept Auth Server Messages",
       "labels": [],
       "properties": {},
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n11",
       "position": {
-        "x": 921.2131633208182,
+        "x": 960.712870400456,
         "y": 226.04178578555616
       },
       "caption": "Request TGT",
       "labels": [],
       "properties": {},
       "style": {
-        "border-color": "#68bc00"
+        "border-color": "#68bc00",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     },
     {
       "id": "n12",
       "position": {
-        "x": 1148.1197055514506,
+        "x": 1187.6194126310884,
         "y": 226.04178578555616
       },
       "caption": "Send TGT",
       "labels": [],
       "properties": {},
       "style": {
-        "border-color": "#0062b1"
+        "border-color": "#0062b1",
+        "label-position": "outside",
+        "label-font-size": 16,
+        "label-border-width": 2,
+        "border-width": 3,
+        "caption-font-size": 18
       }
     }
   ],
@@ -256,7 +322,10 @@
       "toId": "n1",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n1",
@@ -264,7 +333,10 @@
       "toId": "n2",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#000000"
+      }
     },
     {
       "id": "n2",
@@ -272,7 +344,10 @@
       "toId": "n3",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n3",
@@ -280,7 +355,10 @@
       "toId": "n4",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#000000"
+      }
     },
     {
       "id": "n4",
@@ -288,7 +366,10 @@
       "toId": "n5",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n5",
@@ -296,7 +377,10 @@
       "toId": "n5",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#000000"
+      }
     },
     {
       "id": "n6",
@@ -304,7 +388,10 @@
       "toId": "n7",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n7",
@@ -312,7 +399,9 @@
       "toId": "n8",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3
+      }
     },
     {
       "id": "n8",
@@ -320,7 +409,10 @@
       "toId": "n11",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n9",
@@ -328,7 +420,10 @@
       "toId": "n6",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n10",
@@ -336,7 +431,10 @@
       "toId": "n12",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n11",
@@ -344,7 +442,10 @@
       "toId": "n8",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     },
     {
       "id": "n12",
@@ -352,7 +453,10 @@
       "toId": "n11",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#000000"
+      }
     },
     {
       "id": "n13",
@@ -360,7 +464,10 @@
       "toId": "n11",
       "type": "",
       "properties": {},
-      "style": {}
+      "style": {
+        "arrow-width": 3,
+        "arrow-color": "#f44e3b"
+      }
     }
   ]
 }
