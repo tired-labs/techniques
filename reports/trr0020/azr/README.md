@@ -268,7 +268,11 @@ once -- when it is first created -- and after that the secret value cannot be
 retrieved. It can, however, be stolen from the application.
 - The third option for authenticating applications is a federated credential.
 Azure supports GitHub, Kubernetes, customer-managed keys, or an external OpenID
-Connect provider.[^3][^4]
+Connect provider.[^3][^4] The credential configures a single application or
+user-assigned managed identity to trust tokens from that issuer, so no secret or
+certificate is stored.[^14] Federating a domain, which delegates sign-in for
+every user in a domain to an external identity provider, is a separate technique
+([T1484.002]).
 
 ![Adding Credentials via the Azure Portal](images/azure_portal_reg_app_credentials.png)
 
@@ -283,8 +287,11 @@ with the `Microsoft.Directory/servicePrincipals/credentials/update` permission
 in Entra. To add credentials as an application, one of the
 `Application.ReadWrite*` Graph permissions is required. There are many options
 for how to do it, including Powershell (`New-AzAdSpcredential`), the Graph
-API[^8], or the Azure portal. There is one relevant Entra Audit log generated:
-"Update Application - Certificates and secrets management."
+API[^8], or the Azure portal. Adding a certificate or client secret generates
+the Entra Audit log "Update Application - Certificates and secrets management."
+Adding a federated credential is recorded under a different operation: it
+appears as a `FederatedIdentityCredentials` modified property on "Update
+application," "Update service principal," or "Add application."
 
 ### Procedure B: Add owner
 
@@ -600,10 +607,11 @@ to abuse. In Azure logging, delegated permissions are called an
 [AZT502.2]: https://microsoft.github.io/Azure-Threat-Research-Matrix/Persistence/AZT502/AZT502-2/
 [AZT501.2]: https://microsoft.github.io/Azure-Threat-Research-Matrix/Persistence/AZT501/AZT501-2/
 [T1098.003]: https://attack.mitre.org/techniques/T1098/003/
+[T1484.002]: https://attack.mitre.org/techniques/T1484/002/
 [Procedures]: #procedures
 [Application and service principal objects in Microsoft Entra ID]: https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals
 [Graph Permissions Reference - Microsoft Learn]: https://learn.microsoft.com/en-us/azure/active-directory/roles/permissions-reference
-[Azure Privilege Escalation via Azure API Permissions Abuse - SpecterOps]: https://posts.specterops.io/azure-privilege-escalation-via-azure-api-permissions-abuse-74aee1006f48
+[Azure Privilege Escalation via Azure API Permissions Abuse - SpecterOps]: https://specterops.io/blog/2021/12/01/azure-privilege-escalation-via-azure-api-permissions-abuse/
 [Default User Permissions in Entra ID - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/fundamentals/users-default-permissions#owned-application-registrations
 [User and Admin Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/user-admin-consent-overview
 [Grant Tenant-Wide Admin Consent - Microsoft Learn]: https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/grant-admin-consent
@@ -624,7 +632,7 @@ to abuse. In Azure logging, delegated permissions are called an
 [^3]: [Access Token Request with a Federated Credential - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow#third-case-access-token-request-with-a-federated-credential)
 [^4]: [Adding Credentials - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app?tabs=federated-credential#add-credentials)
 [^5]: [App consent permissions for custom roles - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/custom-consent-permissions)
-[^6]: [Azure Privilege Escalation via API Permissions Abuse - SpecterOps](https://posts.specterops.io/azure-privilege-escalation-via-azure-api-permissions-abuse-74aee1006f48)
+[^6]: [Azure Privilege Escalation via API Permissions Abuse - SpecterOps](https://specterops.io/blog/2021/12/01/azure-privilege-escalation-via-azure-api-permissions-abuse/)
 [^7]: [Microsoft Graph Permissions Reference - Microsoft     Learn](https://learn.microsoft.com/en-us/graph/permissions-reference)
 [^8]: [Graph API ServicePrincipal Add Password - Microsoft Learn](https://learn.microsoft.com/en-us/graph/api/serviceprincipal-addpassword?view=graph-rest-1.0&tabs=http)
 [^9]: [Azure Resource Manager - Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview)
@@ -632,3 +640,4 @@ to abuse. In Azure logging, delegated permissions are called an
 [^11]: [AZ CLI App Owner - Microsoft Learn](https://learn.microsoft.com/en-us/cli/azure/ad/app/owner?view=azure-cli-latest)
 [^12]: [AZ CLI SPN Owner - Microsoft     Learn](https://learn.microsoft.com/en-us/cli/azure/ad/sp/owner?view=azure-cli-latest)
 [^13]: [Microsoft Entra built-in roles - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/role-based-access-control/permissions-reference)
+[^14]: [Workload Identity Federation - Microsoft Learn](https://learn.microsoft.com/en-us/entra/workload-id/workload-identity-federation)

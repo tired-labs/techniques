@@ -271,7 +271,22 @@
       "D": "Add API permissions"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": {
+        "text": "Atomic Test 1",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.001/T1098.001.md#atomic-test-1---azure-ad-application-hijacking---service-principal"
+      },
+      "B": null,
+      "C": {
+        "text": "Atomic Test 1-2",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.md"
+      },
+      "D": {
+        "text": "Atomic Test 8",
+        "url": "https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098/T1098.md#atomic-test-8---azure-ad---adding-permission-to-application"
+      }
+    }
   },
   {
     "name": "Azure Guest Account Creation",

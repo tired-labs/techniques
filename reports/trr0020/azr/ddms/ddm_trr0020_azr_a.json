@@ -65,7 +65,10 @@
       ],
       "properties": {
         "RBAC": "Entra ID",
-        "Operation": "Update Application - Certificates and secrets management"
+        "Operation1": "Update Application - Certificates and secrets management",
+        "Operation2": "Update application | Update service principal | Add application",
+        "Property1": "KeyDescription",
+        "Property2": "FederatedIdentityCredentials"
       },
       "style": {
         "label-position": "outside",
