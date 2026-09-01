@@ -249,7 +249,7 @@ the ticket can be imported into a new logon session.
 [T1003.001]: https://attack.mitre.org/techniques/T1003/001/
 [Rubeus]: https://github.com/GhostPack/Rubeus/blob/master/Rubeus/lib/LSA.cs#190
 [Mimikatz]: https://github.com/gentilkiwi/mimikatz/blob/master/mimikatz/modules/sekurlsa/kuhl_m_sekurlsa.c#L290
-[LSA Whisperer - SpecterOps]: https://posts.specterops.io/lsa-whisperer-20874277ea3b
+[LSA Whisperer - SpecterOps]: https://specterops.io/blog/2024/04/17/lsa-whisperer/
 [LsaCallAuthenticationPackage - Microsoft Learn]: https://learn.microsoft.com/en-us/windows/win32/api/ntsecapi/nf-ntsecapi-lsacallauthenticationpackage
 [Abusing Microsoft Kerberos - BlackHat 2014]: https://www.slideshare.net/slideshow/abusing-microsoft-kerberos-sorry-you-guys-dont-get-it/37957800#29
 [Implement Kerberos Auth with LSA Service API]: https://www.apriorit.com/dev-blog/674-driver-how-to-implement-kerberos-authentication-for-windows-with-the-lsa-service-api
@@ -258,6 +258,6 @@ the ticket can be imported into a new logon session.
 [Atomic Tests 1-2]: https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1550.003/T1550.003.md
 [klist]: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/klist
 [Get-KerberosTicketGrantingTicket - Jared Atkinson]: https://gist.github.com/jaredcatkinson/c95fd1e4e76a4b9b966861f64782f5a9
-[Rubeus with More Kekeo - SpecterOps]: https://posts.specterops.io/rubeus-now-with-more-kekeo-6f57d91079b9
+[Rubeus with More Kekeo - SpecterOps]: https://specterops.io/blog/2018/10/04/rubeus-now-with-more-kekeo/
 [Credential Guard - Microsoft Learn]: https://learn.microsoft.com/en-us/windows/security/identity-protection/credential-guard/how-it-works
 [How Credential Guard Works - Steve Syfuhs]: https://syfuhs.net/how-does-remote-credential-guard-work
