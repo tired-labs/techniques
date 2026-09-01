@@ -4,7 +4,7 @@
 
 | Key          | Value             |
 | ------------ | ----------------- |
-| ID           | TRR0000           |
+| ID           | TRR0034           |
 | External IDs | [T1528]           |
 | Tactics      | Credential Access |
 | Platforms    | Azure             |
@@ -285,7 +285,7 @@ applications.
 
 | ID            | Title      | Tactic            |
 | ------------- | ---------- | ----------------- |
-| TRR0000.AZR.A | Authorization Code Collection via Social Engineering (ConsentFix) | Credential Access |
+| TRR0034.AZR.A | Authorization Code Collection via Social Engineering (ConsentFix) | Credential Access |
 
 ### Procedure A: Authorization Code Collection (ConsentFix)
 
@@ -364,7 +364,7 @@ socially engineered into returning the code or full URL to the attacker.
 
 #### Detection Data Model
 
-![DDM - Consent Fix](ddms/trr0000_azr_a.png)
+![DDM - Consent Fix](ddms/trr0034_azr_a.png)
 
 > [!NOTE]
 >
@@ -403,7 +403,7 @@ records as steps in the attack itself.
 
 | ID            | Link |
 | ------------- | ---- |
-| TRR0000.AZR.A |      |
+| TRR0034.AZR.A |      |
 
 ## References
 

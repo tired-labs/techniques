@@ -624,5 +624,29 @@
     },
     "last_update": "2026-07-22",
     "pub_date": "2026-07-22"
+  },
+  {
+    "name": "OAuth Authorization Code Phishing",
+    "id": "TRR0034",
+    "tactics": [
+      "Credential Access"
+    ],
+    "contributors": [
+      "Kyle Barboza"
+    ],
+    "external_ids": [
+      "T1528"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Authorization Code Collection via Social Engineering (ConsentFix)"
+    },
+    "tests": {
+      "A": null
+    },
+    "last_update": "2026-08-17",
+    "pub_date": "2026-08-17"
   }
 ]
