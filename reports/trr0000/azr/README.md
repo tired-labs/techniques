@@ -93,9 +93,9 @@ in to and who owns it. This is how Microsoft describes them:
 - **Microsoft Entra hybrid joined** - Joined to on-premises Active Directory and
   registered with Entra ID. These objects carry a `trustType` of `ServerAd`.[^3]
 
-The distinction between registered and joined is simply a field set in the registration
-request. Both are produced by the same service through the same exchange with the same
-level of validation.
+The distinction between registered and joined is simply a field set in the
+registration request. Both are produced by the same service through the same
+exchange with the same level of validation.
 
 ```text
 JoinType: 4  -->  trustType "Workplace"   (Entra registered)
@@ -182,8 +182,8 @@ The response returns the PRT, an identity token describing the authentication
 that produced it, and a session key encrypted to the transport key submitted
 during registration. The session key is required to use the token for single
 sign-on, a request that presents the token without signing it with the session
-key is rejected. (The session key is not required to establish that the token was
-issued or to read the claims it was issued against.)
+key is rejected. (The session key is not required to establish that the token
+was issued or to read the claims it was issued against.)
 
 The session key  is recoverable only with the transport private key generated
 during registration. An adversary who performs the registration holds all three,
@@ -203,11 +203,11 @@ acquired.[^11]
 
 > [!WARNING]
 >
-> Testing showed that an administrative password reset -- which issues a temporary
-> password for the user and requires them to change their password at their next
-> sign-in -- did not advance the timestamp. A token issued beforehand was still
-> redeemed successfully afterwards. The timestamp advanced only when the user
-> logged in and set a password of their own.
+> Testing showed that an administrative password reset -- which issues a
+> temporary password for the user and requires them to change their password at
+> their next sign-in -- did not advance the timestamp. A token issued beforehand
+> was still redeemed successfully afterwards. The timestamp advanced only when
+> the user logged in and set a password of their own.
 >
 > Because resetting a compromised account's password does not by itself end
 > sessions established with the previous one, the sessions must be explicitly
