@@ -68,9 +68,10 @@ Entra allows administrators to configure the authentication method policy for
 the tenant. The policy defines which methods are accepted for which groups of
 users.
 
-![Entra Authentication Methods Policy](images/entra_auth_policy.png) Entra
-allows methods to be registered that are not approved by the policy, but those
-methods will not be accepted for authentication.
+![Entra Authentication Methods Policy](images/entra_auth_policy.png)
+
+Entra allows methods to be registered that are not approved by the policy, but
+those methods will not be accepted for authentication.
 
 ![Entra Unusable Authentication Method](images/unusable_methods.png)
 
@@ -102,8 +103,8 @@ that would otherwise be protected.
 
 ### Telemetry
 
-Authentication method activity is recorded in the Entra ID audit log under both the
-`Authentication Methods` and `Core Services` services.[^4]
+Authentication method activity is recorded in the Entra ID audit log under both
+the `Authentication Methods` and `Core Services` services.[^4]
 
 | Activity | Service | Details |
 | --- | --- | --- |
