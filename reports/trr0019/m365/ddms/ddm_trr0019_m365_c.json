@@ -61,7 +61,7 @@
       },
       "caption": "Create Compliance Search",
       "labels": [
-        "UnifiedAuditLog \"searchcreated\""
+        "UnifiedAuditLog \"PurviewSearchAdded\""
       ],
       "properties": {},
       "style": {
@@ -80,7 +80,8 @@
       },
       "caption": "Run Compliance Search",
       "labels": [
-        "UnifiedAuditLog \"searchstarted\""
+        "UnifiedAuditLog \"PurviewSearchStatisticsJobSubmitted\"",
+        "UnifiedAuditLog \"PurviewSearchSampleJobSubmitted\""
       ],
       "properties": {},
       "style": {
@@ -96,7 +97,7 @@
       },
       "caption": "Add to Results Review Set",
       "labels": [
-        "UnifiedAuditLog \"ReviewSetSearchRun\""
+        "UnifiedAuditLog \"PurviewSearchAddToReviewSetJobSubmitted\""
       ],
       "properties": {},
       "style": {
@@ -110,9 +111,10 @@
         "x": 475.5406779452106,
         "y": 226.68851317137023
       },
-      "caption": "Export Search Results",
+      "caption": "Export Results",
       "labels": [
-        "UnifiedAuditLog \"searchexported\""
+        "UnifiedAuditLog \"PurviewSearchExportJobSubmitted\"",
+        "UnifiedAuditLog \"ReviewSetExportJobSubmitted\""
       ],
       "properties": {},
       "style": {
@@ -126,9 +128,7 @@
         "y": 226.68851317137023
       },
       "caption": "Download Search Results",
-      "labels": [
-        "UnifiedAuditLog \"searchexportdownloaded\""
-      ],
+      "labels": [],
       "properties": {},
       "style": {
         "border-color": "#68bc00"
@@ -200,6 +200,16 @@
       "properties": {},
       "fromId": "n2",
       "toId": "n5"
+    },
+    {
+      "id": "n5",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-width": 2
+      }
     }
   ]
 }

@@ -167,9 +167,9 @@ Application developers can define the roles exposed by their application using
 either the "Manifest" or the "App roles" blade in the portal or by adding an
 `appRoleAssignment` programmatically. When a user signs in to the application,
 Entra ID adds a `roles` claim to the OAuth token they receive for each role that
-the user or service principal was granted to the resource they’re authenticating
+the user or service principal was granted to the resource they're authenticating
 to. These can then be used by the application to implement claim-based
-authorization (i.e. granting access based on a user’s role claims).
+authorization (i.e. granting access based on a user's role claims).
 
 ##### Delegated Permissions
 
@@ -197,21 +197,21 @@ application using either the "Manifest" or the "Expose an API" blade in the
 portal or by adding an `oauth2PermissionGrant` programmatically. When a user
 signs in to the application, Entra ID adds an `scp` claim to the OAuth token
 they receive for each scope that the user or service principal was granted to
-the resource they’re authenticating to.
+the resource they're authenticating to.
 
 > [!NOTE]
 >
-> You can view an application’s manifest by using the PowerShell
+> You can view an application's manifest by using the PowerShell
 > `Get-AzureADServicePrincipal` cmdlet. This is particularly useful for 1st or
-> 3rd party applications where you can’t see the manifest or App Registration.
+> 3rd party applications where you can't see the manifest or App Registration.
 > For example, the Microsoft Graph API is registered as AppId
 > `00000003-0000-0000-c000-000000000000` and the Azure AD API is registered as
 > `00000002-0000-0000-c000-000000000000`. (These IDs will be the same across all
-> tenants, while the Service Principal will be distinct for each tenant – it
+> tenants, while the Service Principal will be distinct for each tenant - it
 > will share the same `AppID`, but have a unique `ObjectID`). The `AppRoles` or
 > `OAuth2Permissions` defined in the app manifest for those applications show
 > all the application and delegated permissions that can be requested for that
-> application’s API.
+> application's API.
 >
 > ```Text
 > $EXO = Get-AzureADServicePrincipal -Filter "AppId eq '00000002-0000-0ff1-ce00-000000000000'"
@@ -620,53 +620,73 @@ interesting terms (like 'credentials,' 'username,' or 'password') or to bulk
 download messages from target mailboxes. Microsoft's eDiscovery solution is
 accessed via the Microsoft Purview portal[^13], Microsoft Graph[^14], or using
 the `ComplianceSearch` series of cmdlets in the ExchangeOnlineManagement
-module[^15]. Attackers need the `Discovery Management` or `Discovery
-Administrator` EXO role or the `Mailbox Search` permission to create and access
-discovery (also called compliance) searches. Exporting the results requires the
-`Export` permission. For Graph they need the permissions `eDiscovery.Read.All`
-(to view existing search results) or `eDiscovery.ReadWrite.All` (to create new
-searches).
+module[^15]. The cmdlets still create and run searches, but their export
+parameters were retired on May 26, 2025, so a scripted export now goes
+through Graph[^33]. Attackers need an account holding the Purview
+`Compliance Search` role to create searches and view their statistics, the
+`Preview` role to open items from the search results, the `Export` role to
+export them, and the `Review` role to open items in a review set. All four are
+assigned by default to the `eDiscovery Manager` role group, whose `eDiscovery
+Administrator` subgroup can also access every case in the organization[^28].
+For Graph they need `eDiscovery.ReadWrite.All` to create searches, and
+`eDiscovery.Read.All` to view the results of an existing search and to export
+them[^34].
 
 #### Detection Data Model
 
 ![TRR0019.M365.C - eDiscovery](ddms/ddm_trr0019_m365_c.png)
 
-Exchange's eDiscovery solution is fairly simple: you create a compliance search
-and define the parameters to be used to match messages. The search is then run
-and once it has completed, you can preview the results, add them to a review
-set, or initiate a bulk export. This enables attackers to
-extract messages across all mailboxes that might be of interest to them.
+Exchange's eDiscovery solution is fairly simple: you create a search and
+define the parameters to be used to match messages. The search is then run to
+generate statistics or a sample of the matching items, and once it has
+completed, you can preview the sampled items, add the results to a review set,
+or initiate a bulk export. This enables attackers to extract messages across
+all mailboxes that might be of interest to them.
 
 Microsoft's eDiscovery solution uses 'cases' as an organizational construct,
-with each case containing 'content searches' (also called 'collections'),
-'review sets,' and 'exports.' Items from content searches can be added to a
-review set to be reviewed directly, or they can be exported in bulk.
+with each case containing 'searches,' 'review sets,' and 'exports.' Content
+Search, formerly a separate solution, is now a system-generated eDiscovery
+case available to the eDiscovery Manager and Administrator role groups[^29].
+Search results can be added to a review set to be reviewed in place, or
+exported in bulk from the search or from the review set. Export packages are
+downloaded from the Process manager page, and a search export package expires
+14 days after the export is created[^30].
 
 #### eDiscovery Logging
 
 Microsoft's eDiscovery for Microsoft 365 logs to the Unified Audit Log. Logs can
 be retrieved using Purview's Audit search, PowerShell's `Search-UnifiedAuditLog`
 cmdlet, or via the Office 365 Activity Management API (it's one of the "General"
-workloads, with an `AuditLogRecordType` of "Discovery" or ID "24"[^18]).
+workloads, with an `AuditLogRecordType` of `Discovery` (24) for searches and
+case management in the Purview portal and `AeD` (31) for Advanced eDiscovery
+events[^18]). Microsoft records a client IP address on every activity
+performed in the current eDiscovery experience; a record without one was
+produced by the legacy experience[^32].
 
 The following events might be interesting for identifying efforts to use
 eDiscovery to collect and export emails:
 
 | Event | Description |
 | --- | --- |
-| searchcreated | A compliance search has been created |
-| searchstarted | A compliance search has been executed |
-| searchviewed | A compliance search's results have been viewed |
-| searchexported | Results from a compliance search have been exported |
-| searchexportdownloaded | The exported results have been downloaded |
-| ReviewSetSearchRun | The results of a search have been added to a review set |
-| ReviewSetDocumentViewed | A document in a review set has been viewed |
+| PurviewSearchAdded | A new search was created |
+| PurviewSearchStatisticsJobSubmitted | User triggered a "generate statistics" process from a search |
+| PurviewSearchSampleJobSubmitted | User triggered a "generate sample" process from a search |
+| SampleResultsViewed | User viewed search sample results view |
+| PurviewSearchExportJobSubmitted | User triggered an "export" process from a search |
+| PurviewSearchAddToReviewSetJobSubmitted | User triggered an "add to review set" process from a search |
+| ReviewSetDocumentViewed | User viewed a document inside a review set |
+| ReviewSetExportJobSubmitted | Exported documents from review set |
+
+The activity reference lists no operation for the download of an export
+package[^31].
 
 > [!WARNING]
 >
 > When an email item is reviewed or exported using eDiscovery, there is no
 > `MailItemsAccessed` log generated to show the access. The only record of this
-> type of access is via the eDiscovery logs.
+> type of access is via the eDiscovery logs. Adding SharePoint or OneDrive
+> items to a review set or exporting them might record a `FileAccessed` audit
+> event attributed to the eDiscovery service[^30].
 
 ### Procedure D: Delegation
 
@@ -797,6 +817,11 @@ provides equivalent functionality in EXO.
 - [eDiscovery - Microsoft Learn]
 - [eDiscovery Export Search Results - Microsoft Learn]
 - [App-Only Access for eDiscovery]
+- [Assign permissions in eDiscovery - Microsoft Learn]
+- [Audit log activities - Microsoft Learn]
+- [Search for eDiscovery activities in the audit log - Microsoft Learn]
+- [Upcoming changes to Microsoft Purview eDiscovery - Microsoft Tech Community]
+- [ediscoverySearch: exportResult - Microsoft Graph]
 - [MailItemsAccessed - Microsoft Learn]
 - [How to Access Other Mailboxes - Microsoft Learn]
 - [Mailbox audit logging in Exchange Server]
@@ -846,6 +871,16 @@ provides equivalent functionality in EXO.
     https://learn.microsoft.com/en-us/purview/edisc-search-export
 [App-Only Access for eDiscovery]:
     https://learn.microsoft.com/en-us/graph/security-ediscovery-appauthsetup
+[Assign permissions in eDiscovery - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/purview/edisc-permissions
+[Audit log activities - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/purview/audit-log-activities#ediscovery-activities
+[Search for eDiscovery activities in the audit log - Microsoft Learn]:
+    https://learn.microsoft.com/en-us/purview/edisc-ref-audit-log
+[Upcoming changes to Microsoft Purview eDiscovery - Microsoft Tech Community]:
+    https://techcommunity.microsoft.com/blog/microsoft-security-blog/upcoming-changes-to-microsoft-purview-ediscovery/4405084
+[ediscoverySearch: exportResult - Microsoft Graph]:
+    https://learn.microsoft.com/en-us/graph/api/security-ediscoverysearch-exportresult
 [MailItemsAccessed - Microsoft Learn]:
     https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/mailbox-synchronization-and-ews-in-exchange
 [How to Access Other Mailboxes - Microsoft Learn]:
@@ -909,3 +944,10 @@ provides equivalent functionality in EXO.
     Online](https://learn.microsoft.com/en-us/exchange/collaboration-exo/shared-mailboxes)
 [^27]: [Filterable properties for the RecipientFilter parameter on Exchange
     cmdlets - Microsoft Learn](https://learn.microsoft.com/en-us/powershell/exchange/recipientfilter-properties?view=exchange-ps)
+[^28]: [Assign permissions in eDiscovery - Microsoft Learn](https://learn.microsoft.com/en-us/purview/edisc-permissions)
+[^29]: [Learn about eDiscovery - Microsoft Learn](https://learn.microsoft.com/en-us/purview/edisc)
+[^30]: [Export search results in eDiscovery - Microsoft Learn](https://learn.microsoft.com/en-us/purview/edisc-search-export)
+[^31]: [Audit log activities: eDiscovery activities - Microsoft Learn](https://learn.microsoft.com/en-us/purview/audit-log-activities#ediscovery-activities)
+[^32]: [Search for eDiscovery activities in the audit log - Microsoft Learn](https://learn.microsoft.com/en-us/purview/edisc-ref-audit-log)
+[^33]: [Upcoming changes to Microsoft Purview eDiscovery - Microsoft Tech Community](https://techcommunity.microsoft.com/blog/microsoft-security-blog/upcoming-changes-to-microsoft-purview-ediscovery/4405084)
+[^34]: [ediscoverySearch: exportResult - Microsoft Graph](https://learn.microsoft.com/en-us/graph/api/security-ediscoverysearch-exportresult)
