@@ -620,14 +620,17 @@ interesting terms (like 'credentials,' 'username,' or 'password') or to bulk
 download messages from target mailboxes. Microsoft's eDiscovery solution is
 accessed via the Microsoft Purview portal[^13], Microsoft Graph[^14], or using
 the `ComplianceSearch` series of cmdlets in the ExchangeOnlineManagement
-module[^15]. Attackers need an account holding the Purview `Compliance Search`
-role to create searches and view their statistics, the `Preview` role to open
-items from the search results, the `Export` role to export them, and the
-`Review` role to open items in a review set. All four are assigned by default
-to the `eDiscovery Manager` role group, whose `eDiscovery Administrator`
-subgroup can also access every case in the organization[^28]. For Graph they
-need the permissions `eDiscovery.Read.All` (to view existing search results) or
-`eDiscovery.ReadWrite.All` (to create new searches).
+module[^15]. The cmdlets still create and run searches, but their export
+parameters were retired on May 26, 2025, so a scripted export now goes
+through Graph[^33]. Attackers need an account holding the Purview
+`Compliance Search` role to create searches and view their statistics, the
+`Preview` role to open items from the search results, the `Export` role to
+export them, and the `Review` role to open items in a review set. All four are
+assigned by default to the `eDiscovery Manager` role group, whose `eDiscovery
+Administrator` subgroup can also access every case in the organization[^28].
+For Graph they need `eDiscovery.ReadWrite.All` to create searches, and
+`eDiscovery.Read.All` to view the results of an existing search and to export
+them[^34].
 
 #### Detection Data Model
 
@@ -817,6 +820,8 @@ provides equivalent functionality in EXO.
 - [Assign permissions in eDiscovery - Microsoft Learn]
 - [Audit log activities - Microsoft Learn]
 - [Search for eDiscovery activities in the audit log - Microsoft Learn]
+- [Upcoming changes to Microsoft Purview eDiscovery - Microsoft Tech Community]
+- [ediscoverySearch: exportResult - Microsoft Graph]
 - [MailItemsAccessed - Microsoft Learn]
 - [How to Access Other Mailboxes - Microsoft Learn]
 - [Mailbox audit logging in Exchange Server]
@@ -872,6 +877,10 @@ provides equivalent functionality in EXO.
     https://learn.microsoft.com/en-us/purview/audit-log-activities#ediscovery-activities
 [Search for eDiscovery activities in the audit log - Microsoft Learn]:
     https://learn.microsoft.com/en-us/purview/edisc-ref-audit-log
+[Upcoming changes to Microsoft Purview eDiscovery - Microsoft Tech Community]:
+    https://techcommunity.microsoft.com/blog/microsoft-security-blog/upcoming-changes-to-microsoft-purview-ediscovery/4405084
+[ediscoverySearch: exportResult - Microsoft Graph]:
+    https://learn.microsoft.com/en-us/graph/api/security-ediscoverysearch-exportresult
 [MailItemsAccessed - Microsoft Learn]:
     https://learn.microsoft.com/en-us/exchange/client-developer/exchange-web-services/mailbox-synchronization-and-ews-in-exchange
 [How to Access Other Mailboxes - Microsoft Learn]:
@@ -940,3 +949,5 @@ provides equivalent functionality in EXO.
 [^30]: [Export search results in eDiscovery - Microsoft Learn](https://learn.microsoft.com/en-us/purview/edisc-search-export)
 [^31]: [Audit log activities: eDiscovery activities - Microsoft Learn](https://learn.microsoft.com/en-us/purview/audit-log-activities#ediscovery-activities)
 [^32]: [Search for eDiscovery activities in the audit log - Microsoft Learn](https://learn.microsoft.com/en-us/purview/edisc-ref-audit-log)
+[^33]: [Upcoming changes to Microsoft Purview eDiscovery - Microsoft Tech Community](https://techcommunity.microsoft.com/blog/microsoft-security-blog/upcoming-changes-to-microsoft-purview-ediscovery/4405084)
+[^34]: [ediscoverySearch: exportResult - Microsoft Graph](https://learn.microsoft.com/en-us/graph/api/security-ediscoverysearch-exportresult)
