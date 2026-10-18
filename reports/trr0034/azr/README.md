@@ -275,8 +275,8 @@ application useful when the attacker wants SharePoint or user profile access
 without registering a new application or triggering a new consent prompt.
 
 Other commonly discussed first-party applications include Microsoft Azure CLI,
-Microsoft Azure PowerShell, Visual Studio, Visual Studio Code, Microsoft Teams,
-and Aadrm Admin Powershell. This list is not exhaustive. [EntraScopes] maintains
+Microsoft Azure PowerShell, Visual Studio, Visual Studio Code, and Microsoft
+Teams. This list is not exhaustive. [EntraScopes] maintains
 a ConsentFix filter over Microsoft first-party applications (61 applications as
 of September 2026) with the affected reply URL for each one, both `localhost`
 and non-publicly resolvable domains such as `https://sqlaad/`. These
