@@ -113,8 +113,7 @@
       "caption": "Elevate Access to Root Scope",
       "labels": [
         "Entra AuditLogs (User has elevated their access to User Access Administrator for their Azure Resources)",
-        "Azure Activity Log Directory Activity (Microsoft.Authorization/elevateAccess/action)",
-        "Microsoft Defender XDR CloudAuditEvents (Microsoft.Authorization/elevateAccess/action)"
+        "Azure Activity Log Directory Activity (Microsoft.Authorization/elevateAccess/action)"
       ],
       "properties": {
         "Action": "Microsoft.Authorization/elevateAccess/action",
