@@ -138,7 +138,7 @@
     {
       "id": "n3",
       "position": {
-        "x": 1000,
+        "x": 1400,
         "y": 150
       },
       "caption": "Open Remote Path",
@@ -163,7 +163,7 @@
     {
       "id": "n4",
       "position": {
-        "x": 1500,
+        "x": 1900,
         "y": 520
       },
       "caption": "Resolve Host Name",
@@ -185,7 +185,7 @@
     {
       "id": "n5",
       "position": {
-        "x": 2100,
+        "x": 2500,
         "y": 550
       },
       "caption": "Establish Outbound Connection",
@@ -212,7 +212,7 @@
     {
       "id": "n6",
       "position": {
-        "x": 2100,
+        "x": 2500,
         "y": 150
       },
       "caption": "Host Listener",
@@ -231,7 +231,7 @@
     {
       "id": "n7",
       "position": {
-        "x": 2650,
+        "x": 3050,
         "y": 900
       },
       "caption": "Request Service Ticket",
@@ -256,7 +256,7 @@
     {
       "id": "n8",
       "position": {
-        "x": 3200,
+        "x": 3600,
         "y": 550
       },
       "caption": "Send Authentication Message",
