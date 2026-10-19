@@ -18,21 +18,18 @@ attacker-controlled infrastructure, or extracts a token issued to an
 Entra-attached managed identity or federated workload identity on a compromised
 Azure compute or AKS resource.
 
-The token-acquisition pipeline ends when the adversary first receives the
-access or refresh token; later use of the token and resource API calls are
-[T1550.001]. Client-credentials issuance to a service principal that the victim
-tenant was induced to consent to is acquisition and belongs to Procedure B;
-this TRR treats theft of an application client secret or certificate from disk,
-a repository, or a key vault as [T1552], and issuance with that stolen
-credential on a legitimately consented principal as use of that credential
-under [T1078.004]. First-party authorization-code phishing, where the victim
-authenticates to a Microsoft first-party `client_id` and relays the
-authorization code to the adversary, is covered by TRR0034 (OAuth Authorization
-Code Phishing). Azure Arc-enabled servers, the Azure Logic Apps workflow path
-(ATRM AZT601.3), federated identity credentials trusting issuers outside Azure
-compute such as GitHub Actions, and the authentication transfer flow are not
-modeled. This TRR treats reads of token material a client has already cached on
-disk as [T1552.001].
+The pipeline ends at the adversary's first receipt of the access or refresh
+token; later use of the token is [T1550.001]. This TRR treats theft of an
+application secret or certificate from disk, a repository, or a key vault as
+[T1552], reads of a client's on-disk token cache as [T1552.001], and issuance
+with a stolen secret or certificate on a legitimately consented principal as
+[T1078.004]; issuance to a service principal the victim tenant was induced to
+consent to is Procedure B. First-party authorization-code phishing, where the
+victim authenticates to a Microsoft first-party `client_id`, is TRR0034 (OAuth
+Authorization Code Phishing). Azure Arc-enabled servers, Azure Logic Apps
+workflows (ATRM AZT601.3), federated identity credentials trusting issuers
+outside Azure compute such as GitHub Actions, and authentication transfer are
+not modeled.
 
 ## Technique Overview
 
@@ -40,8 +37,7 @@ An adversary obtains a Microsoft Entra ID access token or refresh token issued
 on behalf of a user, service principal, managed identity, or federated workload
 identity, and holds it outside the client the token was issued to. Entra ID
 issues bearer tokens, which any party in possession can use without
-demonstrating possession of a cryptographic key, and a standard OAuth2 token
-contains no certificate binding information. Because the authentication
+demonstrating possession of a cryptographic key. Because the authentication
 requirements were met when the token was issued, a replayed token grants the
 adversary access to organizational resources even where the user satisfied
 multifactor authentication.
@@ -50,13 +46,11 @@ multifactor authentication.
 
 ### Microsoft Identity Platform Endpoints
 
-Microsoft Entra ID exposes its v2.0 authorization endpoint at
-`https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize` and its
-token endpoint at
-`https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token`; Microsoft notes
-that the endpoint URI format may vary by application type, sign-in audience,
-and Azure cloud instance ([Microsoft Identity Platform OAuth 2.0 and OpenID
-Connect Protocols]). Interactive user flows obtain authorization at
+Microsoft gives
+`https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize` and
+`https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` as example v2.0
+authorization and token endpoints ([Microsoft Identity Platform OAuth 2.0 and
+OpenID Connect Protocols]). Interactive user flows obtain authorization at
 `/authorize` and redeem at `/token`. The device code flow uses two different
 endpoints: the client posts to
 `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/devicecode` and then
@@ -79,49 +73,37 @@ has no reliable way to verify that the person who enters the code is signing
 in from the device that generated it ([Dynamics 365 Warehouse Management App
 User-Based Authentication]). The flow begins with the client posting
 `client_id` and `scope` to `/oauth2/v2.0/devicecode`; the response carries
-`device_code` (a long string used to verify the session between the client
-and the authorization server), `user_code` (a short string shown to the user
-to identify the session on a secondary device), `verification_uri`,
-`expires_in` (the number of seconds before the two codes expire), and
-`interval` (the number of seconds the client should wait between polling
-requests) ([Microsoft Identity Platform OAuth 2.0 Device Authorization
-Grant]). Microsoft gives `https://microsoft.com/devicelogin` as an example
-of the URL the user visits ([MSAL Authentication Flows]). While the user
+`device_code`, `user_code` (a short string shown to the user to identify the
+session on a secondary device), `verification_uri`, and the `expires_in` and
+polling `interval` values ([Microsoft Identity Platform OAuth 2.0 Device
+Authorization Grant]). Microsoft gives `https://microsoft.com/devicelogin` as an
+example of the URL the user visits ([MSAL Authentication Flows]). While the user
 authenticates at the verification URI, the client polls `/oauth2/v2.0/token`
 with `grant_type=urn:ietf:params:oauth:grant-type:device_code` and the
-`device_code`; Microsoft documents four errors served before the user
-completes authentication: `authorization_pending`, `authorization_declined`,
-`bad_verification_code`, and `expired_token`. Once the user signs in, the
-device obtains access tokens and, if `offline_access` was in the original
-`scope`, a refresh token. Neither documented request includes a
-`redirect_uri`, PKCE, or `state` parameter. The device code flow is
-available only for public client applications. Since June 2021 the device
-code flow includes a prompt that validates the user is signing into the app
-they expect ([Microsoft Identity Platform Breaking Changes Reference]).
+`device_code`. Once the user signs in, the device obtains access tokens and, if
+`offline_access` was in the original `scope`, a refresh token. Neither
+documented request includes a `redirect_uri`, PKCE, or `state` parameter. The
+device code flow is available only for public client applications. Since June
+2021 the device code flow includes a prompt that validates the user is signing
+into the app they expect ([Microsoft Identity Platform Breaking Changes
+Reference]).
 
 ### Authorization Code Flow Internals
 
 The authorization code flow is a two-leg exchange: an `/authorize` request that
 returns a code, then a `/token` request that redeems it ([Microsoft Identity
 Platform OAuth 2.0 Authorization Code Flow]). The authorize request carries
-`client_id`, `scope`, a `redirect_uri` that must exactly match one registered
-for the application, and `code_challenge`, which Microsoft recommends for all
-application types and requires for single-page applications. Once the user
-authenticates and grants consent, the platform returns the response to the
-`redirect_uri`, with the code as a query-string parameter in the default
-response mode. The client redeems the code with a POST to `/token` carrying
-`grant_type=authorization_code`, the code, and the same `redirect_uri`;
-confidential web apps authenticate with a `client_secret` or a
-`client_assertion` JWT signed with a registered certificate, `code_verifier` is
-required if PKCE was used in the authorization request, and public clients must
-not use secrets or certificates when redeeming a code. The response carries an
-access token and, only if `offline_access` was requested, a refresh token. The
-OAuth 2.0 specification requires that a code be used to redeem an access token
-only once ([MSAL Authentication Flows]), and RFC 6749 recommends a maximum code
-lifetime of 10 minutes ([RFC 6749 OAuth 2.0 Authorization Framework]).
-Microsoft Entra login servers only redirect users and send tokens to redirect
-URIs added to an app registration ([Microsoft Identity Platform Redirect URI
-Restrictions]).
+`client_id`, `scope`, and a `redirect_uri` that must exactly match one
+registered for the application. Once the user authenticates and grants consent,
+the platform returns the code to the `redirect_uri`. The client redeems the code
+with a POST to `/token` carrying `grant_type=authorization_code`, the code, and
+the same `redirect_uri`; confidential web apps authenticate with a
+`client_secret` or a `client_assertion` JWT signed with a registered
+certificate. The response carries an access token and, only if `offline_access`
+was requested, a refresh token. The OAuth 2.0 specification requires that a code
+be used to redeem an access token only once ([MSAL Authentication Flows]), and
+RFC 6749 recommends a maximum code lifetime of 10 minutes ([RFC 6749 OAuth 2.0
+Authorization Framework]).
 
 ### Client Credentials and Federated Credential Exchange
 
@@ -139,15 +121,12 @@ value tells the platform to issue a token for the direct application
 permissions configured for the resource, and refresh tokens are never granted
 with this flow. In the client credentials flow, permissions are granted
 directly to the application itself by an administrator, and no user is
-involved. Federated workload identity for AKS posts
-`grant_type=client_credentials` with
-`client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer`
-and the kubelet-projected service-account JWT as the `client_assertion` ([Use
-Microsoft Entra Workload ID on AKS]). The federated identity credential's
-`issuer`, `subject`, and `audience` values must case-sensitively match the
-corresponding claims in the token ([Microsoft Identity Platform Workload
-Identity Federation]); when the checks pass, the platform issues an access
-token to the external workload.
+involved. AKS workload identity presents the kubelet-projected service-account
+JWT as the `client_assertion` ([Use Microsoft Entra Workload ID on AKS]). The
+federated identity credential's `issuer`, `subject`, and `audience` values must
+case-sensitively match the corresponding claims in the token ([Microsoft
+Identity Platform Workload Identity Federation]); when the checks pass, the
+platform issues an access token to the external workload.
 
 ### The Instance Metadata Service
 
@@ -158,75 +137,54 @@ managed identity is the resource where it is used: all code and scripts running
 on a virtual machine can request and retrieve tokens for any managed identity
 available on it ([Use Managed Identities on an Azure VM to Acquire Access
 Tokens]). A request must contain the header `Metadata: true`, which Microsoft
-describes as a mitigation against server-side request forgery, and must not
-contain an `X-Forwarded-For` header; a request failing either requirement is
-rejected. The token request is an HTTP GET to the endpoint with the
-`api-version` query parameter (`2018-02-01` or greater) and the `resource`
-query parameter, the App ID URI of the target resource, which also appears in
-the issued token's `aud` claim. The response `token_type` is `Bearer`, and the
-token is based on the managed identity's service principal; Microsoft describes
-these tokens as representing the application that accesses the resource and not
-any specific user ([App Service Managed Identity Overview]). The managed
-identities subsystem caches tokens: on-the-wire calls to Microsoft Entra ID
-result only when a cache miss occurs because no token is in the subsystem
-cache, or when the cached token is expired.
+describes as a mitigation against server-side request forgery. The token request
+is an HTTP GET naming the target resource's App ID URI in the `resource` query
+parameter, which also appears in the issued token's `aud` claim. The response
+`token_type` is `Bearer`, and the token is based on the managed identity's
+service principal; Microsoft describes these tokens as representing the
+application that accesses the resource and not any specific user ([App Service
+Managed Identity Overview]). The managed identities subsystem caches tokens:
+on-the-wire calls to Microsoft Entra ID result only when a cache miss occurs
+because no token is in the subsystem cache, or when the cached token is expired.
 
 App Service, Azure Functions, and Container Apps provide an internally
 accessible REST endpoint for token retrieval: `IDENTITY_ENDPOINT` holds the URL
 of the local token service and `IDENTITY_HEADER` holds a value the platform
 rotates, which the caller adds as the `X-IDENTITY-HEADER` header on an HTTP GET
 to `IDENTITY_ENDPOINT` ([App Service Managed Identity Overview], [App Service
-Environment Variables and App Settings Reference], [Azure Container Apps
-Managed Identities]). The Azure Automation page says the metadata header should
-be set to `true`, and its runbook samples send it with `X-IDENTITY-HEADER` to
-the URL in `IDENTITY_ENDPOINT` ([Enable Managed Identity for Azure
-Automation]). Service Fabric exposes an HTTPS `localhost` token service that
-takes a `Secret` header ([Service Fabric Managed Identity in Application
-Code]). The Container Instances sample token request goes to the IMDS address
-with the `Metadata` header set to `true`; for Windows container instances the
-metadata server is not available for getting a Microsoft Entra token, and the
-token request goes to `IDENTITY_ENDPOINT` with `IDENTITY_HEADER` ([Azure
-Container Instances Managed Identity]). In an AKS cluster the IMDS endpoint is
-by default accessible from all pods; when IMDS restriction is enabled, pods
-that are not on the host network cannot acquire managed identity tokens from it
-([AKS IMDS Restriction]). The documented request in each of these cases goes to
-the IMDS address, a `localhost` service, or the URL in `IDENTITY_ENDPOINT`, and
-no authorization-endpoint step appears in any of the references.
+Environment Variables and App Settings Reference], [Azure Container Apps Managed
+Identities]). Azure Automation's runbook samples send `X-IDENTITY-HEADER` to the
+URL in `IDENTITY_ENDPOINT` ([Enable Managed Identity for Azure Automation]).
+Service Fabric exposes an HTTPS `localhost` token service that takes a `Secret`
+header ([Service Fabric Managed Identity in Application Code]). The Container
+Instances sample token request goes to the IMDS address with the `Metadata`
+header set to `true`, or for Windows container instances to `IDENTITY_ENDPOINT`
+with `IDENTITY_HEADER` ([Azure Container Instances Managed Identity]). In an AKS
+cluster the IMDS endpoint is by default accessible from all pods; when IMDS
+restriction is enabled, pods that are not on the host network cannot acquire
+managed identity tokens from it ([AKS IMDS Restriction]).
 
 ### Access Token Structure
 
-An Entra ID access token is a JSON web token with a header, a payload, and a
-signature, each separated by a period and separately Base64 encoded, signed
-with an asymmetric algorithm such as RS256 ([Microsoft Identity Platform Access
-Tokens]). The claims reference ([Microsoft Identity Platform Access Token
-Claims Reference]) defines `aud` (the intended audience), `tid` (the tenant the
-user signs in to), `oid` (the immutable identifier of the user or service
-principal), `appid` in v1.0 tokens and its replacement `azp` in v2.0 tokens
-(the application ID of the client using the token), `appidacr` and `azpacr`
-(`0` for a public client, `1` for a client secret, `2` for a client
-certificate), `scp` (consented scopes, user tokens only), and `roles` (the
-permissions the client credential flow uses in place of user scopes for
-application tokens, and the user's assigned roles for user tokens). A standard
-OAuth2 token contains no certificate binding information; an mTLS
-proof-of-possession token includes a `cnf` claim that binds the token to a
-certificate, a feature in private preview that supports app-only tokens only
-([Microsoft Identity Web Token Binding]).
+An Entra ID access token is a signed JSON web token ([Microsoft Identity
+Platform Access Tokens]) whose claims are defined in the [Microsoft Identity
+Platform Access Token Claims Reference]. A standard OAuth2 token contains no
+certificate binding information; an mTLS proof-of-possession token includes a
+`cnf` claim that binds the token to a certificate, a feature in private preview
+that supports app-only tokens only ([Microsoft Identity Web Token Binding]).
 
 ### Token Lifetimes
 
-When issued, an access token receives a random default lifetime between 60 and
-90 minutes (75 minutes on average), varied to spread token demand over time;
-when both the client and the resource support Continuous Access Evaluation, the
-lifetime increases to long-lived, up to 28 hours ([Microsoft Identity Platform
-Configurable Token Lifetimes], [Microsoft Entra Continuous Access Evaluation]).
-The refresh token Max Inactive Time is 90 days and the Max Age for both
-single-factor and multifactor refresh tokens is until-revoked; a refresh token
-sent to a redirect URI registered as `spa` expires after 24 hours. Since
-January 30, 2021, refresh and session token lifetimes are not configurable
-through token lifetime policies. Authorization codes are short lived
-([Microsoft Identity Platform OAuth 2.0 Authorization Code Flow]). The user has
-15 minutes from the device authorization request to sign in, which is the
-default `expires_in` of a device code.
+An access token receives a random default lifetime between 60 and 90 minutes, or
+up to 28 hours when both the client and the resource support Continuous Access
+Evaluation ([Microsoft Identity Platform Configurable Token Lifetimes],
+[Microsoft Entra Continuous Access Evaluation]). The refresh token Max Inactive
+Time is 90 days and its Max Age is until-revoked ([Microsoft Identity Platform
+Configurable Token Lifetimes]); a refresh token sent to a redirect URI
+registered as `spa` expires after 24 hours ([Microsoft Identity Platform
+OAuth 2.0 Authorization Code Flow]). The user has 15 minutes from the device
+authorization request to sign in, the default `expires_in` of a device code
+([Microsoft Identity Platform OAuth 2.0 Device Authorization Grant]).
 
 ### Conditional Access and Device Code Flow
 
@@ -234,15 +192,12 @@ The Conditional Access authentication flows condition explicitly targets device
 code flow ([Microsoft Entra Conditional Access Authentication Flows]). Protocol
 tracking state is sustained through subsequent refreshes, so a session that
 began with device code flow can remain subject to authentication flows policies
-on later redemptions; the Microsoft Graph `originalTransferMethod` value for
-such a session is `deviceCodeFlow` ([Microsoft Graph signIn Resource]).
-Starting July 1, 2026, all new Microsoft Entra tenants block device code flow
-as part of security defaults ([Microsoft Entra Security Defaults]). When the
-device code flow is used, the require-managed-device grant control and device
-state conditions are not supported, because the device performing
-authentication cannot provide its device state to the device that is providing
-a code, and the device state in the token is locked to the device performing
-authentication ([Microsoft Entra Conditional Access Grant Controls]).
+on later redemptions. Starting July 1, 2026, all new Microsoft Entra tenants
+block device code flow as part of security defaults ([Microsoft Entra Security
+Defaults]). When the device code flow is used, the require-managed-device grant
+control and device state conditions are not supported, because the device
+performing authentication cannot provide its device state to the device that is
+providing a code ([Microsoft Entra Conditional Access Grant Controls]).
 
 ### OAuth Consent Framework
 
@@ -263,25 +218,20 @@ permissions can be granted through a consent experience ([Microsoft Graph
 Service Principal App Role Assignment]).
 
 Tenant user-consent settings offer three options: disable user consent so users
-cannot grant permissions to applications; allow users to consent to
-applications from verified publishers or the organization, but only for
-permissions the administrator selects; or allow users to consent to all
-applications for any permission that does not require admin consent ([Microsoft
-Entra User and Admin Consent Overview]). When risk-based step-up consent is
-enabled (it is enabled by default and changes behavior only when user consent
-is enabled), users cannot consent to most newly registered multitenant apps
-that are not publisher verified; the policy applies to apps registered after
-November 8, 2020 that request permissions beyond basic sign-in and user-profile
-read from users in tenants other than the registering tenant, and the blocked
-attempt is logged with category `ApplicationManagement`, activity `Consent to
-application`, and status reason `Risky application detected` ([Microsoft
-Identity Platform Publisher Verification Overview], [Microsoft Entra Risk-Based
-Step-Up Consent]). The Microsoft managed consent policy, which is the default
-for a new tenant, lets end users consent to any user-consentable delegated
-permission except a Microsoft-maintained list that includes Microsoft Graph
-`Files.Read.All`, `Files.ReadWrite.All`, `Sites.Read.All`, and
-`Sites.ReadWrite.All` and listed scopes in the Mail, Calendars, Chat, Contacts,
-and People families ([Microsoft Entra Manage App Consent Policies]).
+cannot grant permissions to applications; allow users to consent to applications
+from verified publishers or the organization, but only for permissions the
+administrator selects; or allow users to consent to all applications for any
+permission that does not require admin consent ([Microsoft Entra User and Admin
+Consent Overview]). When risk-based step-up consent is enabled (it is enabled by
+default and changes behavior only when user consent is enabled), users cannot
+consent to most newly registered multitenant apps that are not publisher
+verified ([Microsoft Identity Platform Publisher Verification Overview],
+[Microsoft Entra Risk-Based Step-Up Consent]). The Microsoft managed consent
+policy, which is the default for a new tenant, lets end users consent to any
+user-consentable delegated permission except a Microsoft-maintained list of
+Microsoft Graph and Exchange Online scopes, among them listed scopes in the
+Files, Sites, Mail, Calendars, Chat, Contacts, and People families ([Microsoft
+Entra Manage App Consent Policies]).
 
 Granting tenant-wide admin consent requires signing in as a user authorized to
 consent on behalf of the organization. The grant-admin-consent page lists
@@ -323,21 +273,15 @@ AADServicePrincipalSignInLogs Table], [Azure Monitor
 AADManagedIdentitySignInLogs Table]).
 
 `AuthenticationProtocol` lists the protocol type or grant type used in the
-authentication; the `SigninLogs` page documents the values `none`, `oAuth2`,
-`ropc`, `wsFederation`, `saml20`, and `deviceCode`. `OriginalTransferMethod`
-carries the transfer method used to initiate a session throughout all
-subsequent requests; the Graph values are `none`, `deviceCodeFlow`, and
-`authenticationTransfer` ([Microsoft Graph signIn Resource]). `ResultType` is
-defined as `0` for success on the `SigninLogs` page.
-`AADServicePrincipalSignInLogs` carries `ClientCredentialType` (with examples
-client assertion and client secret), `FederatedCredentialId` (the identifier of
-the federated identity credential used to sign in), `ServicePrincipalId`,
-`AppId`, and `ResourceDisplayName`; `AADManagedIdentitySignInLogs` carries
-`ServicePrincipalId`, `ResourceIdentity`, `ResourceDisplayName`,
-`ManagedServiceIdentity`, and `FederatedCredentialId`. For non-interactive
-sign-ins performed by confidential clients, the logged `IPAddress` is the
-original IP used for the original token issuance, not the source of the refresh
-request ([Microsoft Entra Non-Interactive User Sign-Ins]).
+authentication, with `deviceCode` among the values the `SigninLogs` page
+documents. `OriginalTransferMethod` carries the transfer method used to initiate
+a session throughout all subsequent requests; the Graph `originalTransferMethod`
+value for a session begun with device code flow is `deviceCodeFlow` ([Microsoft
+Graph signIn Resource]). `ResultType` is defined as `0` for success on the
+`SigninLogs` page. For non-interactive sign-ins performed by confidential
+clients, the logged `IPAddress` is the original IP used for the original token
+issuance, not the source of the refresh request ([Microsoft Entra
+Non-Interactive User Sign-Ins]).
 
 `AuditLogs` is the Microsoft Entra audit log, which captures changes to
 applications, groups, users, and licenses, with the activity in
@@ -351,26 +295,22 @@ consent, `Add delegated permission grant` to granting delegated access, and
 `Add app role assignment to service principal` to granting app-only access
 ([Microsoft Entra Audit Logs for App Permissions]).
 
-The managed identity client uses an endpoint on the virtual machine rather than
-a Microsoft Entra endpoint, and Entra ID is called only by the subsystem on a
-cache miss or expiry (see [The Instance Metadata Service]). Host-side, an
-outbound connection is observable as a Linux auditd `SYSCALL` record, which a
-syscall rule naming `connect` starts when a program makes that call ([Linux
-auditctl Manual Page], [Red Hat Auditing the System]), and as Sysmon event ID 3
-(NetworkConnect), which logs TCP and UDP connections linked to a process, is
-disabled by default, and is defined in the shared event manifest for Windows
-and Linux ([Sysmon], [Sysmon Common Event Manifest]). A file read in a pod is
-observable as an auditd record under a watch rule (`-w path`) or a syscall rule
-with `-F path`; an audit event contains a `PATH` record for every path passed
-to the system call, and since glibc 2.26 the `open()` wrapper issues the
-`openat()` system call ([Linux open Manual Page]). `AKSAudit` contains all
-Kubernetes API server audit logs, including events with the get and list verbs,
-requires diagnostic settings, and carries `Verb` (the Kubernetes verb, or the
-lower-cased HTTP method for non-resource requests), `ObjectRef` (resource,
-namespace, name, and subresource), `RequestUri`, `User`, `PodName`, and
-`SourceIps` ([Azure Monitor AKSAudit Table], [Kubernetes Auditing], [Kubernetes
-Audit API Reference]). In the Kubernetes authorization model an HTTP `POST`
-maps to the `create` verb ([Kubernetes Authorization Overview]).
+Host-side, an outbound connection from the resource is observable as a Linux
+auditd `SYSCALL` record, which a syscall rule naming `connect` starts when a
+program makes that call ([Linux auditctl Manual Page], [Red Hat Auditing the
+System]), and as Sysmon event ID 3 (NetworkConnect), which logs TCP and UDP
+connections linked to a process, is disabled by default, and is defined in the
+shared event manifest for Windows and Linux ([Sysmon], [Sysmon Common Event
+Manifest]). A file read in a pod is observable as an auditd record under a watch
+rule (`-w path`) or a syscall rule with `-F path`; an audit event contains a
+`PATH` record for every path passed to the system call, and since glibc 2.26 the
+`open()` wrapper issues the `openat()` system call ([Linux open Manual Page]).
+`AKSAudit` contains all Kubernetes API server audit logs, requires diagnostic
+settings, and carries `Verb` (the Kubernetes verb, or the lower-cased HTTP
+method for non-resource requests) and `ObjectRef` (resource, namespace, name,
+and subresource) ([Azure Monitor AKSAudit Table], [Kubernetes Auditing],
+[Kubernetes Audit API Reference]). In the Kubernetes authorization model an HTTP
+`POST` maps to the `create` verb ([Kubernetes Authorization Overview]).
 
 ## Procedures
 
@@ -389,29 +329,26 @@ device. The request and response shapes are stated in [Device Authorization
 Grant Internals].
 
 The adversary generates a legitimate device code request at
-`/oauth2/v2.0/devicecode` and tricks the target into entering the `user_code`
-at a legitimate Microsoft sign-in page ([Microsoft Security Blog - Storm-2372
-Device Code Phishing]); RFC 8628 gives the example of an email instructing the
-user to visit the verification URL and enter the code. The victim's
-authentication at the verification page authenticates the adversary's session
-([Microsoft Security Blog - CaptiveCrunch]). The adversary's client polls
-`/oauth2/v2.0/token` with the device-code grant type and captures the access
-and refresh tokens that are generated; Microsoft states that the requesting
-client receives the tokens through a back channel ([MSAL Authentication
-Flows]). Microsoft, Proofpoint, and Huntress have each documented campaigns
-using this procedure, and Sekoia has documented a phishing-as-a-service kit
-built on it ([Microsoft Security Blog - Storm-2372 Device Code Phishing],
-[Microsoft Security Blog - AI-Enabled Device Code Phishing 2026], [Proofpoint -
-Phishing for Device Code Authorization Account Takeover], [Huntress - Railway
-PaaS M365 Token Replay Campaign], [Sekoia - EvilTokens Device Code Phishing
-Part 1]).
+`/oauth2/v2.0/devicecode` and tricks the target into entering the `user_code` at
+a legitimate Microsoft sign-in page ([Microsoft Security Blog - Storm-2372
+Device Code Phishing]). The victim's authentication at the verification page
+authenticates the adversary's session ([Microsoft Security
+Blog - CaptiveCrunch]). The adversary's client polls `/oauth2/v2.0/token` with
+the device-code grant type and captures the access and refresh tokens that are
+generated; Microsoft states that the requesting client receives the tokens
+through a back channel ([MSAL Authentication Flows]). Microsoft, Proofpoint, and
+Huntress have each documented campaigns using this procedure, and Sekoia has
+documented a phishing-as-a-service kit built on it ([Microsoft Security
+Blog - Storm-2372 Device Code Phishing], [Microsoft Security Blog - AI-Enabled
+Device Code Phishing 2026], [Proofpoint - Phishing for Device Code Authorization
+Account Takeover], [Huntress - Railway PaaS M365 Token Replay Campaign],
+[Sekoia - EvilTokens Device Code Phishing Part 1]).
 
-The `SigninLogs` page enumerates `deviceCode` as an `AuthenticationProtocol`
-value, Microsoft's authentication-flows page ties device code flow events in
-the sign-in logs to that property, and an interactive sign-in is one in which
-the user provides a factor; placing the victim's device-code authentication in
-an `Entra SigninLogs (Interactive sign-in)` row with `AuthenticationProtocol` =
-`deviceCode` follows from those three statements, and no single Microsoft
+The victim's device-code authentication is an `Entra SigninLogs (Interactive
+sign-in)` row with `AuthenticationProtocol` = `deviceCode`; that placement
+follows from the `deviceCode` value and the interactive sign-in definition in
+[Telemetry Surfaces] and from Microsoft's authentication-flows page tying device
+code flow events in the sign-in logs to that property, and no single Microsoft
 sentence states it. No Microsoft page states whether the device code request is
 logged, or that the device-code redemption at `/oauth2/v2.0/token` writes its
 own `AADNonInteractiveUserSignInLogs` row.
@@ -461,13 +398,13 @@ Microsoft page states whether the consent audit rows are written again on such
 a run.
 
 On the application branch a tenant administrator signs in at the admin consent
-endpoint, which Entra ID requires before it completes the request, and for
-Microsoft Graph permissions the consent results in an `appRoleAssignment`. The
-documented success redirect (see [OAuth Consent Framework]) lists no `code`
-parameter, and the client-credentials page proceeds from that response directly
-to a `/token` request authenticated by the application's own credential. The
-application then requests its token with the client-credentials grant and its
-own shared secret, certificate assertion, or federated assertion.
+endpoint, and for Microsoft Graph permissions the consent results in an
+`appRoleAssignment`. The documented success redirect (see [OAuth Consent
+Framework]) lists no `code` parameter, and the client-credentials page proceeds
+from that response directly to a `/token` request authenticated by the
+application's own credential. The application then requests its token with the
+client-credentials grant and its own credential (see [Client Credentials and
+Federated Credential Exchange]).
 
 The victim's interactive sign-in is an `Entra SigninLogs (Interactive sign-in)`
 row whose `AppId` column identifies the application. On the delegated branch
@@ -493,14 +430,13 @@ request naming that tenant in its path.
 ### Procedure C: Managed Identity Token Retrieval (TRR0000.AZR.C)
 
 This procedure covers a token request from code the adversary runs on an Azure
-compute resource with an attached managed identity, against the managed
-identity token endpoint (IMDS or the URL in `IDENTITY_ENDPOINT`). The endpoint,
-header, and caching facts are stated in [The Instance Metadata Service]. No
-authorization-endpoint step appears in the references, and that this procedure
-involves no user or consent step is a derivation from the documented token
-requests and from Microsoft's statement that in the client credentials flow
-permissions are granted directly to the application by an administrator and no
-user is involved (see [Client Credentials and Federated Credential Exchange]).
+compute resource with an attached managed identity, against the managed identity
+token endpoint. The endpoint, header, and caching facts are stated in [The
+Instance Metadata Service]. No authorization-endpoint step appears in the
+references, and that this procedure involves no user or consent step is a
+derivation from the documented token requests and from the client-credentials
+statement that no user is involved (see [Client Credentials and Federated
+Credential Exchange]).
 
 The prerequisite is code execution on the resource: Azure VM, App Service,
 Function App, Container Instance, AKS node, Container App, Service Fabric, or
@@ -509,17 +445,16 @@ prerequisite is drawn gray because code execution on the resource is the access
 vector, outside the technique's observable boundary, and any record the vector
 produces belongs to the vector's own technique. From the resource the adversary
 issues the token request to the managed identity token endpoint, using the
-endpoint and header each host documents, and the response is a JWT bearer
-access token based on the managed identity's service principal. A pod without
-the `azure.workload.identity/use` label is not mutated by the
-azure-workload-identity mutating admission webhook and receives neither the
-Azure environment variables nor the projected service account token volume, so
-a credential chain that falls through to managed identity ([Azure SDK
-Credential Chains]) calls node IMDS, which is reachable from all pods by
-default, and obtains a token for an identity attached to the node; that path is
-a derivation from those statements and runs through this procedure rather than
-Procedure D, and Microsoft lists the kubelet identity's default permissions as
-None ([AKS Managed Identity Overview]).
+endpoint and header each host documents, and the response is a JWT bearer access
+token based on the managed identity's service principal. A pod without the
+`azure.workload.identity/use` label is not mutated by the
+azure-workload-identity mutating admission webhook, so a credential chain that
+falls through to managed identity ([Azure SDK Credential Chains]) calls node
+IMDS, which is reachable from all pods by default, and obtains a token for an
+identity attached to the node; that path is a derivation from those statements
+and runs through this procedure rather than Procedure D, and Microsoft lists the
+kubelet identity's default permissions as None ([AKS Managed Identity
+Overview]).
 
 The request is observable as `Linux auditd (connect syscall)` and `Sysmon 3
 (NetworkConnect)` records for the connection to the token endpoint address. The
@@ -546,24 +481,22 @@ branches differ in how the assertion is obtained.
 
 On the projected-token branch the prerequisite is code execution in a pod of an
 AKS cluster configured for Microsoft Entra Workload ID. The prerequisite is
-drawn gray because code execution in the pod is the access vector, outside the
-technique's observable boundary, and any record the vector produces belongs to
-the vector's own technique. Only pods carrying the label
-`azure.workload.identity/use: "true"` are mutated by the admission webhook to
-inject the Azure environment variables and the projected service account token
-volume, and the service account carries the `azure.workload.identity/client-id`
-annotation naming the Entra application ([Use Microsoft Entra Workload ID on
-AKS]). The adversary reads the projected token from the file named by
-`AZURE_FEDERATED_TOKEN_FILE`; Microsoft gives
-`/var/run/secrets/azure/tokens/azure-identity-token` as an example path and
-calls the mount path an implementation detail of the webhook that can change.
-The token is a signed JWT ([Kubernetes Authentication]), and Kubernetes
-refreshes the projected token in place before it expires ([Kubernetes Service
-Account Administration]). The read is observable as `Linux auditd (open/openat
-syscall)` under a rule keyed on the path. `/proc/<pid>/environ` holds the
-initial environment set at `execve`, so, as a derivation from that statement
-and the variable holding a path, it yields the token file path and not the
-token; `/proc/<pid>/mem` gives access to a process's memory pages under a
+drawn gray for the reason given in Procedure C: code execution in the pod is the
+access vector. Only pods carrying the label `azure.workload.identity/use:
+"true"` are mutated by the admission webhook to inject the Azure environment
+variables and the projected service account token volume, and the service
+account carries the `azure.workload.identity/client-id` annotation naming the
+Entra application ([Use Microsoft Entra Workload ID on AKS]). The adversary
+reads the projected token from the file named by `AZURE_FEDERATED_TOKEN_FILE`;
+Microsoft gives `/var/run/secrets/azure/tokens/azure-identity-token` as an
+example path and calls the mount path an implementation detail of the webhook
+that can change. The token is a signed JWT ([Kubernetes Authentication]), and
+Kubernetes refreshes the projected token in place before it expires ([Kubernetes
+Service Account Administration]). The read is observable as `Linux auditd
+(open/openat syscall)` under a rule keyed on the path. `/proc/<pid>/environ`
+holds the initial environment set at `execve`, so, as a derivation from that
+statement and the variable holding a path, it yields the token file path and not
+the token; `/proc/<pid>/mem` gives access to a process's memory pages under a
 ptrace access-mode check ([Linux proc_pid_mem Manual Page], [Linux
 proc_pid_environ Manual Page]). A procfs read opens a procfs path rather than
 the token path, so a path-keyed audit rule covers the file read and not the
@@ -573,18 +506,16 @@ form.
 On the TokenRequest branch the adversary mints the assertion instead of reading
 it. The prerequisite is `create` rights on `serviceaccounts/token`, the right
 Kubernetes says lets users create TokenRequests to issue tokens for existing
-service accounts ([Kubernetes RBAC Good Practices]); after a caller
-authenticates to the Kubernetes API, AKS authorizes the request with Kubernetes
-RBAC, Microsoft Entra ID authorization using Azure role assignments, or both
-([AKS Access and Identity Concepts]). The prerequisite is drawn gray because
-holding the right is a standing authorization the API server evaluates when the
-TokenRequest is made. The TokenRequest subresource of a ServiceAccount, a
-`POST` to `/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token`, issues
-a time-bound token for that service account with the audiences the caller
-requests ([Kubernetes Service Account Administration], [Kubernetes TokenRequest
-API Reference]). Direct Entra workload identity federation requires a token
-with the audience `api://AzureADTokenExchange`; when identity bindings are
-enabled the webhook sets the default projected token's audience to
+service accounts ([Kubernetes RBAC Good Practices]). The prerequisite is drawn
+gray because holding the right is a standing authorization the API server
+evaluates when the TokenRequest is made. The TokenRequest subresource of a
+ServiceAccount, a `POST` to
+`/api/v1/namespaces/{namespace}/serviceaccounts/{name}/token`, issues a
+time-bound token for that service account with the audiences the caller requests
+([Kubernetes Service Account Administration], [Kubernetes TokenRequest API
+Reference]). Direct Entra workload identity federation requires a token with the
+audience `api://AzureADTokenExchange`; when identity bindings are enabled the
+identity binding webhook sets the default projected token's audience to
 `api://AKSIdentityBinding` instead ([Use Microsoft Entra Workload ID on AKS]).
 The federated identity credential for a service account names the subject
 `system:serviceaccount:<namespace>:<name>` and lists the audiences that may
@@ -593,15 +524,14 @@ appear in the token, with `api://AzureADTokenExchange` as the recommended value
 accepts a TokenRequest-minted token is a derivation: the credential matches on
 issuer, subject, and audience, a TokenRequest for the same service account
 carries that subject and the requested audience, and Microsoft documents the
-exchange only for the projected token. The request is observable as an
-`AKSAudit (Kubernetes API server audit)` row; that the row carries `Verb`
-`create` with `ObjectRef` resource `serviceaccounts` and subresource `token` is
-a derivation from the POST-to-create mapping and the audit event schema, as no
-page shows a TokenRequest audit row. The kubelet itself obtains the token in a
-projected `serviceAccountToken` volume through the TokenRequest API and
-refreshes it before it expires ([Kubernetes Service Account Administration]);
-by the same derivation the kubelet's own TokenRequests would carry the same
-verb and object reference.
+exchange only for the projected token. The request is observable as an `AKSAudit
+(Kubernetes API server audit)` row; that the row carries `Verb` `create` with
+`ObjectRef` resource `serviceaccounts` and subresource `token` is a derivation
+from the POST-to-create mapping and the audit event schema, as no page shows a
+TokenRequest audit row. The kubelet itself obtains projected service account
+tokens through the TokenRequest API ([Kubernetes Service Account
+Administration]), so by the same derivation its own TokenRequests would carry
+the same verb and object reference.
 
 Either assertion is presented at `/oauth2/v2.0/token` in a client-credentials
 token request with the jwt-bearer assertion type, the federated application's
@@ -644,7 +574,6 @@ authorizes that account's pods instead follows from that requirement.
 - [Microsoft Identity Platform Admin Consent Endpoint]
 - [MSAL Authentication Flows]
 - [Microsoft Identity Platform Breaking Changes Reference]
-- [Microsoft Identity Platform Redirect URI Restrictions]
 - [Microsoft Identity Platform Access Tokens]
 - [Microsoft Identity Platform Access Token Claims Reference]
 - [Microsoft Identity Platform Configurable Token Lifetimes]
@@ -681,7 +610,6 @@ authorizes that account's pods instead follows from that requirement.
 - [Azure Container Instances Managed Identity]
 - [AKS IMDS Restriction]
 - [AKS Managed Identity Overview]
-- [AKS Access and Identity Concepts]
 - [Azure SDK Credential Chains]
 - [Use Microsoft Entra Workload ID on AKS]
 - [Customize Cluster Egress with Outbound Types in AKS]
@@ -734,6 +662,7 @@ authorizes that account's pods instead follows from that requirement.
 [Client Credentials and Federated Credential Exchange]: #client-credentials-and-federated-credential-exchange
 [The Instance Metadata Service]: #the-instance-metadata-service
 [OAuth Consent Framework]: #oauth-consent-framework
+[Telemetry Surfaces]: #telemetry-surfaces
 
 [RFC 6749 OAuth 2.0 Authorization Framework]: https://datatracker.ietf.org/doc/html/rfc6749
 [RFC 8628 OAuth 2.0 Device Authorization Grant]: https://datatracker.ietf.org/doc/html/rfc8628
@@ -744,7 +673,6 @@ authorizes that account's pods instead follows from that requirement.
 [Microsoft Identity Platform Admin Consent Endpoint]: https://learn.microsoft.com/en-us/entra/identity-platform/v2-admin-consent
 [MSAL Authentication Flows]: https://learn.microsoft.com/entra/identity-platform/msal-authentication-flows
 [Microsoft Identity Platform Breaking Changes Reference]: https://learn.microsoft.com/entra/identity-platform/reference-breaking-changes
-[Microsoft Identity Platform Redirect URI Restrictions]: https://learn.microsoft.com/entra/identity-platform/reply-url
 [Microsoft Identity Platform Access Tokens]: https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens
 [Microsoft Identity Platform Access Token Claims Reference]: https://learn.microsoft.com/en-us/entra/identity-platform/access-token-claims-reference
 [Microsoft Identity Platform Configurable Token Lifetimes]: https://learn.microsoft.com/en-us/entra/identity-platform/configurable-token-lifetimes
@@ -781,7 +709,6 @@ authorizes that account's pods instead follows from that requirement.
 [Azure Container Instances Managed Identity]: https://learn.microsoft.com/en-us/azure/container-instances/container-instances-managed-identity
 [AKS IMDS Restriction]: https://learn.microsoft.com/en-us/azure/aks/imds-restriction
 [AKS Managed Identity Overview]: https://learn.microsoft.com/en-us/azure/aks/managed-identity-overview
-[AKS Access and Identity Concepts]: https://learn.microsoft.com/en-us/azure/aks/concepts-identity
 [Azure SDK Credential Chains]: https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication/credential-chains
 [Use Microsoft Entra Workload ID on AKS]: https://learn.microsoft.com/en-us/azure/aks/workload-identity-overview
 [Customize Cluster Egress with Outbound Types in AKS]: https://learn.microsoft.com/en-us/azure/aks/egress-outboundtype
