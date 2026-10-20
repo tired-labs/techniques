@@ -54,32 +54,9 @@
   },
   "nodes": [
     {
-      "id": "p0",
-      "position": {
-        "x": 75,
-        "y": 50
-      },
-      "caption": "Hold Global Administrator Role",
-      "labels": [],
-      "properties": {
-        "DirectoryRole": "Global Administrator",
-        "RoleTemplateId": "62e90394-69f5-4237-9190-012177145e10",
-        "TokenClaim": "wids"
-      },
-      "style": {
-        "border-color": "#808080",
-        "node-color": "#cccccc",
-        "border-width": 3,
-        "caption-font-size": 16,
-        "label-position": "outside",
-        "label-font-size": 14,
-        "label-border-width": 2
-      }
-    },
-    {
       "id": "p1",
       "position": {
-        "x": 520,
+        "x": 300,
         "y": 50
       },
       "caption": "Obtain ARM Token",
@@ -90,10 +67,7 @@
         "Entra AADManagedIdentitySignInLogs (Azure Resource Manager)"
       ],
       "properties": {
-        "ResourceDisplayName": "Azure Resource Manager",
-        "ResourceIdentity": "797f4846-ba00-4fd7-ba43-dac1f8f63013",
-        "DelegatedScope": "user_impersonation",
-        "ApplicationScope": ".default"
+        "ResourceIdentity": "797f4846-ba00-4fd7-ba43-dac1f8f63013"
       },
       "style": {
         "border-color": "#000000",
@@ -116,18 +90,8 @@
         "Azure Activity Log Directory Activity (Microsoft.Authorization/elevateAccess/action)"
       ],
       "properties": {
-        "Action": "Microsoft.Authorization/elevateAccess/action",
-        "RequestMethod": "POST",
-        "Endpoint": "/providers/Microsoft.Authorization/elevateAccess",
-        "AuditLogCategory": "AzureRBACRoleManagementElevateAccess",
-        "LoggedByService": "Azure RBAC (Elevated Access)",
-        "ActivityLogCategory": "Administrative",
-        "AuthorizationScope": "/providers/Microsoft.Authorization",
-        "SubscriptionId": "Empty",
-        "RoleDefinitionName": "User Access Administrator",
-        "RoleDefinitionId": "18d7d88d-d35e-4fb5-a5c3-7773c20a72d9",
-        "AssignmentScope": "/",
-        "PrincipalType": "User | ServicePrincipal"
+        "Permission": "Global Administrator",
+        "AuditLogCategory": "AzureRBACRoleManagementElevateAccess"
       },
       "style": {
         "border-color": "#000000",
@@ -140,16 +104,6 @@
     }
   ],
   "relationships": [
-    {
-      "id": "r0",
-      "fromId": "p0",
-      "toId": "n0",
-      "type": "prerequisite",
-      "properties": {},
-      "style": {
-        "arrow-color": "#f44e3b"
-      }
-    },
     {
       "id": "r1",
       "fromId": "p1",
