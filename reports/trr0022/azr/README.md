@@ -245,8 +245,8 @@ initiating the change-tenant request, having it accepted in the destination,
 and completing the transfer; modifying the guest settings and the transfer
 policy precede the path only when invitations or transfers are blocked. The
 gray `Hold Subscription Owner` node marks a non-observable held-state
-prerequisite, the guest's standing `Owner` right, which produces no telemetry
-of its own.
+prerequisite, the acting account's standing `Owner` right, which produces no
+telemetry of its own.
 
 ### Procedure B: Hijack via an internal user
 
@@ -271,10 +271,7 @@ blocked.
 The red path runs from inviting the victim-tenant account into the attacker's
 tenant as a guest, through assigning it `Owner` only when it is not already an
 owner, to initiating the change-tenant request and completing the transfer; the
-transfer-policy edit precedes initiation only when the move is blocked. The
-gray `Hold Subscription Owner` node marks a non-observable held-state
-prerequisite: the account's standing `Owner` right, which produces no telemetry
-of its own.
+transfer-policy edit precedes initiation only when the move is blocked.
 
 ### Procedure C: Hijack via a two-party change-tenant request
 
@@ -299,9 +296,7 @@ The red path runs directly from holding `Owner` on the source subscription to
 initiating the change-tenant request, having it accepted in the destination
 tenant, and completing the transfer; no guest-invitation or owner-assignment
 node is on the path. The transfer-policy edit precedes initiation only when
-the move is blocked. The gray `Hold Subscription Owner` node marks a
-non-observable held-state prerequisite, the acting account's standing `Owner`
-right, which produces no telemetry of its own.
+the move is blocked.
 
 ## Available Emulation Tests
 
