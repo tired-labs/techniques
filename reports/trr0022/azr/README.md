@@ -8,7 +8,7 @@
 | External IDs | [AZT507.3], [T1496]                        |
 | Tactics      | Persistence, Impact                        |
 | Platforms    | Azure                                      |
-| Contributors | Andrew VanVleet                            |
+| Contributors | Andrew VanVleet, John McGuinness           |
 
 ## Technique Overview
 
