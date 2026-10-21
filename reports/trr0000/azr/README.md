@@ -155,8 +155,8 @@ the device certificate. PRTs can be bound to the device (meaning they are stored
 in the Trusted Platform Module or TPM) or unbound (not TPM protected).
 
 PRTs requested with a known device certificate result in a PRT that carries an
-`rsa` claim in the authentication methods (`amr`) field, indicating that the PRT is
-being issued to a device known by the tenant.
+`rsa` claim in the authentication methods (`amr`) field, indicating that the PRT
+is being issued to a device known by the tenant.
 
 PRTs are long-lived credentials, lasting for 14 or 90 days. (There is some
 disagreement between documentation and testing results on the actual lifetime of
@@ -186,8 +186,9 @@ key is rejected. (The session key is not required to establish that the token
 was issued or to read the claims it was issued against.)
 
 The session key is recoverable only with the transport private key generated
-during registration. An adversary who performs the registration holds all three (the token, the session key, and the transport key),
-but a token separated from that key material is not directly usable.
+during registration. An adversary who performs the registration holds all three
+(the token, the session key, and the transport key), but a token separated from
+that key material is not directly usable.
 
 #### Token Revocation
 
