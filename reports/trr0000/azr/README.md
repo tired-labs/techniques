@@ -41,12 +41,12 @@ The following related activities are explicitly out of scope:
 
 A device identity is a directory object representing a machine known to the
 tenant. Organizations can use device identities to distinguish machines they
-know from machines they do not; it also possible to grant access on that basis.
+know from machines they do not; it is also possible to grant access on that basis.
 
 Unlike many attack techniques, device registration in Entra does not yield an
 automatic gain. An adversary performing it already holds a credential for an
 account in the tenant, and holds no more privilege afterwards than before. What
-changes is what the adversary's machine becomes one the directory recognises,
+changes is that the adversary's machine becomes one the directory recognizes,
 with an identifier, a name, a registered owner, and a trust type.
 
 The value of that change depends on the environment. Where an organization has
@@ -133,7 +133,7 @@ A Primary Refresh Token (PRT) is a credential issued to a device + user
 combination that enables single sign-on across applications on that device. It
 can be submitted to Entra to obtain an access token for a specific resource.[^6]
 (Conceptually, this is similar to Kerberos' `ticket granting ticket` (TGT), but
-with improvements)
+with improvements.)
 
 PRTs are used for:
 
@@ -155,7 +155,7 @@ the device certificate. PRTs can be bound to the device (meaning they are stored
 in the Trusted Platform Module or TPM) or unbound (not TPM protected).
 
 PRTs requested with a known device certificate result in a PRT that carries an
-`rsa` claim in authentication methods (`amr`) field, indicating that the PRT is
+`rsa` claim in the authentication methods (`amr`) field, indicating that the PRT is
 being issued to a device known by the tenant.
 
 PRTs are long-lived credentials, lasting for 14 or 90 days. (There is some
@@ -185,8 +185,8 @@ sign-on, a request that presents the token without signing it with the session
 key is rejected. (The session key is not required to establish that the token
 was issued or to read the claims it was issued against.)
 
-The session key  is recoverable only with the transport private key generated
-during registration. An adversary who performs the registration holds all three,
+The session key is recoverable only with the transport private key generated
+during registration. An adversary who performs the registration holds all three (the token, the session key, and the transport key),
 but a token separated from that key material is not directly usable.
 
 #### Token Revocation
@@ -230,7 +230,7 @@ Grant controls can be used to block or grant access according to specific
 conditions, like requiring multifactor authentication or use of a specific
 approved application. There is a grant control for requiring a compliant device
 and one for requiring a hybrid-joined device. There is no grant control that
-requires a registered or joined device[^7]
+requires a registered or joined device[^7].
 
 Of note, a device identity is not an additional factor for satisfying a
 multifactor authentication requirement.
@@ -249,7 +249,7 @@ attributes fall into 3 groups:
 - **Group 2** — set by the management plane, theoretically requiring Intune
   enrollment (but see the note below): `isCompliant`, `mdmAppId`,
   `enrollmentProfileName`, `deviceCategory`,
-  `extensionAttribute1-15`,`deviceOwnership`. If a device is not managed, these
+  `extensionAttribute1-15`, `deviceOwnership`. If a device is not managed, these
   values should be unset.
 
 - **Group 3** — applied by DRS at registration: `systemLabels`, `physicalIds`,
@@ -258,7 +258,7 @@ attributes fall into 3 groups:
 > [!WARNING]
 >
 > In theory, the values in group 2 are set by enrolling the device in Intune and
-> complying the required policies. However, a user with `Intune Administrator`
+> complying with the required policies. However, a user with `Intune Administrator`
 > or `Global Administrator` in Entra can use the Graph API (or
 > AADInternals[^14]) or PowerShell's Entra Management `Set-EntraDevice` cmdlet
 > to manually set these fields, including `isManaged` and `isCompliant`. An
@@ -317,7 +317,7 @@ does not require multifactor authentication.
 The adversary authenticates and obtains a token. On a machine under their
 control they generate a device key pair and a transport key. These keys are
 generated locally and never transmitted, so this operation produces no record
-within the tenant. The adversary constructs a certificate signing request (CRS)
+within the tenant. The adversary constructs a certificate signing request (CSR)
 and submits it to the Device Registration Service (DRS) together with the token.
 DRS validates the token, creates a device object in the directory, and issues a
 certificate signed by the device key.
