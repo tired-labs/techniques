@@ -6,7 +6,7 @@
 |--------------|----------------------------------------------|
 | ID           | TRR0000                                      |
 | External IDs | [T1098.005]                                  |
-| Tactics      | Defense Evasion, Persistence                 |
+| Tactics      | Persistence                 |
 | Platforms    | Azure                                        |
 | Contributors | Andrew VanVleet                              |
 
@@ -104,13 +104,13 @@ that would otherwise be protected.
 ### Telemetry
 
 Authentication method activity is recorded in the Entra ID audit log under both
-the `Authentication Methods` and `Core Services` services.[^4]
+the `Authentication Methods` and `Core Directory` services.[^4]
 
 | Activity | Service | Details |
 | --- | --- | --- |
 | Admin registered security info | Authentication Methods | Records details about the method registered and the admin and target accounts involved in the event. |
 | User registered security info | Authentication Methods | Records details about the method registered and the user account involved. |
-| Update user | Core Services | Records a change to the `StrongAuthenticationUserDetails` field for the user. This field lists all registered authenciation methods for the given user at the time of the event. |
+| Update user | Core Directory | Records a change to the `StrongAuthenticationMethod` field for the user. This field lists all registered authentication methods for the given user at the time of the event. |
 
 ## Procedures
 
@@ -122,7 +122,7 @@ the `Authentication Methods` and `Core Services` services.[^4]
 ### Procedure A: Self-Service Authentication Method Registration
 
 This procedure applies where an adversary holds a credential for an account that
-doesn't have an existing strong authenciation method. The first time that anyone
+doesn't have an existing strong authentication method. The first time that anyone
 logs in with the credentials, Azure will prompt them to register a new
 authentication method. If this is an attacker, then they now control an
 authentication method for the account. If the account is subject to a policy
@@ -139,7 +139,7 @@ The operations shown in green are the client, operations in blue are Azure.
 ### Procedure B: Admin-Initiated Authentication Method Registration
 
 An adversary who controls an account with the
-`UserAuthenticationMethod.ReadWrite.All` permission (by default, `Authentiation
+`UserAuthenticationMethod.ReadWrite.All` permission (by default, `Authentication
 Administrator`, `Privileged Authentication Administrator`, and `Global
 Administrator`) can write an authentication method to any account in the tenant,
 with some limitations: Entra has a safeguard that only allows `Global
@@ -157,7 +157,7 @@ account's multifactor authentication requirement.
 
 ![DDM - Admin-Initiated Authentication Method Registration](ddms/trr0000_azr_b.png)
 
-#### Authentication Methods That Can Be Added Administatively
+#### Authentication Methods That Can Be Added Administratively
 
 The administrative path is available only for some method types (those that have
 a creation operation via the Graph API). The following table records which
