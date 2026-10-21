@@ -178,9 +178,6 @@ identifies as suspicious.[^14]
 Legitimate reasons for elevating include regaining access to a subscription
 or management group, granting a user access, seeing all subscriptions in an
 organization, and giving an automation application tenant-wide access.[^2]
-Defender for Cloud's tenant-wide visibility setup performs the elevation on
-the operator's behalf, and Azure Lighthouse's delegation-monitoring setup
-directs the operator through it.[^15][^12]
 
 ## Procedures
 
@@ -214,7 +211,7 @@ both are described in [Telemetry].
 
 Atomic Red Team carries no test for this technique; its T1098.003 atomics
 cover Entra directory role and Microsoft 365 role additions rather than the
-Azure RBAC elevation.[^16]
+Azure RBAC elevation.[^15]
 
 ## References
 
@@ -272,5 +269,4 @@ Azure RBAC elevation.[^16]
 [^12]: [Azure Lighthouse Monitor Delegation Changes - Microsoft Learn](https://learn.microsoft.com/azure/lighthouse/how-to/monitor-delegation-changes)
 [^13]: [Enable Defender for Resource Manager - Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/tutorial-enable-resource-manager-plan)
 [^14]: [Defender for Cloud Resource Manager Alerts - Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/alerts-resource-manager)
-[^15]: [Defender for Cloud Tenant-Wide Permissions Management - Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/tenant-wide-permissions-management)
-[^16]: [Atomic Red Team T1098.003 Atomics](https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.yaml)
+[^15]: [Atomic Red Team T1098.003 Atomics](https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.yaml)
