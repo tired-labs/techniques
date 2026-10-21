@@ -173,12 +173,6 @@ identifies as suspicious.[^14]
 > further full set of records while leaving the existing assignment in
 > place.
 
-### Benign Use
-
-Legitimate reasons for elevating include regaining access to a subscription
-or management group, granting a user access, seeing all subscriptions in an
-organization, and giving an automation application tenant-wide access.[^2]
-
 ## Procedures
 
 | ID            | Title                              | Tactic                            |
