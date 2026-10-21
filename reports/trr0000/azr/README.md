@@ -6,7 +6,7 @@
 |--------------|----------------------------------------------|
 | ID           | TRR0000                                      |
 | External IDs | [T1098.005]                                  |
-| Tactics      | Defense Evasion                              |
+| Tactics      | Stealth                                      |
 | Platforms    | Azure                                        |
 | Contributors | Andrew VanVleet                              |
 
@@ -41,7 +41,8 @@ The following related activities are explicitly out of scope:
 
 A device identity is a directory object representing a machine known to the
 tenant. Organizations can use device identities to distinguish machines they
-know from machines they do not; it is also possible to grant access on that basis.
+know from machines they do not; it is also possible to grant access on that
+basis.
 
 Unlike many attack techniques, device registration in Entra does not yield an
 automatic gain. An adversary performing it already holds a credential for an
@@ -259,8 +260,8 @@ attributes fall into 3 groups:
 > [!WARNING]
 >
 > In theory, the values in group 2 are set by enrolling the device in Intune and
-> complying with the required policies. However, a user with `Intune Administrator`
-> or `Global Administrator` in Entra can use the Graph API (or
+> complying with the required policies. However, a user with `Intune
+> Administrator` or `Global Administrator` in Entra can use the Graph API (or
 > AADInternals[^14]) or PowerShell's Entra Management `Set-EntraDevice` cmdlet
 > to manually set these fields, including `isManaged` and `isCompliant`. An
 > attacker possessing those roles can modify a device identity to make it appear
