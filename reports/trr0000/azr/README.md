@@ -23,9 +23,7 @@ Direct self-assignment of an Azure RBAC role through
 depends on an existing Azure RBAC write permission rather than on an Entra
 directory role. Privileged Identity Management activation of an eligible
 Global Administrator assignment is one way to meet the Global Administrator
-requirement, not an instance of the technique. Use of the root-scope
-assignment after it exists is outside the boundary, because the success
-condition is the assignment's existence.
+requirement, not an instance of the technique.
 
 ## Technique Overview
 
@@ -46,9 +44,7 @@ such as users, groups, applications, domains, and licensing. Azure RBAC
 governs Azure resources through Azure Resource Manager. Microsoft Entra
 role assignments do not grant access to Azure resources, Azure role
 assignments do not grant access to Microsoft Entra ID, and by default the
-Global Administrator does not have access to Azure resources.[^1] A tenant
-can hold a Global Administrator who cannot read a single virtual machine,
-and a subscription Owner whose Azure role grants nothing in the directory.
+Global Administrator does not have access to Azure resources.[^1]
 
 `Microsoft.Authorization/elevateAccess/action` is the mechanism that
 carries a directory-plane identity into the resource plane. Elevation is a
@@ -60,10 +56,8 @@ it requires no Azure RBAC permission.[^2]
 Azure RBAC scopes nest: resource, resource group, subscription, management
 group, and above all of them root scope `/`.[^3] The tenant root management
 group sits below `/`, and the assignment the platform creates is scoped to
-`/`, not to that group. Built-in role definitions carry an
-`assignableScopes` value of `["/"]`, and custom role definitions cannot set
-`assignableScopes` to `/` at all,[^4] so no custom role reaches root
-scope.
+`/`, not to that group. Custom role definitions cannot be made assignable
+at `/`,[^4] so no custom role reaches root scope.
 
 ### The Elevate Access Action
 
@@ -72,10 +66,8 @@ The action is a single `POST` to
 Manager.[^5] The request carries no body and no parameter other than
 `api-version`, so the caller cannot choose the principal, the role, or the
 scope: the platform fixes all three as the caller, User Access Administrator,
-and `/`. User Access Administrator combines read access to every Azure
-resource type with the full `Microsoft.Authorization/*` and
-`Microsoft.Support/*` action sets, which covers creating, modifying, and
-deleting role assignments and role definitions.[^6]
+and `/`. User Access Administrator reads every Azure resource type and
+manages role assignments and role definitions.[^6]
 
 The elevation applies only to the principal that invokes it. Other Global
 Administrators in the tenant remain as they were.[^2] The access token
@@ -88,19 +80,16 @@ check for its remaining lifetime after the role is removed.
 
 The portal exposes the action as the `Access management for Azure
 resources` toggle under the Microsoft Entra ID `Properties` blade. The same
-action is reachable through raw Azure Resource Manager REST, the Azure CLI
-generic REST command, and the Python, Go, JavaScript, and .NET management
-SDKs; every surface resolves to the same action string against the same
-endpoint. Azure PowerShell has no elevation cmdlet.[^2]
+action is reachable through raw Azure Resource Manager REST, the Azure CLI,
+and the management SDKs; every surface resolves to the same action string
+against the same endpoint. Azure PowerShell has no elevation cmdlet.[^2]
 
 ### Durability and Removal
 
 The assignment the platform creates is an ordinary Azure RBAC role
-assignment with its own lifecycle, and it is the durable product of the
-technique. It has no expiry. Deactivating the Global Administrator
-assignment in Privileged Identity Management leaves the root-scope
-assignment in place,[^2] and so does removing the Global Administrator role
-from the principal.[^8]
+assignment with no expiry. Deactivating the Global Administrator assignment
+in Privileged Identity Management leaves it in place,[^2] and so does
+removing the Global Administrator role from the principal.[^8]
 
 Removal is an ordinary `Microsoft.Authorization/roleAssignments/delete`
 against the assignment at scope `/`.[^2]
@@ -112,8 +101,7 @@ Manager, and the sign-in log records that issuance with a
 `ResourceDisplayName` of `Azure Resource Manager`. The table depends on the
 credential flow: an interactive user sign-in produces
 Entra SigninLogs (Azure Resource Manager) telemetry; a token obtained
-silently from an existing session, which covers the refresh-token exchange
-behind a command-line client and the portal's own silent acquisition,
+silently from an existing session (a command-line client or the portal)
 produces Entra AADNonInteractiveUserSignInLogs (Azure Resource Manager)
 telemetry; a service principal acquiring a client credentials token
 produces Entra AADServicePrincipalSignInLogs (Azure Resource Manager)
@@ -181,17 +169,16 @@ identifies as suspicious.[^14]
 
 ### Procedure A: Self-Elevation to Azure Root Scope (TRR0000.AZR.A)
 
-There is one procedure because the request exposes nothing to vary: every
+There is one procedure because the request exposes nothing to vary. Every
 surface in [Invocation Surfaces] emits the same action against the same
 endpoint, and the credential flow behind the token changes which sign-in
-table records the token issuance and how the records identify the caller,
-not which operations the technique performs, so the portal, the CLI, raw
-REST, the SDKs, and a workload identity holding the directory role are
+table records the issuance and how the records identify the caller, not
+which operations the technique performs. The portal, the CLI, raw REST, the
+SDKs, and a workload identity holding the directory role are therefore
 instances of one path. The two operations are `Obtain ARM Token` and
-`Elevate Access to Root Scope`; the role assignment the platform creates is
-the outcome of the second rather than a separate operation, because no
-caller step sits between the request and the assignment. The records of
-both are described in [Telemetry].
+`Elevate Access to Root Scope`; the platform creates the role assignment
+inside the second, so it is not a separate operation. The records of both
+are described in [Telemetry].
 
 #### Detection Data Model
 
@@ -202,10 +189,6 @@ both are described in [Telemetry].
 | ID                                                       | Link                                              |
 |----------------------------------------------------------|---------------------------------------------------|
 | azure.privilege-escalation.root-user-access-administrator | [Stratus Red Team Root User Access Administrator] |
-
-Atomic Red Team carries no test for this technique; its T1098.003 atomics
-cover Entra directory role and Microsoft 365 role additions rather than the
-Azure RBAC elevation.[^15]
 
 ## References
 
@@ -263,4 +246,3 @@ Azure RBAC elevation.[^15]
 [^12]: [Azure Lighthouse Monitor Delegation Changes - Microsoft Learn](https://learn.microsoft.com/azure/lighthouse/how-to/monitor-delegation-changes)
 [^13]: [Enable Defender for Resource Manager - Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/tutorial-enable-resource-manager-plan)
 [^14]: [Defender for Cloud Resource Manager Alerts - Microsoft Learn](https://learn.microsoft.com/azure/defender-for-cloud/alerts-resource-manager)
-[^15]: [Atomic Red Team T1098.003 Atomics](https://github.com/redcanaryco/atomic-red-team/blob/master/atomics/T1098.003/T1098.003.yaml)
