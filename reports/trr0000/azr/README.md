@@ -122,8 +122,8 @@ the `Authentication Methods` and `Core Directory` services.[^4]
 ### Procedure A: Self-Service Authentication Method Registration
 
 This procedure applies where an adversary holds a credential for an account that
-doesn't have an existing strong authentication method. The first time that anyone
-logs in with the credentials, Azure will prompt them to register a new
+doesn't have an existing strong authentication method. The first time that
+anyone logs in with the credentials, Azure will prompt them to register a new
 authentication method. If this is an attacker, then they now control an
 authentication method for the account. If the account is subject to a policy
 requiring multifactor authentication, the adversary now satisfies that policy,
