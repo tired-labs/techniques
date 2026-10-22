@@ -73,8 +73,8 @@ The elevation applies only to the principal that invokes it. Other Global
 Administrators in the tenant remain as they were.[^2] The access token
 carries the directory role in its `wids` claim,[^7] and Azure Resource
 Manager authorizes the call from the presented token rather than from
-directory state, so a token issued while the role was held satisfies the
-check for its remaining lifetime after the role is removed.
+directory state. A token issued while the role was held therefore satisfies
+the check for its remaining lifetime after the role is removed.
 
 ### Invocation Surfaces
 
@@ -99,13 +99,13 @@ against the assignment at scope `/`.[^2]
 The caller first obtains an access token whose audience is Azure Resource
 Manager, and the sign-in log records that issuance with a
 `ResourceDisplayName` of `Azure Resource Manager`. The table depends on the
-credential flow: an interactive user sign-in produces
-Entra SigninLogs (Azure Resource Manager) telemetry; a token obtained
+credential flow. An interactive user sign-in produces
+Entra SigninLogs (Azure Resource Manager) telemetry. A token obtained
 silently from an existing session (a command-line client or the portal)
 produces Entra AADNonInteractiveUserSignInLogs (Azure Resource Manager)
-telemetry; a service principal acquiring a client credentials token
+telemetry. A service principal acquiring a client credentials token
 produces Entra AADServicePrincipalSignInLogs (Azure Resource Manager)
-telemetry; and a managed identity acquiring the token from the instance
+telemetry, and a managed identity acquiring the token from the instance
 metadata endpoint produces
 Entra AADManagedIdentitySignInLogs (Azure Resource Manager) telemetry. The
 sign-in entry records token issuance rather than the invocation, so a token
@@ -142,10 +142,10 @@ tenant-level REST API.[^10][^8][^11] Reading the tenant-level activity
 log requires an Azure role assignment at scope `/`, and that assignment
 must be made by a Global Administrator with elevated access.[^12]
 
-The two records identify the caller differently: the Activity Log `caller`
+The two records identify the caller differently. The Activity Log `caller`
 field carries a user principal name for a user and a bare object identifier
-for a service principal, and the audit record's `InitiatedBy` populates
-`user` for a user and `app.servicePrincipalId` for a workload identity.
+for a service principal; the audit record's `InitiatedBy` populates `user`
+for a user and `app.servicePrincipalId` for a workload identity.
 
 Microsoft Defender for Resource Manager, a plan enabled per
 subscription,[^13] lists the alert `ARM_AnomalousElevateAccess`
