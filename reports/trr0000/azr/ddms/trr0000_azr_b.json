@@ -1,0 +1,177 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n43",
+      "position": {
+        "x": 432.671724299827,
+        "y": -1559.0192868924187
+      },
+      "caption": "Authenticate Principal",
+      "labels": [],
+      "properties": {
+        "Permission": "UserAuthenticationMethod.ReadWrite.All"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n44",
+      "position": {
+        "x": 650.2011798243113,
+        "y": -1559.0192868924187
+      },
+      "caption": "Issue Token",
+      "labels": [
+        "Entra sign-in logs"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n45",
+      "position": {
+        "x": 892.1705865735936,
+        "y": -1559.0192868924187
+      },
+      "caption": "Call API",
+      "labels": [],
+      "properties": {
+        "API": "POST /users/{id}/authentication/*methods"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n47",
+      "position": {
+        "x": 1134.1399933228759,
+        "y": -1559.0192868924187
+      },
+      "caption": "Receive API Call",
+      "labels": [
+        "MicrosoftGraphActivityLog"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n48",
+      "position": {
+        "x": 1376.1094000721582,
+        "y": -1559.0192868924187
+      },
+      "caption": "Write Authentication Method",
+      "labels": [
+        "Audit (Authentication Methods): Admin registered security info",
+        "Audit (Core Directory): Update user"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n47",
+      "fromId": "n43",
+      "toId": "n44",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n48",
+      "fromId": "n44",
+      "toId": "n45",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n49",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n47",
+      "toId": "n48"
+    },
+    {
+      "id": "n50",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n45",
+      "toId": "n47"
+    }
+  ]
+}
