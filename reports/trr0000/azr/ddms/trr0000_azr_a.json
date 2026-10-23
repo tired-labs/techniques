@@ -1,0 +1,118 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "p1",
+      "position": {
+        "x": 300,
+        "y": 50
+      },
+      "caption": "Obtain ARM Token",
+      "labels": [
+        "Entra SigninLogs (Azure Resource Manager)",
+        "Entra AADNonInteractiveUserSignInLogs (Azure Resource Manager)",
+        "Entra AADServicePrincipalSignInLogs (Azure Resource Manager)",
+        "Entra AADManagedIdentitySignInLogs (Azure Resource Manager)"
+      ],
+      "properties": {
+        "ResourceIdentity": "797f4846-ba00-4fd7-ba43-dac1f8f63013"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n0",
+      "position": {
+        "x": 300,
+        "y": 380
+      },
+      "caption": "Elevate Access to Root Scope",
+      "labels": [
+        "Entra AuditLogs (User has elevated their access to User Access Administrator for their Azure Resources)",
+        "Azure Activity Log Directory Activity (Microsoft.Authorization/elevateAccess/action)"
+      ],
+      "properties": {
+        "Permission": "Global Administrator",
+        "AuditLogCategory": "AzureRBACRoleManagementElevateAccess"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r1",
+      "fromId": "p1",
+      "toId": "n0",
+      "type": "prerequisite",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    }
+  ]
+}
