@@ -1,0 +1,285 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 1,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 510.76226918543784,
+        "y": 2.244266468046103
+      },
+      "caption": "Modify Subscription Transfer Settings",
+      "labels": [
+        "Azure Activity Log Directory Activity (Microsoft.Subscription/Policies/write)"
+      ],
+      "properties": {
+        "Setting": "blockSubscriptionsLeavingTenant"
+      },
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 380,
+        "y": 320
+      },
+      "caption": "Assign Subscription Owner",
+      "labels": [
+        "Azure Activity Log (Microsoft.Authorization/roleAssignments/write)"
+      ],
+      "properties": {
+        "Role": "Owner",
+        "RoleDefinitionId": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
+      },
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 1120,
+        "y": 180
+      },
+      "caption": "Initiate Subscription Tenant Change",
+      "labels": [],
+      "properties": {
+        "Permission": "Owner",
+        "Action": "Microsoft.Subscription/changeTenantRequest/write"
+      },
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 1400,
+        "y": 204.1768186877946
+      },
+      "caption": "Accept Subscription Tenant Change",
+      "labels": [],
+      "properties": {
+        "Action": "Microsoft.Subscription/subscriptions/acceptChangeTenant/action",
+        "Tenant": "Destination"
+      },
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 1680,
+        "y": 180
+      },
+      "caption": "Transfer Subscription",
+      "labels": [
+        "Azure Activity Log (Microsoft.Subscription/updateTenant/action)"
+      ],
+      "properties": {
+        "Category": "Security"
+      },
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 80,
+        "y": 520
+      },
+      "caption": "Modify Directory Guest Settings",
+      "labels": [
+        "Entra AuditLogs (Update authorization policy)",
+        "Entra AuditLogs (Update policy)"
+      ],
+      "properties": {
+        "Policy": "B2BManagementPolicy | authorizationPolicy",
+        "Tenant": "Victim"
+      },
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 666.0923544722361,
+        "y": 520
+      },
+      "caption": "Invite External User as a Guest",
+      "labels": [
+        "Entra AuditLogs (Invite external user)"
+      ],
+      "properties": {
+        "Tenant": "Victim"
+      },
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 1154.9220714379235,
+        "y": 519.9999999999999
+      },
+      "caption": "Redeem Invitation",
+      "labels": [
+        "Entra AuditLogs (Redeem external user invite)"
+      ],
+      "properties": {
+        "Tenant": "Victim"
+      },
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 179.9995071950501,
+        "y": 666.411015076987
+      },
+      "caption": "Invite User as Guest to External Tenant",
+      "labels": [
+        "Entra AuditLogs (Invite external user)"
+      ],
+      "properties": {
+        "Tenant": "Attacker"
+      },
+      "style": {}
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r0",
+      "fromId": "n0",
+      "toId": "n3",
+      "type": "if transfer blocked",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r1",
+      "fromId": "n1",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r3",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "if invites restricted",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r4",
+      "fromId": "n7",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r5",
+      "fromId": "n8",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r6",
+      "fromId": "n9",
+      "toId": "n1",
+      "type": "if not already Owner",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r7",
+      "fromId": "n9",
+      "toId": "n3",
+      "type": "if already Owner",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r8",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r9",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    }
+  ]
+}

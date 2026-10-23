@@ -56,92 +56,155 @@
     {
       "id": "n0",
       "position": {
-        "x": 303.33984375,
-        "y": 78.80693026457553
+        "x": 508.0759559979051,
+        "y": -5.814673094552095
       },
-      "caption": "Invite External User as a Guest",
+      "caption": "Modify Subscription Transfer Settings",
       "labels": [
-        "Entra Audit"
+        "Azure Activity Log Directory Activity (Microsoft.Subscription/Policies/write)"
       ],
       "properties": {
-        "OperationName": "Invite external user"
+        "Setting": "blockSubscriptionsLeavingTenant"
       },
       "style": {}
     },
     {
       "id": "n1",
       "position": {
-        "x": 303.33984375,
-        "y": 280.8069302645755
+        "x": 380,
+        "y": 320
       },
-      "caption": "Invite User as Guest to External Tenant",
-      "labels": [],
-      "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n2",
-      "position": {
-        "x": 75,
-        "y": 179.80693026457553
-      },
-      "caption": "Modify Directory Guest Settings (if needed)",
+      "caption": "Assign Subscription Owner",
       "labels": [
-        "Entra Audit "
+        "Azure Activity Log (Microsoft.Authorization/roleAssignments/write)"
       ],
       "properties": {
-        "OperationName": "Update Policy"
+        "Role": "Owner",
+        "RoleDefinitionId": "8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
       },
-      "style": {
-        "border-color": "#cccccc"
-      }
+      "style": {}
     },
     {
       "id": "n3",
       "position": {
-        "x": 596.4327808431007,
-        "y": 275.9842884523089
+        "x": 1120,
+        "y": 180
       },
-      "caption": "Modify Subscription Transfer Settings (if needed)",
+      "caption": "Initiate Subscription Tenant Change",
       "labels": [],
-      "properties": {},
-      "style": {
-        "border-color": "#cccccc"
-      }
+      "properties": {
+        "Permission": "Owner",
+        "Action": "Microsoft.Subscription/changeTenantRequest/write"
+      },
+      "style": {}
     },
     {
       "id": "n4",
       "position": {
-        "x": 801.390133121815,
-        "y": 168.3321825105087
+        "x": 1400,
+        "y": 209.54944506286006
       },
-      "caption": "Transfer Subscription",
+      "caption": "Accept Subscription Tenant Change",
       "labels": [],
-      "properties": {},
+      "properties": {
+        "Action": "Microsoft.Subscription/subscriptions/acceptChangeTenant/action",
+        "Tenant": "Destination"
+      },
       "style": {}
     },
     {
       "id": "n5",
       "position": {
-        "x": 596.4327808431007,
-        "y": 50
+        "x": 1680,
+        "y": 180
       },
-      "caption": "Add Role",
+      "caption": "Transfer Subscription",
       "labels": [
-        "Azure Activity"
+        "Azure Activity Log (Microsoft.Subscription/updateTenant/action)"
       ],
       "properties": {
-        "Role": "Owner",
-        " operationName": "Microsoft.Authorization/roleAssignments/write"
+        "Category": "Security"
+      },
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 80,
+        "y": 520
+      },
+      "caption": "Modify Directory Guest Settings",
+      "labels": [
+        "Entra AuditLogs (Update authorization policy)",
+        "Entra AuditLogs (Update policy)"
+      ],
+      "properties": {
+        "Policy": "B2BManagementPolicy | authorizationPolicy",
+        "Tenant": "Victim"
+      },
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 695.6417995350961,
+        "y": 520
+      },
+      "caption": "Invite External User as a Guest",
+      "labels": [
+        "Entra AuditLogs (Invite external user)"
+      ],
+      "properties": {
+        "Tenant": "Victim"
+      },
+      "style": {}
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 1120,
+        "y": 519.9999999999999
+      },
+      "caption": "Redeem Invitation",
+      "labels": [
+        "Entra AuditLogs (Redeem external user invite)"
+      ],
+      "properties": {
+        "Tenant": "Victim"
+      },
+      "style": {}
+    },
+    {
+      "id": "n9",
+      "position": {
+        "x": 168.25334687310894,
+        "y": 686.7559615484388
+      },
+      "caption": "Invite User as Guest to External Tenant",
+      "labels": [
+        "Entra AuditLogs (Invite external user)"
+      ],
+      "properties": {
+        "Tenant": "Attacker"
       },
       "style": {}
     }
   ],
   "relationships": [
     {
-      "id": "n0",
-      "fromId": "n2",
-      "toId": "n0",
+      "id": "r0",
+      "fromId": "n0",
+      "toId": "n3",
+      "type": "if transfer blocked",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r1",
+      "fromId": "n1",
+      "toId": "n3",
       "type": "",
       "properties": {},
       "style": {
@@ -149,43 +212,57 @@
       }
     },
     {
-      "id": "n1",
-      "fromId": "n2",
+      "id": "r3",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "if invites restricted",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r4",
+      "fromId": "n7",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r5",
+      "fromId": "n8",
       "toId": "n1",
       "type": "",
       "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n2",
-      "fromId": "n1",
-      "toId": "n3",
-      "type": "if needed",
-      "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n3",
-      "fromId": "n0",
-      "toId": "n5",
-      "type": "",
-      "properties": {},
       "style": {
         "arrow-color": "#f44e3b"
       }
     },
     {
-      "id": "n4",
-      "fromId": "n5",
-      "toId": "n3",
-      "type": "if needed",
+      "id": "r6",
+      "fromId": "n9",
+      "toId": "n1",
+      "type": "if not already Owner",
       "properties": {},
       "style": {
-        "arrow-color": "#f44e3b"
+        "arrow-color": "#000000"
       }
     },
     {
-      "id": "n5",
+      "id": "r7",
+      "fromId": "n9",
+      "toId": "n3",
+      "type": "if already Owner",
+      "properties": {},
+      "style": {
+        "arrow-color": "#000000"
+      }
+    },
+    {
+      "id": "r8",
       "fromId": "n3",
       "toId": "n4",
       "type": "",
@@ -195,30 +272,14 @@
       }
     },
     {
-      "id": "n6",
-      "fromId": "n5",
-      "toId": "n4",
+      "id": "r9",
+      "fromId": "n4",
+      "toId": "n5",
       "type": "",
       "properties": {},
       "style": {
         "arrow-color": "#f44e3b"
       }
-    },
-    {
-      "id": "n7",
-      "fromId": "n1",
-      "toId": "n4",
-      "type": "",
-      "properties": {},
-      "style": {}
-    },
-    {
-      "id": "n8",
-      "fromId": "n1",
-      "toId": "n5",
-      "type": "if needed",
-      "properties": {},
-      "style": {}
     }
   ]
 }

@@ -319,21 +319,28 @@
       "Impact"
     ],
     "contributors": [
-      "Andrew VanVleet"
+      "Andrew VanVleet",
+      "John McGuinness"
     ],
     "external_ids": [
       "AZT507.3",
-      "T1496.004"
+      "T1496"
     ],
     "platforms": [
       "Azure"
     ],
     "procedures": {
       "A": "Hijack via an external guest user",
-      "B": "Hijack via an internal user"
+      "B": "Hijack via an internal user",
+      "C": "Hijack via a two-party change-tenant request"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": null,
+      "B": null,
+      "C": null
+    }
   },
   {
     "name": "Clearing Windows Event Logs",
