@@ -96,9 +96,8 @@ sequenceDiagram
 ```
 
 The authorization code is designed to be **short-lived**, with a lifetime of
-about one minute for the Microsoft Entra v2
-[authorization code flow][microsoft-auth-code-flow], and is intended to be
-redeemed only by the client application that initiated the request.
+about one minute in Microsoft Entra ID,[^1] and is intended to be redeemed
+only by the client application that initiated the request.
 
 ### Authorization Endpoint
 
@@ -179,9 +178,7 @@ a `localhost` reply URL used by command-line or development-oriented clients.
 > You can list the Microsoft first-party applications in your tenant that
 > have a `localhost` reply URL registered with the following PowerShell
 > script. Microsoft first-party service principals are owned by the
-> Microsoft Services tenant
-> `f8cdef31-a31e-4b4a-93e4-5f571e91255a`
-> ([Verify first-party Microsoft applications][microsoft-first-party-apps]):
+> Microsoft Services tenant `f8cdef31-a31e-4b4a-93e4-5f571e91255a`:
 >
 > ```powershell
 > Connect-MgGraph -Scopes "Application.Read.All"
@@ -219,13 +216,7 @@ https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
 
 If the request is valid, the identity provider issues an **access token**
 representing the authenticated user and the permissions granted during the
-authorization request. Whether the request must include a client secret or
-certificate depends on how the redirect URI is registered: a mobile and desktop
-redirect URI classifies the application as a public client, which redeems the
-code without a credential, while a web redirect URI classifies it as a
-confidential client, which must present one
-([AADSTS7000218][microsoft-aadsts7000218], [authorization code
-flow][microsoft-auth-code-flow]).
+authorization request.
 
 The client application can then use this token to access APIs such as Microsoft
 Graph.
@@ -239,9 +230,8 @@ These applications are often represented in customer tenants by service
 principals that Microsoft provisions automatically or on first use. The service
 principal is the tenant-local object for the globally defined Microsoft
 application. First-party applications do not always result in a service
-principal in the tenant, and they still appear in sign-in reports when they do
-not ([Verify first-party Microsoft applications][microsoft-first-party-apps]).
-Delegated permission grants for that service principal are stored as
+principal in the tenant, and they still appear in sign-in reports when they
+do not. Delegated permission grants for that service principal are stored as
 `OAuth2PermissionGrant` objects. When those grants already exist for the
 requested resource and scope, Entra ID does not show the user a new consent
 prompt because consent has already been granted in the tenant.
@@ -420,11 +410,8 @@ a different environment than the one used during the initial authentication.
 The relevant data artifacts are the authorization request parameters, the
 interactive sign-in event created when the victim authenticates, and the
 non-interactive sign-in or token issuance event created when the code is
-redeemed (Microsoft lists redeeming an authorization code among [non-interactive
-user sign-ins][microsoft-noninteractive]). The attacker operations are the
-phishing delivery, authorization request construction, victim code collection,
-and token redemption. Keeping these artifacts separate from the attacker actions
-helps avoid treating log records as steps in the attack itself.
+redeemed (Microsoft lists redeeming an authorization code among non-interactive
+user sign-ins).
 
 ## Available Emulation Tests
 
@@ -443,7 +430,6 @@ helps avoid treating log records as steps in the attack itself.
 - [John Hammond - ConsentFix Video Walkthrough][hammond-video]
 - [EntraScopes - Entra ID first-party applications and scopes][EntraScopes]
 - [Microsoft - OAuth 2.0 authorization code flow][microsoft-auth-code-flow]
-- [Microsoft - Error AADSTS7000218][microsoft-aadsts7000218]
 - [Microsoft - Verify first-party Microsoft applications in sign-in
   reports][microsoft-first-party-apps]
 - [Microsoft - Non-interactive user sign-ins][microsoft-noninteractive]
@@ -463,9 +449,9 @@ helps avoid treating log records as steps in the attack itself.
 [EntraScopes]: https://entrascopes.com/
 [microsoft-auth-code-flow]:
   https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow
-[microsoft-aadsts7000218]:
-  https://learn.microsoft.com/en-us/troubleshoot/entra/entra-id/app-integration/confidential-client-application-authentication-error-aadsts7000218
 [microsoft-first-party-apps]:
   https://learn.microsoft.com/en-us/troubleshoot/entra/entra-id/governance/verify-first-party-apps-sign-in
 [microsoft-noninteractive]:
   https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-noninteractive-sign-ins
+
+[^1]: [OAuth 2.0 authorization code flow - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow)
