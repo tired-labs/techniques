@@ -56,8 +56,8 @@
     {
       "id": "n0",
       "position": {
-        "x": 680,
-        "y": 60
+        "x": 510.76226918543784,
+        "y": 2.244266468046103
       },
       "caption": "Modify Subscription Transfer Settings",
       "labels": [
@@ -102,7 +102,7 @@
       "id": "n4",
       "position": {
         "x": 1400,
-        "y": 180
+        "y": 204.1768186877946
       },
       "caption": "Accept Subscription Tenant Change",
       "labels": [],
@@ -147,7 +147,7 @@
     {
       "id": "n7",
       "position": {
-        "x": 380,
+        "x": 666.0923544722361,
         "y": 520
       },
       "caption": "Invite External User as a Guest",
@@ -162,8 +162,8 @@
     {
       "id": "n8",
       "position": {
-        "x": 680,
-        "y": 520
+        "x": 1154.9220714379235,
+        "y": 519.9999999999999
       },
       "caption": "Redeem Invitation",
       "labels": [
@@ -177,8 +177,8 @@
     {
       "id": "n9",
       "position": {
-        "x": 80,
-        "y": 700
+        "x": 179.9995071950501,
+        "y": 666.411015076987
       },
       "caption": "Invite User as Guest to External Tenant",
       "labels": [
