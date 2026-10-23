@@ -243,10 +243,7 @@ The red path runs from inviting the attacker's user into the victim tenant as a
 guest, through redeeming the invitation and granting that guest `Owner`, to
 initiating the change-tenant request, having it accepted in the destination,
 and completing the transfer; modifying the guest settings and the transfer
-policy precede the path only when invitations or transfers are blocked. The
-gray `Hold Subscription Owner` node marks a non-observable held-state
-prerequisite, the acting account's standing `Owner` right, which produces no
-telemetry of its own.
+policy precede the path only when invitations or transfers are blocked.
 
 ### Procedure B: Hijack via an internal user
 
@@ -278,10 +275,7 @@ transfer-policy edit precedes initiation only when the move is blocked.
 This procedure is the two-party handoff described in the [Technical Background]
 section. The attacker holds `Owner` over the target subscription and sends the
 change-tenant request to a destination tenant the attacker controls, where
-a separate identity accepts it. No guest is invited into either tenant. Whether
-this path removes the dual-directory requirement stated in the Entra guidance
-is not addressed in the documentation; this procedure covers only the
-documented request and accept steps.
+a separate identity accepts it. No guest is invited into either tenant.
 
 Because the acting account already holds `Owner`, the path enters the shared
 change-tenant pipeline at the request step with no guest-invitation or

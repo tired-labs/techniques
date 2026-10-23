@@ -85,22 +85,6 @@
       "style": {}
     },
     {
-      "id": "n2",
-      "position": {
-        "x": 760,
-        "y": 320
-      },
-      "caption": "Hold Subscription Owner",
-      "labels": [],
-      "properties": {
-        "Role": "Owner"
-      },
-      "style": {
-        "border-color": "#808080",
-        "node-color": "#cccccc"
-      }
-    },
-    {
       "id": "n3",
       "position": {
         "x": 1120,
@@ -109,6 +93,7 @@
       "caption": "Initiate Subscription Tenant Change",
       "labels": [],
       "properties": {
+        "Permission": "Owner",
         "Action": "Microsoft.Subscription/changeTenantRequest/write"
       },
       "style": {}
@@ -219,16 +204,6 @@
     {
       "id": "r1",
       "fromId": "n1",
-      "toId": "n2",
-      "type": "",
-      "properties": {},
-      "style": {
-        "arrow-color": "#000000"
-      }
-    },
-    {
-      "id": "r2",
-      "fromId": "n2",
       "toId": "n3",
       "type": "",
       "properties": {},
@@ -279,7 +254,7 @@
     {
       "id": "r7",
       "fromId": "n9",
-      "toId": "n2",
+      "toId": "n3",
       "type": "if already Owner",
       "properties": {},
       "style": {
