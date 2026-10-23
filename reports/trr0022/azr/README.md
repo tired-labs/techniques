@@ -60,9 +60,6 @@ two carry out the move:
   restrictions apply only to Procedure A, because Procedure B's invitation is
   issued and recorded by the attacker's tenant.
 
-Whether the two-party handoff removes the dual-directory requirement that the
-Entra guidance states is not addressed in the documentation.
-
 ### Requirements for both approaches
 
 Both approaches need an account with `Owner` privileges over the subscription
