@@ -676,5 +676,31 @@
     },
     "last_update": "2026-08-17",
     "pub_date": "2026-08-17"
+  },
+  {
+    "name": "Registering Authentication Methods to Entra ID Accounts",
+    "id": "TRR0035",
+    "tactics": [
+      "Persistence"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1098.005"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Self-Service Authentication Method Registration",
+      "B": "Admin-Initiated Authentication Method Registration"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-11-03",
+    "pub_date": "2026-11-03"
   }
 ]
