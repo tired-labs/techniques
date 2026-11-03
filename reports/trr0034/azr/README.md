@@ -310,7 +310,9 @@ browser request to the client, not to Entra ID.
 
 Both events record the user principal name, the application ID, the client IP
 address and its autonomous system number, the device details including the
-device ID, the network location details, and the session identifier.[^4] The
+device ID, the network location details, and the session identifier.[^4] Entra
+ID generates the session identifier when the user authenticates interactively,
+and the access tokens issued from that root authentication inherit it.[^5] The
 non-interactive event's `IncomingTokenType` names the token type presented to
 Entra ID; its documented values are `none`, `primaryRefreshToken`, `saml11`,
 `saml20`, `remoteDesktopToken`, and `refreshToken`, and an authorization code is
@@ -459,6 +461,7 @@ redeemed.
 - [Microsoft - SigninLogs table reference][microsoft-signinlogs]
 - [Microsoft - AADNonInteractiveUserSignInLogs table
   reference][microsoft-noninteractive-table]
+- [Microsoft - Linkable identifiers][microsoft-linkable-identifiers]
 
 [T1528]: https://attack.mitre.org/techniques/T1528/
 [push-consentfix]: https://pushsecurity.com/blog/consentfix
@@ -485,8 +488,11 @@ redeemed.
   https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs
 [microsoft-noninteractive-table]:
   https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/aadnoninteractiveusersigninlogs
+[microsoft-linkable-identifiers]:
+  https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-track-linkable-identifiers
 
 [^1]: [OAuth 2.0 authorization code flow - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow)
 [^2]: [signIn resource type (beta) - Microsoft Graph](https://learn.microsoft.com/en-us/graph/api/resources/signin?view=graph-rest-beta)
 [^3]: [What are non-interactive user sign-ins in Microsoft Entra? - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-noninteractive-sign-ins)
 [^4]: [SigninLogs - Azure Monitor Logs reference](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs)
+[^5]: [Track and investigate identity activities with linkable identifiers in Microsoft Entra - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-track-linkable-identifiers)
