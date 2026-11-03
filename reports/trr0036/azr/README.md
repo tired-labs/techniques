@@ -4,7 +4,7 @@
 
 | Key          | Value                             |
 |--------------|-----------------------------------|
-| ID           | TRR0000                           |
+| ID           | TRR0036                           |
 | External IDs | [AZT402], [T1098.003]             |
 | Tactics      | Privilege Escalation, Persistence |
 | Platforms    | IaaS, Identity Provider           |
@@ -165,9 +165,9 @@ identifies as suspicious.[^14]
 
 | ID            | Title                              | Tactic                            |
 |---------------|------------------------------------|-----------------------------------|
-| TRR0000.AZR.A | Self-Elevation to Azure Root Scope | Privilege Escalation, Persistence |
+| TRR0036.AZR.A | Self-Elevation to Azure Root Scope | Privilege Escalation, Persistence |
 
-### Procedure A: Self-Elevation to Azure Root Scope (TRR0000.AZR.A)
+### Procedure A: Self-Elevation to Azure Root Scope (TRR0036.AZR.A)
 
 There is one procedure because the request exposes nothing to vary. Every
 surface in [Invocation Surfaces] emits the same action against the same
@@ -182,7 +182,7 @@ are described in [Telemetry].
 
 #### Detection Data Model
 
-![TRR0000.AZR.A DDM](ddms/trr0000_azr_a.png)
+![TRR0036.AZR.A DDM](ddms/trr0036_azr_a.png)
 
 ## Available Emulation Tests
 
