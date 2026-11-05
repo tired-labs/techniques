@@ -193,7 +193,7 @@ that key material is not directly usable.
 
 #### Token Revocation
 
-Entra ID does not maintain a list of issued tokens and revoke them individually.
+Entra ID does not maintain a list of issued tokens nor revoke them individually.
 It records a single `TokensValidFrom` timestamp on the user object, and refuses
 any refresh-class token whose issue time precedes it.[^13] Actions described as
 revoking a user's sessions operate by advancing that timestamp.
