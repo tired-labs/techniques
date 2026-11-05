@@ -24,9 +24,7 @@ powershell, wt.exe) vary by malware family and threat actor, the broadstroke
 context of malicious copy/paste remains a taxonomical through-line. A few of the 
 more commonly used variants will be covered here, but it should be noted that 
 this form of social engineering is in widespread use and new execution methods 
-may still emerge. Furthermore, while originally a Windows initial access attack, 
-new variants targeting MacOS and Linux have been observed [^1]. The scope and 
-focus here however, will remain on Windows exclusive variants.
+may still emerge. While originally a Windows initial access attack, variants exist that target MacOS and Linux [^1]. This TRR is scoped to the Windows platform.
 
 ## Technical Background
 
