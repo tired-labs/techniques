@@ -40,13 +40,13 @@ interface to a legitimate OS command prompt and pastes the content of the
 clipboard into this console, thereby initiating the malicious payload. 
 The resultant action appears as standard user-initiated activity.
 
-Modern advanced phishing pages like ClickFix are specifically engineered with 
-detection evasion techniques (e.g., obfuscation, domain rotation) that bypass 
-traditional security tools, including email scanners and network proxies. 
+Modern advanced phishing techniques like ClickFix are specifically engineered 
+with detection evasion techniques (e.g., obfuscation, domain rotation) that 
+bypass traditional security tools, including email scanners and network proxies. 
 Because the malicious code execution is copied inside the browser's controlled 
 sandbox, typical perimeter defenses lose visibility. Consequently, the only 
-viable "last resort" opportunity for mitigation is on the endpoint, after 
-the user has interacted with the phishing content [^2], [^3].
+viable "last resort" opportunity for mitigation is on the endpoint, after the 
+user has interacted with the phishing content [^2], [^3].
 
 ## ClickFix Variants
 
@@ -83,8 +83,7 @@ While classic ClickFix campaigns direct victims to the Windows Run dialog,
 TerminalFix campaigns apply the same phishing technique but direct users to 
 Windows Terminal or PowerShell instead, increasing the likelihood that complex, 
 multi-line scripts execute successfully. Variation within the Terminal attack 
-category typically defines in what way the user is directed to the terminal 
-[^7].
+category is defined by how the user is directed to the terminal [^7].
 
 #### TerminalFix
 
@@ -124,12 +123,12 @@ An interesting aspect of the Run dialog is its use of [Most Recently Used] (MRU)
 elements as this provides a unique detection opportunity for all Run dialog 
 variants of ClickFix. This feature saves the last 26 entries typed into the Run 
 dialog for later use into the registry. The key located at 
-`Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU` within a user's 
+`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU` within a user's 
 `NTUSER.DAT` file. This artifact records the full command history as typed by 
 the user, providing deep insight into victim actions and attacker commands 
 executed via the Run box. RunMRU key contains multiple values that are named for 
-lowercase letters. These values store the commands that a user run using the Run 
-utility. The first value added is named “a”, the second value is named “b”, 
+lowercase letters. These values store the commands that a user has run using the 
+Run utility. The first value added is named “a”, the second value is named “b”, 
 then, “c” and so on. However, the names of the values do not always reflect the 
 order in which the commands were typed into the Run box. This information is 
 maintained in the “MRUList” value which is a string that lists the order in 
@@ -154,8 +153,9 @@ function. As of [Sysmon 12], these types of `SetClipboardData` events are logged
 with an [EventID 24]. Additionally, this data being retrieved from the clipboard 
 is logged within Microsoft Defender XDR as `GetClipboardData` [ActionTypes]. 
 Beyond this, there are a number of other methods for monitoring clipboard 
-activity, such as `Activitescache.db`, though they can be dependent on 
-environmental configurations [^11]
+activity, such as 
+`%LOCALAPPDATA%\ConnectedDevicesPlatform<SID>\ActivitiesCache.db`, though they 
+can be dependent on environmental configurations [^11]
 
 ## Procedures
 
@@ -171,14 +171,13 @@ environmental configurations [^11]
 All ClickFix variants whose execution is performed by leveraging the Run dialog 
 fall under this category regardless of the executable being called. Monitoring 
 changes to the RunMRU registry keys at 
-`Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU`([Windows Security 
-Log EventID 4657]) can be used to identify this activity in almost all 
+`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU` ([Windows 
+Security Log EventID 4657]) can be used to identify this activity in almost all 
 circumstances with one notable exception: if the exact string has already been 
 entered into the Run dialog and has not been cleared from the registry, a new 
 key will not be created. Due to the very specific nature of the executing 
 strings used to achieve initial access in ClickFix campaigns, this is an 
-extremely unlikely 
-situation.
+extremely unlikely situation.
 
 ### Procedure B: ClickFix: Terminal
 
