@@ -732,5 +732,31 @@
     },
     "last_update": "2026-11-03",
     "pub_date": "2026-11-03"
+  },
+  {
+    "name": "Registering Devices to Entra ID",
+    "id": "TRR0037",
+    "tactics": [
+      "Stealth"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1098.005"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Device Registration via the Device Registration Service",
+      "B": "Bulk Device Registration via a Bulk Enrollment Token"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-11-05",
+    "pub_date": "2026-11-05"
   }
 ]

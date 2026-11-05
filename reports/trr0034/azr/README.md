@@ -297,6 +297,29 @@ inventory first-party service principals, review delegated permission grants,
 and examine which reply URLs and resources appear in sign-in activity for those
 applications.
 
+### Logging
+
+Entra ID records an authorization code flow as two user sign-in events. The
+user's authentication at the authorization endpoint is an interactive sign-in,
+in which the user provides an authentication factor. The client's redemption of
+the code at the token endpoint is a non-interactive sign-in, in which the client
+uses a token or code on the user's behalf.[^2][^3] The redirect that delivers
+the code to the reply URL is a browser request to the client, not to Entra ID.
+
+Both events record the user principal name, the application ID, the client IP
+address and its autonomous system number, the device details including the
+device ID, the network location details, and the session identifier.[^4] Entra
+ID generates the session identifier when the user authenticates interactively,
+and the access tokens issued from that root authentication inherit it.[^5] The
+non-interactive event's `IncomingTokenType` names the token type presented to
+Entra ID; its documented values are `none`, `primaryRefreshToken`, `saml11`,
+`saml20`, `remoteDesktopToken`, and `refreshToken`, and an authorization code
+falls into the `none` category.[^2] When the client that redeems the code runs
+on the machine where the user authenticated, as a loopback listener does, both
+events carry that machine's IP address. In Log Analytics the interactive event
+is in the `SigninLogs` table and the non-interactive event in
+`AADNonInteractiveUserSignInLogs`.
+
 ## Procedures
 
 | ID            | Title      | Tactic            |
@@ -410,8 +433,7 @@ a different environment than the one used during the initial authentication.
 The relevant data artifacts are the authorization request parameters, the
 interactive sign-in event created when the victim authenticates, and the
 non-interactive sign-in or token issuance event created when the code is
-redeemed (Microsoft lists redeeming an authorization code among non-interactive
-user sign-ins).
+redeemed.
 
 ## Available Emulation Tests
 
@@ -433,6 +455,11 @@ user sign-ins).
 - [Microsoft - Verify first-party Microsoft applications in sign-in
   reports][microsoft-first-party-apps]
 - [Microsoft - Non-interactive user sign-ins][microsoft-noninteractive]
+- [Microsoft Graph - signIn resource type (beta)][microsoft-graph-signin]
+- [Microsoft - SigninLogs table reference][microsoft-signinlogs]
+- [Microsoft - AADNonInteractiveUserSignInLogs table
+  reference][microsoft-noninteractive-table]
+- [Microsoft - Linkable identifiers][microsoft-linkable-identifiers]
 
 [T1528]: https://attack.mitre.org/techniques/T1528/
 [push-consentfix]: https://pushsecurity.com/blog/consentfix
@@ -453,5 +480,17 @@ user sign-ins).
   https://learn.microsoft.com/en-us/troubleshoot/entra/entra-id/governance/verify-first-party-apps-sign-in
 [microsoft-noninteractive]:
   https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-noninteractive-sign-ins
+[microsoft-graph-signin]:
+  https://learn.microsoft.com/en-us/graph/api/resources/signin?view=graph-rest-beta
+[microsoft-signinlogs]:
+  https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs
+[microsoft-noninteractive-table]:
+  https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/aadnoninteractiveusersigninlogs
+[microsoft-linkable-identifiers]:
+  https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-track-linkable-identifiers
 
 [^1]: [OAuth 2.0 authorization code flow - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow)
+[^2]: [signIn resource type (beta) - Microsoft Graph](https://learn.microsoft.com/en-us/graph/api/resources/signin?view=graph-rest-beta)
+[^3]: [What are non-interactive user sign-ins in Microsoft Entra? - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-noninteractive-sign-ins)
+[^4]: [SigninLogs - Azure Monitor Logs reference](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables/signinlogs)
+[^5]: [Track and investigate identity activities with linkable identifiers in Microsoft Entra - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/authentication/how-to-authentication-track-linkable-identifiers)
