@@ -260,13 +260,13 @@ attributes fall into 3 groups:
 > [!WARNING]
 >
 > In theory, the values in group 2 are set by enrolling the device in Intune and
-> complying with the required policies. However, a user with `Intune
-> Administrator` or `Global Administrator` in Entra can use the Graph API (or
-> AADInternals[^14]) or PowerShell's Entra Management `Set-EntraDevice` cmdlet
-> to manually set these fields, including `isManaged` and `isCompliant`. An
-> attacker possessing those roles can modify a device identity to make it appear
-> managed and compliant, allowing them to pass conditional access policies
-> requiring managed or compliant devices.
+> complying with the required policies. However, an attacker with access to an
+> account holding `Intune Administrator` or `Global Administrator` in Entra can
+> use the Graph API (or AADInternals[^14]) or PowerShell's Entra Management
+> `Set-EntraDevice` cmdlet to manually set these fields, including `isManaged`
+> and `isCompliant`. An attacker possessing those roles can modify a device
+> identity to make it appear managed and compliant, allowing them to pass
+> conditional access policies requiring managed or compliant devices.
 
 A less obvious effect concerns devices that do not exist in the directory at
 all. For a device unregistered with Entra ID, all device properties are
@@ -321,12 +321,16 @@ control they generate a device key pair and a transport key. These keys are
 generated locally and never transmitted, so this operation produces no record
 within the tenant. The adversary constructs a certificate signing request (CSR)
 and submits it to the Device Registration Service (DRS) together with the token.
-DRS validates the token, creates a device object in the directory, and issues a
-certificate signed by the device key.
+DRS validates the token and signature on the CSR, creates a device object in the
+directory, and issues a certificate signed by Microsoft's own CA key,
+`MS-Organization-Access`.
 
-The adversary now possesses a device identity in the tenant whose private key
-material they hold exclusively. They can then request a PRT for the device,
-which Entra ID issues carrying device and user claims.
+The certificate DRS returns binds the device’s public key to the directory
+object. The attacker holds the matching private key. From that point, the device
+private key is what the attacker uses to prove it's that device, by signing the
+PRT request assertion with the private key. Entra validates that signature
+against the public key in the certificate and issues a PRT for the device that
+carries the device and user claims.
 
 #### Detection Data Model
 
