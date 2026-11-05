@@ -303,10 +303,8 @@ Entra ID records an authorization code flow as two user sign-in events. The
 user's authentication at the authorization endpoint is an interactive sign-in,
 in which the user provides an authentication factor. The client's redemption of
 the code at the token endpoint is a non-interactive sign-in, in which the client
-uses a token or code on the user's behalf.[^2] Redeeming an authorization code
-for an access token and refresh token is captured in the non-interactive user
-sign-in log.[^3] The redirect that delivers the code to the reply URL is a
-browser request to the client, not to Entra ID.
+uses a token or code on the user's behalf.[^2][^3] The redirect that delivers
+the code to the reply URL is a browser request to the client, not to Entra ID.
 
 Both events record the user principal name, the application ID, the client IP
 address and its autonomous system number, the device details including the
@@ -315,11 +313,11 @@ ID generates the session identifier when the user authenticates interactively,
 and the access tokens issued from that root authentication inherit it.[^5] The
 non-interactive event's `IncomingTokenType` names the token type presented to
 Entra ID; its documented values are `none`, `primaryRefreshToken`, `saml11`,
-`saml20`, `remoteDesktopToken`, and `refreshToken`, and an authorization code is
-not among them.[^2] When the client that redeems the code runs on the machine
-where the user authenticated, as a loopback listener does, both events carry
-that machine's IP address. In Log Analytics the interactive event is in the
-`SigninLogs` table and the non-interactive event in
+`saml20`, `remoteDesktopToken`, and `refreshToken`, and an authorization code
+falls into the `none` category.[^2] When the client that redeems the code runs
+on the machine where the user authenticated, as a loopback listener does, both
+events carry that machine's IP address. In Log Analytics the interactive event
+is in the `SigninLogs` table and the non-interactive event in
 `AADNonInteractiveUserSignInLogs`.
 
 ## Procedures
