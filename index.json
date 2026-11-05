@@ -319,21 +319,28 @@
       "Impact"
     ],
     "contributors": [
-      "Andrew VanVleet"
+      "Andrew VanVleet",
+      "John McGuinness"
     ],
     "external_ids": [
       "AZT507.3",
-      "T1496.004"
+      "T1496"
     ],
     "platforms": [
       "Azure"
     ],
     "procedures": {
       "A": "Hijack via an external guest user",
-      "B": "Hijack via an internal user"
+      "B": "Hijack via an internal user",
+      "C": "Hijack via a two-party change-tenant request"
     },
     "last_update": "2025-10-07",
-    "pub_date": "2025-10-07"
+    "pub_date": "2025-10-07",
+    "tests": {
+      "A": null,
+      "B": null,
+      "C": null
+    }
   },
   {
     "name": "Clearing Windows Event Logs",
@@ -669,5 +676,61 @@
     },
     "last_update": "2026-08-17",
     "pub_date": "2026-08-17"
+  },
+  {
+    "name": "Registering Authentication Methods to Entra ID Accounts",
+    "id": "TRR0035",
+    "tactics": [
+      "Persistence"
+    ],
+    "contributors": [
+      "Andrew VanVleet"
+    ],
+    "external_ids": [
+      "T1098.005"
+    ],
+    "platforms": [
+      "Azure"
+    ],
+    "procedures": {
+      "A": "Self-Service Authentication Method Registration",
+      "B": "Admin-Initiated Authentication Method Registration"
+    },
+    "tests": {
+      "A": null,
+      "B": null
+    },
+    "last_update": "2026-11-03",
+    "pub_date": "2026-11-03"
+  },
+  {
+    "name": "Elevated Access Toggle (Self-Elevation to Azure Root Scope)",
+    "id": "TRR0036",
+    "tactics": [
+      "Privilege Escalation",
+      "Persistence"
+    ],
+    "contributors": [
+      "John McGuinness"
+    ],
+    "external_ids": [
+      "AZT402",
+      "T1098.003"
+    ],
+    "platforms": [
+      "IaaS",
+      "Identity Provider"
+    ],
+    "procedures": {
+      "A": "Self-Elevation to Azure Root Scope"
+    },
+    "tests": {
+      "root-user-access-administrator": {
+        "text": "Stratus Red Team Root User Access Administrator",
+        "url": "https://stratus-red-team.cloud/attack-techniques/azure/azure.privilege-escalation.root-user-access-administrator/"
+      }
+    },
+    "last_update": "2026-11-03",
+    "pub_date": "2026-11-03"
   }
 ]

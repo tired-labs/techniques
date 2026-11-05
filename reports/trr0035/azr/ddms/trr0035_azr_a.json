@@ -1,0 +1,197 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n36",
+      "position": {
+        "x": 427.74761874595583,
+        "y": -1292.2575175734864
+      },
+      "caption": "Authenticate Principal",
+      "labels": [],
+      "properties": {
+        "Credential": "password / refresh token / TAP",
+        "Account state": "no existing strong method"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n37",
+      "position": {
+        "x": 1467.5349023980325,
+        "y": -1292.2575175734864
+      },
+      "caption": "Issue Token",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n38",
+      "position": {
+        "x": 860.4523536889375,
+        "y": -1292.2575175734864
+      },
+      "caption": "Submit Method Registration",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n40",
+      "position": {
+        "x": 1047.4207377659236,
+        "y": -1292.2575175734867
+      },
+      "caption": "Prove Method Possession",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n41",
+      "position": {
+        "x": 1257.477820081978,
+        "y": -1292.2575175734864
+      },
+      "caption": "Write Authentication Method",
+      "labels": [
+        "Audit (Authentication Methods): User registered security info",
+        "Audit (Core Directory): Update user"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n42",
+      "position": {
+        "x": 650.2011798243113,
+        "y": -1292.2575175734864
+      },
+      "caption": "Require Method Registration",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n40",
+      "fromId": "n36",
+      "toId": "n42",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n42",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n42",
+      "toId": "n38"
+    },
+    {
+      "id": "n44",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n38",
+      "toId": "n40"
+    },
+    {
+      "id": "n45",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n40",
+      "toId": "n41"
+    },
+    {
+      "id": "n46",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n41",
+      "toId": "n37"
+    }
+  ]
+}
