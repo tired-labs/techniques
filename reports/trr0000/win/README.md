@@ -171,8 +171,8 @@ can be dependent on environmental configurations [^11]
 All ClickFix variants whose execution is performed by leveraging the Run dialog 
 fall under this category regardless of the executable being called. Monitoring 
 changes to the RunMRU registry keys at 
-`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU` ([Windows 
-Security Log EventID 4657]) can be used to identify this activity in almost all 
+`HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU` (Windows 
+Security Log [EventID 4657]) can be used to identify this activity in almost all 
 circumstances with one notable exception: if the exact string has already been 
 entered into the Run dialog and has not been cleared from the registry, a new 
 key will not be created. Due to the very specific nature of the executing 
@@ -225,6 +225,7 @@ monitor for malicious content being written to and read from the clipboard.
 [GetClipboardData]: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclipboarddata
 [Sysmon 12]: https://www.bleepingcomputer.com/news/microsoft/microsoft-sysmon-now-logs-data-copied-to-the-windows-clipboard/
 [EventID 24]: https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=90024
+[EventID 4657]: https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/auditing/event-4657
 [ActionTypes]: https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceevents-table
 
 [^1]: https://hunt.io/blog/macos-clickfix-applescript-terminal-phishing
