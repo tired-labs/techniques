@@ -1,0 +1,364 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n18",
+      "position": {
+        "x": 96.61430406748946,
+        "y": -669.7229739131997
+      },
+      "caption": "Authenticate Privileged Principal",
+      "labels": [],
+      "properties": {
+        "Role": "supported Entra role + MDM user scope",
+        "Credential": "password or certificate"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n19",
+      "position": {
+        "x": 285.700033727278,
+        "y": -669.7229739131997
+      },
+      "caption": "Issue Token",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n20",
+      "position": {
+        "x": 479.9638053533,
+        "y": -669.7620985180583
+      },
+      "caption": "Request Bulk Token",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n21",
+      "position": {
+        "x": 382.83191757037116,
+        "y": -501.5247338429467
+      },
+      "caption": "Create Package Identity",
+      "labels": [
+        "Entra Audit Log"
+      ],
+      "properties": {
+        "UserName": "package_{GUID}",
+        "Activity": "Add User"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n22",
+      "position": {
+        "x": 543.8218094216747,
+        "y": -501.5247338429467
+      },
+      "caption": "Issue Bulk Token",
+      "labels": [],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n24",
+      "position": {
+        "x": 975,
+        "y": -669.7620985180583
+      },
+      "caption": "Submit Registration Request",
+      "labels": [],
+      "properties": {
+        "Auth": "bulk enrollment token",
+        "Reuse": "many devices"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n30",
+      "position": {
+        "x": 744.5282755616648,
+        "y": -669.7620985180583
+      },
+      "caption": "Generate Device Key",
+      "labels": [],
+      "properties": {
+        "Keys": "device key pair + transport key"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n31",
+      "position": {
+        "x": 1257.477820081978,
+        "y": -669.7229739131997
+      },
+      "caption": "Receive Registration Request",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {
+        "resourceDisplayName": "Device Registration Service",
+        "resourceId": "01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n32",
+      "position": {
+        "x": 1539.955640163956,
+        "y": -669.7229739131997
+      },
+      "caption": "Create Device Object",
+      "labels": [
+        "Entra Audit Log"
+      ],
+      "properties": {
+        "trustType": "Workplace or AzureAd",
+        "Operation": "\"Register device\" & \"Add device\"",
+        "resourceDisplayName": "Device Registration Service & Core Directory"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n33",
+      "position": {
+        "x": 1772.4743905175549,
+        "y": -669.7229739131998
+      },
+      "caption": "Issue Device Certificate",
+      "labels": [],
+      "properties": {
+        "Binding": "device key"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n34",
+      "position": {
+        "x": 2004.9931408711575,
+        "y": -669.7229739131997
+      },
+      "caption": "Request PRT",
+      "labels": [],
+      "properties": {
+        "deviceTrust": "AzureAd or Workplace"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n35",
+      "position": {
+        "x": 2218.198741617827,
+        "y": -669.7229739131998
+      },
+      "caption": "Issue PRT",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {
+        "Log": "interactive if password, non-interactive if refresh token",
+        "deviceDetail": "id, name, trustType",
+        "resourceDisplayName": "Microsoft Authentication Broker",
+        "resourceId": "29d9ed98-a469-4536-ade2-f981bc1d605e"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n17",
+      "fromId": "n18",
+      "toId": "n19",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n18",
+      "fromId": "n19",
+      "toId": "n20",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n19",
+      "fromId": "n20",
+      "toId": "n21",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n20",
+      "fromId": "n21",
+      "toId": "n22",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n28",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n22",
+      "toId": "n30"
+    },
+    {
+      "id": "n29",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n30",
+      "toId": "n24"
+    },
+    {
+      "id": "n30",
+      "fromId": "n31",
+      "toId": "n32",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n31",
+      "fromId": "n32",
+      "toId": "n33",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n32",
+      "fromId": "n33",
+      "toId": "n34",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n33",
+      "fromId": "n34",
+      "toId": "n35",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n34",
+      "type": "",
+      "style": {},
+      "properties": {},
+      "fromId": "n24",
+      "toId": "n31"
+    }
+  ]
+}
