@@ -18,13 +18,13 @@ code through a copy and paste action disguised as a "quick fix" to common
 computer issues. This style of attack has undergone numerous and continued 
 iterations, morphing into variants that target alternate execution vectors, such 
 as using the explorer address bar to launch cmd in the case of the FileFix 
-variant. While the specifics regarding the social engineering lure (e.g. MFA 
-verification, CAPTCHA challenge) and the underlying execution method (e.g. 
-powershell, wt.exe) vary by malware family and threat actor, the broadstroke 
-context of malicious copy/paste remains a taxonomical through-line. A few of the 
-more commonly used variants will be covered here, but it should be noted that 
-this form of social engineering is in widespread use and new execution methods 
-may still emerge. While originally a Windows initial access attack, variants exist that target MacOS and Linux [^1]. This TRR is scoped to the Windows platform.
+variant. While the specifics regarding the social engineering lure and 
+underlying execution method vary by malware family and threat actor, they all 
+rely on the underlying copy/paste operations. A few of the more commonly used 
+variants will be covered here, but it should be noted that this form of social 
+engineering is in widespread use and new execution methods may still emerge. 
+While originally a Windows initial access attack, variants exist that target 
+MacOS and Linux [^1]. This TRR is scoped to the Windows platform.
 
 ## Technical Background
 
