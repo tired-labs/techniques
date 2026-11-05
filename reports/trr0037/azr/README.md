@@ -4,7 +4,7 @@
 
 | Key          | Value                                        |
 |--------------|----------------------------------------------|
-| ID           | TRR0000                                      |
+| ID           | TRR0037                                      |
 | External IDs | [T1098.005]                                  |
 | Tactics      | Stealth                                      |
 | Platforms    | Azure                                        |
@@ -306,8 +306,8 @@ identity.
 
 | ID            | Title                                                   | Tactic          |
 |---------------|---------------------------------------------------------|-----------------|
-| TRR0000.AZR.A | Device Registration via the Device Registration Service | Defense Evasion |
-| TRR0000.AZR.B | Bulk Device Registration via a Bulk Enrollment Token    | Defense Evasion |
+| TRR0037.AZR.A | Device Registration via the Device Registration Service | Defense Evasion |
+| TRR0037.AZR.B | Bulk Device Registration via a Bulk Enrollment Token    | Defense Evasion |
 
 ### Procedure A: Device Registration via the Device Registration Service
 
@@ -334,7 +334,7 @@ carries the device and user claims.
 
 #### Detection Data Model
 
-![DDM - Device Registration via the Device Registration Service](ddms/trr0000_azr_a.png)
+![DDM - Device Registration via the Device Registration Service](ddms/trr0037_azr_a.png)
 
 ### Procedure B: Bulk Device Registration via a Bulk Enrollment Token
 
@@ -363,14 +363,14 @@ requirements at the point of registration.
 
 #### Detection Data Model
 
-![DDM - Bulk Device Registration via a Bulk Enrollment Token](ddms/trr0000_azr_b.png)
+![DDM - Bulk Device Registration via a Bulk Enrollment Token](ddms/trr0037_azr_b.png)
 
 ## Available Emulation Tests
 
 | ID            | Link |
 |---------------|------|
-| TRR0000.AZR.A |      |
-| TRR0000.AZR.B |      |
+| TRR0037.AZR.A |      |
+| TRR0037.AZR.B |      |
 
 ## References
 
