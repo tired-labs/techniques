@@ -28,7 +28,7 @@ may still emerge. While originally a Windows initial access attack, variants exi
 
 ## Technical Background
 
-A defining mechanic of the ClickFix family of attacks is the abuse of the 
+The defining mechanic of the ClickFix family of attacks is the abuse of the 
 clipboard. Instead of simply dropping a malicious file, ClickFix style campaigns 
 utilize JavaScript payloads on fake or cloned web pages to silently copy a 
 highly obfuscated command, often Base64 encoded PowerShell script or shell 
