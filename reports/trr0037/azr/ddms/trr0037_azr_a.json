@@ -1,0 +1,290 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 2,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 16,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 3,
+    "arrow-color": "#000000",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n0",
+      "position": {
+        "x": 75,
+        "y": 50.000000000000156
+      },
+      "caption": "Authenticate Principal",
+      "labels": [],
+      "properties": {
+        "Credential": "password / refresh token / TAP"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n1",
+      "position": {
+        "x": 269.2281536286223,
+        "y": 50.00000000000012
+      },
+      "caption": "Issue Token",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n2",
+      "position": {
+        "x": 486.28090808415146,
+        "y": 50.00000000000008
+      },
+      "caption": "Generate Device Key",
+      "labels": [],
+      "properties": {
+        "Keys": "device key pair + transport key"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n3",
+      "position": {
+        "x": 747.3840488569369,
+        "y": 50.00000000000012
+      },
+      "caption": "Submit Registration Request",
+      "labels": [],
+      "properties": {
+        "Payload": "ID token + CSR + transport pubkey",
+        "resourceDisplayName": "Device Registration Service",
+        "resourceId": "01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 1008.4871896297225,
+        "y": 50.00000000000008
+      },
+      "caption": "Receive Registration Request",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {
+        "resourceDisplayName": "Device Registration Service",
+        "resourceId": "01cb2876-7ebd-4aa4-9cc9-d28bd4d359a9"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 1290.9650097117008,
+        "y": 50.00000000000012
+      },
+      "caption": "Create Device Object",
+      "labels": [
+        "Entra Audit Log"
+      ],
+      "properties": {
+        "trustType": "Workplace or AzureAd",
+        "Operation": "\"Register device\" & \"Add device\"",
+        "resourceDisplayName": "Device Registration Service & Core Directory"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 1523.4837600653004,
+        "y": 50
+      },
+      "caption": "Issue Device Certificate",
+      "labels": [],
+      "properties": {
+        "Binding": "device key"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n7",
+      "position": {
+        "x": 1756.0025104189003,
+        "y": 50.000000000000156
+      },
+      "caption": "Request PRT",
+      "labels": [],
+      "properties": {
+        "deviceTrust": "AzureAd or Workplace"
+      },
+      "style": {
+        "border-color": "#68bc00",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    },
+    {
+      "id": "n8",
+      "position": {
+        "x": 1969.2081111655705,
+        "y": 50
+      },
+      "caption": "Issue PRT",
+      "labels": [
+        "Entra Signin Log"
+      ],
+      "properties": {
+        "Log": "interactive if password, non-interactive if refresh token",
+        "deviceDetail": "id, name, trustType",
+        "resourceDisplayName": "Microsoft Authentication Broker",
+        "resourceId": "29d9ed98-a469-4536-ade2-f981bc1d605e"
+      },
+      "style": {
+        "border-color": "#0062b1",
+        "property-font-size": 13,
+        "label-font-size": 13
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "n0",
+      "fromId": "n0",
+      "toId": "n1",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n1",
+      "fromId": "n1",
+      "toId": "n2",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n2",
+      "fromId": "n2",
+      "toId": "n3",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n3",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n4",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n5",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n6",
+      "fromId": "n6",
+      "toId": "n7",
+      "type": "",
+      "properties": {},
+      "style": {}
+    },
+    {
+      "id": "n7",
+      "fromId": "n7",
+      "toId": "n8",
+      "type": "",
+      "properties": {},
+      "style": {}
+    }
+  ]
+}
