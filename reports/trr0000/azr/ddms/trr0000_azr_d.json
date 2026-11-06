@@ -1,0 +1,180 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#f44e3b",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n13",
+      "position": {
+        "x": 2900,
+        "y": 50
+      },
+      "caption": "Execute Code in Pod",
+      "labels": [],
+      "properties": {
+        "PodLabel": "azure.workload.identity/use=true",
+        "ServiceAccountAnnotation": "azure.workload.identity/client-id"
+      },
+      "style": {
+        "node-color": "#cccccc",
+        "border-color": "#808080",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n14",
+      "position": {
+        "x": 2900,
+        "y": 400
+      },
+      "caption": "Read Projected Service Account Token",
+      "labels": [
+        "Linux auditd (open/openat syscall)"
+      ],
+      "properties": {
+        "Path": "/var/run/secrets/azure/tokens/azure-identity-token",
+        "EnvVar": "AZURE_FEDERATED_TOKEN_FILE"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n17",
+      "position": {
+        "x": 3600,
+        "y": 400
+      },
+      "caption": "Create Service Account Token",
+      "labels": [
+        "AKSAudit (Kubernetes API server audit)"
+      ],
+      "properties": {
+        "Permission": "create serviceaccounts/token",
+        "Audience": "api://AzureADTokenExchange"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n15",
+      "position": {
+        "x": 3250,
+        "y": 750
+      },
+      "caption": "Request Client Credentials Token",
+      "labels": [
+        "Entra AADServicePrincipalSignInLogs (Federated credential exchange)"
+      ],
+      "properties": {
+        "GrantType": "client_credentials",
+        "ClientAssertionType": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r9",
+      "fromId": "n13",
+      "toId": "n14",
+      "type": "prerequisite",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r10",
+      "fromId": "n14",
+      "toId": "n15",
+      "type": "projected token",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r13",
+      "fromId": "n17",
+      "toId": "n15",
+      "type": "TokenRequest token",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    }
+  ]
+}

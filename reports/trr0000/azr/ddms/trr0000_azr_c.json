@@ -1,0 +1,144 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#f44e3b",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n10",
+      "position": {
+        "x": 2200,
+        "y": 50
+      },
+      "caption": "Execute Code on Azure Compute",
+      "labels": [],
+      "properties": {
+        "IdentityType": "SystemAssigned | UserAssigned"
+      },
+      "style": {
+        "node-color": "#cccccc",
+        "border-color": "#808080",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n11",
+      "position": {
+        "x": 2200,
+        "y": 400
+      },
+      "caption": "Request Managed Identity Token",
+      "labels": [
+        "Linux auditd (connect syscall)",
+        "Sysmon 3 (NetworkConnect)"
+      ],
+      "properties": {
+        "Endpoint": "169.254.169.254/metadata/identity/oauth2/token | IDENTITY_ENDPOINT",
+        "Header": "Metadata: true | X-IDENTITY-HEADER | Secret"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n12",
+      "position": {
+        "x": 2200,
+        "y": 750
+      },
+      "caption": "Issue Managed Identity Access Token",
+      "labels": [
+        "Entra AADManagedIdentitySignInLogs (Token issuance)"
+      ],
+      "properties": {},
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r7",
+      "fromId": "n10",
+      "toId": "n11",
+      "type": "prerequisite",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r8",
+      "fromId": "n11",
+      "toId": "n12",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    }
+  ]
+}

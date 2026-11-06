@@ -1,0 +1,214 @@
+{
+  "style": {
+    "font-family": "sans-serif",
+    "background-color": "#ffffff",
+    "background-image": "",
+    "background-size": "100%",
+    "node-color": "#ffffff",
+    "border-width": 4,
+    "border-color": "#000000",
+    "radius": 50,
+    "node-padding": 5,
+    "node-margin": 2,
+    "outside-position": "auto",
+    "node-icon-image": "",
+    "node-background-image": "",
+    "icon-position": "inside",
+    "icon-size": 64,
+    "caption-position": "inside",
+    "caption-max-width": 200,
+    "caption-color": "#000000",
+    "caption-font-size": 16,
+    "caption-font-weight": "normal",
+    "label-position": "outside",
+    "label-display": "pill",
+    "label-color": "#000000",
+    "label-background-color": "#ffffff",
+    "label-border-color": "#000000",
+    "label-border-width": 2,
+    "label-font-size": 14,
+    "label-padding": 5,
+    "label-margin": 4,
+    "directionality": "directed",
+    "detail-position": "inline",
+    "detail-orientation": "parallel",
+    "arrow-width": 5,
+    "arrow-color": "#f44e3b",
+    "margin-start": 5,
+    "margin-end": 5,
+    "margin-peer": 20,
+    "attachment-start": "normal",
+    "attachment-end": "normal",
+    "relationship-icon-image": "",
+    "type-color": "#000000",
+    "type-background-color": "#ffffff",
+    "type-border-color": "#000000",
+    "type-border-width": 0,
+    "type-font-size": 16,
+    "type-padding": 5,
+    "property-position": "outside",
+    "property-alignment": "colon",
+    "property-color": "#000000",
+    "property-font-size": 16,
+    "property-font-weight": "normal"
+  },
+  "nodes": [
+    {
+      "id": "n3",
+      "position": {
+        "x": 800,
+        "y": 50
+      },
+      "caption": "Register Multi-Tenant OAuth Application",
+      "labels": [],
+      "properties": {
+        "SignInAudience": "AzureADMultipleOrgs"
+      },
+      "style": {
+        "node-color": "#cccccc",
+        "border-color": "#808080",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n4",
+      "position": {
+        "x": 800,
+        "y": 350
+      },
+      "caption": "Authenticate User",
+      "labels": [
+        "Entra SigninLogs (Interactive sign-in)"
+      ],
+      "properties": {
+        "Endpoint": "/oauth2/v2.0/authorize | /v2.0/adminconsent"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n5",
+      "position": {
+        "x": 800,
+        "y": 650
+      },
+      "caption": "Consent to Application",
+      "labels": [
+        "Entra AuditLogs (Consent to application)",
+        "Entra AuditLogs (Add service principal)",
+        "Entra AuditLogs (Add delegated permission grant)",
+        "Entra AuditLogs (Add app role assignment to service principal)"
+      ],
+      "properties": {
+        "GrantObject": "OAuth2PermissionGrant | appRoleAssignment",
+        "ConsentType": "Principal | AllPrincipals"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n6",
+      "position": {
+        "x": 800,
+        "y": 1000
+      },
+      "caption": "Redeem Authorization Code",
+      "labels": [
+        "Entra AADNonInteractiveUserSignInLogs (Authorization code redemption)"
+      ],
+      "properties": {
+        "GrantType": "authorization_code",
+        "ClientAuth": "client_secret | client_assertion"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    },
+    {
+      "id": "n16",
+      "position": {
+        "x": 1400,
+        "y": 1000
+      },
+      "caption": "Request Client Credentials Token",
+      "labels": [
+        "Entra AADServicePrincipalSignInLogs (Client credentials flow sign-in)"
+      ],
+      "properties": {
+        "GrantType": "client_credentials",
+        "ClientAuth": "client_secret | client_assertion"
+      },
+      "style": {
+        "border-color": "#000000",
+        "border-width": 3,
+        "caption-font-size": 16,
+        "label-position": "outside",
+        "label-font-size": 14,
+        "label-border-width": 2
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r2",
+      "fromId": "n3",
+      "toId": "n4",
+      "type": "prerequisite",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r3",
+      "fromId": "n4",
+      "toId": "n5",
+      "type": "",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r4",
+      "fromId": "n5",
+      "toId": "n6",
+      "type": "delegated",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    },
+    {
+      "id": "r11",
+      "fromId": "n5",
+      "toId": "n16",
+      "type": "application",
+      "properties": {},
+      "style": {
+        "arrow-color": "#f44e3b"
+      }
+    }
+  ]
+}
