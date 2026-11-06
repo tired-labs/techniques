@@ -102,9 +102,13 @@
         "y": 650
       },
       "caption": "Redeem Device Code",
-      "labels": [],
+      "labels": [
+        "Entra AADNonInteractiveUserSignInLogs (Device code redemption)"
+      ],
       "properties": {
-        "GrantType": "urn:ietf:params:oauth:grant-type:device_code"
+        "GrantType": "urn:ietf:params:oauth:grant-type:device_code",
+        "OriginalTransferMethod": "deviceCodeFlow",
+        "IncomingTokenType": "none"
       },
       "style": {
         "border-color": "#000000",

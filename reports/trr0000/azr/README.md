@@ -269,10 +269,18 @@ The victim's device-code authentication is an `Entra SigninLogs (Interactive
 sign-in)` row with `AuthenticationProtocol` = `deviceCode`. That placement
 follows from the interactive sign-in definition and the `deviceCode` value in
 [Telemetry Surfaces], and from device code flow events in the sign-in logs being
-tied to the authentication protocol property.[^26] Whether the device code
-request is logged, and whether the redemption at `/oauth2/v2.0/token` writes its
-own `AADNonInteractiveUserSignInLogs` row, is not documented by Microsoft, so
-neither node carries a label.
+tied to the authentication protocol property.[^26] In this TRR's lab, the
+polling client and the victim's browser ran on one hybrid-joined compliant host
+in a corporate tenant. There the redemption wrote an `Entra
+AADNonInteractiveUserSignInLogs (Device code redemption)` row about five seconds
+after that interactive row, sharing its `CorrelationId`. The redemption row
+carried `OriginalTransferMethod` = `deviceCodeFlow`, `IncomingTokenType` =
+`none`, `AuthenticationProtocol` = `none`, and a `UniqueTokenIdentifier` equal
+to the issued token's `uti`. A completion that no client redeemed wrote no such
+row. In that lab, no row in the interactive, non-interactive, or service
+principal sign-in tables or the audit table carried the user code of either of
+two unredeemed device code requests. Whether the device code request is
+recorded is not established, so the request node carries no label.
 
 ![TRR0000.AZR.A DDM](ddms/trr0000_azr_a.png)
 
